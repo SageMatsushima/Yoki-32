@@ -25,6 +25,8 @@ Extra addons:<br/>
 • Have a venter/listener feature<br/>
 • Map number of connections you have with others<br/>
 
+**HTA Approval (dpark20):** Idea approved - make sure your algorithm is complex!
+
 ### Idea 2 <br/>
 _Schedule Concentration Planner_ <br/>
 A website where students can log their classes and concentrations in, and they can see the 
@@ -34,6 +36,8 @@ classes to their course load, seeing how different ones would impact their semes
 <br/>
 We would need to parse information from Critical Review, looking at time required, difficulty, 
 and overall rating on the course and on professors.
+
+**HTA Approval (dpark20):** Idea not approved - not enough algorithmic complexity as of now. Feel free to add more details if you'd like to do this idea.
 
 ### Idea 3
 _Marketplace App_ <br/>
@@ -47,6 +51,10 @@ be made (i.e. cash, venmo, paypal, etc.) <br/>
 When a buyer clicks on “interested” they item will be put on hold for a certain amount of 
 time (probably a day) where they can talk about the item with the seller. Once the exchange 
 is done, both the seller and buyer will be asked about their experience.
+
+**HTA Approval (dpark20):** Idea not approved for same reason as above.
+
+Good ideas - make sure to add more if you'd like to pursue Ideas 2 or 3. Good luck! :)
 
 **Mentor TA:** _Put your mentor TA's name and email here once you're assigned one!_
 
