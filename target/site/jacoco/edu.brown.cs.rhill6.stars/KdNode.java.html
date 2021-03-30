@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>KdNode.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">maps</a> &gt; <a href="index.source.html" class="el_package">edu.brown.cs.rhill6.stars</a> &gt; <span class="el_source">KdNode.java</span></div><h1>KdNode.java</h1><pre class="source lang-java linenums">package edu.brown.cs.rhill6.stars;
+
+import java.util.ArrayList;
+
+/**
+ * A node with coordinates and two children to be used in a KdTree.
+ */
+<span class="fc" id="L8">public abstract class KdNode {</span>
+
+  private ArrayList&lt;Double&gt; coordinates;
+<span class="fc" id="L11">  private KdNode left = null;</span>
+<span class="fc" id="L12">  private KdNode right = null;</span>
+  private int depth;
+
+  /**
+   * Return the distance between the KdNode and an object.
+   * @param o An object, such as an array of coordinates
+   * @return The distance as a double
+   */
+  public abstract double distance(Object o);
+
+  /**
+   * Accessor for the coordinates.
+   * @return coordinates
+   */
+  public ArrayList&lt;Double&gt; getCoords() {
+<span class="fc" id="L27">    return new ArrayList&lt;&gt;(coordinates);</span>
+  }
+
+  /**
+   * Setter for coordinates, creates a new array object.
+   * @param coords array of doubles
+   */
+  public void setCoords(ArrayList&lt;Double&gt; coords) {
+<span class="fc" id="L35">    coordinates = new ArrayList&lt;&gt;(coords);</span>
+<span class="fc" id="L36">  }</span>
+
+  /**
+   * Accessor for the left child.
+   * @return The left child
+   */
+  public KdNode getLeft() {
+<span class="fc" id="L43">    return left;</span>
+  }
+
+  /**
+   * Accessor for the right child.
+   * @return The right child
+   */
+  public KdNode getRight() {
+<span class="fc" id="L51">    return right;</span>
+  }
+
+  /**
+   * Setter for the left child.
+   * @param child Another KdNode
+   */
+  public void setLeft(KdNode child) {
+<span class="fc" id="L59">    left = child;</span>
+<span class="fc" id="L60">  }</span>
+
+  /**
+   * Setter for the right child.
+   * @param child Another KdNode
+   */
+  public void setRight(KdNode child) {
+<span class="fc" id="L67">    right = child;</span>
+<span class="fc" id="L68">  }</span>
+
+  /**
+   * Setter for depth.
+   * @param depth An integer
+   */
+  public void setDepth(int depth) {
+<span class="fc" id="L75">    this.depth = depth;</span>
+<span class="fc" id="L76">  }</span>
+
+  /**
+   * Getter for depth.
+   * @return An integer
+   */
+  public int getDepth() {
+<span class="fc" id="L83">    return depth;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AlexKDTree.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">maps</a> &gt; <a href="index.source.html" class="el_package">edu.brown.cs.rhill6.map</a> &gt; <span class="el_source">AlexKDTree.java</span></div><h1>AlexKDTree.java</h1><pre class="source lang-java linenums">package edu.brown.cs.rhill6.map;
+
+import edu.brown.cs.rhill6.stars.KdNode;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Random;
+
+
+/**
+ * KdTree class from Alex's code base.
+ * @param &lt;N&gt; A node extending KdNode.
+ */
+public class AlexKDTree&lt;N extends KdNode&gt; {
+  //instantiate private variables
+  private final int dimensions;
+  private final N root;
+<span class="fc" id="L20">  private PriorityQueue&lt;N&gt; nearest = null;</span>
+  private int neighbor;
+  private double radius;
+<span class="fc" id="L23">  private final Random coinFlip = new Random();</span>
+
+  /**
+   * This the the constructor class where I create a list of nodes
+   * from the a list of s that were passed in. Then it creates
+   * the create.
+   *
+   * @param nodeList an arraylist of KdNodes
+   * @param d        the dimensions of the KDTree
+   */
+<span class="fc" id="L33">  public AlexKDTree(ArrayList&lt;N&gt; nodeList, int d) {</span>
+<span class="fc" id="L34">    this.dimensions = d;</span>
+
+<span class="fc" id="L36">    ArrayList&lt;N&gt; newNodeList = new ArrayList&lt;&gt;(nodeList);</span>
+
+<span class="fc" id="L38">    this.root = this.createTree(newNodeList, 0);</span>
+<span class="fc" id="L39">  }</span>
+
+  /**
+   * Setter for the number of neighbors to search for.
+   * @param newN A nonnegative integer
+   */
+  public void setNeighbor(int newN) {
+<span class="fc" id="L46">    neighbor = newN;</span>
+<span class="fc" id="L47">  }</span>
+
+  /**
+   * Setter for the search radius.
+   * @param newR A double
+   */
+  public void setRadius(double newR) {
+<span class="fc" id="L54">    radius = newR;</span>
+<span class="fc" id="L55">  }</span>
+
+  /**
+   * This method returns the root of the tree that was created.
+   *
+   * @return root of the tree
+   */
+  public N getRoot() {
+<span class="fc" id="L63">    return this.root;</span>
+  }
+
+  /**
+   * This method uses recursion to create the tree and assigns
+   * locations to specific nodes.
+   *
+   * @param nodeList a list of nodes
+   * @param depth    the depth of the node within the tree
+   * @return the middle node/current node you are working on
+   */
+  public N createTree(List&lt;N&gt; nodeList, int depth) {
+    //Finding the index of x, y, z
+<span class="fc" id="L76">    int index = depth % this.dimensions;</span>
+<span class="fc" id="L77">    nodeList.sort(new NodeCompare(index));</span>
+    //Finding the middle node and setting its depth
+<span class="fc" id="L79">    int mid = (nodeList.size()) / 2;</span>
+<span class="fc" id="L80">    N midNode = nodeList.get(mid);</span>
+<span class="fc" id="L81">    midNode.setDepth(depth);</span>
+
+    //If size is 0 or 1, then reaches the base case
+<span class="pc bpc" id="L84" title="1 of 4 branches missed.">    if (nodeList.size() == 1 || nodeList.size() == 0) {</span>
+<span class="fc" id="L85">      return midNode;</span>
+    }
+    //Recurse on the left hand side of the tree
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">    if (mid &gt; 0) {</span>
+<span class="fc" id="L89">      midNode.setLeft(createTree(nodeList.subList(0, mid), depth + 1));</span>
+    }
+    //Recurse on the right hand side of the tree
+<span class="fc bfc" id="L92" title="All 2 branches covered.">    if (mid &lt; nodeList.size() - 1) {</span>
+<span class="fc" id="L93">      midNode.setRight(createTree(nodeList.subList(mid + 1, nodeList.size()), depth + 1));</span>
+    }
+<span class="fc" id="L95">    return midNode;</span>
+  }
+
+  /**
+   * This method find the neighbors that are closest to the input node.
+   *
+   * @param ignore the node that we ignore if given a name
+   * @param node   the current node we are looking at
+   * @param target the point of which we want to be the closest to
+   * @return the list of neighbors that are nearest
+   */
+  public PriorityQueue&lt;N&gt; search(N ignore, N node, ArrayList&lt;Double&gt; target) {
+    //create a new arraylist if we start out at the root
+<span class="pc bpc" id="L108" title="1 of 4 branches missed.">    if (root == null || node == null) {</span>
+<span class="fc" id="L109">      return null;</span>
+    }
+<span class="fc bfc" id="L111" title="All 2 branches covered.">    if (root == node) {</span>
+      //nearest = new ArrayList&lt;N&gt;();
+<span class="fc" id="L113">      nearest = new PriorityQueue&lt;&gt;(new DistanceCompare(target));</span>
+    }
+
+    // If we searched from this node by name, don't add it
+<span class="fc bfc" id="L117" title="All 2 branches covered.">    if (!node.equals(ignore)) {</span>
+      // if the size of the list of neighbors is less than the numb,
+      // then we can add the node to the list
+<span class="fc bfc" id="L120" title="All 2 branches covered.">      if (nearest.size() &lt; neighbor) {</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">        if (targetDis(node.getCoords(), target) &lt;= radius) {</span>
+<span class="fc" id="L122">          nearest.add(node);</span>
+        }
+      } else {
+        //Edge case where the number of neighbors is 0
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">        if (neighbor == 0) {</span>
+<span class="nc" id="L127">          return nearest;</span>
+        }
+        //Get the last node in the list
+<span class="fc" id="L130">        N largest = nearest.peek();</span>
+      /*Check if the distance between the target point and the node is less that the
+      distance between the largest nodes and the target point
+      */
+<span class="fc" id="L134">        if (targetDis(target, node.getCoords())</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">            &lt; targetDis(largest.getCoords(), target)) {</span>
+          //Remove farthest
+<span class="fc" id="L137">          nearest.poll();</span>
+          //Add new
+<span class="fc" id="L139">          nearest.add(node);</span>
+<span class="fc" id="L140">        } else if (targetDis(target, node.getCoords())</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">            == targetDis(largest.getCoords(), target)) {</span>
+          // Equidistant, add randomness
+<span class="fc bfc" id="L143" title="All 2 branches covered.">          if (coinFlip.nextBoolean()) {</span>
+<span class="fc" id="L144">            nearest.poll();</span>
+<span class="fc" id="L145">            nearest.add(node);</span>
+          }
+        }
+      }
+    }
+
+    //get the index, the largest node, and the distance between the largest node and the targetPoint
+<span class="fc" id="L152">    int index = node.getDepth() % dimensions;</span>
+
+    double targetNeighbor;
+<span class="fc bfc" id="L155" title="All 2 branches covered.">    if (nearest.size() &gt; 0) {</span>
+<span class="fc" id="L156">      N bigNode = nearest.peek();</span>
+<span class="fc" id="L157">      targetNeighbor = targetDis(target, bigNode.getCoords());</span>
+<span class="fc" id="L158">    } else {</span>
+      // No max distance as no node found
+<span class="fc" id="L160">      targetNeighbor = Double.POSITIVE_INFINITY;</span>
+    }
+
+    /*If the target neighbor is greater or equal to the distance between teh current node
+    and the targetPoint axis then recurse on the left and right nodes if they exist
+    */
+<span class="fc bfc" id="L166" title="All 2 branches covered.">    if (nearest.size() &lt; neighbor || targetNeighbor</span>
+<span class="fc bfc" id="L167" title="All 2 branches covered.">        &gt;= Math.abs(node.getCoords().get(index) - target.get(index))) {</span>
+<span class="fc" id="L168">      search(ignore, (N) node.getLeft(), target);</span>
+<span class="fc" id="L169">      search(ignore, (N) node.getRight(), target);</span>
+    } else {
+      /*If the current node index coordinate is less than the target point index
+      and it has a right node or left node then recurse on the respective node
+       */
+<span class="fc bfc" id="L174" title="All 2 branches covered.">      if ((node.getCoords().get(index) &lt; target.get(index))) {</span>
+<span class="fc" id="L175">        search(ignore, (N) node.getRight(), target);</span>
+      } else {
+<span class="fc" id="L177">        search(ignore, (N) node.getLeft(), target);</span>
+      }
+    }
+<span class="fc" id="L180">    return nearest;</span>
+  }
+  /**
+   * This is is a comparator that compares the coordinates axis of different Nodes.
+   */
+  private final class NodeCompare implements Comparator&lt;N&gt; {
+    private int index;
+
+<span class="fc" id="L188">    private NodeCompare(int i) {</span>
+<span class="fc" id="L189">      this.index = i;</span>
+<span class="fc" id="L190">    }</span>
+
+    @Override
+    public int compare(N a, N b) {
+<span class="fc" id="L194">      return Double.compare(a.getCoords().get(index), b.getCoords().get(index));</span>
+    }
+  }
+
+  /**
+   * This is is a comparator that compares the distance of different Nodes.
+   */
+  private final class DistanceCompare implements Comparator&lt;N&gt; {
+    private ArrayList&lt;Double&gt; coor;
+
+<span class="fc" id="L204">    private DistanceCompare(ArrayList&lt;Double&gt; coor) {</span>
+<span class="fc" id="L205">      this.coor = coor;</span>
+<span class="fc" id="L206">    }</span>
+
+    @Override
+    public int compare(N a, N b) {
+<span class="fc" id="L210">      return Double.compare(targetDis(b.getCoords(), coor),</span>
+<span class="fc" id="L211">        targetDis(a.getCoords(), coor));</span>
+    }
+  }
+
+  /**
+   * This method get the distance between a given node and the target point.
+   *
+   * @param node        current node you are looking at
+   * @param targetPoint the target point you are looking at
+   * @return the distance between the two points
+   */
+  public double targetDis(ArrayList&lt;Double&gt; node, ArrayList&lt;Double&gt; targetPoint) {
+<span class="fc" id="L223">    double distance = 0;</span>
+<span class="fc bfc" id="L224" title="All 2 branches covered.">    for (int i = 0; i &lt; dimensions; i++) {</span>
+<span class="fc" id="L225">      distance += Math.pow(node.get(i) - targetPoint.get(i), 2);</span>
+    }
+<span class="fc" id="L227">    return Math.sqrt(distance);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

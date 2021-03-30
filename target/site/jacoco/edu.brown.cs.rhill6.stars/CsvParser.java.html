@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CsvParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">maps</a> &gt; <a href="index.source.html" class="el_package">edu.brown.cs.rhill6.stars</a> &gt; <span class="el_source">CsvParser.java</span></div><h1>CsvParser.java</h1><pre class="source lang-java linenums">package edu.brown.cs.rhill6.stars;
+
+import java.io.FileReader;
+import java.io.BufferedReader;
+
+/**
+ * Reads a CSV file line by line.
+ */
+public class CsvParser {
+  private final BufferedReader reader;
+
+  /**
+   * Constructor for a CSV Parser.
+   * @param filename The path to a csv file
+   * @throws Exception BufferedReader exception on bad file name
+   */
+<span class="fc" id="L17">  public CsvParser(String filename) throws Exception {</span>
+<span class="fc" id="L18">    reader = new BufferedReader(new FileReader(filename));</span>
+<span class="fc" id="L19">  }</span>
+
+  /**
+   * Reads the next line of a CSV file.
+   * @return an array of Strings, each entry in the line of the CSV file
+   */
+  public String[] readLine() {
+    try {
+<span class="fc" id="L27">      String line = reader.readLine();</span>
+
+<span class="pc bpc" id="L29" title="1 of 4 branches missed.">      if (line == null || line.length() == 0) {</span>
+        //eof
+<span class="fc" id="L31">        return null;</span>
+      } else {
+<span class="fc" id="L33">        return line.split(&quot;,&quot;, -1);</span>
+      }
+<span class="nc" id="L35">    } catch (Exception e) {</span>
+<span class="nc" id="L36">      System.err.println(&quot;ERROR: Error reading line&quot;);</span>
+    }
+
+<span class="nc" id="L39">    return null;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

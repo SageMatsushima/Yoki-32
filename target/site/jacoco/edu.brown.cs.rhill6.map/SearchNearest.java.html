@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SearchNearest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">maps</a> &gt; <a href="index.source.html" class="el_package">edu.brown.cs.rhill6.map</a> &gt; <span class="el_source">SearchNearest.java</span></div><h1>SearchNearest.java</h1><pre class="source lang-java linenums">package edu.brown.cs.rhill6.map;
+import edu.brown.cs.rhill6.stars.KdNode;
+import edu.brown.cs.rhill6.stars.TriggerAction;
+
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+
+/**
+ * Parses a CSV files of stars into both an array and a kd tree of stars.
+ */
+<span class="fc" id="L11">public class SearchNearest implements TriggerAction {</span>
+  /**
+   * Parses a csv file of stars and stores them in Main.stars.
+   * @param args A list of arguments. Should be stars,file
+   */
+  public void action(ArrayList&lt;String&gt; args) {
+<span class="pc bpc" id="L17" title="1 of 2 branches missed.">    if (args.size() == 3) {</span>
+
+      try {
+<span class="fc" id="L20">        Double lat = Double.parseDouble(args.get(1));</span>
+<span class="fc" id="L21">        Double lon = Double.parseDouble(args.get(2));</span>
+
+<span class="fc" id="L23">        KdNode nearest = nearestNode(lat, lon);</span>
+<span class="fc" id="L24">        System.out.println(nearest);</span>
+<span class="nc" id="L25">      } catch (Exception e) {</span>
+<span class="nc" id="L26">        System.err.println(&quot;ERROR: nearest takes two numbers&quot;);</span>
+<span class="pc" id="L27">      }</span>
+    } else {
+<span class="nc" id="L29">      System.err.println(&quot;ERROR: invalid number of arguments, must be in form (nearest # #)&quot;);</span>
+    }
+<span class="fc" id="L31">  }</span>
+
+  /**
+   * Get the nearest node to lat/lon coordinates.
+   * @param lat A double
+   * @param lon A double
+   * @return A MapNode
+   */
+  public static MapNode nearestNode(Double lat, Double lon) {
+<span class="fc" id="L40">    ArrayList&lt;Double&gt; coords = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L41">    coords.add(lat);</span>
+<span class="fc" id="L42">    coords.add(lon);</span>
+
+<span class="fc" id="L44">    AlexKDTree&lt;MapNode&gt; tree = MapReader.getTree();</span>
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">    if (tree == null) {</span>
+<span class="nc" id="L46">      return null;</span>
+    }
+
+<span class="fc" id="L49">    tree.setNeighbor(1);</span>
+<span class="fc" id="L50">    tree.setRadius(Double.POSITIVE_INFINITY);</span>
+<span class="fc" id="L51">    PriorityQueue&lt;MapNode&gt; found = tree.search(null, tree.getRoot(), coords);</span>
+
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">    if (found.size() == 1) {</span>
+<span class="fc" id="L54">      return found.peek();</span>
+    } else {
+<span class="nc" id="L56">      return null;</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ParseMock.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">maps</a> &gt; <a href="index.source.html" class="el_package">edu.brown.cs.rhill6.mockaroo</a> &gt; <span class="el_source">ParseMock.java</span></div><h1>ParseMock.java</h1><pre class="source lang-java linenums">package edu.brown.cs.rhill6.mockaroo;
+
+import edu.brown.cs.rhill6.stars.CsvParser;
+import edu.brown.cs.rhill6.stars.TriggerAction;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+/**
+ * Parses the mock_data file.
+ */
+<span class="nc" id="L12">public class ParseMock implements TriggerAction {</span>
+
+  /**
+   * Parses a file of data and prints all people if all lines conform to a MockPerson.
+   * @param args An array of &quot;mock&quot; and a filename
+   */
+  public void action(ArrayList&lt;String&gt; args) {
+<span class="nc bnc" id="L19" title="All 2 branches missed.">    if (args.size() == 2) {</span>
+      try {
+<span class="nc" id="L21">        CsvParser parser = new CsvParser(args.get(1));</span>
+
+<span class="nc" id="L23">        String[] newLine = parser.readLine();</span>
+<span class="nc" id="L24">        String[] firstLine = &quot;first_name,last_name,timestamp,email,gender,street_address&quot;</span>
+<span class="nc" id="L25">            .split(&quot;,&quot;);</span>
+
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        if (!Arrays.equals(newLine, firstLine)) {</span>
+<span class="nc" id="L28">          System.err.println(&quot;ERROR: Incorrect first line for mock data&quot;);</span>
+<span class="nc" id="L29">          return;</span>
+        }
+
+        String firstName, lastName, dateTime, email, gender, address;
+<span class="nc" id="L33">        ArrayList&lt;MockPerson&gt; people = new ArrayList&lt;&gt;();</span>
+
+        while (true) {
+<span class="nc" id="L36">          newLine = parser.readLine();</span>
+          // EOF
+<span class="nc bnc" id="L38" title="All 2 branches missed.">          if (newLine == null) {</span>
+<span class="nc" id="L39">            break;</span>
+          }
+
+<span class="nc bnc" id="L42" title="All 2 branches missed.">          if (newLine.length != 6) {</span>
+<span class="nc" id="L43">            System.err.println(&quot;ERROR: Line of csv has the wrong number of entries&quot;);</span>
+<span class="nc" id="L44">            return;</span>
+          }
+
+<span class="nc" id="L47">          firstName = newLine[0];</span>
+<span class="nc" id="L48">          lastName = newLine[1];</span>
+<span class="nc" id="L49">          dateTime = newLine[2];</span>
+<span class="nc" id="L50">          email = newLine[3];</span>
+<span class="nc" id="L51">          gender = newLine[4];</span>
+<span class="nc" id="L52">          address = newLine[5];</span>
+
+<span class="nc bnc" id="L54" title="All 2 branches missed.">          if (dateTime.length() == 0) {</span>
+<span class="nc" id="L55">            System.err.println(&quot;ERROR: Invalid datetime&quot;);</span>
+<span class="nc" id="L56">            return;</span>
+          }
+
+<span class="nc" id="L59">          people.add(new MockPerson(firstName, lastName, dateTime,</span>
+              email, gender, address));
+        }
+
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        for (MockPerson person : people) {</span>
+<span class="nc" id="L64">          System.out.println(person);</span>
+<span class="nc" id="L65">        }</span>
+<span class="nc" id="L66">      } catch (Exception e) {</span>
+<span class="nc" id="L67">        System.err.println(&quot;ERROR: error reading from file &quot; + args.get(1));</span>
+<span class="nc" id="L68">      }</span>
+    } else {
+<span class="nc" id="L70">      System.err.println(&quot;ERROR: mock requires one additional argument&quot;);</span>
+    }
+<span class="nc" id="L72">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

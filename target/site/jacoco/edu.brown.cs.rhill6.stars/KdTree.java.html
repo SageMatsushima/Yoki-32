@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>KdTree.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">maps</a> &gt; <a href="index.source.html" class="el_package">edu.brown.cs.rhill6.stars</a> &gt; <span class="el_source">KdTree.java</span></div><h1>KdTree.java</h1><pre class="source lang-java linenums">package edu.brown.cs.rhill6.stars;
+
+import edu.brown.cs.rhill6.map.AlexKDTree;
+
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Collections;
+
+/**
+ * A KdTree of Nodes.
+ * @param &lt;N&gt; A node extending KdNode
+ */
+<span class="fc" id="L13">public class KdTree&lt;N extends KdNode&gt; {</span>
+<span class="fc" id="L14">  private N root = null;</span>
+  private int dim;
+<span class="fc" id="L16">  private final ArrayList&lt;N&gt; list = new ArrayList&lt;&gt;();</span>
+
+  // Fields for search functions
+  private int k;
+  private double r;
+<span class="fc" id="L21">  private ArrayList&lt;Double&gt; coords = new ArrayList&lt;&gt;();</span>
+  private N nodeIgnored;
+<span class="fc" id="L23">  private final ArrayList&lt;N&gt; found = new ArrayList&lt;&gt;();</span>
+  private AlexKDTree&lt;N&gt; alexKDTree;
+
+  /**
+   * Constructs a KD tree from its list of nodes; nodes remain
+   * in the list but are assigned left and right children.
+   * @param nodeList List of nodes
+   */
+  public void listToTree(ArrayList&lt;N&gt; nodeList) {
+    // start by getting median along first dim, root
+    // recur down tree, alternating dimension
+    // pass down range to look for the median in
+
+<span class="fc bfc" id="L36" title="All 2 branches covered.">    if (list.size() == 0) {</span>
+<span class="fc" id="L37">      root = null;</span>
+<span class="fc" id="L38">      return;</span>
+    }
+
+<span class="fc" id="L41">    dim = list.get(0).getCoords().size();</span>
+<span class="fc" id="L42">    alexKDTree = new AlexKDTree&lt;&gt;(nodeList, dim);</span>
+<span class="fc" id="L43">    root = alexKDTree.getRoot();</span>
+<span class="fc" id="L44">  }</span>
+
+  /**
+   * Performs a KD Tree search and prints the found nodes in order.
+   */
+  public void searchAndPrint() {
+<span class="fc" id="L50">    kdNeighbors();</span>
+<span class="fc" id="L51">    printFound();</span>
+<span class="fc" id="L52">  }</span>
+
+  /**
+   * Performs a naive list search and prints the found nodes in order.
+   */
+  public void naiveSearchAndPrint() {
+<span class="fc" id="L58">    naiveNeighbors();</span>
+<span class="fc" id="L59">    printFound();</span>
+<span class="fc" id="L60">  }</span>
+
+  private void printFound() {
+<span class="fc bfc" id="L63" title="All 2 branches covered.">    for (N node : found) {</span>
+<span class="fc" id="L64">      System.out.println(node);</span>
+<span class="fc" id="L65">    }</span>
+<span class="fc" id="L66">  }</span>
+
+  /**
+   * Performs a KD nearest neighbors search based on fields.
+   */
+  public void kdNeighbors() {
+<span class="fc" id="L72">    found.clear();</span>
+<span class="fc bfc" id="L73" title="All 4 branches covered.">    if (root == null || k == 0) {</span>
+<span class="fc" id="L74">      return;</span>
+    }
+<span class="fc" id="L76">    alexKDTree.setNeighbor(k);</span>
+<span class="fc" id="L77">    alexKDTree.setRadius(r);</span>
+<span class="fc" id="L78">    PriorityQueue&lt;N&gt; foundQ = alexKDTree.search(nodeIgnored, alexKDTree.getRoot(), coords);</span>
+<span class="fc" id="L79">    heapToList(foundQ);</span>
+<span class="fc" id="L80">  }</span>
+
+  private void heapToList(PriorityQueue&lt;N&gt; maxHeap) {
+<span class="pc bpc" id="L83" title="1 of 4 branches missed.">    if (maxHeap == null || maxHeap.size() == 0) {</span>
+<span class="fc" id="L84">      found.clear();</span>
+<span class="fc" id="L85">      return;</span>
+    }
+
+<span class="fc" id="L88">    N maxElt = maxHeap.poll();</span>
+<span class="fc" id="L89">    heapToList(maxHeap);</span>
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">    if (maxElt.distance(coords) &lt;= r) {</span>
+<span class="fc" id="L91">      found.add(maxElt);</span>
+    }
+<span class="fc" id="L93">  }</span>
+
+  /**
+   * Performs a naive list search based on fields.
+   */
+  public void naiveNeighbors() {
+    // Don't add nodes with this distance or less, already added
+<span class="fc" id="L100">    double distAdded = -1;</span>
+    double currentMin;
+<span class="fc" id="L102">    ArrayList&lt;Integer&gt; indices = new ArrayList&lt;&gt;();</span>
+    double newDist;
+
+<span class="fc" id="L105">    found.clear();</span>
+
+<span class="fc bfc" id="L107" title="All 4 branches covered.">    while (found.size() &lt; k &amp;&amp; found.size() &lt; list.size()) {</span>
+<span class="fc" id="L108">      indices.clear();</span>
+<span class="fc" id="L109">      currentMin = Double.POSITIVE_INFINITY;</span>
+
+<span class="fc bfc" id="L111" title="All 2 branches covered.">      for (int i = 0; i &lt; list.size(); i++) {</span>
+        // If searching from a node, ignore that node
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        if (list.get(i).equals(nodeIgnored)) {</span>
+<span class="fc" id="L114">          continue;</span>
+        }
+
+<span class="fc" id="L117">        newDist = list.get(i).distance(coords);</span>
+<span class="fc bfc" id="L118" title="All 6 branches covered.">        if (newDist &lt; currentMin &amp;&amp; newDist &gt; distAdded &amp;&amp; newDist &lt;= r) {</span>
+          // Found better node
+<span class="fc" id="L120">          currentMin = newDist;</span>
+<span class="fc" id="L121">          indices.clear();</span>
+<span class="fc" id="L122">          indices.add(i);</span>
+<span class="pc bpc" id="L123" title="2 of 6 branches missed.">        } else if (newDist == currentMin &amp;&amp; newDist &gt; distAdded &amp;&amp; newDist &lt;= r) {</span>
+          // Two equally close nodes
+<span class="fc" id="L125">          indices.add(i);</span>
+        }
+      }
+
+<span class="fc" id="L129">      distAdded = currentMin;</span>
+
+<span class="fc bfc" id="L131" title="All 2 branches covered.">      if (indices.size() == 0) {</span>
+        // None found, finish
+<span class="fc" id="L133">        return;</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">      } else if (found.size() + indices.size() &lt;= k) {</span>
+        // Print normally
+
+<span class="fc bfc" id="L137" title="All 2 branches covered.">        for (int idx : indices) {</span>
+<span class="fc" id="L138">          found.add(list.get(idx));</span>
+<span class="fc" id="L139">        }</span>
+      } else {
+        // Randomize, print up to k total
+        // nodes_found + indices.size() &gt; k
+        // indices.size() &gt; k - nodes_found
+<span class="fc" id="L144">        Collections.shuffle(indices);</span>
+<span class="fc" id="L145">        int holdSize = found.size();</span>
+<span class="fc bfc" id="L146" title="All 2 branches covered.">        for (int i = 0; i &lt; k - holdSize; i++) {</span>
+<span class="fc" id="L147">          found.add(list.get(indices.get(i)));</span>
+        }
+<span class="fc" id="L149">      }</span>
+    }
+<span class="fc" id="L151">  }</span>
+
+  /**
+   * Accessor for nodes.
+   * @return An ArrayList of nodes
+   */
+  public ArrayList&lt;N&gt; getNodeList() {
+<span class="fc" id="L158">    return list;</span>
+  }
+
+  /**
+   * Accessor for nodes found in search.
+   * @return An ArrayList of nodes
+   */
+  public ArrayList&lt;N&gt; getFound() {
+<span class="fc" id="L166">    return found;</span>
+  }
+
+  /**
+   * Setter for k.
+   * @param newK Nonnegative integer
+   */
+  public void setK(int newK) {
+<span class="fc" id="L174">    k = newK;</span>
+<span class="fc" id="L175">  }</span>
+
+  /**
+   * Setter for radius.
+   * @param newR Nonnegative double
+   */
+  public void setR(double newR) {
+<span class="fc" id="L182">    r = newR;</span>
+<span class="fc" id="L183">  }</span>
+
+  /**
+   * Setter for coordinates, creates a copy of the given array.
+   * @param newCoords An ArrayList of doubles.
+   */
+  public void setCoords(ArrayList&lt;Double&gt; newCoords) {
+<span class="fc" id="L190">    coords = new ArrayList&lt;&gt;(newCoords);</span>
+<span class="fc" id="L191">  }</span>
+
+  /**
+   * Setter for node to be ignored.
+   * @param node A KdNode
+   */
+  public void setNodeIgnored(N node) {
+<span class="fc" id="L198">    nodeIgnored = node;</span>
+<span class="fc" id="L199">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

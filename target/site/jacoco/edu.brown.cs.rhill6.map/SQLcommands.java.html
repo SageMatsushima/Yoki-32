@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SQLcommands.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">maps</a> &gt; <a href="index.source.html" class="el_package">edu.brown.cs.rhill6.map</a> &gt; <span class="el_source">SQLcommands.java</span></div><h1>SQLcommands.java</h1><pre class="source lang-java linenums">package edu.brown.cs.rhill6.map;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+/**
+ * This class contains the SQL commands we use throughout the maps package.
+ */
+public final class SQLcommands {
+
+  private SQLcommands() { }
+
+  /**
+   * This method is the SQL command fo the SearchWays class.
+   * @return PreparedStatement from the SQL query
+   */
+  public static PreparedStatement searchWaysSQL() {
+    try {
+<span class="fc" id="L21">      Connection conn = MapReader.getConnection();</span>
+<span class="fc" id="L22">      PreparedStatement prep = conn.prepareStatement(&quot;SELECT DISTINCT way.id FROM way, node WHERE &quot;</span>
+          + &quot;(node.id = way.start OR node.id = way.end) &quot;
+          + &quot;AND node.latitude &lt;= ? AND node.latitude &gt;= ? &quot;
+          + &quot;AND node.longitude &gt;= ? AND node.longitude &lt;= ?&quot;);
+<span class="fc" id="L26">      return prep;</span>
+<span class="nc" id="L27">    } catch (Exception e) {</span>
+<span class="nc" id="L28">      System.err.println(&quot;ERROR: Issue reading in SQL&quot;);</span>
+<span class="nc" id="L29">      return null;</span>
+    }
+  }
+
+  /**
+   * This method is the SQL command fo the SearchRoute class.
+   * @return PreparedStatement from the SQL query
+   */
+  public static PreparedStatement searchRouteSQL() {
+    try {
+<span class="fc" id="L39">      Connection conn = MapReader.getConnection();</span>
+<span class="fc" id="L40">      PreparedStatement prep = conn.prepareStatement(&quot;WITH traversable AS (&quot;</span>
+          + &quot;  SELECT name, start s, end e FROM way&quot;
+          + &quot;  WHERE type != '' AND type != 'unclassified'&quot;
+          + &quot;  AND (name = ? OR name = ?)) SELECT CASE&quot;
+          + &quot;   WHEN a1.s = a2.s OR a1.s = a2.e THEN a1.s &quot;
+          + &quot;   ELSE a1.e END AS shared FROM traversable a1 &quot;
+          + &quot;JOIN traversable a2 ON a1.s=a2.s OR a1.s=a2.e OR a1.e=a2.s OR a1.e=a2.e &quot;
+          + &quot;WHERE a1.name != a2.name LIMIT 1;&quot;
+      );
+<span class="fc" id="L49">      return prep;</span>
+<span class="nc" id="L50">    } catch (Exception e) {</span>
+<span class="nc" id="L51">      System.err.println(&quot;ERROR: Issue reading in SQL&quot;);</span>
+<span class="nc" id="L52">      return null;</span>
+    }
+  }
+
+  /**
+   * This method is the SQL command fo the MapNode class.
+   * @return PreparedStatement from the SQL query
+   */
+  public static PreparedStatement mapNodeSQL() {
+    try {
+<span class="fc" id="L62">      Connection conn = MapReader.getConnection();</span>
+<span class="fc" id="L63">      PreparedStatement prep = conn.prepareStatement(</span>
+          &quot;SELECT id, name, type, start, end FROM way &quot;
+            + &quot;WHERE type != 'unclassified' AND type != ''&quot;
+            + &quot;AND start=? &quot;);
+<span class="fc" id="L67">      return prep;</span>
+<span class="nc" id="L68">    } catch (Exception e) {</span>
+<span class="nc" id="L69">      System.err.println(&quot;ERROR: Issue reading in SQL&quot;);</span>
+<span class="nc" id="L70">      return null;</span>
+    }
+  }
+
+  /**
+   * This method is the SQL command fo the MapReader class.
+   * @return PreparedStatement from the SQL query
+   */
+  public static ResultSet mapReaderSQL() {
+    try {
+<span class="fc" id="L80">      Connection conn = MapReader.getConnection();</span>
+<span class="fc" id="L81">      String sql1 = &quot;WITH traversable_ways AS (SELECT start, end FROM way &quot;</span>
+          + &quot;WHERE type != 'unclassified' AND type != '') &quot;
+          + &quot;SELECT DISTINCT n.id, n.latitude, n.longitude FROM traversable_ways w &quot;
+          + &quot;JOIN node n ON w.start = n.id OR w.end = n.id;&quot;;
+<span class="fc" id="L85">      Statement stmt = conn.createStatement();</span>
+<span class="fc" id="L86">      ResultSet rs = stmt.executeQuery(sql1);</span>
+<span class="fc" id="L87">      return rs;</span>
+<span class="nc" id="L88">    } catch (Exception e) {</span>
+<span class="nc" id="L89">      System.err.println(&quot;ERROR: Issue reading in SQL&quot;);</span>
+<span class="nc" id="L90">      return null;</span>
+    }
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

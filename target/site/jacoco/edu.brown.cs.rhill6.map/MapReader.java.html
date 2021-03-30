@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MapReader.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">maps</a> &gt; <a href="index.source.html" class="el_package">edu.brown.cs.rhill6.map</a> &gt; <span class="el_source">MapReader.java</span></div><h1>MapReader.java</h1><pre class="source lang-java linenums">package edu.brown.cs.rhill6.map;
+import edu.brown.cs.rhill6.stars.TriggerAction;
+
+import java.io.File;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+/**
+ * Reads a database containing tables of nodes and ways.
+ */
+<span class="fc" id="L18">public class MapReader implements TriggerAction {</span>
+  //setting up instance variables
+  private static AlexKDTree&lt;MapNode&gt; tree;
+<span class="fc" id="L21">  private static ArrayList&lt;MapNode&gt; nodes = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L22">  private static HashMap&lt;String, MapNode&gt; nodeIdMap = new HashMap&lt;&gt;();</span>
+  private static Connection conn;
+<span class="fc" id="L24">  private static String mapDataPath = null;</span>
+
+  /**
+   * Action command that executes the MapReader code.
+   * @param args List of strings
+   */
+  @Override
+  public void action(ArrayList&lt;String&gt; args) {
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">    if (args.size() == 2) {</span>
+<span class="fc" id="L33">      String path = args.get(1);</span>
+
+      // Check if file exists, otherwise an empty temporary database will be created
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">      if (new File(path).exists()) {</span>
+        try {
+<span class="fc" id="L38">          mapDataPath = path;</span>
+
+<span class="fc" id="L40">          nodes.clear();</span>
+<span class="fc" id="L41">          nodeIdMap.clear();</span>
+<span class="fc" id="L42">          node();</span>
+
+<span class="fc" id="L44">          System.out.println(&quot;map set to &quot; + path);</span>
+<span class="nc" id="L45">        } catch (SQLException | ClassNotFoundException sqlEx) {</span>
+<span class="nc" id="L46">          System.out.println(&quot;ERROR: Error reading from &quot; + path);</span>
+<span class="pc" id="L47">        }</span>
+      } else {
+<span class="nc" id="L49">        System.err.println(&quot;ERROR: &quot; + path + &quot; is not a valid file.&quot;);</span>
+      }
+<span class="fc" id="L51">    } else {</span>
+<span class="nc" id="L52">      System.err.println(&quot;ERROR: Maps takes one additional argument&quot;);</span>
+    }
+<span class="fc" id="L54">  }</span>
+
+  /**
+   * Reads in all the nodes from the file.
+   * @throws SQLException
+   * @throws ClassNotFoundException
+   */
+  private void node() throws SQLException, ClassNotFoundException {
+<span class="fc bfc" id="L62" title="All 2 branches covered.">    if (conn != null) {</span>
+<span class="fc" id="L63">      conn.close();</span>
+    }
+
+<span class="fc" id="L66">    Class.forName(&quot;org.sqlite.JDBC&quot;);</span>
+<span class="fc" id="L67">    String urlToDB = &quot;jdbc:sqlite:&quot; + mapDataPath;</span>
+<span class="fc" id="L68">    conn = DriverManager.getConnection(urlToDB);</span>
+<span class="fc" id="L69">    Statement stat = conn.createStatement();</span>
+<span class="fc" id="L70">    stat.executeUpdate(&quot;PRAGMA foreign_keys=ON&quot;);</span>
+
+    // Query nodes that are part of a distinct way
+<span class="fc" id="L73">    try (ResultSet rs = SQLcommands.mapReaderSQL();) {</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">      while (rs.next()) {</span>
+<span class="fc" id="L75">        String id = rs.getString(&quot;id&quot;);</span>
+<span class="fc" id="L76">        double latitude = rs.getDouble(&quot;latitude&quot;);</span>
+<span class="fc" id="L77">        double longitude = rs.getDouble(&quot;longitude&quot;);</span>
+<span class="fc" id="L78">        MapNode newNode = new MapNode(id, latitude, longitude);</span>
+
+<span class="fc" id="L80">        nodes.add(newNode);</span>
+<span class="fc" id="L81">        nodeIdMap.put(id, newNode);</span>
+<span class="fc" id="L82">      }</span>
+<span class="fc" id="L83">      rs.close();</span>
+<span class="fc" id="L84">    } catch (Exception e) {</span>
+<span class="fc" id="L85">      System.err.println(&quot;ERROR: There was an error reading in node data&quot;);</span>
+<span class="fc" id="L86">    }</span>
+<span class="fc" id="L87">    tree = new AlexKDTree&lt;MapNode&gt;(nodes, 2);</span>
+<span class="fc" id="L88">  }</span>
+
+  /**
+   * Getter for the KdTree of MapNodes.
+   * @return KdTree
+   */
+  public static AlexKDTree&lt;MapNode&gt; getTree() {
+<span class="fc" id="L95">    return tree;</span>
+  }
+
+  /**
+   * Getter for nodes.
+   * @return An arraylist of MapNodes
+   */
+  public static ArrayList&lt;MapNode&gt; getNodes() {
+<span class="fc" id="L103">    return nodes;</span>
+  }
+
+  /**
+   * Getter for nodeIdMap.
+   * @return A hashmap from id to MapNode
+   */
+  public static HashMap&lt;String, MapNode&gt; getNodeIdMap() {
+<span class="fc" id="L111">    return nodeIdMap;</span>
+  }
+
+  /**
+   * Getter for database connection.
+   * @return A database connection
+   */
+  public static Connection getConnection() {
+<span class="fc" id="L119">    return conn;</span>
+  }
+
+  /**
+   * getter for the mapDataPath.
+   * @return The paths out from nodes
+   */
+  public static String getMapDataPath() {
+<span class="fc" id="L127">    return mapDataPath;</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

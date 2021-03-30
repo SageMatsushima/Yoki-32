@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SearchRoute.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">maps</a> &gt; <a href="index.source.html" class="el_package">edu.brown.cs.rhill6.map</a> &gt; <span class="el_source">SearchRoute.java</span></div><h1>SearchRoute.java</h1><pre class="source lang-java linenums">package edu.brown.cs.rhill6.map;
+
+import edu.brown.cs.rhill6.stars.Main;
+import edu.brown.cs.rhill6.stars.TriggerAction;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+/**
+ * Class for the route command, does an A* search.
+ */
+<span class="fc" id="L14">public class SearchRoute implements TriggerAction {</span>
+  /**
+   * Executes the action command that looks for the shortest route.
+   * @param args List of strings
+   */
+  @Override
+  public void action(ArrayList&lt;String&gt; args) {
+<span class="pc bpc" id="L21" title="1 of 2 branches missed.">    if (args.size() == 5) {</span>
+<span class="fc bfc" id="L22" title="All 2 branches covered.">      if (args.get(1).charAt(0) == '&quot;') {</span>
+        // If args in quotes, street intersections
+<span class="fc" id="L24">        intersectionSearch(args);</span>
+      } else {
+        // First arg doesn't start with quotes, try long/lat search
+<span class="fc" id="L27">        coordinateSearch(args);</span>
+      }
+    } else {
+<span class="nc" id="L30">      System.err.println(&quot;ERROR: route takes 4 additional arguments&quot;);</span>
+    }
+<span class="fc" id="L32">  }</span>
+
+  /**
+   * Search for the route given coordinates.
+   * @param args the input command
+   */
+  private void coordinateSearch(ArrayList&lt;String&gt; args) {
+    try {
+<span class="fc" id="L40">      double lat1 = Double.parseDouble(args.get(1));</span>
+<span class="fc" id="L41">      double lon1 = Double.parseDouble(args.get(2));</span>
+<span class="fc" id="L42">      double lat2 = Double.parseDouble(args.get(3));</span>
+<span class="fc" id="L43">      double lon2 = Double.parseDouble(args.get(4));</span>
+
+<span class="fc" id="L45">      MapNode start = SearchNearest.nearestNode(lat1, lon1);</span>
+<span class="fc" id="L46">      MapNode end = SearchNearest.nearestNode(lat2, lon2);</span>
+
+<span class="pc bpc" id="L48" title="2 of 4 branches missed.">      if (start == null || end == null) {</span>
+<span class="nc" id="L49">        System.err.println(&quot;Error: Start or end node not found&quot;);</span>
+<span class="nc" id="L50">        return;</span>
+      }
+
+<span class="fc" id="L53">      Main.getGraph().dijkstra(start, end);</span>
+
+<span class="nc" id="L55">    } catch (Exception e) {</span>
+<span class="nc" id="L56">      System.err.println(&quot;ERROR: route must be given numeric coordinates &quot;</span>
+          + &quot;or street names in quotes&quot;);
+<span class="fc" id="L58">    }</span>
+<span class="fc" id="L59">  }</span>
+
+  /**
+   * Search for the route given a name.
+   * @param args the input command
+   */
+  private void intersectionSearch(ArrayList&lt;String&gt; args) {
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">    if (parseNames(args)) {</span>
+<span class="fc" id="L67">      String s1 = args.get(1);</span>
+<span class="fc" id="L68">      String c1 = args.get(2);</span>
+<span class="fc" id="L69">      String s2 = args.get(3);</span>
+<span class="fc" id="L70">      String c2 = args.get(4);</span>
+
+<span class="pc bpc" id="L72" title="2 of 4 branches missed.">      if (s1.equals(c1) || s2.equals(c2)) {</span>
+<span class="nc" id="L73">        System.err.println(&quot;ERROR: Street and cross street must have distinct names&quot;);</span>
+<span class="nc" id="L74">        return;</span>
+      }
+
+      try {
+<span class="fc" id="L78">        PreparedStatement prep = SQLcommands.searchRouteSQL();</span>
+
+<span class="fc" id="L80">        prep.setString(1, s1);</span>
+<span class="fc" id="L81">        prep.setString(2, c1);</span>
+
+<span class="fc" id="L83">        ResultSet rs = prep.executeQuery();</span>
+
+        String start;
+        String end;
+
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if (rs.next()) {</span>
+<span class="fc" id="L89">          start = rs.getString(&quot;shared&quot;);</span>
+        } else {
+<span class="nc" id="L91">          System.err.println(&quot;ERROR: No such intersection&quot;);</span>
+<span class="nc" id="L92">          return;</span>
+        }
+
+<span class="fc" id="L95">        prep.setString(1, s2);</span>
+<span class="fc" id="L96">        prep.setString(2, c2);</span>
+
+<span class="fc" id="L98">        rs = prep.executeQuery();</span>
+
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        if (rs.next()) {</span>
+<span class="fc" id="L101">          end = rs.getString(&quot;shared&quot;);</span>
+        } else {
+<span class="nc" id="L103">          System.err.println(&quot;ERROR: No such intersection&quot;);</span>
+<span class="nc" id="L104">          return;</span>
+        }
+
+<span class="fc" id="L107">        prep.close();</span>
+<span class="fc" id="L108">        rs.close();</span>
+
+<span class="fc" id="L110">        HashMap&lt;String, MapNode&gt; nodeIdMap = MapReader.getNodeIdMap();</span>
+<span class="fc" id="L111">        Main.getGraph().dijkstra(nodeIdMap.get(start), nodeIdMap.get(end));</span>
+
+<span class="nc" id="L113">      } catch (Exception e) {</span>
+<span class="nc" id="L114">        e.printStackTrace();</span>
+<span class="nc" id="L115">        System.err.println(&quot;ERROR: Error reading from database&quot;);</span>
+<span class="fc" id="L116">      }</span>
+
+<span class="fc" id="L118">    } else {</span>
+<span class="nc" id="L119">      System.err.println(&quot;ERROR: route must be given numeric coordinates &quot;</span>
+          + &quot;or street names in quotes&quot;);
+    }
+<span class="fc" id="L122">  }</span>
+
+  /**
+   * Given the input command, parse the names.
+   * @param args a list strings representing the input command
+   * @return if the arguments are correct
+   */
+  private boolean parseNames(ArrayList&lt;String&gt; args) {
+<span class="fc" id="L130">    String s1 = args.get(1);</span>
+<span class="fc" id="L131">    String c1 = args.get(2);</span>
+<span class="fc" id="L132">    String s2 = args.get(3);</span>
+<span class="fc" id="L133">    String c2 = args.get(4);</span>
+
+<span class="pc bpc" id="L135" title="4 of 8 branches missed.">    if (nameQuoted(s1) &amp;&amp; nameQuoted(c1) &amp;&amp; nameQuoted(s2) &amp;&amp; nameQuoted(c2)) {</span>
+<span class="fc" id="L136">      args.set(1, s1.substring(1, s1.length() - 1));</span>
+<span class="fc" id="L137">      args.set(2, c1.substring(1, c1.length() - 1));</span>
+<span class="fc" id="L138">      args.set(3, s2.substring(1, s2.length() - 1));</span>
+<span class="fc" id="L139">      args.set(4, c2.substring(1, c2.length() - 1));</span>
+<span class="fc" id="L140">      return true;</span>
+    } else {
+<span class="nc" id="L142">      return false;</span>
+    }
+  }
+
+  /**
+   * Check if the input name is valid.
+   * @param s command string
+   * @return a boolean if the string is valid
+   */
+  private boolean nameQuoted(String s) {
+<span class="pc bpc" id="L152" title="3 of 6 branches missed.">    return s.length() &gt; 1 &amp;&amp; s.charAt(0) == '&quot;' &amp;&amp; s.charAt(s.length() - 1) == '&quot;';</span>
+  }
+
+  /**
+   * Getter for the output path.
+   * @return A string of the path
+   */
+  public String getOutput() {
+<span class="fc" id="L160">    return Main.getGraph().getOutput();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
