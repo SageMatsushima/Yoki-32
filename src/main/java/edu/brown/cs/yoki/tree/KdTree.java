@@ -2,7 +2,6 @@ package edu.brown.cs.yoki.tree;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
-import java.util.Collections;
 
 /**
  * A KdTree of Nodes.
@@ -11,7 +10,7 @@ import java.util.Collections;
 public class KdTree<N extends KdNode> {
   private N root = null;
   private int dim;
-  private final ArrayList<N> list = new ArrayList<>();
+  private ArrayList<N> list = new ArrayList<>();
 
   // Fields for search functions
   private int k;
@@ -30,38 +29,52 @@ public class KdTree<N extends KdNode> {
     // start by getting median along first dim, root
     // recur down tree, alternating dimension
     // pass down range to look for the median in
+    this.list = nodeList;
 
-    if (list.size() == 0) {
+    if (nodeList.size() == 0) {
       root = null;
       return;
     }
-
+//    getCoords().length
     dim = list.get(0).getCoords().length;
-    System.out.println(dim);
-
     alexKDTree = new AlexKDTree<>(nodeList, dim);
     root = alexKDTree.getRoot();
+//    for (N node : this.list) {
+//      double dist = Math.sqrt(Math.pow(nodeIgnored.getCoords()[0] - node.getCoords()[0], 2)
+//          + Math.pow(nodeIgnored.getCoords()[1] - node.getCoords()[1], 2)
+//          + Math.pow(nodeIgnored.getCoords()[2] - node.getCoords()[2], 2)
+//          + Math.pow(nodeIgnored.getCoords()[3] - node.getCoords()[3], 2)
+//          + Math.pow(nodeIgnored.getCoords()[4] - node.getCoords()[4], 2));
+//      System.out.println(node + ": Dist = " + dist);
+//    }
+//    System.out.println("-----------");
   }
 
   /**
    * Performs a KD Tree search and prints the found nodes in order.
    */
   public void searchAndPrint() {
+    for (N node : this.list) {
+      double dist = Math.sqrt(Math.pow(nodeIgnored.getCoords()[0] - node.getCoords()[0], 2)
+          + Math.pow(nodeIgnored.getCoords()[1] - node.getCoords()[1], 2)
+          + Math.pow(nodeIgnored.getCoords()[2] - node.getCoords()[2], 2)
+          + Math.pow(nodeIgnored.getCoords()[3] - node.getCoords()[3], 2)
+          + Math.pow(nodeIgnored.getCoords()[4] - node.getCoords()[4], 2));
+      System.out.println(node + ": Dist = " + dist);
+    }
+    System.out.println("-----------");
     kdNeighbors();
-    printFound();
-  }
-
-  /**
-   * Performs a naive list search and prints the found nodes in order.
-   */
-  public void naiveSearchAndPrint() {
-    naiveNeighbors();
     printFound();
   }
 
   private void printFound() {
     for (N node : found) {
-      System.out.println(node);
+      double dist = Math.sqrt(Math.pow(nodeIgnored.getCoords()[0] - node.getCoords()[0], 2)
+          + Math.pow(nodeIgnored.getCoords()[1] - node.getCoords()[1], 2)
+          + Math.pow(nodeIgnored.getCoords()[2] - node.getCoords()[2], 2)
+          + Math.pow(nodeIgnored.getCoords()[3] - node.getCoords()[3], 2)
+          + Math.pow(nodeIgnored.getCoords()[4] - node.getCoords()[4], 2));
+      System.out.println(node + ": Dist = " + dist);
     }
   }
 
@@ -87,67 +100,7 @@ public class KdTree<N extends KdNode> {
 
     N maxElt = maxHeap.poll();
     heapToList(maxHeap);
-    if (maxElt.distance(coords) <= r) {
-      found.add(maxElt);
-    }
-  }
-
-  /**
-   * Performs a naive list search based on fields.
-   */
-  public void naiveNeighbors() {
-    // Don't add nodes with this distance or less, already added
-    double distAdded = -1;
-    double currentMin;
-    ArrayList<Integer> indices = new ArrayList<>();
-    double newDist;
-
-    found.clear();
-
-    while (found.size() < k && found.size() < list.size()) {
-      indices.clear();
-      currentMin = Double.POSITIVE_INFINITY;
-
-      for (int i = 0; i < list.size(); i++) {
-        // If searching from a node, ignore that node
-        if (list.get(i).equals(nodeIgnored)) {
-          continue;
-        }
-
-        newDist = list.get(i).distance(coords);
-        if (newDist < currentMin && newDist > distAdded && newDist <= r) {
-          // Found better node
-          currentMin = newDist;
-          indices.clear();
-          indices.add(i);
-        } else if (newDist == currentMin && newDist > distAdded && newDist <= r) {
-          // Two equally close nodes
-          indices.add(i);
-        }
-      }
-
-      distAdded = currentMin;
-
-      if (indices.size() == 0) {
-        // None found, finish
-        return;
-      } else if (found.size() + indices.size() <= k) {
-        // Print normally
-
-        for (int idx : indices) {
-          found.add(list.get(idx));
-        }
-      } else {
-        // Randomize, print up to k total
-        // nodes_found + indices.size() > k
-        // indices.size() > k - nodes_found
-        Collections.shuffle(indices);
-        int holdSize = found.size();
-        for (int i = 0; i < k - holdSize; i++) {
-          found.add(list.get(indices.get(i)));
-        }
-      }
-    }
+    found.add(maxElt);
   }
 
   /**
@@ -186,8 +139,8 @@ public class KdTree<N extends KdNode> {
    * Setter for coordinates, creates a copy of the given array.
    * @param newCoords An ArrayList of doubles.
    */
-  public void setCoords(ArrayList<Double> newCoords) {
-    coords = new int[5];
+  public void setCoords(int[] newCoords) {
+    coords = newCoords;
   }
 
   /**

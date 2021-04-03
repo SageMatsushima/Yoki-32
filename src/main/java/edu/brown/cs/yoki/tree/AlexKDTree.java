@@ -228,26 +228,26 @@ public class AlexKDTree<N extends KdNode> {
   }
 
   public void printTree(KdNode node) {
-        System.out.println("Root node: " + node.getDepth() + "(" + node.getCoords()[0]
-        + ", " + node.getCoords()[1]
-        + ", " + node.getCoords()[2]
-        + ", " + node.getCoords()[3]
-        + ", " + node.getCoords()[4] + ")");
+    System.out.println("Root node: " + node.getDepth() + "(" + node.getCoords()[0]
+          + ", " + node.getCoords()[1]
+          + ", " + node.getCoords()[2]
+          + ", " + node.getCoords()[3]
+          + ", " + node.getCoords()[4] + ")");
     if (node.getLeft() != null) {
       System.out.println("Left node: " + node.getDepth() + "(" + node.getCoords()[0]
-        + ", " + node.getCoords()[1]
-        + ", " + node.getCoords()[2]
-        + ", " + node.getCoords()[3]
-        + ", " + node.getCoords()[4] + ")");
+          + ", " + node.getCoords()[1]
+          + ", " + node.getCoords()[2]
+          + ", " + node.getCoords()[3]
+          + ", " + node.getCoords()[4] + ")");
       printTree(node.getLeft());
 
     }
     if (node.getRight() != null) {
       System.out.println("Right node: " + node.getDepth() + "(" + node.getCoords()[0]
-        + ", " + node.getCoords()[1]
-        + ", " + node.getCoords()[2]
-        + ", " + node.getCoords()[3]
-        + ", " + node.getCoords()[4] + ")");
+          + ", " + node.getCoords()[1]
+          + ", " + node.getCoords()[2]
+          + ", " + node.getCoords()[3]
+          + ", " + node.getCoords()[4] + ")");
       printTree(node.getRight());
     }
   }

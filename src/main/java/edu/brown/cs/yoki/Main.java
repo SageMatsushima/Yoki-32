@@ -8,7 +8,7 @@ import java.io.StringWriter;
 import edu.brown.cs.yoki.tree.KdTree;
 import edu.brown.cs.yoki.tree.ParseStars;
 import edu.brown.cs.yoki.tree.Users;
-import edu.brown.cs.yoki.tree.StarSearcher;
+import edu.brown.cs.yoki.tree.MatchFinder;
 import edu.brown.cs.yoki.tree.REPL;
 
 import joptsimple.OptionParser;
@@ -45,7 +45,7 @@ public final class Main {
 
   private final String[] args;
   private static KdTree<Users> tree = new KdTree<>();
-  private static StarSearcher searcher = new StarSearcher();
+  private static MatchFinder finder = new MatchFinder();
   private static ParseStars csvParser = new ParseStars();
 
   private Main(String[] args) {
@@ -67,7 +67,7 @@ public final class Main {
     REPL repl = new REPL();
 
     repl.addAction("data", csvParser);
-    repl.addAction("match", searcher);
+    repl.addAction("match", finder);
 
     repl.run();
   }

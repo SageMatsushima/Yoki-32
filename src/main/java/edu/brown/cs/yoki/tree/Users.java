@@ -15,7 +15,7 @@ public class Users extends KdNode {
     this.firstName = firstName;
     this.lastName = lastName;
     this.interests = interests;
-    //etCoords(this.interests);
+    setCoords(this.interests);
   }
 
   /**
@@ -76,9 +76,6 @@ public class Users extends KdNode {
       for (int i = 0; i < interests.length; i++) {
         sqDist += Math.pow(getInterests()[i] - s2.getInterests()[i], 2);
       }
-//      return Math.sqrt(Math.pow(getX() - s2.getX(), 2)
-//          + Math.pow(getY() - s2.getY(), 2)
-//          + Math.pow(getZ() - s2.getZ(), 2));
       return Math.sqrt(sqDist);
     } else {
       System.err.println(
