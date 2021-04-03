@@ -11,17 +11,10 @@ public class ParseStars implements TriggerAction {
         // filename
       try {
         CsvParser parser = new CsvParser(args.get(1));
-        ArrayList<Users> users = Main.getKdTree().getNodeList();
+        ArrayList<Users> users = new ArrayList<Users>();
 
         String[] newLine = parser.readLine();
 
-        String[] firstLine = {"userID", "firstName", "lastName", "Biking", "Running", "Swimming",
-            "Skating", "Skiing"};
-
-        users.clear();
-
-        String id, firstName, lastName;
-        int[] interests = new int[5];
 
         while (true) {
           newLine = parser.readLine();
@@ -29,22 +22,22 @@ public class ParseStars implements TriggerAction {
           if (newLine == null) {
             break;
           }
+
           if (newLine.length != 8) {
             System.err.println("ERROR: Line of csv has the wrong number of entries");
             return;
           }
 
+          String id, firstName, lastName;
+          int[] interests = new int[5];
           id = newLine[0];
           firstName = newLine[1];
           lastName = newLine[2];
-          for (int i = 3; i < newLine.length; i++) {
-            interests[i - 3] = Integer.parseInt(newLine[i]);
+
+          for (int i = 0; i < 5; i++) {
+            interests[i] = Integer.parseInt(newLine[i + 3]);
           }
           users.add(new Users(id, firstName, lastName, interests));
-        }
-
-        for (int i = 0; i < users.size(); i++) {
-          System.out.println(users.get(i).getId() + ", " + users.get(i).getName());
         }
         Main.getKdTree().listToTree(users);
 

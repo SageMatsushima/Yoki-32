@@ -15,7 +15,7 @@ public class Users extends KdNode {
     this.firstName = firstName;
     this.lastName = lastName;
     this.interests = interests;
-    setCoords(interests);
+    //etCoords(this.interests);
   }
 
   /**
@@ -31,11 +31,11 @@ public class Users extends KdNode {
    * @return Star name as a String
    */
   public String getName() {
-    return firstName + " " + lastName;
+    return this.firstName + " " + this.lastName;
   }
 
   public int[] getInterests() {
-    return interests;
+    return this.interests;
   }
 
 //  @Override

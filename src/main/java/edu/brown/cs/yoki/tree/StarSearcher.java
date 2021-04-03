@@ -36,15 +36,9 @@ public class StarSearcher implements TriggerAction {
 
 
   private boolean parse(ArrayList<String> args) {
-    if (args.size() == 3 || args.size() == 5) {
-      if (args.get(0).equals("naive_neighbors")
-          || args.get(0).equals("neighbors")) {
-        k = Integer.parseInt(args.get(1));
-        r = Double.POSITIVE_INFINITY;
-      } else {
-        r = Double.parseDouble(args.get(1));
-        k = Integer.MAX_VALUE;
-      }
+    if (args.size() == 3) {
+      k = Integer.parseInt(args.get(1));
+      r = Double.POSITIVE_INFINITY;
 
       if (args.size() == 3) {
         // k,name
@@ -63,20 +57,7 @@ public class StarSearcher implements TriggerAction {
 //          return false;
 //        }
 
-      } else {
-        // k,x,y,z
-        starIgnored = null;
-
-        x = Double.parseDouble(args.get(2));
-        y = Double.parseDouble(args.get(3));
-        z = Double.parseDouble(args.get(4));
-
-        coords.clear();
-        coords.add(x);
-        coords.add(y);
-        coords.add(z);
       }
-
       return true;
     } else {
       System.err.println("ERROR: " + args + " requires 2 or 4 additional parameters");

@@ -67,7 +67,7 @@ public final class Main {
     REPL repl = new REPL();
 
     repl.addAction("data", csvParser);
-    repl.addAction("naive_neighbors", searcher);
+    repl.addAction("match", searcher);
 
     repl.run();
   }

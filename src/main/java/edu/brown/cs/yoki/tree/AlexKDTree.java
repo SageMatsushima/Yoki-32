@@ -76,37 +76,22 @@ public class AlexKDTree<N extends KdNode> {
     nodeList.sort(new NodeCompare(index));
     //Finding the middle node and setting its depth
     int mid = (nodeList.size()) / 2;
+//    System.out.println(nodeList.get(mid);
     N midNode = nodeList.get(mid);
     midNode.setDepth(depth);
 
     //If size is 0 or 1, then reaches the base case
     if (nodeList.size() == 1 || nodeList.size() == 0) {
-      System.out.println("Root node: " + midNode.getDepth() + "(" + midNode.getCoords()[0]
-          + ", " + midNode.getCoords()[1]
-          + ", " + midNode.getCoords()[2]
-          + ", " + midNode.getCoords()[3]
-          + ", " + midNode.getCoords()[4] + ")");
       return midNode;
     }
     //Recurse on the left hand side of the tree
     if (mid > 0) {
       midNode.setLeft(createTree(nodeList.subList(0, mid), depth + 1));
-      System.out.println("Left node: " + midNode.getDepth() + "(" + midNode.getCoords()[0]
-          + ", " + midNode.getCoords()[1]
-          + ", " + midNode.getCoords()[2]
-          + ", " + midNode.getCoords()[3]
-          + ", " + midNode.getCoords()[4] + ")");
     }
     //Recurse on the right hand side of the tree
     if (mid < nodeList.size() - 1) {
       midNode.setRight(createTree(nodeList.subList(mid + 1, nodeList.size()), depth + 1));
-      System.out.println("Right node: " + midNode.getDepth() + "(" + midNode.getCoords()[0]
-          + ", " + midNode.getCoords()[1]
-          + ", " + midNode.getCoords()[2]
-          + ", " + midNode.getCoords()[3]
-          + ", " + midNode.getCoords()[4] + ")");
     }
-
     return midNode;
   }
 
@@ -240,5 +225,30 @@ public class AlexKDTree<N extends KdNode> {
       distance += Math.pow(node[i] - targetPoint[i], 2);
     }
     return Math.sqrt(distance);
+  }
+
+  public void printTree(KdNode node) {
+        System.out.println("Root node: " + node.getDepth() + "(" + node.getCoords()[0]
+        + ", " + node.getCoords()[1]
+        + ", " + node.getCoords()[2]
+        + ", " + node.getCoords()[3]
+        + ", " + node.getCoords()[4] + ")");
+    if (node.getLeft() != null) {
+      System.out.println("Left node: " + node.getDepth() + "(" + node.getCoords()[0]
+        + ", " + node.getCoords()[1]
+        + ", " + node.getCoords()[2]
+        + ", " + node.getCoords()[3]
+        + ", " + node.getCoords()[4] + ")");
+      printTree(node.getLeft());
+
+    }
+    if (node.getRight() != null) {
+      System.out.println("Right node: " + node.getDepth() + "(" + node.getCoords()[0]
+        + ", " + node.getCoords()[1]
+        + ", " + node.getCoords()[2]
+        + ", " + node.getCoords()[3]
+        + ", " + node.getCoords()[4] + ")");
+      printTree(node.getRight());
+    }
   }
 }
