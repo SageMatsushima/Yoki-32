@@ -37,7 +37,9 @@ public class KdTree<N extends KdNode> {
     }
 
     dim = list.get(0).getCoords().length;
-    alexKDTree = new AlexKDTree<>(nodeList, 5);
+    System.out.println(dim);
+
+    alexKDTree = new AlexKDTree<>(nodeList, dim);
     root = alexKDTree.getRoot();
   }
 

@@ -31,9 +31,10 @@ public class AlexKDTree<N extends KdNode> {
   public AlexKDTree(ArrayList<N> nodeList, int d) {
     this.dimensions = d;
 
-    ArrayList<N> newNodeList = new ArrayList<>(nodeList);
+//    ArrayList<N> newNodeList = new ArrayList<>(nodeList);
+    System.out.println("nodeList " + nodeList);
 
-    this.root = this.createTree(newNodeList, 0);
+    this.root = this.createTree(nodeList, 0);
   }
 
   /**
@@ -80,21 +81,32 @@ public class AlexKDTree<N extends KdNode> {
 
     //If size is 0 or 1, then reaches the base case
     if (nodeList.size() == 1 || nodeList.size() == 0) {
+      System.out.println("Root node: " + midNode.getDepth() + "(" + midNode.getCoords()[0]
+          + ", " + midNode.getCoords()[1]
+          + ", " + midNode.getCoords()[2]
+          + ", " + midNode.getCoords()[3]
+          + ", " + midNode.getCoords()[4] + ")");
       return midNode;
     }
     //Recurse on the left hand side of the tree
     if (mid > 0) {
       midNode.setLeft(createTree(nodeList.subList(0, mid), depth + 1));
+      System.out.println("Left node: " + midNode.getDepth() + "(" + midNode.getCoords()[0]
+          + ", " + midNode.getCoords()[1]
+          + ", " + midNode.getCoords()[2]
+          + ", " + midNode.getCoords()[3]
+          + ", " + midNode.getCoords()[4] + ")");
     }
     //Recurse on the right hand side of the tree
     if (mid < nodeList.size() - 1) {
       midNode.setRight(createTree(nodeList.subList(mid + 1, nodeList.size()), depth + 1));
+      System.out.println("Right node: " + midNode.getDepth() + "(" + midNode.getCoords()[0]
+          + ", " + midNode.getCoords()[1]
+          + ", " + midNode.getCoords()[2]
+          + ", " + midNode.getCoords()[3]
+          + ", " + midNode.getCoords()[4] + ")");
     }
-    System.out.println(midNode.getDepth() + ": " + midNode.getCoords()[0]
-        + ", " + midNode.getCoords()[1]
-        + ", " + midNode.getCoords()[2]
-        + ", " + midNode.getCoords()[3]
-        + ", " + midNode.getCoords()[4]);
+
     return midNode;
   }
 

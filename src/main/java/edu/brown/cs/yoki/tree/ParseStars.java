@@ -36,14 +36,16 @@ public class ParseStars implements TriggerAction {
 
           id = newLine[0];
           firstName = newLine[1];
-          lastName = newLine[1];
+          lastName = newLine[2];
           for (int i = 3; i < newLine.length; i++) {
             interests[i - 3] = Integer.parseInt(newLine[i]);
           }
           users.add(new Users(id, firstName, lastName, interests));
-          System.out.println(id + ", " + firstName + ", " + lastName + ", " + interests);
         }
 
+        for (int i = 0; i < users.size(); i++) {
+          System.out.println(users.get(i).getId() + ", " + users.get(i).getName());
+        }
         Main.getKdTree().listToTree(users);
 
         System.out.println("Read " + users.size() + " users from " + args.get(1));

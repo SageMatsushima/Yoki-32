@@ -13,6 +13,7 @@ public class Users extends KdNode {
   public Users(String id, String firstName, String lastName, int[] interests) {
     this.id = id;
     this.firstName = firstName;
+    this.lastName = lastName;
     this.interests = interests;
     setCoords(interests);
   }
