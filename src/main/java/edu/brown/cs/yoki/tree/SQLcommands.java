@@ -5,5 +5,7 @@ package edu.brown.cs.yoki.tree;
  */
 public final class SQLcommands {
 
-  private SQLcommands() { }
+  private SQLcommands() {
+
+  }
 }

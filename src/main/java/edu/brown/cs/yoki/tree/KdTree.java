@@ -39,15 +39,6 @@ public class KdTree<N extends KdNode> {
     dim = list.get(0).getCoords().length;
     alexKDTree = new AlexKDTree<>(nodeList, dim);
     root = alexKDTree.getRoot();
-//    for (N node : this.list) {
-//      double dist = Math.sqrt(Math.pow(nodeIgnored.getCoords()[0] - node.getCoords()[0], 2)
-//          + Math.pow(nodeIgnored.getCoords()[1] - node.getCoords()[1], 2)
-//          + Math.pow(nodeIgnored.getCoords()[2] - node.getCoords()[2], 2)
-//          + Math.pow(nodeIgnored.getCoords()[3] - node.getCoords()[3], 2)
-//          + Math.pow(nodeIgnored.getCoords()[4] - node.getCoords()[4], 2));
-//      System.out.println(node + ": Dist = " + dist);
-//    }
-//    System.out.println("-----------");
   }
 
   /**

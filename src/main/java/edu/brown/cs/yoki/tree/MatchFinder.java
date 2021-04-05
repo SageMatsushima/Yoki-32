@@ -33,7 +33,7 @@ public class MatchFinder implements TriggerAction {
       k = Integer.parseInt(args.get(1));
       r = Double.POSITIVE_INFINITY;
       if (!setCoordsByName(args.get(2))) {
-        System.err.println("ERROR: No star found named " + args.get(2));
+        System.err.println("ERROR: No user id found named " + args.get(2));
         return false;
       }
       return true;
