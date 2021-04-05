@@ -98,25 +98,25 @@ public final class Main {
     FreeMarkerEngine freeMarker = createEngine();
 
     // Setup Spark Routes
-    Spark.get("/stars", new FrontHandler(), freeMarker);
+    //Spark.get("/stars", new FrontHandler(), freeMarker);
     Spark.get("/yoki", new YokiHandler(), freeMarker);
   }
 
-  private static class FrontHandler implements TemplateViewRoute {
+ /* private static class FrontHandler implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request req, Response res) {
 
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
       return new ModelAndView(variables.build(), "query.ftl");
     }
-  }
+  }*/
 
   private static class YokiHandler implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request req, Response res) {
 
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
-      return new ModelAndView(variables.build(), "query.ftl");
+      return new ModelAndView(variables.build(), "main.ftl");
     }
   }
 
