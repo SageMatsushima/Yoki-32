@@ -5,11 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import edu.brown.cs.yoki.tree.KdTree;
-import edu.brown.cs.yoki.tree.ParseStars;
-import edu.brown.cs.yoki.tree.Users;
-import edu.brown.cs.yoki.tree.MatchFinder;
-import edu.brown.cs.yoki.tree.REPL;
+import edu.brown.cs.yoki.tree.*;
 
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -47,6 +43,27 @@ public final class Main {
   private static KdTree<Users> tree = new KdTree<>();
   private static MatchFinder finder = new MatchFinder();
   private static ParseStars csvParser = new ParseStars();
+  private static CreateTable createTable;
+  private static AddData addRows;
+  private static AddUsers addUsers;
+
+  static {
+    try {
+      addRows = new AddData("data/bigData.sqlite");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    try {
+      createTable = new CreateTable("data/Interests.csv");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    try {
+      addUsers = new AddUsers("data/bigTest.csv");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 
   private Main(String[] args) {
     this.args = args;
@@ -68,7 +85,9 @@ public final class Main {
 
     repl.addAction("data", csvParser);
     repl.addAction("match", finder);
-
+    repl.addAction("createTable", createTable);
+    repl.addAction("addRows", addRows);
+    repl.addAction("addUsers", addUsers);
     repl.run();
   }
   public static KdTree<Users> getKdTree() {

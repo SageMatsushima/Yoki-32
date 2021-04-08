@@ -8,4 +8,8 @@ public final class SQLcommands {
   private SQLcommands() {
 
   }
+
+  public void fillDatabase() {
+    
+  }
 }

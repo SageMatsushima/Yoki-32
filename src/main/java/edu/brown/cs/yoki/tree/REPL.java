@@ -2,6 +2,7 @@ package edu.brown.cs.yoki.tree;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,7 +27,7 @@ public class REPL {
    * @param s Id of TriggerAction
    * @param args ArrayList of Strings to pass into action method
    */
-  public void executeAction(String s, ArrayList<String> args) {
+  public void executeAction(String s, ArrayList<String> args) throws SQLException, ClassNotFoundException {
     if (map.containsKey(s)) {
       map.get(s).action(args);
     } else {
@@ -52,6 +53,7 @@ public class REPL {
         ArrayList<String> args = parse(userInput);
         executeAction(args.get(0), args);
       } catch (Exception e) {
+        e.printStackTrace();
         System.out.println("ERROR: Issue reading REPL input");
       }
     }

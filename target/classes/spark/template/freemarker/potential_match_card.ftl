@@ -23,7 +23,7 @@
           </div>
       </div>
       <div id = "right-content">
-        <img id = "match_image">
+        <img id = "match_image" src="./images/kendall.jpg">
       </div>
     </div>
   </div>

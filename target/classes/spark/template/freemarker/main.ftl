@@ -3,13 +3,23 @@
     <div id = "card_content">
       <div id = "left-content">
         <div id = "name_info">
-          <h1>Name</h1>
-          <h3>Class</h3>
-          <h3>Concentration</h3>
+          <h1>Kendall</h1>
+          <h3>Class of 2023</h3>
+          <h3>Cognitive Science</h3>
         </div>
         <div id = "top_interests">
-          <h1>Interests</h1>
-          <ul id = "top_interests_list"></ul>
+          <h3>Interests</h3>
+          <ul id = "top_interests_list">
+            <li>
+              modeling
+            </li>
+            <li>
+              being rich
+            </li>
+            <li>
+              Asap Rocky
+            </li>
+          </ul>
         </div>
       </div>
       <div id = "right-content">
@@ -17,6 +27,18 @@
       </div>
     </div>
   </div>
+</#assign>
+
+<#assign matchButton>
+ <button class = "button" id="match-button">
+   match
+ </button>
+</#assign>
+
+<#assign passButton>
+  <button class = "button" id="pass-button">
+    pass
+  </button>
 </#assign>
 
 
@@ -34,7 +56,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
+    <div id = "card-div">
      ${card}
+      <div id = "button-div">
+        ${passButton}
+          ${matchButton}
+      </div>
+    </div>
      <!-- Again, we're serving up the unminified source for clarity. -->
   </body>
   <!-- See http://html5boilerplate.com/ for a good place to start

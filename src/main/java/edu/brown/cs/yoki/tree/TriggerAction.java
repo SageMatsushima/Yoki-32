@@ -1,5 +1,6 @@
 package edu.brown.cs.yoki.tree;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -10,5 +11,5 @@ public interface TriggerAction {
    * Action to execute.
    * @param args List of strings
    */
-  void action(ArrayList<String> args);
+  void action(ArrayList<String> args) throws SQLException, ClassNotFoundException;
 }
