@@ -11,7 +11,7 @@ public class ParseStars implements TriggerAction {
         // filename
       try {
         CsvParser parser = new CsvParser(args.get(1));
-        ArrayList<Users> users = new ArrayList<Users>();
+        ArrayList<User> users = new ArrayList<User>();
 
         String[] newLine = parser.readLine();
 
@@ -37,7 +37,7 @@ public class ParseStars implements TriggerAction {
           for (int i = 0; i < 5; i++) {
             interests[i] = Integer.parseInt(newLine[i + 3]);
           }
-          users.add(new Users(id, firstName, lastName, interests));
+//          users.add(new User(id, firstName, lastName, interests));
         }
         Main.getKdTree().listToTree(users);
 

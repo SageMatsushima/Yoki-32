@@ -1,20 +1,29 @@
 package edu.brown.cs.student.yoki.tree;
 
 
+import java.util.HashMap;
+
 /**
  * Class for a single star.
  */
-public class Users extends KdNode {
+public class User extends KdNode {
   private String firstName;
   private String lastName;
-  private String id;
+  private int id;
+  private String email;
+  private String password;
+  private int year;
+
   private int[] interests;
 
-  public Users(String id, String firstName, String lastName, int[] interests) {
+  public User(int id, String firstName, String lastName, String email, String password, int year, int[] interests) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.interests = interests;
+    this.email = email;
+    this.password = password;
+    this.year = year;
     setCoords(this.interests);
   }
 
@@ -22,7 +31,7 @@ public class Users extends KdNode {
    * Get the id of the star.
    * @return Star id as an integer
    */
-  public String getId() {
+  public int getId() {
     return id;
   }
 
@@ -45,8 +54,8 @@ public class Users extends KdNode {
    */
   public double distance(Object o) {
 
-    if (o instanceof Users) {
-      Users s2 = (Users) o;
+    if (o instanceof User) {
+      User s2 = (User) o;
       int sqDist = 0;
       for (int i = 0; i < interests.length; i++) {
         sqDist += Math.pow(getInterests()[i] - s2.getInterests()[i], 2);
@@ -61,6 +70,17 @@ public class Users extends KdNode {
 
   @Override
   public String toString() {
-    return id;
+    String str = "id: " + this.id + ", first_name: " + this.firstName + ", last_name: " + this.lastName
+      + ", email: " + this.email + ", password: " + this.password + ", year: " + this.year
+      + "\n" + interestsToString();
+    return str;
+  }
+
+  public String interestsToString() {
+    String str = "";
+    for (int i = 0; i < this.interests.length; i++) {
+      str += this.interests[i] + ", ";
+    }
+    return str.substring(0, str.length()-2);
   }
 }

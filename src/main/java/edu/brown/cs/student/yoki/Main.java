@@ -41,30 +41,8 @@ public final class Main {
   }
 
   private final String[] args;
-  private static KdTree<Users> tree = new KdTree<>();
+  private static KdTree<User> tree = new KdTree<>();
   private static MatchFinder finder = new MatchFinder();
-  private static ParseStars csvParser = new ParseStars();
-  private static CreateTable createTable;
-  private static AddData addRows;
-  private static AddUsers addUsers;
-
-  static {
-    try {
-      addRows = new AddData("data/bigData.sqlite");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    try {
-      createTable = new CreateTable("data/Interests.csv");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    try {
-      addUsers = new AddUsers("data/bigTest.csv");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
 
   private Main(String[] args) {
     this.args = args;
@@ -85,14 +63,10 @@ public final class Main {
     REPL repl = new REPL();
     repl.addAction("data", new DataReader());
     repl.addAction("interests", new InterestsReader());
-//    repl.addAction("data", csvParser);
-//    repl.addAction("match", finder);
-//    repl.addAction("createTable", createTable);
-//    repl.addAction("addRows", addRows);
-//    repl.addAction("addUsers", addUsers);
+    repl.addAction("match", finder);
     repl.run();
   }
-  public static KdTree<Users> getKdTree() {
+  public static KdTree<User> getKdTree() {
     return tree;
   }
 

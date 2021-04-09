@@ -11,14 +11,14 @@ public class MatchFinder implements TriggerAction {
 
   private int k;
   private double r;
-  private Users starIgnored = null;
-  private int[] coords = new int[5];
+  private User starIgnored = null;
+  private int[] coords = new int[DataReader.getInterestCount()];
 
   @Override
   public void action(ArrayList<String> args) {
     if (Double.parseDouble(args.get(1)) >= 0) {
       if (parse(args)) {
-        KdTree<Users> tree = Main.getKdTree();
+        KdTree<User> tree = Main.getKdTree();
         tree.setK(k);
         tree.setR(r);
         tree.setNodeIgnored(starIgnored);
@@ -44,11 +44,10 @@ public class MatchFinder implements TriggerAction {
   }
 
   public boolean setCoordsByName(String id) {
-    KdTree<Users> tree = Main.getKdTree();
-    ArrayList<Users> users = tree.getNodeList();
-
-    for (Users usr : users) {
-      if (usr.getId().equals(id)) {
+    KdTree<User> tree = Main.getKdTree();
+    ArrayList<User> users = tree.getNodeList();
+    for (User usr : users) {
+      if (usr.getId() == Integer.parseInt(id)) {
         starIgnored = usr;
         tree.setCoords(usr.getCoords());
         tree.setNodeIgnored(starIgnored);

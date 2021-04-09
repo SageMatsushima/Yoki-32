@@ -3,6 +3,7 @@ package edu.brown.cs.student.yoki.tree;
 import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Reads a database containing tables of nodes and ways.
@@ -11,6 +12,8 @@ public class DataReader implements TriggerAction {
   //setting up instance variables
   private static Connection conn;
   private static String dataPath = null;
+  private static ArrayList<User> userList = new ArrayList<User>();
+  private static int interestCount;
 
   /**
    * Action command that executes the MapReader code.
@@ -52,19 +55,39 @@ public class DataReader implements TriggerAction {
     stat.executeUpdate("PRAGMA foreign_keys=ON");
     try {
 
-      // Query nodes that are part of a distinct way
-      PreparedStatement prep = SQLcommands.getAllUserData();
+      PreparedStatement prep1 = SQLcommands.getAll();
+      ResultSet rs1 = prep1.executeQuery();
+      ResultSetMetaData rsmd = rs1.getMetaData();
+      interestCount = rsmd.getColumnCount() - 7;
 
-      ResultSet rs = prep.executeQuery();
-      while (rs.next()) {
-        System.out.println(rs.getInt("id") + ", " +  rs.getString("first_name")
-            + ", " + rs.getString("last_name") + ", " + rs.getString("email")
-            + ", " + rs.getString("password") + ", " + rs.getInt("year"));
+      HashMap<String, Integer> converter = new HashMap<>();
+      for (int i = 7; i < interestCount; i++) {
+        String interestName = rsmd.getColumnName(i);
+        converter.put(interestName, i);
       }
-      prep.close();
-      rs.close();
 
+      while (rs1.next()) {
+        int id = rs1.getInt("id");
+        String firstName = rs1.getString("first_name");
+        String lastName = rs1.getString("last_name");
+        String email = rs1.getString("email");
+        String password = rs1.getString("password");
+        int year = rs1.getInt("year");
+
+        int[] interests = new int[interestCount];
+        for (int j = 0; j < interests.length; j++) {
+          interests[j] = rs1.getInt(j+8);
+        }
+
+        User user = new User(id, firstName, lastName, email, password, year, interests);
+        System.out.println(user.toString());
+        userList.add(user);
+      }
+
+      prep1.close();
+      rs1.close();
     } catch (Exception e) {
+      e.printStackTrace();
       System.err.println("ERROR: There was an error reading in node data");
     }
   }
@@ -75,6 +98,10 @@ public class DataReader implements TriggerAction {
 
   public static String getdataPath() {
     return dataPath;
+  }
+
+  public static int getInterestCount() {
+    return interestCount;
   }
 
 }
