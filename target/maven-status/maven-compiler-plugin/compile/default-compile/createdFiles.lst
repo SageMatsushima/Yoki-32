@@ -3,6 +3,7 @@ edu/brown/cs/student/yoki/tree/KdTree.class
 edu/brown/cs/student/yoki/tree/CreateTable.class
 edu/brown/cs/student/yoki/tree/ParseStars.class
 edu/brown/cs/student/yoki/tree/AlexKDTree.class
+edu/brown/cs/student/yoki/tree/DataReader.class
 edu/brown/cs/student/yoki/tree/KdNode.class
 edu/brown/cs/student/yoki/tree/Users.class
 edu/brown/cs/student/yoki/tree/SQLcommands.class

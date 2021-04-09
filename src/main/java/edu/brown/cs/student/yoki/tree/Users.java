@@ -38,31 +38,6 @@ public class Users extends KdNode {
     return this.interests;
   }
 
-//  @Override
-//  public boolean equals(Object o) {
-//
-//    if (!(o instanceof Users)) {
-//      return false;
-//    }
-//
-//    Users s2 = (Users) o;
-//    boolean equal = true;
-//
-//    equal = equal && (id.equals(s2.getId()));
-//    equal = equal && name.equals(s2.getName());
-//    equal = equal && (getX() == s2.getX());
-//    equal = equal && (getY() == s2.getY());
-//    equal = equal && (getZ() == s2.getZ());
-//
-//    return equal;
-//  }
-
-//  @Override
-//  public int hashCode() {
-//    return Objects.hash(id, firstName, lastName, interests);
-//  }
-
-
   /**
    * Get the Euclidean distance between the star and the given object.
    * @param o A star or an ArrayList of 3 doubles.
