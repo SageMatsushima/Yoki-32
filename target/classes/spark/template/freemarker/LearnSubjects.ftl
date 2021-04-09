@@ -1,6 +1,11 @@
 <script>
     function subjectClick() {
+<<<<<<< HEAD
         document.getElementById("subjectButton").style.color = "green";
+=======
+        document.getElementById("subjectButton").style.backgroundColor = "green";
+
+>>>>>>> 1d3e20a621aba6c4875b8f3e30fdc4f28429a014
     }
 </script>
 
