@@ -9,6 +9,7 @@ import edu.brown.cs.student.yoki.tree.*;
 
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
+
 import spark.Spark;
 import spark.TemplateViewRoute;
 import spark.ModelAndView;
@@ -82,12 +83,13 @@ public final class Main {
     }
 
     REPL repl = new REPL();
-
-    repl.addAction("data", csvParser);
-    repl.addAction("match", finder);
-    repl.addAction("createTable", createTable);
-    repl.addAction("addRows", addRows);
-    repl.addAction("addUsers", addUsers);
+    repl.addAction("data", new DataReader());
+    repl.addAction("interests", new InterestsReader());
+//    repl.addAction("data", csvParser);
+//    repl.addAction("match", finder);
+//    repl.addAction("createTable", createTable);
+//    repl.addAction("addRows", addRows);
+//    repl.addAction("addUsers", addUsers);
     repl.run();
   }
   public static KdTree<Users> getKdTree() {
