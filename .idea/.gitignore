@@ -6,4 +6,8 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
-/.mvn-classpath
+target/
+.mvn-classpath
+.classpath
+.idea/
+**.DS_Store**
