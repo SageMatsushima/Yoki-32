@@ -17,7 +17,7 @@ public final class SQLcommands {
    *
    * @return PreparedStatement from the SQL query
    */
-  public static PreparedStatement getUserData() {
+  public static PreparedStatement getAllUserData() {
     try {
       Connection conn = DataReader.getConnection();
       PreparedStatement prep = conn.prepareStatement("SELECT * FROM user_data");
@@ -29,10 +29,23 @@ public final class SQLcommands {
     }
   }
 
-  public static PreparedStatement getUserInterest(int id) {
+  public static PreparedStatement getUserData(int id) {
     try {
       Connection conn = DataReader.getConnection();
       PreparedStatement prep = conn.prepareStatement("SELECT * FROM user_data WHERE id = ?");
+      prep.setInt(1, id);
+      return prep;
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+      return null;
+    }
+  }
+
+  public static PreparedStatement getUserInterests(int id) {
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement("SELECT * FROM user_interests WHERE id = ?");
       prep.setInt(1, id);
       return prep;
     } catch (Exception e) {

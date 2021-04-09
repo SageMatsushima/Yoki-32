@@ -5,15 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import edu.brown.cs.student.yoki.tree.KdTree;
-import edu.brown.cs.student.yoki.tree.MatchFinder;
-import edu.brown.cs.student.yoki.tree.ParseStars;
-import edu.brown.cs.student.yoki.tree.Users;
-import edu.brown.cs.student.yoki.tree.AddData;
-import edu.brown.cs.student.yoki.tree.AddUsers;
-import edu.brown.cs.student.yoki.tree.CreateTable;
-import edu.brown.cs.student.yoki.tree.REPL;
-import edu.brown.cs.student.yoki.tree.DataReader;
+import edu.brown.cs.student.yoki.tree.*;
 
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -92,6 +84,7 @@ public final class Main {
 
     REPL repl = new REPL();
     repl.addAction("data", new DataReader());
+    repl.addAction("interests", new InterestsReader());
 //    repl.addAction("data", csvParser);
 //    repl.addAction("match", finder);
 //    repl.addAction("createTable", createTable);

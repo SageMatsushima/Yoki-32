@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class DataReader implements TriggerAction {
   //setting up instance variables
   private static Connection conn;
-  private static String mapDataPath = null;
+  private static String dataPath = null;
 
   /**
    * Action command that executes the MapReader code.
@@ -24,8 +24,8 @@ public class DataReader implements TriggerAction {
       // Check if file exists, otherwise an empty temporary database will be created
       if (new File(path).exists()) {
         try {
-          mapDataPath = path;
-          allInterests();
+          dataPath = path;
+          allUserData();
 
           System.out.println("Reading data from " + path);
         } catch (SQLException | ClassNotFoundException sqlEx) {
@@ -40,20 +40,20 @@ public class DataReader implements TriggerAction {
   }
 
 
-  private void allInterests() throws SQLException, ClassNotFoundException {
+  private void allUserData() throws SQLException, ClassNotFoundException {
     if (conn != null) {
       conn.close();
     }
 
     Class.forName("org.sqlite.JDBC");
-    String urlToDB = "jdbc:sqlite:" + mapDataPath;
+    String urlToDB = "jdbc:sqlite:" + dataPath;
     conn = DriverManager.getConnection(urlToDB);
     Statement stat = conn.createStatement();
     stat.executeUpdate("PRAGMA foreign_keys=ON");
     try {
 
       // Query nodes that are part of a distinct way
-      PreparedStatement prep = SQLcommands.getUserData();
+      PreparedStatement prep = SQLcommands.getAllUserData();
 
       ResultSet rs = prep.executeQuery();
       while (rs.next()) {
@@ -72,4 +72,9 @@ public class DataReader implements TriggerAction {
   public static Connection getConnection() {
     return conn;
   }
+
+  public static String getdataPath() {
+    return dataPath;
+  }
+
 }
