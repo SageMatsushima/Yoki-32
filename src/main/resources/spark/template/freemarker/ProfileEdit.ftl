@@ -1,3 +1,18 @@
+<#assign nav>
+<nav>
+    <button class="sidebar">Home</button> <br>
+    <button class="sidebar">Matches</button> <br>
+    <button class="sidebar">Learn</button> <br>
+    <button class="sidebar">Teach</button> <br>
+    <button class="sidebar">My Profile</button> <br>
+    <button class="sidebar">Settings</button> <br>
+</nav>
+</#assign>
+
+<#assign save>
+    <button id="save">Save</button>
+</#assign>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,14 +22,7 @@
 </head>
 <body>
     <div id="profile">
-        <nav>
-            <button class="sidebar">Home</button> <br>
-            <button class="sidebar">Matches</button> <br>
-            <button class="sidebar">Learn</button> <br>
-            <button class="sidebar">Teach</button> <br>
-            <button class="sidebar">My Profile</button> <br>
-            <button class="sidebar">Settings</button> <br>
-        </nav>
+        ${nav}
         <h2>Edit Profile</h2><br>
         <div id="main">
             <div id="inputs">
@@ -30,7 +38,7 @@
             <div id="picture">
                 <img src="">
                 <button id="changePic">Picture icon</button><br>
-                <button id="save">Save</button>
+                ${save}
             </div>
         </div>
     </div>
