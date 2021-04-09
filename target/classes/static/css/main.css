@@ -73,8 +73,4 @@ input[id="coords"]:checked + label > input {
 }
 
 body {
-    background-image: url("../images/4965.jpg");
-    background-color: #1e1330;
-    background-size: cover;
-    background-repeat: no-repeat;
 }
