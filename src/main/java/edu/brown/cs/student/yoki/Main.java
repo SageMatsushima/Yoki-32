@@ -106,6 +106,8 @@ public final class Main {
     }
   }*/
 
+  //sends to Front-end next match -> pops from our list
+  //when program loads, run the program and store a list of matches in Main
   private static class YokiHandler implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request req, Response res) {
@@ -114,6 +116,7 @@ public final class Main {
       return new ModelAndView(variables.build(), "main.ftl");
     }
   }
+
 
   private static class ExceptionPrinter implements ExceptionHandler {
     @Override
