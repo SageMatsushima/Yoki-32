@@ -113,7 +113,7 @@ public final class Main {
     public ModelAndView handle(Request req, Response res) {
 
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
-      return new ModelAndView(variables.build(), "main.ftl");
+      return new ModelAndView(variables.build(), "ProfileEdit.ftl");
     }
   }
 
