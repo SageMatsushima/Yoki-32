@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"edu.brown.cs.rhill6.map"},{"l":"edu.brown.cs.rhill6.mockaroo"},{"l":"edu.brown.cs.rhill6.stars"}]
