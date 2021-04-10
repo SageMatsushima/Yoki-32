@@ -35,7 +35,7 @@ public class KdTree<N extends KdNode> {
       root = null;
       return;
     }
-//    getCoords().length
+
     dim = list.get(0).getCoords().length;
     alexKDTree = new AlexKDTree<>(nodeList, dim);
     root = alexKDTree.getRoot();
@@ -45,27 +45,34 @@ public class KdTree<N extends KdNode> {
    * Performs a KD Tree search and prints the found nodes in order.
    */
   public void searchAndPrint() {
-    for (N node : this.list) {
-      double dist = Math.sqrt(Math.pow(nodeIgnored.getCoords()[0] - node.getCoords()[0], 2)
-          + Math.pow(nodeIgnored.getCoords()[1] - node.getCoords()[1], 2)
-          + Math.pow(nodeIgnored.getCoords()[2] - node.getCoords()[2], 2)
-          + Math.pow(nodeIgnored.getCoords()[3] - node.getCoords()[3], 2)
-          + Math.pow(nodeIgnored.getCoords()[4] - node.getCoords()[4], 2));
-      System.out.println(node + ": Dist = " + dist);
-    }
-    System.out.println("-----------");
+//    for (N node : this.list) {
+//      double dist = Math.sqrt(Math.pow(nodeIgnored.getCoords()[0] - node.getCoords()[0], 2)
+//          + Math.pow(nodeIgnored.getCoords()[1] - node.getCoords()[1], 2)
+//          + Math.pow(nodeIgnored.getCoords()[2] - node.getCoords()[2], 2)
+//          + Math.pow(nodeIgnored.getCoords()[3] - node.getCoords()[3], 2)
+//          + Math.pow(nodeIgnored.getCoords()[4] - node.getCoords()[4], 2));
+//    }
     kdNeighbors();
     printFound();
   }
 
   private void printFound() {
+    int num = 1;
+    System.out.println(nodeIgnored.toString());
     for (N node : found) {
-      double dist = Math.sqrt(Math.pow(nodeIgnored.getCoords()[0] - node.getCoords()[0], 2)
-          + Math.pow(nodeIgnored.getCoords()[1] - node.getCoords()[1], 2)
-          + Math.pow(nodeIgnored.getCoords()[2] - node.getCoords()[2], 2)
-          + Math.pow(nodeIgnored.getCoords()[3] - node.getCoords()[3], 2)
-          + Math.pow(nodeIgnored.getCoords()[4] - node.getCoords()[4], 2));
-      System.out.println(node + ": Dist = " + dist);
+      System.out.println("Match number: " + num);
+      num++;
+      double dist = 0;
+      String ratio = "";
+      for (int i = 0; i < node.getCoords().length; i++) {
+        dist += Math.pow(nodeIgnored.getCoords()[i] - node.getCoords()[i], 2);
+        ratio += Math.abs(node.getCoords()[i] - nodeIgnored.getCoords()[i]) + ", ";
+      }
+      dist = Math.sqrt(dist);
+      System.out.println(node + "\n" + dist);
+      System.out.println(ratio);
+      System.out.println("-----------------------------------");
+      System.out.println();
     }
   }
 
@@ -141,4 +148,6 @@ public class KdTree<N extends KdNode> {
   public void setNodeIgnored(N node) {
     nodeIgnored = node;
   }
+
+
 }

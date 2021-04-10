@@ -1,5 +1,7 @@
 package edu.brown.cs.student.yoki.tree;
 
+import edu.brown.cs.student.yoki.Main;
+
 import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
@@ -83,7 +85,7 @@ public class DataReader implements TriggerAction {
         System.out.println(user.toString());
         userList.add(user);
       }
-
+      Main.getKdTree().listToTree(userList);
       prep1.close();
       rs1.close();
     } catch (Exception e) {
