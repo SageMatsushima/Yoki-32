@@ -46,6 +46,7 @@ public class MatchFinder implements TriggerAction {
   public boolean setCoordsByName(String id) {
     KdTree<User> tree = Main.getKdTree();
     ArrayList<User> users = tree.getNodeList();
+
     for (User usr : users) {
       if (usr.getId() == Integer.parseInt(id)) {
         starIgnored = usr;

@@ -56,11 +56,47 @@ public class User extends KdNode {
 
     if (o instanceof User) {
       User s2 = (User) o;
-      int sqDist = 0;
+      int matchScore = 0;
       for (int i = 0; i < interests.length; i++) {
-        sqDist += Math.pow(getInterests()[i] - s2.getInterests()[i], 2);
+        matchScore += getInterests()[i]/10 * s2.getInterests()[i]/10;
       }
-      return Math.sqrt(sqDist);
+      return 1/matchScore;
+//        if (Math.abs(getInterests()[i]-s2.getInterests()[i) <= 2)
+//        {
+//          if (Math.abs(getInterests()[i] > 5 && s2.getInterests()[i) > 5) {
+//            matchScore += 10;
+//          } else {
+//            matchScore += 5;
+//          }
+//        } else {
+//          if (Math.abs(getInterests()[i] > 5 && s2.getInterests()[i) > 5) {
+//            matchScore += 5;
+//          } else {
+//            matchScore += 2;
+//          }
+//        }
+
+//        if (getInterests()[i] > 5 && s2.getInterests()[i] > 5) {
+//          if (getInterests()[i] == s2.getInterests()[i]){
+//            matchScore += 10;
+//          } else if (Math.abs(getInterests()[i]-s2.getInterests()[i]) <= 2) {
+//            matchScore += 8;
+//          } else {
+//            matchScore += 5;
+//          }
+//        } else {
+//          if (Math.abs(getInterests()[i]-s2.getInterests()[i) <= 2) {
+//            matchScore += 3;
+//          } else {
+//            matchScore += 2;
+//          }
+//        }
+//
+//          sqDist += Math.pow(getInterests()[i] - s2.getInterests()[i], 2);
+//      }
+//      return Math.sqrt(sqDist);
+
+
     } else {
       System.err.println(
           "ERROR: Star distance must take another star or an ArrayList of coordinates");
