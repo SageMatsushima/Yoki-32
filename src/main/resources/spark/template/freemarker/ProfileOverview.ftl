@@ -20,6 +20,10 @@
     <button id="interestBtn">Add Interest</button>
 </#assign>
 
+<#assign editProfile>
+    <button id="editProfile" onclick="">Edit Profile</button>
+</#assign>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +42,7 @@
                 <h5>grad Year</h5><br>
                 <h5>concentration</h5>
                 <h5>Email</h5>
-                <button>Edit Profile</button>
+                ${editProfile}
             </div>
             <div id="picture"><img src="">Picture</div>
         </div>
