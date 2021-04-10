@@ -4,18 +4,17 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Map;
 
-import edu.brown.cs.student.yoki.tree.*;
+import edu.brown.cs.student.yoki.commands.DataReader;
+import edu.brown.cs.student.yoki.commands.InterestsReader;
+import edu.brown.cs.student.yoki.commands.MatchFinder;
+import edu.brown.cs.student.yoki.driver.*;
 
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 
-import spark.Spark;
-import spark.TemplateViewRoute;
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
-import spark.ExceptionHandler;
+import spark.*;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import com.google.common.collect.ImmutableMap;
@@ -41,7 +40,7 @@ public final class Main {
   }
 
   private final String[] args;
-  private static KdTree<User> tree = new KdTree<>();
+  private static TreeFunction<User> tree = new TreeFunction<>();
   private static MatchFinder finder = new MatchFinder();
 
   private Main(String[] args) {
@@ -66,7 +65,7 @@ public final class Main {
     repl.addAction("match", finder);
     repl.run();
   }
-  public static KdTree<User> getKdTree() {
+  public static TreeFunction<User> getKdTree() {
     return tree;
   }
 
@@ -95,6 +94,7 @@ public final class Main {
     // Setup Spark Routes
     //Spark.get("/stars", new FrontHandler(), freeMarker);
     Spark.get("/yoki", new YokiHandler(), freeMarker);
+//    Spark.get("/userData", new UserData(), freeMarker);
   }
 
  /* private static class FrontHandler implements TemplateViewRoute {
@@ -117,6 +117,14 @@ public final class Main {
     }
   }
 
+//  private static class UserData implements TemplateViewRoute {
+//    @Override
+//    public ModelAndView handle(Request req, Response res) {
+////      User currentUser = finder.get()
+////      Map<String, String> variables = ImmutableMap.of("userData", );
+//      return new ModelAndView(variables, "autocorrect.ftl");
+//    }
+//  }
 
   private static class ExceptionPrinter implements ExceptionHandler {
     @Override
