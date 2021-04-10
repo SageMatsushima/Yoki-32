@@ -3,9 +3,9 @@
     <div id = "card_content">
       <div id = "left-content">
         <div id = "name_info">
-          <h1>Kendall</h1>
-          <h3>Class of 2023</h3>
-          <h3>Cognitive Science</h3>
+          <h1 id="match-name">Kendall</h1>
+          <h3 id="match-grade">Class of 2023</h3>
+          <h3 id="match-major">Cognitive Science</h3>
         </div>
         <div id = "top_interests">
           <h3>Interests</h3>
