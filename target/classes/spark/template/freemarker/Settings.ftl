@@ -4,7 +4,7 @@
     <a href="/match"><div class="sidebar">Matches</div></a> <br>
     <a href="/learn"><div class="sidebar">Learn</div></a> <br>
     <a href="/teach"><div class="sidebar">Teach</div></a> <br>
-    <a href="/profileEdit"><div class="sidebar">My Profile</div></a> <br>
+    <a href="/profileOverview"><div class="sidebar">My Profile</div></a> <br>
     <a href="/settings"><div class="sidebar">Settings</div></a> <br>
 </nav>
 </#assign>
@@ -31,6 +31,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/settings.css">
+    <link rel="stylesheet" href="css/matching.css">
 </head>
 <body>
     <div id="profile">
@@ -40,7 +41,7 @@
             <div id="options">
                 ${logout}
                 ${LD}
-                ${TD}
+                ${TC}
                 ${report}
             </div>
         </div>

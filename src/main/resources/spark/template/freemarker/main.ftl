@@ -1,5 +1,6 @@
 <#assign nav>
   <nav>
+    <a href="/yoki"><img src="/images/whiteLogo.png" id="logo"></a> <br>
     <a href="/yoki"><div class="sidebar">Home</div></a> <br>
     <a href="/match"><div class="sidebar">Matches</div></a> <br>
     <a href="/learn"><div class="sidebar">Learn</div></a> <br>

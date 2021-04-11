@@ -133,8 +133,8 @@ public final class Main {
     Spark.get("/settings", new SettingsHandler(), freeMarker);
     Spark.get("/profileEdit", new ProfileEditHandler(), freeMarker);
     Spark.get("/match", new MatchPageHandler(), freeMarker);
-    Spark.get("/yokimatch", new MatchHandler());
     Spark.get("/profileOverview", new ProfileOverviewHandler(), freeMarker);
+    Spark.get("/yokimatch", new MatchHandler());
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
 
