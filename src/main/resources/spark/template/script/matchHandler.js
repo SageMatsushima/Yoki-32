@@ -8,7 +8,7 @@ const matchMap = new Map();
 
 function onMatchPressed() {
     let response = getNextMatch();
-    matchMap.append(response.data.name, response);
+    matchMap.append(response.data.firstName, response);
 }
 
 
@@ -21,10 +21,10 @@ function getNextMatch(){
         },
     })
         .then(response => {
-            console.log(response.data.name)
-            matchName.innerHTML = response.data.name;
-            matchGrade.innerHTML = "Class of " + response.data.grade;
-            matchMajor.innerHTML = response.data.major;
+            console.log(response.data.firstName)
+            matchName.innerHTML = response.data.firstName;
+            matchGrade.innerHTML = "Class of " + response.data.year;
+            //matchMajor.innerHTML = response.data.major;
             return response.data;
         })
         .catch(function (error) {

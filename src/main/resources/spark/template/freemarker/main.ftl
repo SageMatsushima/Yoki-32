@@ -5,7 +5,6 @@
         <div id = "name_info">
           <h1 id="match-name">Kendall</h1>
           <h3 id="match-grade">Class of 2023</h3>
-          <h3 id="match-major">Cognitive Science</h3>
         </div>
         <div id = "top_interests">
           <h3>Interests</h3>
@@ -30,13 +29,13 @@
 </#assign>
 
 <#assign matchButton>
- <button class = "button" id="match-button">
+ <button class = "button" id="match-button" onclick="onMatchPressed()">
    match
  </button>
 </#assign>
 
 <#assign passButton>
-  <button class = "button" id="pass-button">
+  <button class = "button" id="pass-button" onclick="getNextMatch()">
     pass
   </button>
 </#assign>
