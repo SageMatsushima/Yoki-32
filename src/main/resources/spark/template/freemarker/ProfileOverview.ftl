@@ -11,7 +11,7 @@
 </#assign>
 
 <#assign interest>
-    <div class="interest">
+    <div class="interests">
         <h3>Interest</h3>
         <input type="range" min="1" max="100" value="50" class="slider">
     </div>
