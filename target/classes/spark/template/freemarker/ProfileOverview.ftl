@@ -1,5 +1,6 @@
 <#assign nav>
 <nav>
+    <a href="/yoki"><img src="/images/whiteLogo.png" id="logo"></a> <br>
     <a href="/yoki"><div class="sidebar">Home</div></a> <br>
     <a href="/match"><div class="sidebar">Matches</div></a> <br>
     <a href="/learn"><div class="sidebar">Learn</div></a> <br>
@@ -30,6 +31,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/profileOverview.css">
+    <link rel="stylesheet" href="css/matching.css">
 </head>
 <body>
 <div id="profile">
@@ -42,7 +44,7 @@
                 <h5>grad Year</h5><br>
                 <h5>concentration</h5>
                 <h5>Email</h5>
-                ${editProfile}
+                <a href="/profileEdit"><button id="match-button" onclick="">Edit Profile</button></a>
             </div>
             <div id="picture"><img src="">Picture</div>
         </div>
