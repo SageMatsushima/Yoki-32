@@ -1,12 +1,12 @@
 <#assign nav>
 <nav>
-    <a href="/yoki"><img src="/images/whiteLogo.png" id="logo"></a> <br>
-    <a href="/yoki"><div class="sidebar">Home</div></a> <br>
-    <a href="/match"><div class="sidebar">Matches</div></a> <br>
-    <a href="/learn"><div class="sidebar">Learn</div></a> <br>
-    <a href="/teach"><div class="sidebar">Teach</div></a> <br>
-    <a href="/profileOverview"><div class="sidebar">My Profile</div></a> <br>
-    <a href="/settings"><div class="sidebar">Settings</div></a> <br>
+    <a href="/yoki"><img src="/images/whiteLogo.png" id="logo"></a>
+    <a href="/yoki"><div class="sidebar">Home</div></a>
+    <a href="/match"><div class="sidebar">Matches</div></a>
+    <a href="/learn"><div class="sidebar">Learn</div></a>
+    <a href="/teach"><div class="sidebar">Teach</div></a>
+    <a href="/profileOverview"><div class="sidebar">My Profile</div></a>
+    <a href="/settings"><div class="sidebar">Settings</div></a>
 </nav>
 </#assign>
 
@@ -16,16 +16,16 @@
     </button>
 </#assign>
 
-<#assign request>
-    <button id="request">Request</button>
+<#assign accept>
+    <button class="request" id="match-button">Accept</button>
 </#assign>
 
 <#assign user>
     <div class="user">
-        <div id="idPhoto">
+        <div class="idPhoto">
             <img src="">
         </div>
-        <div id="info">
+        <div class="info">
             <h5>Name</h5>
             <h5>subject to learn</h5>
             <h5>Email</h5>
@@ -63,7 +63,7 @@
             </div>
             <div id="results">
                 ${user}
-                ${request}
+                ${accept}
             </div>
         </div>
     </div>

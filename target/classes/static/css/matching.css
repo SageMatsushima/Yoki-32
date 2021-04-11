@@ -105,6 +105,7 @@
     padding: 14px 28px;
     font-size: 16px;
     cursor: pointer;
+    margin-top: 1vw;
 }
 
 #profile {
@@ -140,4 +141,27 @@ div.sidebar:hover {
     width: 12vw;
     height: 7vw;
     margin-left: 1vw;
+    margin-bottom: 3vw;
+}
+
+.interest {
+    display: flex;
+}
+
+progress.interestBar {
+    width: 7vw;
+    height: 1.75vw;
+    margin-left: 2vw;
+}
+
+progress[value] {
+    color: #bc9e26;
+}
+
+ul {
+    font-size: 1.25vw;
+    padding-left: .5vw;
+    font-family: Quicksand;
+    src: url(/fonts/Quicksand-VariableFont_wght.ttf) format("truetype");
+    font-weight: bold;
 }
