@@ -17,7 +17,7 @@
 </#assign>
 
 <#assign interestButton>
-    <button id="interestBtn" onclick="addInterest()">Add Interest</button>
+    <button id="interestBtn" onclick="addInterest">Add Interest</button>
 </#assign>
 
 <#assign editProfile>

@@ -4,16 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import edu.brown.cs.student.yoki.commands.DataReader;
 import edu.brown.cs.student.yoki.commands.InterestsReader;
 import edu.brown.cs.student.yoki.commands.MatchFinder;
 import edu.brown.cs.student.yoki.driver.*;
-
-import com.google.gson.Gson;
 
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -46,21 +42,9 @@ public final class Main {
   private final String[] args;
   private static TreeFunction<User> tree = new TreeFunction<>();
   private static MatchFinder finder = new MatchFinder();
-  private static DataReader dataReader = new DataReader();
-  private static InterestsReader interestsReader = new InterestsReader();
-  private List<User> users = new ArrayList<>();
-  private static final Gson GSON = new Gson();
 
   private Main(String[] args) {
     this.args = args;
-  }
-
-  public List<User> getUsers() {
-    return users;
-  }
-
-  public void setUsers(List<User> users) {
-    this.users = users;
   }
 
   private void run() {
@@ -75,23 +59,10 @@ public final class Main {
       runSparkServer((int) options.valueOf("port"));
     }
 
-
-    ArrayList<String> dataReaderArgs = new ArrayList<>();
-    dataReaderArgs.add("data");
-    dataReaderArgs.add("data/bigData.sqlite");
-    dataReader.action(dataReaderArgs);
-    ArrayList<String> finderArgs = new ArrayList<>();
-    finderArgs.add("match");
-    finderArgs.add("10");
-    finderArgs.add("1");
-    finder.action(finderArgs);
-    this.setUsers(finder.getUserList());
-
     REPL repl = new REPL();
-    repl.addAction("data", dataReader);
-    repl.addAction("interests", interestsReader);
+    repl.addAction("data", new DataReader());
+    repl.addAction("interests", new InterestsReader());
     repl.addAction("match", finder);
-
     repl.run();
   }
   public static TreeFunction<User> getKdTree() {
@@ -123,7 +94,6 @@ public final class Main {
     // Setup Spark Routes
     //Spark.get("/stars", new FrontHandler(), freeMarker);
     Spark.get("/yoki", new YokiHandler(), freeMarker);
-    Spark.get("/yokimatch", new MatchHandler());
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
 
@@ -138,42 +108,12 @@ public final class Main {
 
   //sends to Front-end next match -> pops from our list
   //when program loads, run the program and store a list of matches in Main
-  private class YokiHandler implements TemplateViewRoute {
+  private static class YokiHandler implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request req, Response res) {
 
-<<<<<<< HEAD
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
       return new ModelAndView(variables.build(), "ProfileOverview.ftl");
-=======
-      //User tod = new User(20, "test", "test", "test", "test", 3023, new int[]{0, 1});
-      //Map<String, User> variables = ImmutableMap.of("user", tod);
-      //ImmutableMap.Builder<String, User> variables = new ImmutableMap.Builder();
-      System.out.println(Main.this.getUsers().size());
-      if (Main.this.getUsers().size() > 0) {
-        User nextMatch = Main.this.getUsers().remove(0);
-        Map<String, User> variables = ImmutableMap.of("user", nextMatch);
-        return new ModelAndView(variables, "main.ftl");
-      }
-      return new ModelAndView(null, "main.ftl");
-    }
-  }
-
-  private class MatchHandler implements Route {
-    @Override
-    public String handle(Request req, Response res) {
-
-      //User tod = new User(20, "test", "test", "test", "test", 3023, new int[]{0, 1});
-      //Map<String, User> variables = ImmutableMap.of("user", tod);
-      //ImmutableMap.Builder<String, User> variables = new ImmutableMap.Builder();
-      System.out.println(Main.this.getUsers().size());
-      if (Main.this.getUsers().size() > 0) {
-        User nextMatch = Main.this.getUsers().remove(0);
-        Map<String, User> variables = ImmutableMap.of("user", nextMatch);
-        return GSON.toJson(variables);
-      }
-      return "null";
->>>>>>> c84e8ec21b5d6368812cc59abeec80c0409bef08
     }
   }
 
