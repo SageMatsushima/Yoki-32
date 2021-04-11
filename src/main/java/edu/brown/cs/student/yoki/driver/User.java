@@ -43,14 +43,13 @@ public class User extends KdNode {
     return this.interests;
   }
 
-  public double distance(Object o) {
-    return 0; }
+  public double distance(Object o) { return 0;}
 
   @Override
   public String toString() {
     String str = "id: " + this.id + ", first_name: " + this.firstName + ", last_name: " + this.lastName
-        + ", email: " + this.email + ", password: " + this.password + ", year: " + this.year
-        + "\nInterest Levels: " + interestsToString() + "\n";
+      + ", email: " + this.email + ", password: " + this.password + ", year: " + this.year
+      + "\n" + interestsToString();
     return str;
   }
 
@@ -59,6 +58,6 @@ public class User extends KdNode {
     for (int i = 0; i < this.interests.length; i++) {
       str += this.interests[i] + ", ";
     }
-    return str.substring(0, str.length() - 2);
+    return str.substring(0, str.length()-2);
   }
 }

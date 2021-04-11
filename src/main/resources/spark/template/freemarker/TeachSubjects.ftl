@@ -28,7 +28,7 @@
             <h5>Name</h5>
             <h5>subject to learn</h5>
             <h5>Email</h5>
-        </div>
+        </div><br>
     </div>
 </#assign>
 
@@ -45,6 +45,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/teachSubjects.css">
+    <link rel="stylesheet" href="css/matching.css">
 </head>
 <body>
     <div id="profile">

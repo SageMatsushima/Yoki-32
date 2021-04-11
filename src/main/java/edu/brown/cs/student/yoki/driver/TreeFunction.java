@@ -51,6 +51,7 @@ public class TreeFunction<N extends KdNode> {
 
   private void printFound() {
     int num = 1;
+//    System.out.println(nodeIgnored.toString());
     for (N node : found) {
       System.out.println("Match number: " + num);
       num++;
@@ -62,6 +63,8 @@ public class TreeFunction<N extends KdNode> {
         dist += Math.pow(nodeIgnored.getCoords()[i] - node.getCoords()[i], 2);
         ratio += Math.abs(node.getCoords()[i] - nodeIgnored.getCoords()[i]) + ", ";
       }
+//      System.out.println(node + "\n" + dist);
+//      System.out.println(ratio);
       System.out.println("-----------------------------------");
       System.out.println();
     }

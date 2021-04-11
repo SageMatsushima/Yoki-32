@@ -71,7 +71,7 @@ h2 {
     margin-left: 3vw;
 }
 
-.subject {
+#match-button.subject {
     border: none;
     border-radius: 1vw;
     width: 18vw;
@@ -99,7 +99,9 @@ h2 {
 }
 
 .user {
-    background-color: #99008a;
+    background-color: #696367;
+    height: 8vw;
+    display: flex;
 }
 
 #request {
@@ -111,9 +113,21 @@ h2 {
 }
 
 #request {
-    display: none;
+    /*display: none;*/
+    flex: none;
 }
 
 h3 {
     margin-left: 3vw;
+}
+
+#idPhoto {
+    width: 8vw;
+    height: 8vw;
+    background-color: beige;
+}
+
+h5 {
+    margin: 0;
+    margin-top: .75vw;
 }
