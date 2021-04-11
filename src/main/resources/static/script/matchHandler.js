@@ -1,11 +1,14 @@
 const matchInterests = document.getElementById("top_interests_list");
 const matchList = document.getElementById('matchList');
 const matchMap = new Map();
+let currUser;
 
 
 function onMatchPressed() {
-    let response = getNextMatch();
-    //matchMap.append(response.data., response);
+    let data = getNextMatch();
+    //console.log(currUser);
+    matchMap.set(currUser.firstName, currUser);
+    console.log(matchMap);
 }
 
 
@@ -22,7 +25,7 @@ function getNextMatch(){
             let matchName = document.getElementById('match-name');
             let matchGrade = document.getElementById('match-grade');
             let topInterests = document.getElementById('top_interests_list')
-            console.log(data);
+            //console.log(data);
             matchName.innerHTML = data.user.firstName;
             matchGrade.innerHTML = "Class of " + data.user.year;
             topInterests.innerHTML = ""
@@ -31,6 +34,7 @@ function getNextMatch(){
             }
             console.log()
             //matchMajor.innerHTML = response.data.major;
+            currUser = data.user;
             return data;
         })
         .catch(function (error) {
