@@ -25,6 +25,19 @@ public final class SQLcommands {
       return null;
     }
   }
+
+  public static PreparedStatement getUserIds() {
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement("SELECT id FROM user_data INNER JOIN user_interests ON user_data.id=user_interests.id;");
+      return prep;
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+      return null;
+    }
+  }
+
   public static PreparedStatement getUserData() {
     try {
       Connection conn = DataReader.getConnection();
