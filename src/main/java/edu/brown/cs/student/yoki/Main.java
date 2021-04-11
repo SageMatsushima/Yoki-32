@@ -138,15 +138,6 @@ public final class Main {
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
 
- /* private static class FrontHandler implements TemplateViewRoute {
-    @Override
-    public ModelAndView handle(Request req, Response res) {
-
-      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
-      return new ModelAndView(variables.build(), "query.ftl");
-    }
-  }*/
-
   //sends to Front-end next match -> pops from our list
   //when program loads, run the program and store a list of matches in Main
   private class YokiHandler implements TemplateViewRoute {
