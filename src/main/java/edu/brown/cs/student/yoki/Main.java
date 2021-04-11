@@ -139,13 +139,11 @@ public final class Main {
     Spark.get("/match", new MatchPageHandler(), freeMarker);
     Spark.get("/profileOverview", new ProfileOverviewHandler(), freeMarker);
     Spark.get("/yokimatch", new MatchHandler());
-<<<<<<< HEAD
+
     Spark.get("/setmatch", new MatchMapHandler());
     Spark.get("/listInterests", new ListInterestsHandler());
 
-=======
-    Spark.post("/listInterests", new ListInterestsHandler());
->>>>>>> 3017ad489c682459ebb51670ab0d04d0e79817b4
+
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
 

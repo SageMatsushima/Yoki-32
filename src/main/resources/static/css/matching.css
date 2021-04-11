@@ -3,6 +3,12 @@
     src: url(/fonts/Quicksand-VariableFont_wght.ttf) format("truetype");
 }
 
+body {
+    margin: 0;
+    font-family: Quicksand;
+    font-size: 1.75vw;
+}
+
 #potential_card {
     width: 60%;
     height: 35vw;
