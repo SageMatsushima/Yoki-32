@@ -1,3 +1,14 @@
+<#assign nav>
+  <nav>
+    <a href="/yoki"><div class="sidebar">Home</div></a> <br>
+    <a href="/match"><div class="sidebar">Matches</div></a> <br>
+    <a href="/learn"><div class="sidebar">Learn</div></a> <br>
+    <a href="/teach"><div class="sidebar">Teach</div></a> <br>
+    <a href="/profileOverview"><div class="sidebar">My Profile</div></a> <br>
+    <a href="/settings"><div class="sidebar">Settings</div></a> <br>
+  </nav>
+</#assign>
+
 <#assign card>
   <script src="script/matchHandler.js"></script>
   <div id = "potential_card">
@@ -56,14 +67,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
+  <div id="profile">
+    ${nav}
     <script src="script/matchHandler.js"></script>
     <div id = "card-div">
-     ${card}
+      ${card}
       <div id = "button-div">
         ${passButton}
-          ${matchButton}
+        ${matchButton}
       </div>
     </div>
+  </div>
      <!-- Again, we're serving up the unminified source for clarity. -->
   </body>
   <!-- See http://html5boilerplate.com/ for a good place to start

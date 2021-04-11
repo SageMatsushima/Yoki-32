@@ -11,7 +11,7 @@ import java.util.Map;
 import edu.brown.cs.student.yoki.commands.DataReader;
 import edu.brown.cs.student.yoki.commands.InterestsReader;
 import edu.brown.cs.student.yoki.commands.MatchFinder;
-import edu.brown.cs.student.yoki.commands.TopInterests;
+import edu.brown.cs.student.yoki.commands.UserReader;
 import edu.brown.cs.student.yoki.driver.*;
 
 import com.google.gson.Gson;
@@ -46,10 +46,12 @@ public final class Main {
 
   private final String[] args;
   private static TreeFunction<User> tree = new TreeFunction<>();
-  private static MatchFinder finder = new MatchFinder();
+  private static MatchFinder matches = new MatchFinder();
   private static DataReader dataReader = new DataReader();
   private static InterestsReader interestsReader = new InterestsReader();
-  private static TopInterests topInterests = new TopInterests();
+  private static UserReader userReader = new UserReader();
+
+
   private List<User> users = new ArrayList<>();
   private static final Gson GSON = new Gson();
 
@@ -80,20 +82,20 @@ public final class Main {
 
     ArrayList<String> dataReaderArgs = new ArrayList<>();
     dataReaderArgs.add("data");
-    dataReaderArgs.add("data/bigData.sqlite");
+    dataReaderArgs.add("data/smallData.sqlite");
     dataReader.action(dataReaderArgs);
     ArrayList<String> finderArgs = new ArrayList<>();
     finderArgs.add("match");
     finderArgs.add("10");
     finderArgs.add("1");
-    finder.action(finderArgs);
-    this.setUsers(finder.getUserList());
+    matches.action(finderArgs);
+    this.setUsers(matches.getUserList());
 
     REPL repl = new REPL();
     repl.addAction("data", dataReader);
     repl.addAction("interests", interestsReader);
-    repl.addAction("match", finder);
-    repl.addAction("top", topInterests);
+    repl.addAction("match", matches);
+    repl.addAction("user", userReader);
 
     repl.run();
   }
@@ -126,7 +128,13 @@ public final class Main {
     // Setup Spark Routes
     //Spark.get("/stars", new FrontHandler(), freeMarker);
     Spark.get("/yoki", new YokiHandler(), freeMarker);
+    Spark.get("/learn", new LearnHandler(), freeMarker);
+    Spark.get("/teach", new TeachHandler(), freeMarker);
+    Spark.get("/settings", new SettingsHandler(), freeMarker);
+    Spark.get("/profileEdit", new ProfileEditHandler(), freeMarker);
+    Spark.get("/match", new MatchPageHandler(), freeMarker);
     Spark.get("/yokimatch", new MatchHandler());
+    Spark.get("/profileOverview", new ProfileOverviewHandler(), freeMarker);
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
 
@@ -172,6 +180,60 @@ public final class Main {
         return GSON.toJson(variables);
       }
       return "null";
+    }
+  }
+
+  private static class MatchPageHandler implements TemplateViewRoute {
+    @Override
+    public ModelAndView handle(Request req, Response res) {
+
+      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      return new ModelAndView(variables.build(), "main.ftl");
+    }
+  }
+
+  private static class LearnHandler implements TemplateViewRoute {
+    @Override
+    public ModelAndView handle(Request req, Response res) {
+
+      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      return new ModelAndView(variables.build(), "LearnSubjects.ftl");
+    }
+  }
+
+  private static class TeachHandler implements TemplateViewRoute {
+    @Override
+    public ModelAndView handle(Request req, Response res) {
+
+      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      return new ModelAndView(variables.build(), "TeachSubjects.ftl");
+    }
+  }
+
+  private static class SettingsHandler implements TemplateViewRoute {
+    @Override
+    public ModelAndView handle(Request req, Response res) {
+
+      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      return new ModelAndView(variables.build(), "Settings.ftl");
+    }
+  }
+
+  private static class ProfileEditHandler implements TemplateViewRoute {
+    @Override
+    public ModelAndView handle(Request req, Response res) {
+
+      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      return new ModelAndView(variables.build(), "ProfileEdit.ftl");
+    }
+  }
+
+  private static class ProfileOverviewHandler implements TemplateViewRoute {
+    @Override
+    public ModelAndView handle(Request req, Response res) {
+
+      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      return new ModelAndView(variables.build(), "ProfileOverview.ftl");
     }
   }
 
