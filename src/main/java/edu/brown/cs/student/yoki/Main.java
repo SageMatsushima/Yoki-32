@@ -8,6 +8,7 @@ import java.io.StringWriter;
 import edu.brown.cs.student.yoki.commands.DataReader;
 import edu.brown.cs.student.yoki.commands.InterestsReader;
 import edu.brown.cs.student.yoki.commands.MatchFinder;
+import edu.brown.cs.student.yoki.commands.TopInterests;
 import edu.brown.cs.student.yoki.driver.*;
 
 import joptsimple.OptionParser;
@@ -41,6 +42,10 @@ public final class Main {
   private final String[] args;
   private static TreeFunction<User> tree = new TreeFunction<>();
   private static MatchFinder finder = new MatchFinder();
+  private static DataReader dataReader = new DataReader();
+  private static InterestsReader interestsReader = new InterestsReader();
+  private static TopInterests topInterests = new TopInterests();
+
 
   private Main(String[] args) {
     this.args = args;
@@ -59,9 +64,11 @@ public final class Main {
     }
 
     REPL repl = new REPL();
-    repl.addAction("data", new DataReader());
-    repl.addAction("interests", new InterestsReader());
+    repl.addAction("data", dataReader);
+    repl.addAction("interests", interestsReader);
     repl.addAction("match", finder);
+    repl.addAction("top", topInterests);
+
     repl.run();
   }
   public static TreeFunction<User> getKdTree() {
