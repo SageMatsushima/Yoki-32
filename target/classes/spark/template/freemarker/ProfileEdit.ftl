@@ -10,7 +10,7 @@
 </#assign>
 
 <#assign save>
-    <button id="save">Save</button>
+    <button id="match-button">Save</button>
 </#assign>
 
 <!DOCTYPE html>
@@ -19,6 +19,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/profileEdit.css">
+    <link rel="stylesheet" href="css/matching.css">
 </head>
 <body>
     <div id="profile">
@@ -32,11 +33,11 @@
                 </label></div><br>
                 <div id="major">Major<br><input name= "major" type="text"></div>
                 <div id="gradYear">Grad Year<br><input name= "gradYear" type="text"></div><br>
-                <div id="email">Email<br><input name= "email" type="text"></div> <br>
+                <div id="email">Email<br><input name= "email" type="text" id="emailInput"></div> <br>
                 <div id="bio">Bio<br><input id= "bioBox" type="text"></div>
             </div>
             <div id="picture">
-                <img src="">
+                <img id = "profilePic" src="./images/kendall.jpg">
                 <button id="changePic">Picture icon</button><br>
                 ${save}
             </div>

@@ -15,7 +15,7 @@ function addInterest() {
     document.div.appendChild(name);
     document.div.appendChild(input);
     document.getElementById("interest").appendChild(div);
-    console.log("here")
+
     //post request to the profile edit page
     // const interest = document.getElementsByClassName('slider');
     //

@@ -1,7 +1,9 @@
-const matchName = document.getElementById('match-name');
-const matchGrade = document.getElementById('match-grade');
-const matchMajor = document.getElementById('match-major');
-const matchInterests = document.getElementById("top_interests_list");
+const name = document.getElementById('name');
+const pronouns = document.getElementById('pronouns');
+const major = document.getElementById('major');
+const gradYear = document.getElementById("gradYear");
+const email = document.getElementById('email');
+const bio = document.getElementById('bioBox');
 
 const save = () => {
     fetch('/yoki', {
@@ -12,10 +14,13 @@ const save = () => {
         },
     })
         .then(response => {
-            console.log(response.data.name)
-            matchName.innerHTML = response.data.name;
-            matchGrade.innerHTML = "Class of " + response.data.grade;
-            matchMajor.innerHTML = response.data.major;
+            text: name.value
+            text: pronouns.value
+            text: major.value
+            text: gradYear.value
+            text: email.value
+            text: bio.value
+            //need to send back to the front end
         })
         .catch(function (error) {
             console.log(error);

@@ -17,7 +17,11 @@
 </#assign>
 
 <#assign interestButton>
-    <button id="interestBtn">Add Interest</button>
+    <button id="interestBtn" onclick="addInterest()">Add Interest</button>
+</#assign>
+
+<#assign editProfile>
+    <button id="editProfile" onclick="">Edit Profile</button>
 </#assign>
 
 <!DOCTYPE html>
@@ -26,6 +30,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/profileOverview.css">
+    <link rel="stylesheet" href="css/matching.css">
 </head>
 <body>
 <div id="profile">
@@ -38,7 +43,7 @@
                 <h5>grad Year</h5><br>
                 <h5>concentration</h5>
                 <h5>Email</h5>
-                <button>Edit Profile</button>
+                ${editProfile}
             </div>
             <div id="picture"><img src="">Picture</div>
         </div>
