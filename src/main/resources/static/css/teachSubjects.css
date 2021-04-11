@@ -61,23 +61,12 @@ h2 {
 #search {
     width: 20vw;
     height: 3vw;
-    margin-left: 3vw;
+    margin-left: 4.5vw;
 }
 
 #options {
     height: 25vw;
     width: 26vw;
-}
-
-#results {
-    width: 20vw;
-    height: 35vw;
-    margin-left: 3vw;
-    background-color: #007a99;
-}
-
-.user {
-    background-color: #99008a;
 }
 
 #request {
@@ -88,10 +77,15 @@ h2 {
     float: right;
 }
 
-#request {
-    display: none;
-}
-
 h3 {
     margin-left: 3vw;
+}
+
+h5 {
+    margin: 0;
+    margin-left: 1vw;
+}
+
+button#match-button.subject {
+    margin-left: 6vw;
 }

@@ -22,7 +22,7 @@
 </#assign>
 
 <#assign editProfile>
-    <button id="editProfile" onclick="">Edit Profile</button>
+    <button id="match-button" class="request" onclick="">Edit Profile</button>
 </#assign>
 
 <!DOCTYPE html>

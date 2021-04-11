@@ -17,13 +17,13 @@
 </#assign>
 
 <#assign subject>
-    <button class = "subject" id="subjectButton" onclick="subjectClick">
+    <button class = "subject" id="match-button" onclick="subjectClick">
         subject
     </button>
 </#assign>
 
 <#assign request>
-    <button class="request">Request</button>
+    <button class="request" id="match-button">Request</button>
 </#assign>
 
 <#assign user>
