@@ -1,6 +1,7 @@
 package edu.brown.cs.student.yoki.commands;
 
 import edu.brown.cs.student.yoki.Main;
+import edu.brown.cs.student.yoki.driver.Interest;
 import edu.brown.cs.student.yoki.driver.TriggerAction;
 import edu.brown.cs.student.yoki.driver.User;
 
@@ -18,6 +19,7 @@ public class DataReader implements TriggerAction {
   private static String dataPath = null;
   private static ArrayList<User> userList = new ArrayList<User>();
   private static int interestCount;
+  private static HashMap<Integer, Interest> convert = new HashMap<>();
 
   /**
    * Action command that executes the MapReader code.
@@ -33,7 +35,10 @@ public class DataReader implements TriggerAction {
         try {
           dataPath = path;
           allUserData();
-
+          for (int i = 0; i < interestCount; i++) {
+            Interest interest = convert.get(i + 8);
+            System.out.println(interest.getId() + " " + interest.getTag() + " " + interest.getName());
+          }
           System.out.println("Reading data from " + path);
         } catch (SQLException | ClassNotFoundException sqlEx) {
           System.out.println("ERROR: Error reading from " + path);
@@ -52,13 +57,13 @@ public class DataReader implements TriggerAction {
       conn.close();
     }
 
+    // connect to database
     Class.forName("org.sqlite.JDBC");
     String urlToDB = "jdbc:sqlite:" + dataPath;
     conn = DriverManager.getConnection(urlToDB);
     Statement stat = conn.createStatement();
     stat.executeUpdate("PRAGMA foreign_keys=ON");
     try {
-
       PreparedStatement prep1 = SQLcommands.getAll();
       ResultSet rs1 = prep1.executeQuery();
       ResultSetMetaData rsmd = rs1.getMetaData();
@@ -80,7 +85,9 @@ public class DataReader implements TriggerAction {
 
         int[] interests = new int[interestCount];
         for (int j = 0; j < interests.length; j++) {
-          interests[j] = rs1.getInt(j+8);
+          interests[j] = rs1.getInt(j + 8);
+          String tag = rsmd.getColumnName(j + 8);
+          convert.put(j + 8, new Interest(j + 8, tag));
         }
 
         User user = new User(id, firstName, lastName, email, password, year, interests);
