@@ -11,6 +11,7 @@ import java.util.Map;
 import edu.brown.cs.student.yoki.commands.DataReader;
 import edu.brown.cs.student.yoki.commands.InterestsReader;
 import edu.brown.cs.student.yoki.commands.MatchFinder;
+import edu.brown.cs.student.yoki.commands.UserReader;
 import edu.brown.cs.student.yoki.driver.*;
 
 import com.google.gson.Gson;
@@ -45,9 +46,12 @@ public final class Main {
 
   private final String[] args;
   private static TreeFunction<User> tree = new TreeFunction<>();
-  private static MatchFinder finder = new MatchFinder();
+  private static MatchFinder matches = new MatchFinder();
   private static DataReader dataReader = new DataReader();
   private static InterestsReader interestsReader = new InterestsReader();
+  private static UserReader userReader = new UserReader();
+
+
   private List<User> users = new ArrayList<>();
   private static final Gson GSON = new Gson();
 
@@ -78,19 +82,20 @@ public final class Main {
 
     ArrayList<String> dataReaderArgs = new ArrayList<>();
     dataReaderArgs.add("data");
-    dataReaderArgs.add("data/bigData.sqlite");
+    dataReaderArgs.add("data/smallData.sqlite");
     dataReader.action(dataReaderArgs);
     ArrayList<String> finderArgs = new ArrayList<>();
     finderArgs.add("match");
     finderArgs.add("10");
     finderArgs.add("1");
-    finder.action(finderArgs);
-    this.setUsers(finder.getUserList());
+    matches.action(finderArgs);
+    this.setUsers(matches.getUserList());
 
     REPL repl = new REPL();
     repl.addAction("data", dataReader);
     repl.addAction("interests", interestsReader);
-    repl.addAction("match", finder);
+    repl.addAction("match", matches);
+    repl.addAction("user", userReader);
 
     repl.run();
   }

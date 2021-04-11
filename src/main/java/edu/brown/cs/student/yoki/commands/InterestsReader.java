@@ -2,12 +2,15 @@ package edu.brown.cs.student.yoki.commands;
 
 import edu.brown.cs.student.yoki.driver.Interest;
 import edu.brown.cs.student.yoki.driver.TriggerAction;
+import edu.brown.cs.student.yoki.driver.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+
+import static java.lang.System.*;
 
 /**
  * Reads a database containing tables of nodes and ways.
@@ -24,7 +27,7 @@ public class InterestsReader implements TriggerAction {
   public void action(ArrayList<String> args) {
     if (args.size() == 2) {
       if (DataReader.getdataPath() == null) {
-        System.err.println("ERROR: No database loaded");
+        err.println("ERROR: No database loaded");
       } else {
         try {
           int id = Integer.parseInt(args.get(1));
@@ -33,12 +36,12 @@ public class InterestsReader implements TriggerAction {
           // North to south, less than lat 1 and greater than lat2
           prep.setInt(1, id);
           ResultSet rs = prep.executeQuery();
-          for (int i = 2; i < DataReader.getInterestCount(); i++) {
+          for (int i = 2; i < DataReader.getInterestCount()+2; i++) {
             try {
               userInterests.add(rs.getInt(i));
-              System.out.print(rs.getInt(i) + ", ");
+              out.print(rs.getInt(i) + ", ");
             } catch (Exception e) {
-              System.err.println("Something went wrong with reading in data");
+              err.println("Something went wrong with reading in data");
             }
           }
           prep.close();
@@ -46,11 +49,11 @@ public class InterestsReader implements TriggerAction {
           getTopInterests();
         } catch (Exception e) {
           e.printStackTrace();
-          System.err.println("ERROR: must enter valid numbers");
+          err.println("ERROR: must enter valid numbers");
         }
       }
     } else {
-      System.err.println("ERROR: ways takes 4 additional arguments");
+      err.println("ERROR: ways takes 4 additional arguments");
     }
   }
 
@@ -58,21 +61,28 @@ public class InterestsReader implements TriggerAction {
     return userInterests;
   }
 
-  public HashMap<Integer, Interest> getTopInterests() {
-    HashMap<Integer, Interest> currentInterest = new HashMap<Integer, Interest>();
+  public ArrayList<ArrayList<Interest>>  getTopInterests() {
     HashMap<Integer, Interest> converter = DataReader.getConvert();
-    ArrayList<Interest> topInterests = new ArrayList<>();
-//    DataReader.printHash();
-//    DataReader.getInterestCount()-8
-    for (int i = 0; i < DataReader.getInterestCount()-2; i++) {
+    ArrayList<Interest> topCommonInterests = new ArrayList<>();
+    ArrayList<Interest> topOtherInterests = new ArrayList<>();
+    User currentUser = DataReader.getCurrentUser();
+    ArrayList<ArrayList<Interest>> topInterests = new ArrayList<>();
+    int c = DataReader.getInterestCount();
+    for (int i = 0; i < DataReader.getInterestCount(); i++) {
       if (userInterests.get(i) > 0) {
-        currentInterest.put(i, new Interest(i, converter.get(i+8).getTag(), userInterests.get(i)));
-        topInterests.add(new Interest(i, converter.get(i+8).getTag(), userInterests.get(i)));
-        System.out.println((i+8) + ", " + converter.get(i+8).getTag() + ", " + userInterests.get(i));
+        if (currentUser.getInterests()[i] > 0) {
+          topCommonInterests.add(new Interest(i+1, converter.get(i+8).getTag(), userInterests.get(i)));
+        } else {
+          topOtherInterests.add(new Interest(i+1, converter.get(i+8).getTag(), userInterests.get(i)));
+        }
       }
     }
-    topInterests.sort(new DistComparator());
-    return currentInterest;
+    topCommonInterests.sort(new DistComparator());
+    topOtherInterests.sort(new DistComparator());
+    topInterests.add(topCommonInterests);
+    topInterests.add(topOtherInterests);
+
+    return topInterests;
   }
 
   private final class DistComparator implements Comparator<Interest> {

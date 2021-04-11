@@ -20,6 +20,8 @@ public class DataReader implements TriggerAction {
   private static ArrayList<User> userList = new ArrayList<User>();
   private static int interestCount;
   private static HashMap<Integer, Interest> convert = new HashMap<>();
+  private static int currentId = 1;
+  private static User currentUser;
 
   /**
    * Action command that executes the MapReader code.
@@ -94,6 +96,9 @@ public class DataReader implements TriggerAction {
         }
 
         User user = new User(id, firstName, lastName, email, password, year, interests);
+        if (id == currentId) {
+          currentUser = user;
+        }
         System.out.println(user.toString());
         userList.add(user);
       }
@@ -124,6 +129,10 @@ public class DataReader implements TriggerAction {
 
   public static HashMap<Integer, Interest> getConvert() {
     return convert;
+  }
+
+  public static User getCurrentUser() {
+    return currentUser;
   }
 
 }
