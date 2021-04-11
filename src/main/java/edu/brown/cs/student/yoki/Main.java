@@ -6,11 +6,14 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import edu.brown.cs.student.yoki.commands.DataReader;
 import edu.brown.cs.student.yoki.commands.InterestsReader;
 import edu.brown.cs.student.yoki.commands.MatchFinder;
 import edu.brown.cs.student.yoki.driver.*;
+
+import com.google.gson.Gson;
 
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -46,6 +49,7 @@ public final class Main {
   private static DataReader dataReader = new DataReader();
   private static InterestsReader interestsReader = new InterestsReader();
   private List<User> users = new ArrayList<>();
+  private static final Gson GSON = new Gson();
 
   private Main(String[] args) {
     this.args = args;
@@ -71,8 +75,17 @@ public final class Main {
       runSparkServer((int) options.valueOf("port"));
     }
 
-    ArrayList<User> usersList = tree.getFound();
-    this.setUsers(usersList);
+
+    ArrayList<String> dataReaderArgs = new ArrayList<>();
+    dataReaderArgs.add("data");
+    dataReaderArgs.add("data/bigData.sqlite");
+    dataReader.action(dataReaderArgs);
+    ArrayList<String> finderArgs = new ArrayList<>();
+    finderArgs.add("match");
+    finderArgs.add("10");
+    finderArgs.add("1");
+    finder.action(finderArgs);
+    this.setUsers(finder.getUserList());
 
     REPL repl = new REPL();
     repl.addAction("data", dataReader);
@@ -110,6 +123,7 @@ public final class Main {
     // Setup Spark Routes
     //Spark.get("/stars", new FrontHandler(), freeMarker);
     Spark.get("/yoki", new YokiHandler(), freeMarker);
+    Spark.get("/yokimatch", new MatchHandler());
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
 
@@ -128,10 +142,33 @@ public final class Main {
     @Override
     public ModelAndView handle(Request req, Response res) {
 
-      ImmutableMap.Builder<String, User> variables = new ImmutableMap.Builder();
-      User nextMatch = Main.this.getUsers().remove(0);
-      variables.put(nextMatch.getName(), nextMatch);
-      return new ModelAndView(variables.build(), "main.ftl");
+      //User tod = new User(20, "test", "test", "test", "test", 3023, new int[]{0, 1});
+      //Map<String, User> variables = ImmutableMap.of("user", tod);
+      //ImmutableMap.Builder<String, User> variables = new ImmutableMap.Builder();
+      System.out.println(Main.this.getUsers().size());
+      if (Main.this.getUsers().size() > 0) {
+        User nextMatch = Main.this.getUsers().remove(0);
+        Map<String, User> variables = ImmutableMap.of("user", nextMatch);
+        return new ModelAndView(variables, "main.ftl");
+      }
+      return new ModelAndView(null, "main.ftl");
+    }
+  }
+
+  private class MatchHandler implements Route {
+    @Override
+    public String handle(Request req, Response res) {
+
+      //User tod = new User(20, "test", "test", "test", "test", 3023, new int[]{0, 1});
+      //Map<String, User> variables = ImmutableMap.of("user", tod);
+      //ImmutableMap.Builder<String, User> variables = new ImmutableMap.Builder();
+      System.out.println(Main.this.getUsers().size());
+      if (Main.this.getUsers().size() > 0) {
+        User nextMatch = Main.this.getUsers().remove(0);
+        Map<String, User> variables = ImmutableMap.of("user", nextMatch);
+        return GSON.toJson(variables);
+      }
+      return "null";
     }
   }
 
