@@ -134,6 +134,7 @@ public final class Main {
     Spark.get("/profileEdit", new ProfileEditHandler(), freeMarker);
     Spark.get("/match", new MatchPageHandler(), freeMarker);
     Spark.get("/yokimatch", new MatchHandler());
+    Spark.get("/profileOverview", new ProfileOverviewHandler(), freeMarker);
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
 
@@ -224,6 +225,15 @@ public final class Main {
 
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
       return new ModelAndView(variables.build(), "ProfileEdit.ftl");
+    }
+  }
+
+  private static class ProfileOverviewHandler implements TemplateViewRoute {
+    @Override
+    public ModelAndView handle(Request req, Response res) {
+
+      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      return new ModelAndView(variables.build(), "ProfileOverview.ftl");
     }
   }
 

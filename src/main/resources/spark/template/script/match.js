@@ -49,7 +49,7 @@ function createCard() {
 function matchInfo() {
     // post request to the profile edit page
 
-    fetch('/match', {
+    fetch('/yokimatch', {
         method: 'post',
         body: JSON.stringify(postParameters),
         headers: {
@@ -57,6 +57,7 @@ function matchInfo() {
         },
     })
         .then(response => {
+
             //send new info about interest back to front end
         //    info should send slider value to front end
         })
