@@ -11,19 +11,19 @@
 </#assign>
 
 <#assign logout>
-    <button class="settings">Logout</button><br>
+    <button class="settings" id="match-button">Logout</button><br>
 </#assign>
 
 <#assign LD>
-    <button class="settings">Light/Dark Mode</button><br>
+    <button class="settings" id="match-button">Light/Dark Mode</button><br>
 </#assign>
 
 <#assign TC>
-    <button class="settings">Terms and Conditions</button><br>
+    <button class="settings" id="match-button">Terms and Conditions</button><br>
 </#assign>
 
 <#assign report>
-    <button class="settings">Report</button>
+    <button class="settings" id="match-button">Report</button>
 </#assign>
 
 <!DOCTYPE html>

@@ -10,15 +10,8 @@
 </nav>
 </#assign>
 
-<#assign interest>
-    <div class="interest">
-        <h3>Interest</h3>
-        <input type="range" min="1" max="100" value="50" class="slider">
-    </div>
-</#assign>
-
 <#assign interestButton>
-    <button id="interestBtn">Add Interest</button>
+    <button class="interestBtn" id="match-button">Save</button>
 </#assign>
 
 <#assign editProfile>
@@ -33,25 +26,30 @@
     <link rel="stylesheet" href="css/profileOverview.css">
     <link rel="stylesheet" href="css/matching.css">
 </head>
-<body>
+<script src="script/interestButtons.js"></script>
+<body onload="allInterests()">
 <div id="profile">
     ${nav}
     <h2>My Profile</h2> <br>
     <div id="main">
-        <div id="profileTag">
-            <div id="info">
-                <h4>Sage</h4> <h4>pronouns</h4><br>
-                <h5>grad Year</h5><br>
-                <h5>concentration</h5>
-                <h5>Email</h5>
-                <a href="/profileEdit"><button id="match-button" onclick="">Edit Profile</button></a>
+        <div id="side">
+            <div id="profileTag">
+                <div id="info">
+                    <h4>Sage</h4> <h4>pronouns</h4><br>
+                    <h5>grad Year</h5><br>
+                    <h5>concentration</h5>
+                    <h5>Email</h5>
+                    <a href="/profileEdit"><button id="match-button" onclick="">Edit Profile</button></a>
+                </div>
+                <div id="picture"><img src="">Picture</div>
             </div>
-            <div id="picture"><img src="">Picture</div>
+            <div id="subjects">
+                <h3>Interest Search</h3>
+            </div>
         </div>
+
         <h2 id="title">Interests</h2>
         <div id="interest">
-            ${interest}
-            ${interest}
             ${interestButton}
         </div>
     </div>

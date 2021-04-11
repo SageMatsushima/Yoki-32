@@ -131,8 +131,13 @@ public final class Main {
     Spark.get("/match", new MatchPageHandler(), freeMarker);
     Spark.get("/profileOverview", new ProfileOverviewHandler(), freeMarker);
     Spark.get("/yokimatch", new MatchHandler());
+<<<<<<< HEAD
     Spark.get("/listInterests", new ListInterestsHandler());
     Spark.get("/update", new UpdateInterests());
+=======
+    Spark.post("/listInterests", new ListInterestsHandler());
+//    Spark.get("/userData", new UserData(), freeMarker);
+>>>>>>> 3017ad489c682459ebb51670ab0d04d0e79817b4
   }
 
   //sends to Front-end next match -> pops from our list
