@@ -1,4 +1,5 @@
 <#assign card>
+  <script src="script/matchHandler.js"></script>
   <div id = "potential_card">
     <div id = "card_content">
       <div id = "left-content">
