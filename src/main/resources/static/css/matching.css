@@ -3,6 +3,12 @@
     src: url(/fonts/Quicksand-VariableFont_wght.ttf) format("truetype");
 }
 
+body {
+    margin: 0;
+    font-family: Quicksand;
+    font-size: 1.75vw;
+}
+
 #potential_card {
     width: 60%;
     height: 35vw;
@@ -139,7 +145,7 @@ div.sidebar:hover {
 #logo {
     width: 12vw;
     height: 7vw;
-    margin-left: 1vw;
+    margin-left: 1.5vw;
     margin-bottom: 2vw;
     margin-top: 1vw;
 }

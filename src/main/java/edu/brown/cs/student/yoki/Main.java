@@ -138,7 +138,6 @@ public final class Main {
     Spark.get("/listInterests", new ListInterestsHandler());
     Spark.get("/update", new UpdateInterests());
     Spark.get("/setmatch", new MatchMapHandler());
-//    Spark.get("/userData", new UserData(), freeMarker);
   }
 
   //sends to Front-end next match -> pops from our list
