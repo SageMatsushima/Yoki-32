@@ -17,7 +17,11 @@
 </#assign>
 
 <#assign interestButton>
+<<<<<<< HEAD
     <button id="interestBtn" onclick="addInterest">Add Interest</button>
+=======
+    <button id="interestBtn">Add Interest</button>
+>>>>>>> 08e1f8f9a509f84d92ff3c4e01134b11b39808db
 </#assign>
 
 <#assign editProfile>
@@ -30,7 +34,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/profileOverview.css">
-    <link rel="stylesheet" href="css/matching.css">
 </head>
 <body>
 <div id="profile">

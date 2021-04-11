@@ -8,24 +8,25 @@ const matchMap = new Map();
 
 function onMatchPressed() {
     let response = getNextMatch();
-    matchMap.append(response.data.name, response);
+    //matchMap.append(response.data., response);
 }
 
 
 function getNextMatch(){
-    fetch('/yoki', {
-        method: 'post',
-        body: JSON.stringify(postParameters),
+    fetch('http://localhost:4567/yokimatch', {
+        method: 'get',
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
         },
     })
-        .then(response => {
-            console.log(response.data.name)
-            matchName.innerHTML = response.data.name;
-            matchGrade.innerHTML = "Class of " + response.data.grade;
-            matchMajor.innerHTML = response.data.major;
-            return response.data;
+        .then((response) =>
+            response.json())
+        .then((data) => {
+            console.log(data);
+            matchName.innerHTML = data.firstName;
+            matchGrade.innerHTML = "Class of " + data.year;
+            //matchMajor.innerHTML = response.data.major;
+            return data;
         })
         .catch(function (error) {
             console.log(error);

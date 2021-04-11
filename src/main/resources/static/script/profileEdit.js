@@ -20,7 +20,6 @@ const save = () => {
             text: gradYear.value
             text: email.value
             text: bio.value
-            //need to send back to the front end
         })
         .catch(function (error) {
             console.log(error);

@@ -16,7 +16,6 @@
         <div id = "name_info">
           <h1 id="match-name">Kendall</h1>
           <h3 id="match-grade">Class of 2023</h3>
-          <h3 id="match-major">Cognitive Science</h3>
         </div>
         <div id = "top_interests">
           <h3>Interests</h3>
@@ -41,13 +40,13 @@
 </#assign>
 
 <#assign matchButton>
- <button class = "button" id="match-button">
+ <button class = "button" id="match-button" onclick="onMatchPressed()">
    match
  </button>
 </#assign>
 
 <#assign passButton>
-  <button class = "button" id="pass-button">
+  <button class = "button" id="pass-button" onclick="getNextMatch()">
     pass
   </button>
 </#assign>
@@ -67,8 +66,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
+<<<<<<< HEAD
   <div id="profile">
     ${nav}
+=======
+    <script src="script/matchHandler.js"></script>
+>>>>>>> 08e1f8f9a509f84d92ff3c4e01134b11b39808db
     <div id = "card-div">
       ${card}
       <div id = "button-div">

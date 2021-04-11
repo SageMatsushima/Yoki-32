@@ -31,6 +31,9 @@ nav {
     height: 35vw;
     width: 40vw;
     margin-left: 5vw;
+    background-color: #87c1ea;
+    /*display: flex;*/
+    /*flex-wrap: wrap;*/
 }
 
 #picture {
@@ -50,12 +53,15 @@ input {
     background-color: #8c8c8c;
 }
 
-#match-button {
+#save {
     border: none;
     float: right;
+<<<<<<< HEAD
     border-radius: 5vw;
     height: 4vw;
     width: 15vw;
+=======
+>>>>>>> 08e1f8f9a509f84d92ff3c4e01134b11b39808db
 }
 
 #name {
@@ -79,7 +85,7 @@ input {
 }
 
 #email {
-    grid-column: 1/2;
+    grid-column: 1;
     grid-row: 3;
 }
 
@@ -105,8 +111,11 @@ h2 {
     margin-left: 10%;
     top: 118px;
     border-radius: 30px;
+<<<<<<< HEAD
 }
 
 #emailInput {
     width: 100%;
+=======
+>>>>>>> 08e1f8f9a509f84d92ff3c4e01134b11b39808db
 }

@@ -4,8 +4,10 @@ import edu.brown.cs.student.yoki.Main;
 import edu.brown.cs.student.yoki.driver.TreeFunction;
 import edu.brown.cs.student.yoki.driver.TriggerAction;
 import edu.brown.cs.student.yoki.driver.User;
+import edu.brown.cs.student.yoki.driver.Interest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Subclasses searches through a list or kdTree of stars. Parses input.

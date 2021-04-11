@@ -10,7 +10,7 @@
 </#assign>
 
 <#assign save>
-    <button id="match-button">Save</button>
+    <button id="save">Save</button>
 </#assign>
 
 <!DOCTYPE html>
@@ -33,7 +33,7 @@
                 </label></div><br>
                 <div id="major">Major<br><input name= "major" type="text"></div>
                 <div id="gradYear">Grad Year<br><input name= "gradYear" type="text"></div><br>
-                <div id="email">Email<br><input name= "email" type="text" id="emailInput"></div> <br>
+                <div id="email">Email<br><input name= "email" type="text"></div> <br>
                 <div id="bio">Bio<br><input id= "bioBox" type="text"></div>
             </div>
             <div id="picture">

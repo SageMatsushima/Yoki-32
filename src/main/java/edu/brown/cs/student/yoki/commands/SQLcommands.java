@@ -13,15 +13,22 @@ public final class SQLcommands {
 
   }
 
-  /**
-   * This method is the SQL command fo the MapReader class.
-   *
-   * @return PreparedStatement from the SQL query
-   */
+
   public static PreparedStatement getAllUserData() {
     try {
       Connection conn = DataReader.getConnection();
       PreparedStatement prep = conn.prepareStatement("SELECT * FROM user_data");
+      return prep;
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+      return null;
+    }
+  }
+  public static PreparedStatement getUserData() {
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement("SELECT * FROM user_data INNER JOIN user_interests ON user_data.id=user_interests.id WHERE user_data.id = ?;");
       return prep;
     } catch (Exception e) {
       e.printStackTrace();
