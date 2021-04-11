@@ -11,18 +11,18 @@
 </#assign>
 
 <#assign interest>
-    <div class="interest">
+    <div class="interests">
         <h3>Interest</h3>
         <input type="range" min="1" max="100" value="50" class="slider">
     </div>
 </#assign>
 
 <#assign interestButton>
-    <button id="interestBtn">Add Interest</button>
+    <button class="interestBtn" id="match-button">Add Interest</button>
 </#assign>
 
 <#assign editProfile>
-    <button id="editProfile" onclick="">Edit Profile</button>
+    <button id="match-button" class="request" onclick="">Edit Profile</button>
 </#assign>
 
 <!DOCTYPE html>
