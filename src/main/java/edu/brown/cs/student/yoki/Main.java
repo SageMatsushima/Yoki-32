@@ -126,8 +126,11 @@ public final class Main {
     public ModelAndView handle(Request req, Response res) {
 
       ImmutableMap.Builder<String, User> variables = new ImmutableMap.Builder();
-      User nextMatch = Main.this.getUsers().remove(0);
-      variables.put(nextMatch.getName(), nextMatch);
+      System.out.println(Main.this.getUsers().size());
+      if (Main.this.getUsers().size() > 0) {
+        User nextMatch = Main.this.getUsers().remove(0);
+        variables.put(nextMatch.getName(), nextMatch);
+      }
       return new ModelAndView(variables.build(), "main.ftl");
     }
   }
