@@ -18,7 +18,7 @@
 </#assign>
 
 <#assign interestButton>
-    <button id="interestBtn">Add Interest</button>
+    <button class="interestBtn" id="match-button">Add Interest</button>
 </#assign>
 
 <#assign editProfile>

@@ -65,13 +65,16 @@ body {
     transition: opacity .2s;
 }
 
-#interestBtn {
+.interestBtn {
+    margin-left: 0;
+    position: fixed;
     float: right;
     height: 3vw;
     width: 10vw;
     border-radius: .5vw;
     border: none;
     margin-top: 1vw;
+    margin-right: 1vw;
 }
 
 .slider:hover {
