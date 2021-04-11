@@ -26,10 +26,6 @@ public class AlexKDTree<N extends KdNode> {
    */
   public AlexKDTree(ArrayList<N> nodeList, int d) {
     this.dimensions = d;
-
-//    ArrayList<N> newNodeList = new ArrayList<>(nodeList);
-    System.out.println("nodeList " + nodeList);
-
     this.root = this.createTree(nodeList, 0);
   }
 

@@ -1,11 +1,14 @@
 package edu.brown.cs.student.yoki.commands;
 
+import edu.brown.cs.student.yoki.driver.Interest;
 import edu.brown.cs.student.yoki.driver.TriggerAction;
 import edu.brown.cs.student.yoki.driver.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 
 import static java.lang.System.*;
 
@@ -13,6 +16,7 @@ import static java.lang.System.*;
  * Reads a database containing tables of nodes and ways.
  */
 public class InterestsReader implements TriggerAction {
+  private ArrayList<Integer> userInterests = new ArrayList<Integer>();
 
   /**
    * Executes the search ways command and allows looks for the ways within a bounded box.
@@ -32,28 +36,17 @@ public class InterestsReader implements TriggerAction {
           // North to south, less than lat 1 and greater than lat2
           prep.setInt(1, id);
           ResultSet rs = prep.executeQuery();
-<<<<<<< HEAD
           for (int i = 2; i < DataReader.getInterestCount()+2; i++) {
             try {
               userInterests.add(rs.getInt(i));
               out.print(rs.getInt(i) + ", ");
             } catch (Exception e) {
               err.println("Something went wrong with reading in data");
-=======
-          int i = 2;
-          boolean hasNextInterest = true;
-          while (hasNextInterest) {
-            try {
-              System.out.print(rs.getInt(i) + ", ");
-              i++;
-            } catch (Exception e) {
-              hasNextInterest = false;
->>>>>>> f191dd468d3a6c9f271f49229cdcdc46fe8e95ee
             }
           }
-          System.out.println();
           prep.close();
           rs.close();
+          getTopInterests();
         } catch (Exception e) {
           e.printStackTrace();
           err.println("ERROR: must enter valid numbers");
@@ -63,7 +56,6 @@ public class InterestsReader implements TriggerAction {
       err.println("ERROR: ways takes 4 additional arguments");
     }
   }
-<<<<<<< HEAD
 
   public ArrayList<Integer> getUserInterests() {
     return userInterests;
@@ -100,6 +92,4 @@ public class InterestsReader implements TriggerAction {
     }
   }
 
-=======
->>>>>>> f191dd468d3a6c9f271f49229cdcdc46fe8e95ee
 }
