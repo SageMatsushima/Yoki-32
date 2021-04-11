@@ -150,7 +150,16 @@ public final class Main {
       System.out.println(Main.this.getUsers().size());
       if (Main.this.getUsers().size() > 0) {
         User nextMatch = Main.this.getUsers().remove(0);
-        Map<String, User> variables = ImmutableMap.of("user", nextMatch);
+
+        ArrayList<String> interestsArgs = new ArrayList<>();
+        interestsArgs.add("interests");
+        interestsArgs.add(nextMatch.getId() + "");
+        interestsReader.action(interestsArgs);
+        ArrayList<Interest> topCommonInterests = interestsReader.getTopInterests().get(0);
+        ArrayList<Interest> topOtherInterests = interestsReader.getTopInterests().get(1);
+
+        Map<String, Object> variables = ImmutableMap.of("user", nextMatch,
+          "topCommonInterests", topCommonInterests, "topOtherInterests", topOtherInterests);
         return new ModelAndView(variables, "main.ftl");
       }
       return new ModelAndView(null, "main.ftl");
@@ -167,7 +176,15 @@ public final class Main {
       System.out.println(Main.this.getUsers().size());
       if (Main.this.getUsers().size() > 0) {
         User nextMatch = Main.this.getUsers().remove(0);
-        Map<String, User> variables = ImmutableMap.of("user", nextMatch);
+        ArrayList<String> interestsArgs = new ArrayList<>();
+        interestsArgs.add("interests");
+        interestsArgs.add(nextMatch.getId() + "");
+        interestsReader.action(interestsArgs);
+        ArrayList<Interest> topCommonInterests = interestsReader.getTopInterests().get(0);
+        ArrayList<Interest> topOtherInterests = interestsReader.getTopInterests().get(1);
+
+        Map<String, Object> variables = ImmutableMap.of("user", nextMatch,
+          "topCommonInterests", topCommonInterests, "topOtherInterests", topOtherInterests);
         return GSON.toJson(variables);
       }
       return "null";
