@@ -1,7 +1,6 @@
 <script>
     function subjectClick() {
-        document.getElementById("subjectButton").style.backgroundColor = "green";
-
+        document.getElementById("subjectButton").style.color = "green";
     }
 </script>
 

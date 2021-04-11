@@ -69,7 +69,7 @@ input {
 
 #save {
     border: none;
-    float: bottom;
+    float: right;
 }
 
 #name {
@@ -112,4 +112,11 @@ h2 {
     margin-left: 25vw;
     width: 15vw;
     height: 4vw;
+}
+
+#profilePic {
+    height: 30vw;
+    margin-left: 10%;
+    top: 118px;
+    border-radius: 30px;
 }
