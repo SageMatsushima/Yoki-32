@@ -1,4 +1,3 @@
-const matchMajor = document.getElementById('match-major');
 const matchInterests = document.getElementById("top_interests_list");
 const matchList = document.getElementById('matchList');
 const matchMap = new Map();
