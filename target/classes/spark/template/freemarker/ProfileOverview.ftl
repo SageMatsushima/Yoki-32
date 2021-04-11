@@ -25,6 +25,24 @@
     <button id="match-button" class="request" onclick="">Edit Profile</button>
 </#assign>
 
+<#assign addInterest>
+    <div></div>
+</#assign>
+
+<#assign search>
+    <div>
+        <img src="">
+        <input id="search" name= "search" type="text">
+    </div>
+</#assign>
+
+<#assign subject>
+    <button class = "subject" id="match-button" onclick="onInterestPressed()">
+        subject
+    </button>
+</#assign>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,21 +51,30 @@
     <link rel="stylesheet" href="css/profileOverview.css">
     <link rel="stylesheet" href="css/matching.css">
 </head>
-<body>
+<script src="script/interestButtons.js"></script>
+<body onload="allInterests()">
 <div id="profile">
     ${nav}
     <h2>My Profile</h2> <br>
     <div id="main">
-        <div id="profileTag">
-            <div id="info">
-                <h4>Sage</h4> <h4>pronouns</h4><br>
-                <h5>grad Year</h5><br>
-                <h5>concentration</h5>
-                <h5>Email</h5>
-                <a href="/profileEdit"><button id="match-button" onclick="">Edit Profile</button></a>
+        <div id="side">
+            <div id="profileTag">
+                <div id="info">
+                    <h4>Sage</h4> <h4>pronouns</h4><br>
+                    <h5>grad Year</h5><br>
+                    <h5>concentration</h5>
+                    <h5>Email</h5>
+                    <a href="/profileEdit"><button id="match-button" onclick="">Edit Profile</button></a>
+                </div>
+                <div id="picture"><img src="">Picture</div>
             </div>
-            <div id="picture"><img src="">Picture</div>
+            <div id="subjects">
+                <h3>Interest Search</h3>
+                ${subject}
+                ${subject}
+            </div>
         </div>
+
         <h2 id="title">Interests</h2>
         <div id="interest">
             ${interest}

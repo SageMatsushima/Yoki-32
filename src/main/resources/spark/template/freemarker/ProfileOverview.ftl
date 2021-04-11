@@ -10,38 +10,13 @@
 </nav>
 </#assign>
 
-<#assign interest>
-    <div class="interests">
-        <h3>Interest</h3>
-        <input type="range" min="1" max="100" value="50" class="slider">
-    </div>
-</#assign>
-
 <#assign interestButton>
-    <button class="interestBtn" id="match-button">Add Interest</button>
+    <button class="interestBtn" id="match-button">Save</button>
 </#assign>
 
 <#assign editProfile>
     <button id="match-button" class="request" onclick="">Edit Profile</button>
 </#assign>
-
-<#assign addInterest>
-    <div></div>
-</#assign>
-
-<#assign search>
-    <div>
-        <img src="">
-        <input id="search" name= "search" type="text">
-    </div>
-</#assign>
-
-<#assign subject>
-    <button class = "subject" id="match-button" onclick="subjectClick">
-        subject
-    </button>
-</#assign>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +26,8 @@
     <link rel="stylesheet" href="css/profileOverview.css">
     <link rel="stylesheet" href="css/matching.css">
 </head>
-<body>
+<script src="script/interestButtons.js"></script>
+<body onload="allInterests()">
 <div id="profile">
     ${nav}
     <h2>My Profile</h2> <br>
@@ -69,16 +45,11 @@
             </div>
             <div id="subjects">
                 <h3>Interest Search</h3>
-                ${search}
-                ${subject}
-                ${subject}
             </div>
         </div>
 
         <h2 id="title">Interests</h2>
         <div id="interest">
-            ${interest}
-            ${interest}
             ${interestButton}
         </div>
     </div>

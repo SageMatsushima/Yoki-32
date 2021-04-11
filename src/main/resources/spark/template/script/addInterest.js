@@ -1,8 +1,10 @@
-//make it create a new interest
-// <div className="interests">
-//     <h3>Interest</h3>
-//     <input type="range" min="1" max="100" value="50" className="slider">
-// </div>
+const interest = document.getElementById('subject');
+const matchMap = new Map();
+
+function onInterestPressed() {
+    let response = addInterest();
+    matchMap.append(response.data.name, response);
+}
 
 function addInterest() {
     fetch('/yoki', {
@@ -14,9 +16,7 @@ function addInterest() {
     })
         .then(response => {
             console.log(response.data.name)
-            matchName.innerHTML = response.data.name;
-            matchGrade.innerHTML = "Class of " + response.data.grade;
-            matchMajor.innerHTML = response.data.major;
+            interest.innerHTML = response.data.name;
             return response.data;
         })
         .catch(function (error) {
