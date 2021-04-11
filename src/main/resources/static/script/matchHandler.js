@@ -6,16 +6,17 @@ function onMatchPressed() {
     getNextMatch();
     console.log(currUser);
     matchMap.set(currUser.firstName, currUser);
+    console.log(matchMap);
 }
 
 function setBackMatch() {
     const postParameters = {
         //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
-        text: currUser.firstName,
-        text: currUser.lastName,
+        first: currUser.firstName,
+        last: currUser.lastName,
     };
 
-    fetch('http://localhost:4567/setmatch', {
+    fetch('http://localhost:4567/sendmatch', {
         method: 'post',
         body: JSON.stringify(postParameters),
         headers: {
@@ -59,7 +60,7 @@ function getNextMatch(){
 
 
             let matchList = document.getElementById('match-list');
-            setBackMatch();
+            //setBackMatch();
             Object.keys(matchMap).map(function(key) {
                 matchList.innerHTML = "<li> " + matchMap[key].firstName + " </li>";
             });

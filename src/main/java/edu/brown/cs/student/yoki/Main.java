@@ -139,8 +139,7 @@ public final class Main {
     Spark.get("/match", new MatchPageHandler(), freeMarker);
     Spark.get("/profileOverview", new ProfileOverviewHandler(), freeMarker);
     Spark.get("/yokimatch", new MatchHandler());
-
-    Spark.get("/setmatch", new MatchMapHandler());
+    Spark.post("/sendmatches", new MatchMapHandler());
     Spark.get("/listInterests", new ListInterestsHandler());
 
 
