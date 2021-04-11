@@ -141,7 +141,8 @@ div.sidebar:hover {
     width: 12vw;
     height: 7vw;
     margin-left: 1vw;
-    margin-bottom: 3vw;
+    margin-bottom: 2vw;
+    margin-top: 1vw;
 }
 
 .interest {
@@ -164,4 +165,38 @@ ul {
     font-family: Quicksand;
     src: url(/fonts/Quicksand-VariableFont_wght.ttf) format("truetype");
     font-weight: bold;
+}
+
+.user {
+    background-color: #99008a;
+    margin-left: 2vw;
+    height: 6vw;
+    width: 25vw;
+    display: flex;
+    margin-top: 1vw;
+}
+
+.idPhoto {
+    height: 6vw;
+    width: 6vw;
+    background-color: #339900;
+}
+
+#results {
+    width: 30vw;
+    height: 35vw;
+    margin-left: 3vw;
+    background-color: #bac5cf;
+    border-radius: 1vw;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.request {
+    border: none;
+    border-radius: 1vw;
+    width: 10vw;
+    height: 2vw;
+    float: right;
+    margin-top: 0;
+    margin-right: 3vw;
 }

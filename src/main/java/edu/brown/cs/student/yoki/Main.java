@@ -53,6 +53,8 @@ public final class Main {
 
 
   private List<User> users = new ArrayList<>();
+  private Map<String, User> matchList = new ArrayList<>();
+
   private static final Gson GSON = new Gson();
 
   private Main(String[] args) {
@@ -200,7 +202,7 @@ public final class Main {
     public ModelAndView handle(Request req, Response res) {
 
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
-      return new ModelAndView(variables.build(), "main.ftl");
+      return new ModelAndView(variables.build(), "Matches.ftl");
     }
   }
 
@@ -247,6 +249,13 @@ public final class Main {
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
       return new ModelAndView(variables.build(), "ProfileOverview.ftl");
     }
+  }
+
+ private class MatchMapHandler implements Route {
+    @Override
+    public String handle(Request req, Response res) {
+      JSONObject data = new JSONObject(request.body());
+
   }
 
 //  private static class UserData implements TemplateViewRoute {

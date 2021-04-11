@@ -1,14 +1,30 @@
-const matchInterests = document.getElementById("top_interests_list");
-const matchList = document.getElementById('matchList');
-const matchMap = new Map();
+let matchMap = new Map();
 let currUser;
 
 
 function onMatchPressed() {
-    let data = getNextMatch();
+    getNextMatch();
     //console.log(currUser);
     matchMap.set(currUser.firstName, currUser);
     console.log(matchMap);
+}
+
+function setBackMatches() {
+    fetch('http://localhost:4567/setmatch', {
+        method: 'post',
+        body: JSON.stringify(matchMap),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        .then((response) =>
+            response.json())
+        .then((data) => {
+            matchMap = data;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
 
 
@@ -32,6 +48,11 @@ function getNextMatch(){
             for (var interest in data.topCommonInterests) {
                 topInterests.innerHTML += "<li> " + data.topCommonInterests[interest].name + " </li>";
             }
+            let matchList = document.getElementById('match-list');
+            setBackMatches();
+            Object.keys(matchMap).map(function(key) {
+                matchList.innerHTML = "<li> " + matchMap[key].firstName + " </li>";
+            });
             console.log()
             //matchMajor.innerHTML = response.data.major;
             currUser = data.user;
