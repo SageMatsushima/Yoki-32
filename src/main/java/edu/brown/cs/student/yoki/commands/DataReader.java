@@ -111,6 +111,7 @@ public class DataReader implements TriggerAction {
     }
   }
 
+
   public static Connection getConnection() {
     return conn;
   }

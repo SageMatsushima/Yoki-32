@@ -1,4 +1,7 @@
 package edu.brown.cs.student.yoki.driver;
+
+import java.util.HashMap;
+
 /**
  * Class for a single star.
  */
@@ -53,6 +56,8 @@ public class User extends KdNode {
         + "\nInterest Levels: " + interestsToString() + "\n";
     return str;
   }
+
+
 
   public String interestsToString() {
     String str = "";
