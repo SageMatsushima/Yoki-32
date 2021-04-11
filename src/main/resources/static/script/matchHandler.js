@@ -1,5 +1,3 @@
-const matchName = document.getElementById('match-name');
-const matchGrade = document.getElementById('match-grade');
 const matchMajor = document.getElementById('match-major');
 const matchInterests = document.getElementById("top_interests_list");
 const matchList = document.getElementById('matchList');
