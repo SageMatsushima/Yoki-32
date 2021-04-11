@@ -12,6 +12,7 @@ body {
 
 #main {
     grid-column: 2;
+    margin-left: 4vw;
 }
 
 #profileTag {
@@ -37,13 +38,14 @@ body {
 
 #interest {
     width: 70vw;
-    height: 15vw;
+    height: 16vw;
     background-color: #bac5cf;
     border-radius: 1vw;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    overflow: auto;
 }
 
-.interest {
+.interests {
     width: 55vw;
     height: 5vw;
     background-color: #3F5FBF;
@@ -63,13 +65,16 @@ body {
     transition: opacity .2s;
 }
 
-#interestBtn {
+.interestBtn {
+    margin-left: 0;
+    position: fixed;
     float: right;
     height: 3vw;
     width: 10vw;
     border-radius: .5vw;
     border: none;
     margin-top: 1vw;
+    margin-right: 1vw;
 }
 
 .slider:hover {
@@ -92,4 +97,34 @@ h2 {
 
 h3, h4, h5 {
     margin: 0;
+}
+
+div#subjects {
+    background-color: #bac5cf;
+    border-radius: 1vw;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    width: 30vw;
+    height: 15vw;
+    align-content: center;
+    margin-left: 3vw;
+    overflow: auto;
+}
+
+.subject {
+    border: none;
+    border-radius: 1vw;
+    width: 18vw;
+    height: 2vw;
+    margin-left: 4.5vw;
+    margin-top: 1vw;
+}
+
+#search {
+    width: 20vw;
+    height: 2vw;
+    margin-left: 4.5vw;
+}
+
+#side {
+    display: flex;
 }

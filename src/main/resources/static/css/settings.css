@@ -25,12 +25,17 @@ body {
 
 }
 
-.settings {
+button#match-button.settings {
     width: 15vw;
     height: 4vw;
     border-radius: 1vw;
     margin-left: 12vw;
     margin-top: 3.5vw;
+    border: none;
+}
+
+button#match-button.settings:hover {
+    background-color: #e2c651;
 }
 
 #picture {
