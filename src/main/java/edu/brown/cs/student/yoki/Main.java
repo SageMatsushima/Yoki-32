@@ -138,6 +138,7 @@ public final class Main {
     Spark.post("/listInterests", new ListInterestsHandler());
     Spark.get("/update", new UpdateInterests());
     Spark.get("/setmatch", new MatchMapHandler());
+
   }
 
   //sends to Front-end next match -> pops from our list
