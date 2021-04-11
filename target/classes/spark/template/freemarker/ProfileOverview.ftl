@@ -1,11 +1,11 @@
 <#assign nav>
 <nav>
-    <button class="sidebar">Home</button> <br>
-    <button class="sidebar">Matches</button> <br>
-    <button class="sidebar">Learn</button> <br>
-    <button class="sidebar">Teach</button> <br>
-    <button class="sidebar">My Profile</button> <br>
-    <button class="sidebar">Settings</button> <br>
+    <a href="/yoki"><div class="sidebar">Home</div></a> <br>
+    <a href="/match"><div class="sidebar">Matches</div></a> <br>
+    <a href="/learn"><div class="sidebar">Learn</div></a> <br>
+    <a href="/teach"><div class="sidebar">Teach</div></a> <br>
+    <a href="/profileEdit"><div class="sidebar">My Profile</div></a> <br>
+    <a href="/settings"><div class="sidebar">Settings</div></a> <br>
 </nav>
 </#assign>
 
@@ -17,11 +17,7 @@
 </#assign>
 
 <#assign interestButton>
-    <button id="interestBtn" onclick="addInterest()">Add Interest</button>
-</#assign>
-
-<#assign editProfile>
-    <button id="editProfile" onclick="">Edit Profile</button>
+    <button id="interestBtn" onclick="addInterest">Add Interest</button>
 </#assign>
 
 <#assign editProfile>

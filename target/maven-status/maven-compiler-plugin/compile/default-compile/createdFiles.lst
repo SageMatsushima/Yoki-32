@@ -1,12 +1,15 @@
-<<<<<<< HEAD
 edu\brown\cs\student\yoki\commands\SQLcommands.class
 edu\brown\cs\student\yoki\driver\AlexKDTree.class
 edu\brown\cs\student\yoki\commands\DataReader.class
 edu\brown\cs\student\yoki\driver\TreeFunction.class
+edu\brown\cs\student\yoki\Main$LearnHandler.class
 edu\brown\cs\student\yoki\driver\REPL.class
 edu\brown\cs\student\yoki\util\AddData.class
 edu\brown\cs\student\yoki\Database.class
 edu\brown\cs\student\yoki\Main.class
+edu\brown\cs\student\yoki\Main$SettingsHandler.class
+edu\brown\cs\student\yoki\Main$ProfileEditHandler.class
+edu\brown\cs\student\yoki\Main$TeachHandler.class
 edu\brown\cs\student\yoki\driver\AlexKDTree$DistanceCompare.class
 edu\brown\cs\student\yoki\driver\TriggerAction.class
 edu\brown\cs\student\yoki\util\AddUsers.class
@@ -18,24 +21,3 @@ edu\brown\cs\student\yoki\Main$YokiHandler.class
 edu\brown\cs\student\yoki\driver\KdNode.class
 edu\brown\cs\student\yoki\driver\User.class
 edu\brown\cs\student\yoki\commands\MatchFinder.class
-=======
-edu/brown/cs/student/yoki/commands/MatchFinder.class
-edu/brown/cs/student/yoki/util/CreateTable.class
-edu/brown/cs/student/yoki/driver/AlexKDTree.class
-edu/brown/cs/student/yoki/Main$YokiHandler.class
-edu/brown/cs/student/yoki/commands/SQLcommands.class
-edu/brown/cs/student/yoki/driver/KdNode.class
-edu/brown/cs/student/yoki/driver/TreeFunction.class
-edu/brown/cs/student/yoki/driver/AlexKDTree$NodeCompare.class
-edu/brown/cs/student/yoki/driver/User.class
-edu/brown/cs/student/yoki/Main$ExceptionPrinter.class
-edu/brown/cs/student/yoki/util/AddUsers.class
-edu/brown/cs/student/yoki/commands/InterestsReader.class
-edu/brown/cs/student/yoki/util/AddData.class
-edu/brown/cs/student/yoki/driver/AlexKDTree$DistanceCompare.class
-edu/brown/cs/student/yoki/driver/REPL.class
-edu/brown/cs/student/yoki/Database.class
-edu/brown/cs/student/yoki/Main.class
-edu/brown/cs/student/yoki/commands/DataReader.class
-edu/brown/cs/student/yoki/driver/TriggerAction.class
->>>>>>> c84e8ec21b5d6368812cc59abeec80c0409bef08

@@ -94,6 +94,11 @@ public final class Main {
     // Setup Spark Routes
     //Spark.get("/stars", new FrontHandler(), freeMarker);
     Spark.get("/yoki", new YokiHandler(), freeMarker);
+    Spark.get("/learn", new LearnHandler(), freeMarker);
+    Spark.get("/teach", new TeachHandler(), freeMarker);
+    Spark.get("/settings", new SettingsHandler(), freeMarker);
+    Spark.get("/profileEdit", new ProfileEditHandler(), freeMarker);
+    Spark.get("/match", new MatchHandler(), freeMarker);
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
 
@@ -114,6 +119,51 @@ public final class Main {
 
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
       return new ModelAndView(variables.build(), "ProfileOverview.ftl");
+    }
+  }
+
+  private static class MatchHandler implements TemplateViewRoute {
+    @Override
+    public ModelAndView handle(Request req, Response res) {
+
+      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      return new ModelAndView(variables.build(), "main.ftl");
+    }
+  }
+
+  private static class LearnHandler implements TemplateViewRoute {
+    @Override
+    public ModelAndView handle(Request req, Response res) {
+
+      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      return new ModelAndView(variables.build(), "LearnSubjects.ftl");
+    }
+  }
+
+  private static class TeachHandler implements TemplateViewRoute {
+    @Override
+    public ModelAndView handle(Request req, Response res) {
+
+      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      return new ModelAndView(variables.build(), "TeachSubjects.ftl");
+    }
+  }
+
+  private static class SettingsHandler implements TemplateViewRoute {
+    @Override
+    public ModelAndView handle(Request req, Response res) {
+
+      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      return new ModelAndView(variables.build(), "Settings.ftl");
+    }
+  }
+
+  private static class ProfileEditHandler implements TemplateViewRoute {
+    @Override
+    public ModelAndView handle(Request req, Response res) {
+
+      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      return new ModelAndView(variables.build(), "ProfileEdit.ftl");
     }
   }
 

@@ -1,5 +1,5 @@
-//make it create a new interest
-function addInterest() {
+//make it create new card
+function nextMatch() {
     const div = document.createElement("div");
     div.style.width = "55vw";
     div.style.height = "5vw";

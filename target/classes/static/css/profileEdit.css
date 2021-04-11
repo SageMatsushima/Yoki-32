@@ -18,20 +18,6 @@ nav {
     float: left;
 }
 
-.sidebar {
-    border: none;
-    background-color: white;
-    color: black;
-    padding: 14px 28px;
-    font-size: 16px;
-    cursor: pointer;
-    /*height: 100%;*/
-    margin-top: 1.5vw;
-    width: 15vw;
-    /*position: absolute;*/
-    background-color: #d77373;
-}
-
 
 #main {
     display: flex;
@@ -67,12 +53,9 @@ input {
 #match-button {
     border: none;
     float: right;
-<<<<<<< HEAD
     border-radius: 5vw;
     height: 4vw;
     width: 15vw;
-=======
->>>>>>> c84e8ec21b5d6368812cc59abeec80c0409bef08
 }
 
 #name {
@@ -122,11 +105,8 @@ h2 {
     margin-left: 10%;
     top: 118px;
     border-radius: 30px;
-<<<<<<< HEAD
 }
 
 #emailInput {
     width: 100%;
-=======
->>>>>>> c84e8ec21b5d6368812cc59abeec80c0409bef08
 }
