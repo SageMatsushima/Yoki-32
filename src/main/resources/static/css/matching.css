@@ -136,3 +136,9 @@ a {
 div.sidebar:hover {
     background-color: #646464;
 }
+
+#logo {
+    width: 12vw;
+    height: 7vw;
+    margin-left: 1vw;
+}

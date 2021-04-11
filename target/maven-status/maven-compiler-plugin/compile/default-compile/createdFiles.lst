@@ -8,6 +8,7 @@ edu\brown\cs\student\yoki\util\AddData.class
 edu\brown\cs\student\yoki\Database.class
 edu\brown\cs\student\yoki\Main.class
 edu\brown\cs\student\yoki\Main$SettingsHandler.class
+edu\brown\cs\student\yoki\Main$ProfileOverviewHandler.class
 edu\brown\cs\student\yoki\Main$ProfileEditHandler.class
 edu\brown\cs\student\yoki\Main$TeachHandler.class
 edu\brown\cs\student\yoki\driver\AlexKDTree$DistanceCompare.class
