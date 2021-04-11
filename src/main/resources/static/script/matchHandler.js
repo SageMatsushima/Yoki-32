@@ -22,9 +22,11 @@ function getNextMatch(){
         .then((response) =>
             response.json())
         .then((data) => {
-            console.log(data);
-            matchName.innerHTML = data.firstName;
-            matchGrade.innerHTML = "Class of " + data.year;
+            let matchName = document.getElementById('match-name');
+            let matchGrade = document.getElementById('match-grade')
+            console.log(data.user);
+            matchName.innerHTML = data.user.firstName;
+            matchGrade.innerHTML = "Class of " + data.user.year;
             //matchMajor.innerHTML = response.data.major;
             return data;
         })
