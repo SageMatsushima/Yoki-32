@@ -135,6 +135,7 @@ public final class Main {
     Spark.get("/match", new MatchPageHandler(), freeMarker);
     Spark.get("/profileOverview", new ProfileOverviewHandler(), freeMarker);
     Spark.get("/yokimatch", new MatchHandler());
+    Spark.get("/listInterests", new ListInterestsHandler());
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
 
@@ -192,6 +193,14 @@ public final class Main {
         return GSON.toJson(variables);
       }
       return "null";
+    }
+  }
+
+  private static class ListInterestsHandler implements Route {
+    @Override
+    public String handle(Request req, Response res) {
+      Map<String, Object> variables = ImmutableMap.of("interestsList", DataReader.getConvert());
+      return GSON.toJson(variables);
     }
   }
 
