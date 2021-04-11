@@ -39,20 +39,30 @@ public final class SQLcommands {
     }
   }
 
-  public static PreparedStatement insert(ArrayList<String> values) {
-    String newInsert = "";
-    for (int i = 0; i < values.size(); i++) {
-      newInsert += values.get(i) + ", ";
+  public static void insert(ArrayList<String> values) {
+    String newDataInsert = "";
+    String newInterestInsert = "";
+
+    for (int i = 0; i < 7; i++) {
+      newDataInsert += values.get(i) + ", ";
     }
-    newInsert.substring(0, newInsert.length() - 1);
+
+    for (int i = 7; i < values.size(); i++) {
+      newInterestInsert += values.get(i) + ", ";
+    }
+
+    newDataInsert.substring(0, newDataInsert.length() - 1);
+    newInterestInsert.substring(0, newInterestInsert.length() - 1);
+
     try {
       Connection conn = DataReader.getConnection();
-      PreparedStatement prep = conn.prepareStatement("INSERT INTO user_data VALUES (" + newInsert + ");");
-      return prep;
+      PreparedStatement prep1 = conn.prepareStatement("INSERT INTO user_interests VALUES (" + newInterestInsert + ");");
+      PreparedStatement prep2 = conn.prepareStatement("INSERT INTO user_data VALUES (" + newDataInsert + ");");
+      prep1.execute();
+      prep2.execute();
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println("ERROR: Issue reading in SQL");
-      return null;
     }
   }
 
