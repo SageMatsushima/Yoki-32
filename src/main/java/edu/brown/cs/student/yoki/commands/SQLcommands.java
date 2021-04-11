@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * This class contains the SQL commands we use throughout the maps package.
@@ -63,24 +65,32 @@ public final class SQLcommands {
       PreparedStatement prep2 = conn.prepareStatement("INSERT INTO user_data VALUES (" + newDataInsert + ");");
       prep1.execute();
       prep2.execute();
+      prep1.close();
+      prep2.close();
+
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println("ERROR: Issue reading in SQL");
     }
   }
 
-  public static void update(int id, HashMap<String, Interest> newInterest) {
-
+  public static void update(int userId, HashMap<String, Interest> newInterest) {
+    userId = 1;
     try {
       Connection conn = DataReader.getConnection();
 
-      for (int i = 0; i < newInterest.size(); i++) {
-        newInterest.get();
+      Iterator hmIterator = newInterest.entrySet().iterator();
+      while (hmIterator.hasNext()) {
+        Map.Entry mapElement = (Map.Entry) hmIterator.next();
+        Interest interest = (Interest) mapElement.getValue();
+        int value = interest.getScore();
+        String key = (String) mapElement.getKey();
+
+        PreparedStatement prep = conn.prepareStatement("UPDATE user_interests SET" + key + "='" + value + "' WHERE id=userId;");
+        prep.execute();
+        prep.close();
       }
-//      PreparedStatement prep1 = conn.prepareStatement("INSERT INTO user_interests VALUES (" + newInterestInsert + ");");
-//      PreparedStatement prep2 = conn.prepareStatement("INSERT INTO user_data VALUES (" + newDataInsert + ");");
-//      prep1.execute();
-//      prep2.execute();
+      conn.close();
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println("ERROR: Issue reading in SQL");
