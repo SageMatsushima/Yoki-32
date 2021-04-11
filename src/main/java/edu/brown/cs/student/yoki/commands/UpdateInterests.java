@@ -38,6 +38,13 @@ public class UpdateInterests implements TriggerAction {
           while (rs1.next()) {
             idList.add(rs1.getInt("id"));
           }
+
+          if (idList.contains(searchId)) {
+
+          } else {
+
+          }
+
           prep.close();
           rs1.close();
         } catch (Exception e) {
@@ -48,4 +55,5 @@ public class UpdateInterests implements TriggerAction {
     } else {
       err.println("ERROR: ways takes 4 additional arguments");
     }
+  }
 }
