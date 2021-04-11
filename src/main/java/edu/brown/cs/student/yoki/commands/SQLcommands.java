@@ -68,6 +68,7 @@ public final class SQLcommands {
     }
   }
 
+
   public static PreparedStatement getAll() {
     try {
       Connection conn = DataReader.getConnection();
@@ -91,6 +92,7 @@ public final class SQLcommands {
       return null;
     }
   }
+
 
   public static PreparedStatement getAllUserInterests() {
     try {

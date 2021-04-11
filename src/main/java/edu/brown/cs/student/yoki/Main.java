@@ -163,9 +163,11 @@ public final class Main {
         ArrayList<String> interestsArgs = new ArrayList<>();
         interestsArgs.add("interests");
         interestsArgs.add(nextMatch.getId() + "");
+        System.out.println("match id: " + nextMatch.getId());
         interestsReader.action(interestsArgs);
         ArrayList<Interest> topCommonInterests = interestsReader.getTopInterests().get(0);
         ArrayList<Interest> topOtherInterests = interestsReader.getTopInterests().get(1);
+        System.out.println("size: " + interestsReader.getTopInterests().get(0).size());
 
         Map<String, Object> variables = ImmutableMap.of("user", nextMatch,
           "topCommonInterests", topCommonInterests, "topOtherInterests", topOtherInterests);
@@ -186,11 +188,13 @@ public final class Main {
       if (Main.this.getUsers().size() > 0) {
         User nextMatch = Main.this.getUsers().remove(0);
         ArrayList<String> interestsArgs = new ArrayList<>();
+
+        InterestsReader ir = new InterestsReader();
         interestsArgs.add("interests");
         interestsArgs.add(nextMatch.getId() + "");
-        interestsReader.action(interestsArgs);
-        ArrayList<Interest> topCommonInterests = interestsReader.getTopInterests().get(0);
-        ArrayList<Interest> topOtherInterests = interestsReader.getTopInterests().get(1);
+        ir.action(interestsArgs);
+        ArrayList<Interest> topCommonInterests = ir.getTopInterests().get(0);
+        ArrayList<Interest> topOtherInterests = ir.getTopInterests().get(1);
 
         Map<String, Object> variables = ImmutableMap.of("user", nextMatch,
           "topCommonInterests", topCommonInterests, "topOtherInterests", topOtherInterests);
