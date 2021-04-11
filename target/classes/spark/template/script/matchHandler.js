@@ -21,7 +21,7 @@ function getNextMatch(){
         },
     })
         .then(response => {
-            console.log(response.data.firstName)
+            console.log(response.data)
             matchName.innerHTML = response.data.firstName;
             matchGrade.innerHTML = "Class of " + response.data.year;
             //matchMajor.innerHTML = response.data.major;
