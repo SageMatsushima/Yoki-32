@@ -14,14 +14,13 @@ function onMatchPressed() {
 
 function getNextMatch(){
     fetch('/yoki', {
-        method: 'post',
-        body: JSON.stringify(postParameters),
+        method: 'get',
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
         },
     })
         .then(response => {
-            console.log(response.data.firstName)
+            console.log(response.data);
             matchName.innerHTML = response.data.firstName;
             matchGrade.innerHTML = "Class of " + response.data.year;
             //matchMajor.innerHTML = response.data.major;
