@@ -1,9 +1,12 @@
 package edu.brown.cs.student.yoki.commands;
 
 
+import edu.brown.cs.student.yoki.driver.Interest;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * This class contains the SQL commands we use throughout the maps package.
@@ -60,6 +63,24 @@ public final class SQLcommands {
       PreparedStatement prep2 = conn.prepareStatement("INSERT INTO user_data VALUES (" + newDataInsert + ");");
       prep1.execute();
       prep2.execute();
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+    }
+  }
+
+  public static void update(int id, HashMap<String, Interest> newInterest) {
+
+    try {
+      Connection conn = DataReader.getConnection();
+
+      for (int i = 0; i < newInterest.size(); i++) {
+        newInterest.get();
+      }
+//      PreparedStatement prep1 = conn.prepareStatement("INSERT INTO user_interests VALUES (" + newInterestInsert + ");");
+//      PreparedStatement prep2 = conn.prepareStatement("INSERT INTO user_data VALUES (" + newDataInsert + ");");
+//      prep1.execute();
+//      prep2.execute();
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println("ERROR: Issue reading in SQL");
