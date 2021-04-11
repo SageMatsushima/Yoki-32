@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/driver/Interest.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/Main.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/commands/TopInterests.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/util/CreateTable.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/driver/KdNode.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/driver/TreeFunction.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/commands/MatchFinder.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/commands/InterestsReader.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/driver/REPL.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/Database.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/util/AddData.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/commands/DataReader.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/driver/AlexKDTree.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/commands/SQLcommands.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/driver/User.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/util/AddUsers.java
-/Users/delorali/Documents/Brown/Spring2021/final2cs32/term-project-ale22-dli65-iacosta1-smatsush/src/main/java/edu/brown/cs/student/yoki/driver/TriggerAction.java
-=======
 C:\Users\sagem\Desktop\32\term-project-ale22-dli65-iacosta1-smatsush\src\main\java\edu\brown\cs\student\yoki\driver\AlexKDTree.java
 C:\Users\sagem\Desktop\32\term-project-ale22-dli65-iacosta1-smatsush\src\main\java\edu\brown\cs\student\yoki\Main.java
 C:\Users\sagem\Desktop\32\term-project-ale22-dli65-iacosta1-smatsush\src\main\java\edu\brown\cs\student\yoki\util\AddUsers.java
@@ -34,4 +15,3 @@ C:\Users\sagem\Desktop\32\term-project-ale22-dli65-iacosta1-smatsush\src\main\ja
 C:\Users\sagem\Desktop\32\term-project-ale22-dli65-iacosta1-smatsush\src\main\java\edu\brown\cs\student\yoki\driver\User.java
 C:\Users\sagem\Desktop\32\term-project-ale22-dli65-iacosta1-smatsush\src\main\java\edu\brown\cs\student\yoki\commands\UserReader.java
 C:\Users\sagem\Desktop\32\term-project-ale22-dli65-iacosta1-smatsush\src\main\java\edu\brown\cs\student\yoki\driver\REPL.java
->>>>>>> 904b9c20e4061321cc7e7a9fe7b0758030b94579

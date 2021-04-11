@@ -100,12 +100,11 @@
 
 .sidebar {
     border: none;
-    background-color: white;
+    background-color: #DBDBDB;
     color: black;
     padding: 14px 28px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #d77373;
 }
 
 #profile {
@@ -135,4 +134,10 @@ a {
 
 div.sidebar:hover {
     background-color: #646464;
+}
+
+#logo {
+    width: 12vw;
+    height: 7vw;
+    margin-left: 1vw;
 }
