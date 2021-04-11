@@ -4,8 +4,8 @@ const matchMap = new Map();
 
 
 function onMatchPressed() {
-    let response = getNextMatch();
-    //matchMap.append(response.data., response);
+    let data = getNextMatch();
+    matchMap.append(data.user.firstName, data.user);
 }
 
 
