@@ -4,10 +4,20 @@ public class Interest {
   private int id;
   private String tag;
   private String name;
+  private int score;
 
   public Interest(int id, String tag) {
     this.id = id;
     this.tag = tag;
+    this.score = -1;
+
+    convertTagToName();
+  }
+
+  public Interest(int id, String tag, int score) {
+    this.id = id;
+    this.tag = tag;
+    this.score = score;
     convertTagToName();
   }
 
@@ -30,4 +40,9 @@ public class Interest {
   public String getName() {
     return name;
   }
+
+  public int getScore() {
+    return score;
+  }
+
 }

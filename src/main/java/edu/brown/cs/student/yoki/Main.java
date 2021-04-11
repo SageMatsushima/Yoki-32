@@ -10,7 +10,6 @@ import java.util.List;
 import edu.brown.cs.student.yoki.commands.DataReader;
 import edu.brown.cs.student.yoki.commands.InterestsReader;
 import edu.brown.cs.student.yoki.commands.MatchFinder;
-import edu.brown.cs.student.yoki.commands.TopInterests;
 import edu.brown.cs.student.yoki.driver.*;
 
 import joptsimple.OptionParser;
@@ -46,7 +45,6 @@ public final class Main {
   private static MatchFinder finder = new MatchFinder();
   private static DataReader dataReader = new DataReader();
   private static InterestsReader interestsReader = new InterestsReader();
-  private static TopInterests topInterests = new TopInterests();
   private List<User> users = new ArrayList<>();
 
   private Main(String[] args) {
@@ -80,7 +78,6 @@ public final class Main {
     repl.addAction("data", dataReader);
     repl.addAction("interests", interestsReader);
     repl.addAction("match", finder);
-    repl.addAction("top", topInterests);
 
     repl.run();
   }

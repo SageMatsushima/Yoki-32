@@ -35,10 +35,7 @@ public class DataReader implements TriggerAction {
         try {
           dataPath = path;
           allUserData();
-          for (int i = 0; i < interestCount; i++) {
-            Interest interest = convert.get(i + 8);
-            System.out.println(interest.getId() + " " + interest.getTag() + " " + interest.getName());
-          }
+//          printHash();
           System.out.println("Reading data from " + path);
         } catch (SQLException | ClassNotFoundException sqlEx) {
           System.out.println("ERROR: Error reading from " + path);
@@ -51,6 +48,12 @@ public class DataReader implements TriggerAction {
     }
   }
 
+  public static void printHash() {
+    for (int i = 0; i < interestCount; i++) {
+      Interest interest = convert.get(i + 8);
+      System.out.println(interest.getId() + " " + interest.getTag() + " " + interest.getName());
+    }
+  }
 
   private void allUserData() throws SQLException, ClassNotFoundException {
     if (conn != null) {
@@ -117,6 +120,10 @@ public class DataReader implements TriggerAction {
 
   public static int getInterestCount() {
     return interestCount;
+  }
+
+  public static HashMap<Integer, Interest> getConvert() {
+    return convert;
   }
 
 }
