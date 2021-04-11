@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.brown.cs.student.yoki.commands.DataReader;
 import edu.brown.cs.student.yoki.commands.InterestsReader;
@@ -41,9 +43,18 @@ public final class Main {
   private final String[] args;
   private static TreeFunction<User> tree = new TreeFunction<>();
   private static MatchFinder finder = new MatchFinder();
+  private List<User> users = new ArrayList<>();
 
   private Main(String[] args) {
     this.args = args;
+  }
+
+  public List<User> getUsers() {
+    return users;
+  }
+
+  public void setUsers(List<User> users) {
+    this.users = users;
   }
 
   private void run() {
@@ -57,6 +68,9 @@ public final class Main {
     if (options.has("gui")) {
       runSparkServer((int) options.valueOf("port"));
     }
+
+    ArrayList<User> usersList = tree.getFound();
+    this.setUsers(usersList);
 
     REPL repl = new REPL();
     repl.addAction("data", new DataReader());
@@ -107,12 +121,14 @@ public final class Main {
 
   //sends to Front-end next match -> pops from our list
   //when program loads, run the program and store a list of matches in Main
-  private static class YokiHandler implements TemplateViewRoute {
+  private class YokiHandler implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request req, Response res) {
 
-      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
-      return new ModelAndView(variables.build(), "ProfileEdit.ftl");
+      ImmutableMap.Builder<String, User> variables = new ImmutableMap.Builder();
+      User nextMatch = Main.this.getUsers().remove(0);
+      variables.put(nextMatch.getName(), nextMatch);
+      return new ModelAndView(variables.build(), "main.ftl");
     }
   }
 
