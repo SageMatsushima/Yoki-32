@@ -20,10 +20,16 @@ function getNextMatch(){
             response.json())
         .then((data) => {
             let matchName = document.getElementById('match-name');
-            let matchGrade = document.getElementById('match-grade')
-            console.log(data.user);
+            let matchGrade = document.getElementById('match-grade');
+            let topInterests = document.getElementById('top_interests_list')
+            console.log(data);
             matchName.innerHTML = data.user.firstName;
             matchGrade.innerHTML = "Class of " + data.user.year;
+            topInterests.innerHTML = ""
+            for (var interest in data.topCommonInterests) {
+                topInterests.innerHTML += "<li> " + data.topCommonInterests[interest].name + " </li>";
+            }
+            console.log()
             //matchMajor.innerHTML = response.data.major;
             return data;
         })
