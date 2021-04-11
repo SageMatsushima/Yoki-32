@@ -66,12 +66,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-<<<<<<< HEAD
   <div id="profile">
     ${nav}
-=======
     <script src="script/matchHandler.js"></script>
->>>>>>> 08e1f8f9a509f84d92ff3c4e01134b11b39808db
     <div id = "card-div">
       ${card}
       <div id = "button-div">

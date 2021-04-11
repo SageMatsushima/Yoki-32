@@ -128,15 +128,12 @@ public final class Main {
     // Setup Spark Routes
     //Spark.get("/stars", new FrontHandler(), freeMarker);
     Spark.get("/yoki", new YokiHandler(), freeMarker);
-<<<<<<< HEAD
     Spark.get("/learn", new LearnHandler(), freeMarker);
     Spark.get("/teach", new TeachHandler(), freeMarker);
     Spark.get("/settings", new SettingsHandler(), freeMarker);
     Spark.get("/profileEdit", new ProfileEditHandler(), freeMarker);
-    Spark.get("/match", new MatchHandler(), freeMarker);
-=======
+    Spark.get("/match", new MatchPageHandler(), freeMarker);
     Spark.get("/yokimatch", new MatchHandler());
->>>>>>> 08e1f8f9a509f84d92ff3c4e01134b11b39808db
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
 
@@ -185,7 +182,7 @@ public final class Main {
     }
   }
 
-  private static class MatchHandler implements TemplateViewRoute {
+  private static class MatchPageHandler implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request req, Response res) {
 

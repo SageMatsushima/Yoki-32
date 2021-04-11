@@ -1,11 +1,11 @@
 <#assign nav>
   <nav>
-    <div class="sidebar"><a href="/yoki">Home</a></div> <br>
-    <div class="sidebar"><a href="/match">Matches</a></div> <br>
-    <div class="sidebar"><a href="/learn">Learn</a></div> <br>
-    <div class="sidebar"><a href="/teach">Teach</a></div> <br>
-    <div class="sidebar"><a href="/profileEdit">My Profile</a></div> <br>
-    <div class="sidebar"><a href="/settings">Settings</a></div> <br>
+    <a href="/yoki"><div class="sidebar">Home</div></a> <br>
+    <a href="/match"><div class="sidebar">Matches</div></a> <br>
+    <a href="/learn"><div class="sidebar">Learn</div></a> <br>
+    <a href="/teach"><div class="sidebar">Teach</div></a> <br>
+    <a href="/profileEdit"><div class="sidebar">My Profile</div></a> <br>
+    <a href="/settings"><div class="sidebar">Settings</div></a> <br>
   </nav>
 </#assign>
 
@@ -16,7 +16,6 @@
         <div id = "name_info">
           <h1 id="match-name">Kendall</h1>
           <h3 id="match-grade">Class of 2023</h3>
-          <h3 id="match-major">Cognitive Science</h3>
         </div>
         <div id = "top_interests">
           <h3>Interests</h3>
@@ -41,13 +40,13 @@
 </#assign>
 
 <#assign matchButton>
- <button class = "button" id="match-button">
+ <button class = "button" id="match-button" onclick="onMatchPressed()">
    match
  </button>
 </#assign>
 
 <#assign passButton>
-  <button class = "button" id="pass-button">
+  <button class = "button" id="pass-button" onclick="getNextMatch()">
     pass
   </button>
 </#assign>
@@ -67,14 +66,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
+  <div id="profile">
     ${nav}
+    <script src="script/matchHandler.js"></script>
     <div id = "card-div">
-     ${card}
+      ${card}
       <div id = "button-div">
         ${passButton}
-          ${matchButton}
+        ${matchButton}
       </div>
     </div>
+  </div>
      <!-- Again, we're serving up the unminified source for clarity. -->
   </body>
   <!-- See http://html5boilerplate.com/ for a good place to start

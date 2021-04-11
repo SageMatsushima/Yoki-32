@@ -31,6 +31,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/settings.css">
+    <link rel="stylesheet" href="css/matching.css">
 </head>
 <body>
     <div id="profile">
@@ -40,7 +41,7 @@
             <div id="options">
                 ${logout}
                 ${LD}
-                ${TD}
+                ${TC}
                 ${report}
             </div>
         </div>
