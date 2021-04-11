@@ -135,18 +135,9 @@ public final class Main {
     Spark.get("/match", new MatchPageHandler(), freeMarker);
     Spark.get("/profileOverview", new ProfileOverviewHandler(), freeMarker);
     Spark.get("/yokimatch", new MatchHandler());
-<<<<<<< HEAD
     Spark.get("/listInterests", new ListInterestsHandler());
     Spark.get("/update", new UpdateInterests());
-=======
-<<<<<<< HEAD
     Spark.get("/setmatch", new MatchMapHandler());
-    Spark.get("/listInterests", new ListInterestsHandler());
-
-=======
-    Spark.post("/listInterests", new ListInterestsHandler());
->>>>>>> 3017ad489c682459ebb51670ab0d04d0e79817b4
->>>>>>> 877d81ac3f46375d45cb551271c82e0af444f7be
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
 
@@ -224,7 +215,7 @@ public final class Main {
 
   private static class MatchPageHandler implements TemplateViewRoute {
     @Override
-    public ModelAndView handle(Request req, Response res){
+    public ModelAndView handle(Request req, Response res) {
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
       return new ModelAndView(variables.build(), "Matches.ftl");
     }
