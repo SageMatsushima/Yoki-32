@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import edu.brown.cs.student.yoki.commands.DataReader;
-import edu.brown.cs.student.yoki.commands.InterestsReader;
-import edu.brown.cs.student.yoki.commands.MatchFinder;
-import edu.brown.cs.student.yoki.commands.UserReader;
+import edu.brown.cs.student.yoki.commands.*;
 import edu.brown.cs.student.yoki.driver.*;
 
 import com.google.gson.Gson;
@@ -126,7 +123,6 @@ public final class Main {
     FreeMarkerEngine freeMarker = createEngine();
 
     // Setup Spark Routes
-    //Spark.get("/stars", new FrontHandler(), freeMarker);
     Spark.get("/yoki", new YokiHandler(), freeMarker);
     Spark.get("/learn", new LearnHandler(), freeMarker);
     Spark.get("/teach", new TeachHandler(), freeMarker);
@@ -136,7 +132,7 @@ public final class Main {
     Spark.get("/profileOverview", new ProfileOverviewHandler(), freeMarker);
     Spark.get("/yokimatch", new MatchHandler());
     Spark.get("/listInterests", new ListInterestsHandler());
-//    Spark.get("/userData", new UserData(), freeMarker);
+    Spark.get("/update", new UpdateInterests());
   }
 
   //sends to Front-end next match -> pops from our list
@@ -162,13 +158,20 @@ public final class Main {
         System.out.println("size: " + interestsReader.getTopInterests().get(0).size());
 
         Map<String, Object> variables = ImmutableMap.of("user", nextMatch,
-          "topCommonInterests", topCommonInterests, "topOtherInterests", topOtherInterests);
+            "topCommonInterests", topCommonInterests, "topOtherInterests", topOtherInterests);
         return new ModelAndView(variables, "main.ftl");
       }
       return new ModelAndView(null, "main.ftl");
     }
   }
-
+  private static class UpdateInterests implements Route {
+    @Override 
+    public String handle(Request req, Response res) {
+//      SQLcommands.update(1, req.);
+      Map<String, Object> variables = ImmutableMap.of("msg", "done");
+      return GSON.toJson(variables);
+    }
+  }
   private class MatchHandler implements Route {
     @Override
     public String handle(Request req, Response res) {
