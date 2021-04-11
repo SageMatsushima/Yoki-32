@@ -199,10 +199,8 @@ public final class Main {
   private static class ListInterestsHandler implements Route {
     @Override
     public String handle(Request req, Response res) {
-        Map<String, Object> variables = ImmutableMap.of("interestsList", DataReader.getConvert());
-        return GSON.toJson(variables);
-      }
-      return "null";
+      Map<String, Object> variables = ImmutableMap.of("interestsList", DataReader.getConvert());
+      return GSON.toJson(variables);
     }
   }
 
