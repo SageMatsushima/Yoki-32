@@ -76,6 +76,11 @@ public final class Main {
     ArrayList<User> usersList = tree.getFound();
     this.setUsers(usersList);
 
+    ArrayList<String> dataReaderArgs = new ArrayList<>();
+    dataReaderArgs.add("data");
+    dataReaderArgs.add("data/bigData.sqlite");
+    dataReader.action(dataReaderArgs);
+
     REPL repl = new REPL();
     repl.addAction("data", dataReader);
     repl.addAction("interests", interestsReader);

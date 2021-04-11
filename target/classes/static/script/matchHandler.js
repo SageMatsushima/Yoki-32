@@ -20,7 +20,11 @@ function getNextMatch(){
         },
     })
         .then(response => {
+<<<<<<< HEAD:target/classes/static/script/matchHandler.js
             console.log(response.data);
+=======
+            console.log(response.data)
+>>>>>>> 140dcf647d50f667da5f69628dbe0838744e2f1c:src/main/resources/spark/template/script/matchHandler.js
             matchName.innerHTML = response.data.firstName;
             matchGrade.innerHTML = "Class of " + response.data.year;
             //matchMajor.innerHTML = response.data.major;
