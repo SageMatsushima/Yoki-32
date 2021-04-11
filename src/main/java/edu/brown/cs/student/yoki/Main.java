@@ -86,7 +86,7 @@ public final class Main {
     dataReader.action(dataReaderArgs);
     ArrayList<String> finderArgs = new ArrayList<>();
     finderArgs.add("match");
-    finderArgs.add("10");
+    finderArgs.add("104");
     finderArgs.add("1");
     matches.action(finderArgs);
     this.setUsers(matches.getUserList());
