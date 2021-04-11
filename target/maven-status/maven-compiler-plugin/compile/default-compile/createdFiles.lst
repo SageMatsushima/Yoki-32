@@ -1,7 +1,3 @@
-<<<<<<< HEAD
 edu/brown/cs/student/yoki/Main$UpdateInterests.class
 edu/brown/cs/student/yoki/commands/UpdateInterests.class
 edu/brown/cs/student/yoki/Main$ListInterestsHandler.class
-=======
-edu\brown\cs\student\yoki\Main$ListInterestsHandler.class
->>>>>>> 3017ad489c682459ebb51670ab0d04d0e79817b4
