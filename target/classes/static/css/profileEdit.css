@@ -67,9 +67,12 @@ input {
 #match-button {
     border: none;
     float: right;
+<<<<<<< HEAD
     border-radius: 5vw;
     height: 4vw;
     width: 15vw;
+=======
+>>>>>>> c84e8ec21b5d6368812cc59abeec80c0409bef08
 }
 
 #name {
@@ -119,8 +122,11 @@ h2 {
     margin-left: 10%;
     top: 118px;
     border-radius: 30px;
+<<<<<<< HEAD
 }
 
 #emailInput {
     width: 100%;
+=======
+>>>>>>> c84e8ec21b5d6368812cc59abeec80c0409bef08
 }

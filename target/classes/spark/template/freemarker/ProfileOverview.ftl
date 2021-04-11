@@ -24,6 +24,10 @@
     <button id="editProfile" onclick="">Edit Profile</button>
 </#assign>
 
+<#assign editProfile>
+    <button id="editProfile" onclick="">Edit Profile</button>
+</#assign>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
