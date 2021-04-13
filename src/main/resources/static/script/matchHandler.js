@@ -13,6 +13,7 @@ function onMatchPressed() {
 function setBackMatch() {
     const postParameters = {
         //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
+        id: currUser.id,
         first: currUser.firstName,
         last: currUser.lastName
     };

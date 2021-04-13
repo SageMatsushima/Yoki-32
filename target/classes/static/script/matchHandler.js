@@ -13,8 +13,9 @@ function onMatchPressed() {
 function setBackMatch() {
     const postParameters = {
         //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
+        id: currUser.id,
         first: currUser.firstName,
-        last: currUser.lastName,
+        last: currUser.lastName
     };
 
     fetch('http://localhost:4567/sendmatch', {
@@ -24,11 +25,6 @@ function setBackMatch() {
             'Content-type': 'application/json; charset=UTF-8',
         },
     })
-        .then((response) =>
-            response.json())
-        .then((data) => {
-            //matchMap.put(currUser.firstName, currUser);
-        })
         .catch(function (error) {
             console.log(error);
         });
