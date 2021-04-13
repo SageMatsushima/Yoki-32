@@ -2,9 +2,11 @@ package edu.brown.cs.student.yoki.commands;
 
 
 import edu.brown.cs.student.yoki.driver.Interest;
+import edu.brown.cs.student.yoki.driver.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -158,6 +160,42 @@ public final class SQLcommands {
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println("ERROR: Issue reading in SQL");
+    }
+  }
+
+  public static ArrayList<User> getAllMatches(int userId) {
+    userId = 1;
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement("SELECT match_id FROM matches WHERE id=? AND matched=true");
+      prep.setInt(1, userId);
+      ResultSet rs = prep.executeQuery();
+      ArrayList<User> matches = new ArrayList<>();
+      while(rs.next()) {
+        PreparedStatement prep2 = getUserData();
+        prep2.setInt(1, rs.getInt("match_id"));
+        ResultSet rs2 = prep.executeQuery();
+
+        int id = rs2.getInt("id");
+        String firstName = rs2.getString("first_name");
+        String lastName = rs2.getString("last_name");
+        String email = rs2.getString("email");
+        String password = rs2.getString("password");
+        int year = rs2.getInt("year");
+
+        int[] interests = new int[DataReader.getInterestCount()];
+        for (int j = 0; j < interests.length; j++) {
+          interests[j] = rs2.getInt(j + 8);
+        }
+
+        User user = new User(id, firstName, lastName, email, password, year, interests);
+        matches.add(user);
+      }
+      return matches;
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+      return null;
     }
   }
 
