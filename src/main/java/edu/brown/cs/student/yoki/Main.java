@@ -210,7 +210,7 @@ public final class Main {
 
   private static class MatchPageHandler implements TemplateViewRoute {
     @Override
-    public ModelAndView handle(Request req, Response res){
+    public ModelAndView handle(Request req, Response res) {
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
       return new ModelAndView(variables.build(), "Matches.ftl");
     }
@@ -260,15 +260,14 @@ public final class Main {
       return new ModelAndView(variables.build(), "ProfileOverview.ftl");
     }
   }
-
- private class MatchMapHandler implements Route {
+  private class MatchMapHandler implements Route {
     @Override
-    public String handle(Request req, Response res) throws Exception{
+    public String handle(Request req, Response res) throws Exception {
       JSONObject newMatch = new JSONObject(req.body());
-      for (User user: Main.this.getUsers()) {
+      for (User user: matches.getUserList()) {
         if (user.getId() == newMatch.getInt("id")) {
           matchSet.add(user);
-          System.out.println(user);
+          System.out.println("added");
         }
       }
       return "";
