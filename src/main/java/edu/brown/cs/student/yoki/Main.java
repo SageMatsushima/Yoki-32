@@ -132,9 +132,10 @@ public final class Main {
     Spark.get("/match", new MatchPageHandler(), freeMarker);
     Spark.get("/profileOverview", new ProfileOverviewHandler(), freeMarker);
     Spark.get("/yokimatch", new MatchHandler());
+    Spark.post("/sendmatch", new MatchMapHandler());
     Spark.post("/listInterests", new ListInterestsHandler());
-    Spark.get("/update", new UpdateInterests());
-    Spark.get("/setmatch", new MatchMapHandler());
+
+//    Spark.get("/userData", new UserData(), freeMarker);
   }
 
   //sends to Front-end next match -> pops from our list
