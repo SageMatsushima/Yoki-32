@@ -6,10 +6,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.*;
 
-import edu.brown.cs.student.yoki.commands.DataReader;
-import edu.brown.cs.student.yoki.commands.InterestsReader;
-import edu.brown.cs.student.yoki.commands.MatchFinder;
-import edu.brown.cs.student.yoki.commands.UserReader;
+import edu.brown.cs.student.yoki.commands.*;
 import edu.brown.cs.student.yoki.driver.*;
 
 import com.google.gson.Gson;
@@ -53,6 +50,7 @@ public final class Main {
 
   private List<User> users = new ArrayList<>();
   private Set<User> matchSet = new HashSet();
+  private static int currentId = 1;
 
   private static final Gson GSON = new Gson();
 
@@ -129,7 +127,6 @@ public final class Main {
     FreeMarkerEngine freeMarker = createEngine();
 
     // Setup Spark Routes
-    //Spark.get("/stars", new FrontHandler(), freeMarker);
     Spark.get("/yoki", new YokiHandler(), freeMarker);
     Spark.get("/learn", new LearnHandler(), freeMarker);
     Spark.get("/teach", new TeachHandler(), freeMarker);
@@ -143,9 +140,13 @@ public final class Main {
     Spark.post("/sendmatch", new MatchMapHandler());
     Spark.post("/listInterests", new ListInterestsHandler());
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 460757a9f990a2ebfef6b62e3641853e8de5bbfe
+=======
+    Spark.get("/getmatch", new GetMatchesHandler());
+>>>>>>> 629028ecdbd4845bbe01798ddbe8ec13f6ebb8a6
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
@@ -173,13 +174,20 @@ public final class Main {
         System.out.println("size: " + interestsReader.getTopInterests().get(0).size());
 
         Map<String, Object> variables = ImmutableMap.of("user", nextMatch,
-          "topCommonInterests", topCommonInterests, "topOtherInterests", topOtherInterests);
+            "topCommonInterests", topCommonInterests, "topOtherInterests", topOtherInterests);
         return new ModelAndView(variables, "main.ftl");
       }
       return new ModelAndView(null, "main.ftl");
     }
   }
-
+  private static class UpdateInterests implements Route {
+    @Override
+    public String handle(Request req, Response res) {
+//      SQLcommands.update(1, req.);
+      Map<String, Object> variables = ImmutableMap.of("msg", "done");
+      return GSON.toJson(variables);
+    }
+  }
   private class MatchHandler implements Route {
     @Override
     public String handle(Request req, Response res) {
@@ -267,17 +275,35 @@ public final class Main {
       return new ModelAndView(variables.build(), "ProfileOverview.ftl");
     }
   }
+
+  /**
+   * Handler method for post request for matching with a user. Adds the matched user to matchSet.
+   */
   private class MatchMapHandler implements Route {
     @Override
     public String handle(Request req, Response res) throws Exception {
       JSONObject newMatch = new JSONObject(req.body());
+      int matchId = newMatch.getInt("id");
       for (User user: matches.getUserList()) {
-        if ((int) (user.getId()) == (int) (newMatch.getInt("id"))) {
+        if ((user.getId()) == (matchId)) {
           matchSet.add(user);
           System.out.println("added");
         }
       }
+      SQLcommands.addMatch(currentId, matchId);
+      //add match to db function with matchId
       return "";
+    }
+  }
+
+  /**
+   * Handler method for post request for matching with a user. Adds the matched user to matchSet.
+   */
+  private class GetMatchesHandler implements Route {
+    @Override
+    public String handle(Request req, Response res) throws Exception {
+      Map<String, Object> variables = ImmutableMap.of("matchSet", SQLcommands.getAllMatches(currentId));
+      return GSON.toJson(variables);
     }
   }
 
