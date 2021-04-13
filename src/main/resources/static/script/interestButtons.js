@@ -1,13 +1,14 @@
 const addInterest = new Map();
 
-function addInterestDiv(value) {
+function addInterestDiv(value, key) {
     const interest = document.createElement("div");
     interest.className = "interests";
     interest.id = "subject";
     const name = document.createElement("h3");
     name.innerHTML = value.name;
     const input = document.createElement("input");
-    input.className = "slider";
+    input.className = "slider interestValue";
+    input.id = value.id;
     input.type = "range";
     input.min = "0";
     input.max = "10";
@@ -17,8 +18,7 @@ function addInterestDiv(value) {
     document.getElementById("interest").appendChild(interest);
     document.getElementById("subject").appendChild(name);
     document.getElementById("subject").appendChild(input);
-
-    addInterest.append(value.name, input.value);
+    addInterest.set(key,  input.value);
 }
 
 function allInterests() {
@@ -35,7 +35,7 @@ function allInterests() {
             for (const [key, value] of Object.entries(data.interestsList)) {
                 console.log(`${key}: ${value.name}`);
                 const interest = document.createElement("button");
-                interest.addEventListener("click", () => addInterestDiv(value));
+                interest.addEventListener("click", () => addInterestDiv(value, key));
                 interest.className = "subject";
                 interest.id = key;
                 interest.innerHTML = value.name;
@@ -49,26 +49,26 @@ function allInterests() {
         });
 }
 
-function onSavePressed(value) {
-    save();
-    matchMap.set(currUser.firstName, currUser);
+function updateInterest() {
+    for (let i of document.getElementsByClassName("interestValue")) {
+        addInterest.set(i.id, i.value);
+    }
 }
 
 function save() {
+    updateInterest();
+    console.log(addInterest);
+    const postParameters = {
+        //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
+        interests: addInterest
+    };
     fetch('http://localhost:4567/listInterests', {
         method: 'post',
+        body: JSON.stringify(postParameters),
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
         },
     })
-        .then(response => {
-            console.log(addInterest);
-            console.log(value);
-            // matchName.innerHTML = response.data.name;
-            // matchGrade.innerHTML = "Class of " + response.data.grade;
-            // matchMajor.innerHTML = response.data.major;
-            // return response.data;
-        })
         .catch(function (error) {
             console.log(error);
         });
