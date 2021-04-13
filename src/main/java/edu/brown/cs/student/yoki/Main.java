@@ -170,7 +170,7 @@ public final class Main {
     }
   }
   private static class UpdateInterests implements Route {
-    @Override 
+    @Override
     public String handle(Request req, Response res) {
 //      SQLcommands.update(1, req.);
       Map<String, Object> variables = ImmutableMap.of("msg", "done");
@@ -267,7 +267,7 @@ public final class Main {
 
  private class MatchMapHandler implements Route {
     @Override
-    public String handle(Request req, Response res) throws Exception{
+    public String handle(Request req, Response res) throws Exception {
       String newMatch = req.body();
       System.out.println(newMatch);
       return "";
