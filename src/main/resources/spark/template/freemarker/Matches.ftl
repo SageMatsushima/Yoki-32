@@ -26,10 +26,10 @@
   <body>
   <div id="profile">
     ${nav}
-    <script src="script/matchHandler.js"></script>
-    <div id = "card-div">
+    <script src="script/matchUpdate.js"></script>
+    <div id = "match-div">
       <h1>Your Matches</h1>
-      <ul id="match-list"></ul>
+      <div id="match-list"></div>
   </div>
      <!-- Again, we're serving up the unminified source for clarity. -->
   </body>

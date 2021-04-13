@@ -261,6 +261,10 @@ public final class Main {
       return new ModelAndView(variables.build(), "ProfileOverview.ftl");
     }
   }
+
+  /**
+   * Handler method for post request for matching with a user. Adds the matched user to matchSet.
+   */
   private class MatchMapHandler implements Route {
     @Override
     public String handle(Request req, Response res) throws Exception {
@@ -272,6 +276,17 @@ public final class Main {
         }
       }
       return "";
+    }
+  }
+
+  /**
+   * Handler method for post request for matching with a user. Adds the matched user to matchSet.
+   */
+  private class GetMatchesHandler implements Route {
+    @Override
+    public String handle(Request req, Response res) throws Exception {
+      Map<String, Object> variables = ImmutableMap.of("matchSet", matchSet);
+      return GSON.toJson(variables);
     }
   }
 
