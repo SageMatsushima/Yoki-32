@@ -64,8 +64,10 @@ public final class Main {
     return users;
   }
 
-  public void setUsers(List<User> users) {
-    this.users = users;
+  public void setUsers(List<User> usersInput) {
+    for (User user: usersInput) {
+      users.add(user);
+    }
   }
 
   private void run() {
@@ -264,7 +266,7 @@ public final class Main {
     public String handle(Request req, Response res) throws Exception {
       JSONObject newMatch = new JSONObject(req.body());
       for (User user: matches.getUserList()) {
-        if (user.getId() == newMatch.getInt("id")) {
+        if ((int) (user.getId()) == (int) (newMatch.getInt("id"))) {
           matchSet.add(user);
           System.out.println("added");
         }
