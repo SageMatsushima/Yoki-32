@@ -1,31 +1,36 @@
-const matchName = document.getElementById('match-name');
-const matchGrade = document.getElementById('match-grade');
-const matchMajor = document.getElementById('match-major');
-const matchInterests = document.getElementById("top_interests_list");
-const matchList = document.getElementById('matchList');
-const matchMap = new Map();
+window.onload = addMatches();
+
+let matchSet = new Set();
+
+function addMatchDiv(matched) {
+    const match = document.createElement("div");
+    match.className = "match";
+    match.id = "matchCard";
+    const name = document.createElement("h3");
+    name.innerHTML = matched.firstName;
 
 
-function onMatchPressed() {
-    let response = getNextMatch();
-    matchMap.append(response.data.name, response);
+    document.getElementById("match-list").appendChild(match);
+    match.appendChild(name);
 }
 
-
-function getNextMatch(){
-    fetch('/yoki', {
-        method: 'post',
-        body: JSON.stringify(postParameters),
+function addMatches() {
+    fetch('http://localhost:4567/getmatch', {
+        method: 'get',
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
         },
     })
-        .then(response => {
-            console.log(response.data.name)
-            matchName.innerHTML = response.data.name;
-            matchGrade.innerHTML = "Class of " + response.data.grade;
-            matchMajor.innerHTML = response.data.major;
-            return response.data;
+        .then((response) =>
+            response.json())
+        .then((data) => {
+            matchSet = data.matchSet;
+            for (const v of matchSet) {
+                console.log(v);
+                addMatchDiv(v);
+            }
+            //matchMajor.innerHTML = response.data.major;
+            return data;
         })
         .catch(function (error) {
             console.log(error);

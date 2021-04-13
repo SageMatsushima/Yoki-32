@@ -137,6 +137,7 @@ public final class Main {
     Spark.get("/yokimatch", new MatchHandler());
     Spark.post("/sendmatch", new MatchMapHandler());
     Spark.post("/listInterests", new ListInterestsHandler());
+    Spark.get("/getmatch", new GetMatchesHandler());
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
@@ -266,12 +267,9 @@ public final class Main {
     }
   }
 
-<<<<<<< HEAD
   /**
    * Handler method for post request for matching with a user. Adds the matched user to matchSet.
    */
-=======
->>>>>>> 32af611a5c7a5a05e0ab2e5e4f75e28a815899d1
   private class MatchMapHandler implements Route {
     @Override
     public String handle(Request req, Response res) throws Exception {
