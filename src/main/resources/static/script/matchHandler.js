@@ -7,13 +7,14 @@ function onMatchPressed() {
     console.log(currUser);
     matchMap.set(currUser.firstName, currUser);
     console.log(matchMap);
+    setBackMatch();
 }
 
 function setBackMatch() {
     const postParameters = {
         //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
         first: currUser.firstName,
-        last: currUser.lastName,
+        last: currUser.lastName
     };
 
     fetch('http://localhost:4567/sendmatch', {
@@ -23,11 +24,6 @@ function setBackMatch() {
             'Content-type': 'application/json; charset=UTF-8',
         },
     })
-        .then((response) =>
-            response.json())
-        .then((data) => {
-            //matchMap.put(currUser.firstName, currUser);
-        })
         .catch(function (error) {
             console.log(error);
         });
@@ -60,7 +56,6 @@ function getNextMatch(){
 
 
             let matchList = document.getElementById('match-list');
-            //setBackMatch();
             Object.keys(matchMap).map(function(key) {
                 matchList.innerHTML = "<li> " + matchMap[key].firstName + " </li>";
             });

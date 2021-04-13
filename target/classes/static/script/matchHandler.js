@@ -7,6 +7,7 @@ function onMatchPressed() {
     console.log(currUser);
     matchMap.set(currUser.firstName, currUser);
     console.log(matchMap);
+    setBackMatch();
 }
 
 function setBackMatch() {
@@ -60,7 +61,6 @@ function getNextMatch(){
 
 
             let matchList = document.getElementById('match-list');
-            //setBackMatch();
             Object.keys(matchMap).map(function(key) {
                 matchList.innerHTML = "<li> " + matchMap[key].firstName + " </li>";
             });

@@ -67,6 +67,7 @@ body {
 
 .interestBtn {
     margin-left: 0;
+    /*position: fixed;*/
     float: right;
     height: 3vw;
     width: 10vw;
