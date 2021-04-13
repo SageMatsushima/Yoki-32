@@ -1,3 +1,4 @@
 edu/brown/cs/student/yoki/Main$UpdateInterests.class
 edu/brown/cs/student/yoki/commands/UpdateInterests.class
+edu/brown/cs/student/yoki/Main$GetMatchesHandler.class
 edu/brown/cs/student/yoki/Main$ListInterestsHandler.class
