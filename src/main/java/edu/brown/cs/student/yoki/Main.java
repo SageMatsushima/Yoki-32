@@ -64,8 +64,10 @@ public final class Main {
     return users;
   }
 
-  public void setUsers(List<User> users) {
-    this.users = users;
+  public void setUsers(List<User> usersInput) {
+    for (User user: usersInput) {
+      users.add(user);
+    }
   }
 
   private void run() {
@@ -215,7 +217,7 @@ public final class Main {
 
   private static class MatchPageHandler implements TemplateViewRoute {
     @Override
-    public ModelAndView handle(Request req, Response res){
+    public ModelAndView handle(Request req, Response res) {
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
       return new ModelAndView(variables.build(), "Matches.ftl");
     }
@@ -265,15 +267,14 @@ public final class Main {
       return new ModelAndView(variables.build(), "ProfileOverview.ftl");
     }
   }
-
- private class MatchMapHandler implements Route {
+  private class MatchMapHandler implements Route {
     @Override
-    public String handle(Request req, Response res) throws Exception{
+    public String handle(Request req, Response res) throws Exception {
       JSONObject newMatch = new JSONObject(req.body());
-      for (User user: Main.this.getUsers()) {
-        if (user.getId() == newMatch.getInt("id")) {
+      for (User user: matches.getUserList()) {
+        if ((int) (user.getId()) == (int) (newMatch.getInt("id"))) {
           matchSet.add(user);
-          System.out.println(user);
+          System.out.println("added");
         }
       }
       return "";
