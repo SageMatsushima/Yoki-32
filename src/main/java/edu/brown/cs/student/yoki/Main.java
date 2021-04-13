@@ -50,7 +50,7 @@ public final class Main {
 
   private List<User> users = new ArrayList<>();
   private Set<User> matchSet = new HashSet();
-  private static int currentId;
+  private static int currentId = 1;
 
   private static final Gson GSON = new Gson();
 
@@ -266,12 +266,9 @@ public final class Main {
     }
   }
 
-<<<<<<< HEAD
   /**
    * Handler method for post request for matching with a user. Adds the matched user to matchSet.
    */
-=======
->>>>>>> 32af611a5c7a5a05e0ab2e5e4f75e28a815899d1
   private class MatchMapHandler implements Route {
     @Override
     public String handle(Request req, Response res) throws Exception {
@@ -283,7 +280,7 @@ public final class Main {
           System.out.println("added");
         }
       }
-      SQLcommands.addMatch(1, matchId);
+      SQLcommands.addMatch(currentId, matchId);
       //add match to db function with matchId
       return "";
     }
@@ -295,7 +292,7 @@ public final class Main {
   private class GetMatchesHandler implements Route {
     @Override
     public String handle(Request req, Response res) throws Exception {
-      Map<String, Object> variables = ImmutableMap.of("matchSet", matchSet);
+      Map<String, Object> variables = ImmutableMap.of("matchSet", SQLcommands.getAllMatches(currentId));
       return GSON.toJson(variables);
     }
   }
