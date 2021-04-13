@@ -74,4 +74,14 @@ public final class SQLcommands {
       return null;
     }
   }
+
+  public static PreparedStatement addMatch() {
+    try {
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+      return null;
+    }
+  }
 }

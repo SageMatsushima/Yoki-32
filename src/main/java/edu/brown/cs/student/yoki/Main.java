@@ -261,16 +261,19 @@ public final class Main {
       return new ModelAndView(variables.build(), "ProfileOverview.ftl");
     }
   }
+
   private class MatchMapHandler implements Route {
     @Override
     public String handle(Request req, Response res) throws Exception {
       JSONObject newMatch = new JSONObject(req.body());
+      int matchId = newMatch.getInt("id");
       for (User user: matches.getUserList()) {
-        if ((int) (user.getId()) == (int) (newMatch.getInt("id"))) {
+        if ((user.getId()) == (matchId)) {
           matchSet.add(user);
           System.out.println("added");
         }
       }
+      //add match to db function with matchId
       return "";
     }
   }
