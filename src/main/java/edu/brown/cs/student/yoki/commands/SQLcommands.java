@@ -90,7 +90,6 @@ public final class SQLcommands {
         prep.execute();
         prep.close();
       }
-      conn.close();
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println("ERROR: Issue reading in SQL");
@@ -147,13 +146,34 @@ public final class SQLcommands {
     }
   }
 
-  public static PreparedStatement addMatch() {
+  public static void addMatch(int userId, int matchId) {
+    userId = 1;
     try {
-      
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement("INSERT INTO matches VALUES (?,?,true)");
+      prep.setInt(1, userId);
+      prep.setInt(2, matchId);
+      prep.execute();
+      prep.close();
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println("ERROR: Issue reading in SQL");
-      return null;
+    }
+  }
+
+  public static void addPass(int userId, int matchId) {
+    userId = 1;
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement("INSERT INTO matches VALUES (?,?,false)");
+      prep.setInt(1, userId);
+      prep.setInt(2, matchId);
+      prep.execute();
+      prep.close();
+      conn.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
     }
   }
 }

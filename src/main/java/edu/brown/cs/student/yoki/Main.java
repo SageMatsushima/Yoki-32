@@ -50,6 +50,7 @@ public final class Main {
 
   private List<User> users = new ArrayList<>();
   private Set<User> matchSet = new HashSet();
+  private static int currentId;
 
   private static final Gson GSON = new Gson();
 
@@ -276,6 +277,7 @@ public final class Main {
           System.out.println("added");
         }
       }
+      SQLcommands.addMatch(1, matchId);
       //add match to db function with matchId
       return "";
     }
