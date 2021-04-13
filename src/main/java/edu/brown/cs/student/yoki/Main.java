@@ -4,10 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import edu.brown.cs.student.yoki.commands.DataReader;
 import edu.brown.cs.student.yoki.commands.InterestsReader;
@@ -55,7 +52,7 @@ public final class Main {
 
 
   private List<User> users = new ArrayList<>();
-  private Map<String, User> matchList = new HashMap();
+  private Set<User> matchSet = new HashSet();
 
   private static final Gson GSON = new Gson();
 
@@ -143,7 +140,10 @@ public final class Main {
     Spark.post("/sendmatches", new MatchMapHandler());
     Spark.post("/sendmatch", new MatchMapHandler());
     Spark.post("/listInterests", new ListInterestsHandler());
+<<<<<<< HEAD
 
+=======
+>>>>>>> 460757a9f990a2ebfef6b62e3641853e8de5bbfe
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
@@ -269,8 +269,13 @@ public final class Main {
  private class MatchMapHandler implements Route {
     @Override
     public String handle(Request req, Response res) throws Exception{
-      String newMatch = req.body();
-      System.out.println(newMatch);
+      JSONObject newMatch = new JSONObject(req.body());
+      for (User user: Main.this.getUsers()) {
+        if (user.getId() == newMatch.getInt("id")) {
+          matchSet.add(user);
+          System.out.println(user);
+        }
+      }
       return "";
     }
   }
