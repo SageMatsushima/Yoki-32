@@ -266,6 +266,12 @@ public final class Main {
     }
   }
 
+<<<<<<< HEAD
+  /**
+   * Handler method for post request for matching with a user. Adds the matched user to matchSet.
+   */
+=======
+>>>>>>> 32af611a5c7a5a05e0ab2e5e4f75e28a815899d1
   private class MatchMapHandler implements Route {
     @Override
     public String handle(Request req, Response res) throws Exception {
@@ -280,6 +286,17 @@ public final class Main {
       SQLcommands.addMatch(1, matchId);
       //add match to db function with matchId
       return "";
+    }
+  }
+
+  /**
+   * Handler method for post request for matching with a user. Adds the matched user to matchSet.
+   */
+  private class GetMatchesHandler implements Route {
+    @Override
+    public String handle(Request req, Response res) throws Exception {
+      Map<String, Object> variables = ImmutableMap.of("matchSet", matchSet);
+      return GSON.toJson(variables);
     }
   }
 
