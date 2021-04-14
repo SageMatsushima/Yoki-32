@@ -10,6 +10,7 @@ import edu.brown.cs.student.yoki.commands.*;
 import edu.brown.cs.student.yoki.driver.*;
 
 import com.google.gson.Gson;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import joptsimple.OptionParser;
@@ -140,6 +141,7 @@ public final class Main {
     Spark.post("/sendmatch", new MatchMapHandler());
     Spark.post("/listInterests", new ListInterestsHandler());
     Spark.get("/getmatch", new GetMatchesHandler());
+    Spark.post("/updateInterests", new UpdateInterests());
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
@@ -173,10 +175,27 @@ public final class Main {
       return new ModelAndView(null, "main.ftl");
     }
   }
-  private static class UpdateInterests implements Route {
+  private class UpdateInterests implements Route {
     @Override
-    public String handle(Request req, Response res) {
+    public String handle(Request req, Response res) throws JSONException {
+      //update interests
+      //update db
+      //update matches list
 //      SQLcommands.update(1, req.);
+      JSONObject newMatch = new JSONObject(req.body());
+      Object obj = newMatch.get("interests");
+
+      ArrayList<String> dataReaderArgs = new ArrayList<>();
+      dataReaderArgs.add("data");
+      dataReaderArgs.add("data/smallData.sqlite");
+      dataReader.action(dataReaderArgs);
+      ArrayList<String> finderArgs = new ArrayList<>();
+      finderArgs.add("match");
+      finderArgs.add("104");
+      finderArgs.add("1");
+      matches.action(finderArgs);
+      Main.this.setUsers(matches.getUserList());
+
       Map<String, Object> variables = ImmutableMap.of("msg", "done");
       return GSON.toJson(variables);
     }

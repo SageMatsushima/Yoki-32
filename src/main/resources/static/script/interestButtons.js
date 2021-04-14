@@ -62,7 +62,7 @@ function save() {
         //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
         interests: addInterest
     };
-    fetch('http://localhost:4567/listInterests', {
+    fetch('http://localhost:4567/updateInterests', {
         method: 'post',
         body: JSON.stringify(postParameters),
         headers: {

@@ -222,4 +222,23 @@ public final class SQLcommands {
       System.err.println("ERROR: Issue reading in SQL");
     }
   }
+
+  public static boolean isAMatch (int userId, int matchId) {
+    userId = 1;
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement("SELECT * FROM matches WHERE id=? AND match_id=? AND matched=true");
+      prep.setInt(1, userId);
+      prep.setInt(2, matchId);
+      ResultSet rs = prep.executeQuery();
+      if (rs.next()) {
+        return true;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+      return false;
+    }
+    return false;
+  }
 }
