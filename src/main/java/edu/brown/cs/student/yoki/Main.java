@@ -146,6 +146,7 @@ public final class Main {
     Spark.post("/sendmatches", new MatchMapHandler());
     Spark.post("/sendmatch", new MatchMapHandler());
     Spark.post("/listInterests", new ListInterestsHandler());
+    Spark.post("/getinterests", new GetInterestHandler());
     Spark.get("/getmatch", new GetMatchesHandler());
     Spark.post("/updateInterests", new UpdateInterests());
 
@@ -338,14 +339,35 @@ public final class Main {
     }
   }
 
-//  private static class UserData implements TemplateViewRoute {
-//    @Override
-//    public ModelAndView handle(Request req, Response res) {
-////      User currentUser = finder.get()
-////      Map<String, String> variables = ImmutableMap.of("userData", );
-//      return new ModelAndView(variables, "autocorrect.ftl");
-//    }
-//  }
+  private class GetInterestHandler implements Route {
+    @Override
+    public String handle(Request req, Response res) throws JSONException {
+      JSONObject newMatch = new JSONObject(req.body());
+      int matchId = newMatch.getInt("id");
+      User matched = null;
+      for (User user: matches.getUserList()) {
+        if ((user.getId()) == (matchId)) {
+          matched = user;
+          System.out.println(user.getName() + " matched");
+        }
+      }
+      if (matched != null) {
+        ArrayList<String> interestsArgs = new ArrayList<>();
+
+        InterestsReader ir = new InterestsReader();
+        interestsArgs.add("interests");
+        interestsArgs.add(matched.getId() + "");
+        ir.action(interestsArgs);
+        ArrayList<Interest> topCommonInterests = ir.getTopInterests().get(0);
+        ArrayList<Interest> topOtherInterests = ir.getTopInterests().get(1);
+
+        Map<String, Object> variables = ImmutableMap.of(
+                "topCommonInterests", topCommonInterests, "topOtherInterests", topOtherInterests);
+        return GSON.toJson(variables);
+      }
+      return "null";
+    }
+  }
 
   private static class ExceptionPrinter implements ExceptionHandler {
     @Override
