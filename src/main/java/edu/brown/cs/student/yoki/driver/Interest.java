@@ -45,4 +45,8 @@ public class Interest {
     return score;
   }
 
+  public void setScore(int score) {
+    this.score = score;
+  }
+
 }

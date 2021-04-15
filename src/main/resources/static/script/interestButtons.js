@@ -83,12 +83,13 @@ function updateInterest() {
  */
 function save() {
     updateInterest();
-    console.log(addInterest);
+
     const postParameters = {
         //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
-        interests: addInterest
+        interests: Object.fromEntries(addInterest)
     };
-    fetch('http://localhost:4567/listInterests', {
+    console.log(JSON.stringify(Array.from(addInterest)));
+    fetch('http://localhost:4567/updateInterests', {
         method: 'post',
         body: JSON.stringify(postParameters),
         headers: {

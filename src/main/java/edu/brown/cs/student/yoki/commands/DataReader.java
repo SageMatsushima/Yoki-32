@@ -99,10 +99,15 @@ public class DataReader implements TriggerAction {
         if (id == currentId) {
           currentUser = user;
         }
-        System.out.println(user.toString());
-        userList.add(user);
+        if (!SQLcommands.isAMatch(currentId, id)) {
+          userList.add(user);
+          System.out.println(user.toString());
+        }
       }
+
+      //Main.newKdTree();
       Main.getKdTree().listToTree(userList);
+
       prep1.close();
       rs1.close();
     } catch (Exception e) {

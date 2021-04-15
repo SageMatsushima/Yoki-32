@@ -1,5 +1,6 @@
 let matchMap = new Map();
 let currUser;
+window.onload = getNextMatch();
 
 
 function onMatchPressed() {

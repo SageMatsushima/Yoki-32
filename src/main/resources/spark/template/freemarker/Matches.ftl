@@ -23,13 +23,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/matching.css">
   </head>
-  <body>
+  <body id = "main">
   <div id="profile">
     ${nav}
     <script src="script/matchUpdate.js"></script>
     <div id = "match-div">
       <h1>Your Matches</h1>
-      <div id="match-list"></div>
+      <div id="match-list">
+        <p id="noMatchText">You have no matches!</p>
+      </div>
   </div>
      <!-- Again, we're serving up the unminified source for clarity. -->
   </body>
