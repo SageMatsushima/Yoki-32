@@ -155,8 +155,16 @@ public final class SQLcommands {
       PreparedStatement prep = conn.prepareStatement("INSERT INTO matches VALUES (?,?,true)");
       prep.setInt(1, userId);
       prep.setInt(2, matchId);
-      prep.execute();
+
+      PreparedStatement prep2 = conn.prepareStatement("SELECT * FROM matches WHERE id=? AND match_id=? AND matched=true");
+      prep2.setInt(1, userId);
+      prep2.setInt(2, matchId);
+      ResultSet rs2 = prep2.executeQuery();
+      if (!rs2.next()) {
+        prep.execute();
+      }
       prep.close();
+      prep2.close();
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println("ERROR: Issue reading in SQL");
@@ -167,14 +175,14 @@ public final class SQLcommands {
     userId = 1;
     try {
       Connection conn = DataReader.getConnection();
-      PreparedStatement prep = conn.prepareStatement("SELECT match_id FROM matches WHERE id=? AND matched=true");
+      PreparedStatement prep = conn.prepareStatement("SELECT * FROM matches WHERE id=? AND matched=true");
       prep.setInt(1, userId);
       ResultSet rs = prep.executeQuery();
       ArrayList<User> matches = new ArrayList<>();
       while(rs.next()) {
         PreparedStatement prep2 = getUserData();
         prep2.setInt(1, rs.getInt("match_id"));
-        ResultSet rs2 = prep.executeQuery();
+        ResultSet rs2 = prep2.executeQuery();
 
         int id = rs2.getInt("id");
         String firstName = rs2.getString("first_name");

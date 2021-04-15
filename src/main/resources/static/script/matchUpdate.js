@@ -6,12 +6,20 @@ function addMatchDiv(matched) {
     const match = document.createElement("div");
     match.className = "match";
     match.id = "matchCard";
+    const image = document.createElement("img");
+    image.src = "./images/kendall.jpg";
+    image.id = "match_image";
+
     const name = document.createElement("h3");
     name.innerHTML = matched.firstName;
 
+    // const card = document.createElement("div");
+    // card.className = "card";
+
+    match.appendChild(image);
+    match.appendChild(name);
 
     document.getElementById("match-list").appendChild(match);
-    match.appendChild(name);
 }
 
 function addMatches() {
