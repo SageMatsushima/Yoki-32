@@ -29,6 +29,9 @@ function addMatches() {
                 console.log(v);
                 addMatchDiv(v);
             }
+            if (matchSet.size > 0) {
+                document.getElementById("noMatchText").innerHTML = "";
+            }
             //matchMajor.innerHTML = response.data.major;
             return data;
         })

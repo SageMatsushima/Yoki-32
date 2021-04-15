@@ -29,7 +29,9 @@
     <script src="script/matchUpdate.js"></script>
     <div id = "match-div">
       <h1>Your Matches</h1>
-      <div id="match-list"></div>
+      <div id="match-list">
+        <p id="noMatchText">You have no matches!</p>
+      </div>
   </div>
      <!-- Again, we're serving up the unminified source for clarity. -->
   </body>
