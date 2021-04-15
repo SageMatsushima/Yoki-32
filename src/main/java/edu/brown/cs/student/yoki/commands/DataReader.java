@@ -104,7 +104,10 @@ public class DataReader implements TriggerAction {
           System.out.println(user.toString());
         }
       }
+
+      //Main.newKdTree();
       Main.getKdTree().listToTree(userList);
+
       prep1.close();
       rs1.close();
     } catch (Exception e) {

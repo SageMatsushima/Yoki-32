@@ -5,6 +5,7 @@ import edu.brown.cs.student.yoki.driver.Interest;
 import edu.brown.cs.student.yoki.driver.User;
 
 import java.sql.Connection;
+import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -76,7 +77,7 @@ public final class SQLcommands {
     }
   }
 
-  public static void update(int userId, HashMap<String, Interest> newInterest) {
+  public static void update(int userId, HashMap<Integer, Interest> newInterest) {
     userId = 1;
     try {
       Connection conn = DataReader.getConnection();
@@ -85,10 +86,10 @@ public final class SQLcommands {
       while (hmIterator.hasNext()) {
         Map.Entry mapElement = (Map.Entry) hmIterator.next();
         Interest interest = (Interest) mapElement.getValue();
-        int value = interest.getScore();
-        String key = (String) mapElement.getKey();
 
-        PreparedStatement prep = conn.prepareStatement("UPDATE user_interests SET" + key + "='" + value + "' WHERE id=userId;");
+        PreparedStatement prep = conn.prepareStatement("UPDATE user_interests SET " + interest.getTag() + "=? WHERE id=?;");
+        prep.setInt(1, interest.getScore());
+        prep.setInt(2, userId);
         prep.execute();
         prep.close();
       }
