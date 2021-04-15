@@ -209,7 +209,7 @@ public final class Main {
 
       ArrayList<String> finderArgs = new ArrayList<>();
       finderArgs.add("match");
-      finderArgs.add("104");
+      finderArgs.add(DataReader.getUserList().size() + "");
       finderArgs.add("1");
       matches = new MatchFinder();
       matches.action(finderArgs);

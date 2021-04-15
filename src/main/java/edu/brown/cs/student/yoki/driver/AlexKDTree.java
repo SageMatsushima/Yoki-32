@@ -155,8 +155,7 @@ public class AlexKDTree<N extends KdNode> {
     /*If the target neighbor is greater or equal to the distance between teh current node
     and the targetPoint axis then recurse on the left and right nodes if they exist
     */
-    if (nearest.size() < neighbor || targetNeighbor
-        >= Math.abs(node.getCoords()[index] - target[index])) {
+    if (nearest.size() < neighbor || targetNeighbor >= Math.abs(node.getCoords()[index] - target[index])) {
       search(ignore, (N) node.getLeft(), target);
       search(ignore, (N) node.getRight(), target);
     } else {

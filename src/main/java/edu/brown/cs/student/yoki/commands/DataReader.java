@@ -2,8 +2,10 @@ package edu.brown.cs.student.yoki.commands;
 
 import edu.brown.cs.student.yoki.Main;
 import edu.brown.cs.student.yoki.driver.Interest;
+import edu.brown.cs.student.yoki.driver.TreeFunction;
 import edu.brown.cs.student.yoki.driver.TriggerAction;
 import edu.brown.cs.student.yoki.driver.User;
+import jdk.nashorn.api.tree.Tree;
 
 import java.io.File;
 import java.sql.*;
@@ -105,7 +107,7 @@ public class DataReader implements TriggerAction {
         }
       }
 
-      //Main.newKdTree();
+//      Main.newKdTree();
       Main.getKdTree().listToTree(userList);
 
       prep1.close();
