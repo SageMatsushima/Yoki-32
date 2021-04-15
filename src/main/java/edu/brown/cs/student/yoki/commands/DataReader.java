@@ -60,6 +60,7 @@ public class DataReader implements TriggerAction {
   }
 
   private void allUserData() throws SQLException, ClassNotFoundException {
+    userList = new ArrayList<>();
     if (conn != null) {
       conn.close();
     }
@@ -101,13 +102,15 @@ public class DataReader implements TriggerAction {
         if (id == currentId) {
           currentUser = user;
         }
+//        userList.add(user);
+
         if (!SQLcommands.isAMatch(currentId, id)) {
           userList.add(user);
           System.out.println(user.toString());
         }
       }
 
-//      Main.newKdTree();
+      System.out.println("userlist" + userList.size());
       Main.getKdTree().listToTree(userList);
 
       prep1.close();

@@ -64,7 +64,9 @@ public final class Main {
   }
 
   public void setUsers(List<User> usersInput) {
+    users = new ArrayList<>();
     for (User user: usersInput) {
+      System.out.println(user.getName());
       users.add(user);
     }
   }
@@ -93,6 +95,7 @@ public final class Main {
     finderArgs.add("104");
     finderArgs.add("1");
     matches.action(finderArgs);
+
     this.setUsers(matches.getUserList());
 
     REPL repl = new REPL();
@@ -200,21 +203,23 @@ public final class Main {
         interest.setScore(value);
         interestsMap.put(key, interest);
       }
-
+      Main.newKdTree();
       SQLcommands.update(currentId, interestsMap);
       ArrayList<String> dataReaderArgs = new ArrayList<>();
       dataReaderArgs.add("data");
       dataReaderArgs.add("data/smallData.sqlite");
-      dataReader = new DataReader();
-      dataReader.action(dataReaderArgs);
+      DataReader dr = new DataReader();
+      dr.action(dataReaderArgs);
+
 
       ArrayList<String> finderArgs = new ArrayList<>();
       finderArgs.add("match");
       finderArgs.add(DataReader.getUserList().size() + "");
       finderArgs.add("1");
-      matches = new MatchFinder();
-      matches.action(finderArgs);
-      Main.this.setUsers(matches.getUserList());
+      System.out.println(finderArgs);
+      MatchFinder m = new MatchFinder();
+      m.action(finderArgs);
+      Main.this.setUsers(m.getUserList());
 
       Map<String, Object> variables = ImmutableMap.of("msg", "done");
       return GSON.toJson(variables);
