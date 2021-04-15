@@ -155,8 +155,7 @@ public class AlexKDTree<N extends KdNode> {
     /*If the target neighbor is greater or equal to the distance between teh current node
     and the targetPoint axis then recurse on the left and right nodes if they exist
     */
-    if (nearest.size() < neighbor || targetNeighbor
-        >= Math.abs(node.getCoords()[index] - target[index])) {
+    if (nearest.size() < neighbor || targetNeighbor >= Math.abs(node.getCoords()[index] - target[index])) {
       search(ignore, (N) node.getLeft(), target);
       search(ignore, (N) node.getRight(), target);
     } else {
@@ -213,10 +212,15 @@ public class AlexKDTree<N extends KdNode> {
    */
   public double targetDis(int[] node, int[] targetPoint) {
     double matchScore = 0;
+    double sum = 0;
     for (int i = 0; i < dimensions; i++) {
-      double relevance = node[i]/10.0 * targetPoint[i]/10.0;
-      matchScore += relevance;
+//      double relevance = node[i]/10.0 * targetPoint[i]/10.0;
+//      int dist = Math.abs(node[i] - targetPoint[i]);
+//      matchScore += relevance*(10 - dist);
+      sum += Math.pow(node[i] - targetPoint[i], 2);
     }
-    return 1 / matchScore;
+//    return 1/matchScore;
+//    System.out.println(Math.sqrt(sum));
+    return Math.sqrt(sum);
   }
 }

@@ -78,6 +78,30 @@ function openMatchInfo(){
     image.src = "./images/kendall.jpg";
     image.id = "match_image";
 
+    const emailDiv = document.createElement('div');
+    emailDiv.id = "emaildiv";
+
+    const emailtext = document.createElement('textarea');
+    emailtext.value = currMatch.email;
+    emailDiv.id = "emailtext";
+
+    const copyEmail = document.createElement('button');
+    copyEmail.innerHTML = "Copy Email";
+    copyEmail.onclick = function() {
+        const copyText = document.createElement('textarea');
+        copyText.value = currMatch.email;
+        document.body.appendChild(copyText);
+        copyText.select();
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+
+        /* Alert the copied text */
+        alert("Copied the text: " + copyText.value);
+        console.log("copied");
+        document.body.removeChild(copyText);
+    }
+
 
     grayDiv.appendChild(card);
     card.appendChild(cardContent);
@@ -88,7 +112,9 @@ function openMatchInfo(){
     nameDiv.appendChild(nameYear);
     cardContent.appendChild(rightContent);
     rightContent.appendChild(image);
-
+    leftContent.appendChild(emailDiv);
+    emailDiv.appendChild(emailtext);
+    emailDiv.appendChild(copyEmail);
 
     document.getElementById("main").appendChild(grayDiv);
 }
