@@ -139,14 +139,7 @@ public final class Main {
     Spark.post("/sendmatches", new MatchMapHandler());
     Spark.post("/sendmatch", new MatchMapHandler());
     Spark.post("/listInterests", new ListInterestsHandler());
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 460757a9f990a2ebfef6b62e3641853e8de5bbfe
-=======
     Spark.get("/getmatch", new GetMatchesHandler());
->>>>>>> 629028ecdbd4845bbe01798ddbe8ec13f6ebb8a6
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }

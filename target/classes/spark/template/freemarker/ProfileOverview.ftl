@@ -10,8 +10,8 @@
 </nav>
 </#assign>
 
-<#assign interestButton>
-    <button class="interestBtn" id="match-button">Save</button>
+<#assign save>
+    <button class="interestBtn" id="match-button" onclick="save()">Save</button>
 </#assign>
 
 <#assign editProfile>
@@ -50,7 +50,7 @@
 
         <h2 id="title">Interests</h2>
         <div id="interest">
-            ${interestButton}
+            ${save}
         </div>
     </div>
 </div>
