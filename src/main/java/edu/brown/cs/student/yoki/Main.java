@@ -79,6 +79,8 @@ public final class Main {
 
     if (options.has("gui")) {
       runSparkServer((int) options.valueOf("port"));
+    } else {
+      runSparkServer(DEFAULT_PORT);
     }
 
 
@@ -183,12 +185,21 @@ public final class Main {
       //update matches list
 //      SQLcommands.update(1, req.);
       JSONObject newMatch = new JSONObject(req.body());
-      Object obj = newMatch.get("interests");
+      Object interests = newMatch.getJSONArray("interests");
+      Object obj = req.body();
+//      byte[] interests = req.body().getBytes();
+//      HashMap<Integer, Interest> interestsMap = new HashMap<>();
+//      for (int scale: interests) {
+//
+//      }
+//      Object obj = newMatch.get("interests");
+      //Object obj = req.body();
 
       ArrayList<String> dataReaderArgs = new ArrayList<>();
       dataReaderArgs.add("data");
       dataReaderArgs.add("data/smallData.sqlite");
       dataReader.action(dataReaderArgs);
+
       ArrayList<String> finderArgs = new ArrayList<>();
       finderArgs.add("match");
       finderArgs.add("104");
