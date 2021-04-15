@@ -10,6 +10,7 @@ import edu.brown.cs.student.yoki.commands.*;
 import edu.brown.cs.student.yoki.driver.*;
 
 import com.google.gson.Gson;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import joptsimple.OptionParser;
@@ -78,6 +79,8 @@ public final class Main {
 
     if (options.has("gui")) {
       runSparkServer((int) options.valueOf("port"));
+    } else {
+      runSparkServer(DEFAULT_PORT);
     }
 
 
@@ -102,6 +105,10 @@ public final class Main {
   }
   public static TreeFunction<User> getKdTree() {
     return tree;
+  }
+
+  public static void newKdTree() {
+    tree = new TreeFunction<>();
   }
 
 
@@ -140,6 +147,7 @@ public final class Main {
     Spark.post("/sendmatch", new MatchMapHandler());
     Spark.post("/listInterests", new ListInterestsHandler());
     Spark.get("/getmatch", new GetMatchesHandler());
+    Spark.post("/updateInterests", new UpdateInterests());
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
@@ -173,10 +181,40 @@ public final class Main {
       return new ModelAndView(null, "main.ftl");
     }
   }
-  private static class UpdateInterests implements Route {
+  private class UpdateInterests implements Route {
     @Override
-    public String handle(Request req, Response res) {
-//      SQLcommands.update(1, req.);
+    public String handle(Request req, Response res) throws JSONException {
+      //update interests
+      //update db
+      //update matches list
+      JSONObject newMatch = new JSONObject(req.body());
+      JSONObject interests = newMatch.getJSONObject("interests");
+      HashMap<Integer, Interest> interestsMap = new HashMap<>();
+      Iterator<String> keys = interests.keys();
+      while (keys.hasNext()) {
+        String strKey = keys.next();
+        Integer key = Integer.parseInt(strKey);
+        Integer value = Integer.parseInt(interests.getString(strKey));
+        Interest interest = DataReader.getConvert().get(key);
+        interest.setScore(value);
+        interestsMap.put(key, interest);
+      }
+
+      SQLcommands.update(currentId, interestsMap);
+      ArrayList<String> dataReaderArgs = new ArrayList<>();
+      dataReaderArgs.add("data");
+      dataReaderArgs.add("data/smallData.sqlite");
+      dataReader = new DataReader();
+      dataReader.action(dataReaderArgs);
+
+      ArrayList<String> finderArgs = new ArrayList<>();
+      finderArgs.add("match");
+      finderArgs.add("104");
+      finderArgs.add("1");
+      matches = new MatchFinder();
+      matches.action(finderArgs);
+      Main.this.setUsers(matches.getUserList());
+
       Map<String, Object> variables = ImmutableMap.of("msg", "done");
       return GSON.toJson(variables);
     }
