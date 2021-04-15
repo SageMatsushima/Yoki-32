@@ -1,12 +1,25 @@
 const addInterest = new Map();
 
+/**
+ * Adds an interest to the user.
+ * @param value for dictionary
+ * @param key for dictionary
+ */
 function addInterestDiv(value, key) {
     if (!addInterest.has(key)) {
         const interest = document.createElement("div");
         interest.className = "interests";
-        interest.id = "subject";
+        interest.id = key + "remove";
+
+        const nameButton = document.createElement("div");
+        nameButton.id = "nameButton";
+        // nameButton.style.display = "flex";
         const name = document.createElement("h3");
         name.innerHTML = value.name;
+        const remove = document.createElement("button");
+        remove.className = "remove";
+        remove.onclick = function() { removes(key); };
+
         const input = document.createElement("input");
         input.className = "slider interestValue";
         input.id = value.id;
@@ -15,15 +28,20 @@ function addInterestDiv(value, key) {
         input.max = "10";
         input.value = "5";
 
-
+        //ocument.getElementById("interest").appendChild(interest);
+        interest.appendChild(nameButton);
         document.getElementById("interest").appendChild(interest);
-        document.getElementById("subject").appendChild(name);
-        document.getElementById("subject").appendChild(input);
+        document.getElementById("nameButton").appendChild(name);
+        document.getElementById("nameButton").appendChild(remove);
+        interest.appendChild(input);
         addInterest.set(key,  input.value);
     }
 
 }
 
+/**
+ * Makes the list of clickable buttons of the interests in the database
+ */
 function allInterests() {
     fetch('http://localhost:4567/listInterests', {
         method: 'post',
@@ -44,7 +62,6 @@ function allInterests() {
                 interest.innerHTML = value.name;
                 document.getElementById("subjects").appendChild(interest);
             }
-            //matchMajor.innerHTML = response.data.major;
             return data;
         })
         .catch(function (error) {
@@ -52,12 +69,18 @@ function allInterests() {
         });
 }
 
+/**
+ * Updates the interests based on the users input.
+ */
 function updateInterest() {
     for (let i of document.getElementsByClassName("interestValue")) {
         addInterest.set(i.id, i.value);
     }
 }
 
+/**
+ * Saves the interests of the user and sends it to the backend.
+ */
 function save() {
     updateInterest();
     console.log(addInterest);
@@ -75,4 +98,39 @@ function save() {
         .catch(function (error) {
             console.log(error);
         });
+}
+
+/**
+ * Removes the interest from the users data.
+ */
+function removes(key) {
+    removeInterest(key);
+    console.log(addInterest);
+    const postParameters = {
+        //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
+        interests: addInterest
+    };
+    fetch('http://localhost:4567/listInterests', {
+        method: 'post',
+        body: JSON.stringify(postParameters),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+function removeInterest(key) {
+    console.log(key);
+    let interest = document.getElementById(key + "remove");
+    // interest.innerHTML = '';
+    // interest.textContent = '';
+    // while (interest.firstChild) {
+    //     interest.removeChild(interest.lastChild);
+    // }
+    interest.remove();
+
+    addInterest.delete(key);
 }

@@ -128,3 +128,10 @@ div#subjects {
 #side {
     display: flex;
 }
+
+.remove {
+    background-color: #FFE0A4;
+    color: #C97800;
+    width: 5vw;
+    height: 1vw;
+}

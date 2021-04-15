@@ -206,3 +206,21 @@ ul {
     margin-right: 3vw;
 }
 
+#match-div{
+    margin-left: 20vw;
+    /*overflow: scroll;*/
+    width: 100vw;
+}
+
+#match-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 1000px;
+}
+
+.match{
+    margin: 10px;
+    text-align: center;
+}
+
