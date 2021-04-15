@@ -13,11 +13,8 @@ function addMatchDiv(matched) {
     const name = document.createElement("h3");
     name.innerHTML = matched.firstName;
 
-<<<<<<< HEAD
-=======
     // const card = document.createElement("div");
     // card.className = "card";
->>>>>>> 16a0190e7c75eef49a6cbc5ace7f4354d2307dd1
 
     match.appendChild(image);
     match.appendChild(name);
@@ -35,13 +32,15 @@ function addMatches() {
         .then((response) =>
             response.json())
         .then((data) => {
+            let count = 0;
             matchSet = data.matchSet;
             for (const v of matchSet) {
-                console.log(v);
+                count++;
                 addMatchDiv(v);
             }
-            if (matchSet.size > 0) {
-                document.getElementById("noMatchText").innerHTML = "";
+            console.log(count);
+            if (count > 0) {
+                document.getElementById("noMatchText").style.display = "none";
             }
             //matchMajor.innerHTML = response.data.major;
             return data;

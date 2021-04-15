@@ -32,13 +32,15 @@ function addMatches() {
         .then((response) =>
             response.json())
         .then((data) => {
+            let count = 0;
             matchSet = data.matchSet;
             for (const v of matchSet) {
-                console.log(v);
+                count++;
                 addMatchDiv(v);
             }
-            if (matchSet.size > 0) {
-                document.getElementById("noMatchText").innerHTML = "";
+            console.log(count);
+            if (count > 0) {
+                document.getElementById("noMatchText").style.display = "none";
             }
             //matchMajor.innerHTML = response.data.major;
             return data;
