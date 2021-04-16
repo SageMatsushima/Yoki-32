@@ -49,7 +49,7 @@
         </div>
 
         <h2 id="title">Interests</h2>
-        <div id="interest">
+        <div id="interestList">
             ${save}
         </div>
     </div>
