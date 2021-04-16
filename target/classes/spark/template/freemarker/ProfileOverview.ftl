@@ -34,6 +34,9 @@
         <div id="side">
             <div id="profileTag">
                 <div id="info">
+                    <div id="user-info">
+
+                    </div>
 <#--                    <h4>Sage</h4>-->
 <#--                    <h5>grad Year</h5>-->
 <#--                    <h5>concentration</h5>-->

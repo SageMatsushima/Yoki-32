@@ -1,6 +1,7 @@
 package edu.brown.cs.student.yoki.commands;
 
 
+import edu.brown.cs.student.yoki.driver.Encrypt;
 import edu.brown.cs.student.yoki.driver.Interest;
 import edu.brown.cs.student.yoki.driver.User;
 
@@ -257,15 +258,29 @@ public final class SQLcommands {
     }
   }
 
-<<<<<<< HEAD
   public static void encryptPasswords() {
     try {
       Connection conn = DataReader.getConnection();
 
-      PreparedStatement prep = conn.prepareStatement("UPDATE user_data SET password=?;");
-      prep.setInt(1, interest.getScore());
-      prep.setInt(2, userId);
-      prep.execute();
+      PreparedStatement prep = conn.prepareStatement("SELECT * FROM user_data");
+      ResultSet rs = prep.executeQuery();
+      ArrayList<String> temp = new ArrayList<>();
+      ArrayList<String> encrypt = new ArrayList<>();
+
+      while (rs.next()) {
+        String password = rs.getString("password");
+        temp.add(password);
+        String key = "gudetama";
+        encrypt.add(Encrypt.encrypt(password, key));
+      }
+
+      for (String i : temp) {
+        System.out.println(i);
+      }
+      for (String i : encrypt) {
+        System.out.println(i);
+      }
+      rs.close();
       prep.close();
     } catch (Exception e) {
       e.printStackTrace();
@@ -273,7 +288,6 @@ public final class SQLcommands {
     }
   }
 
-=======
   public static User getUserInfo(int userId) {
     try {
       Connection conn = DataReader.getConnection();
@@ -303,5 +317,4 @@ public final class SQLcommands {
     }
     return null;
   }
->>>>>>> 54736902be4e981f551a267918b07aa0dd4ff278
 }

@@ -197,7 +197,8 @@ public final class Main {
       JSONObject loginCreds = new JSONObject(req.body());
       String email = loginCreds.getString("email");
       String password = loginCreds.getString("password");
-
+      String key = "gudetama";
+      password = Encrypt.encrypt(password, key);
       currentId = SQLcommands.getUserId(email, password);
       String status = "false";
       if (currentId > 0) {
