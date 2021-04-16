@@ -56,9 +56,9 @@ public class Encrypt implements TriggerAction {
 
   @Override
   public void action(ArrayList<String> args) throws SQLException, ClassNotFoundException {
-    if (args.size() == 2) {
+    if (args.size() == 3) {
       String inputSecretKey = args.get(1);
-      String originalString = "Yoki";
+      String originalString = args.get(2);
       String encryptedString = this.encrypt(originalString, inputSecretKey);
       String decryptedString = this.decrypt(encryptedString, inputSecretKey);
       System.out.println("Key: " + args.get(1));

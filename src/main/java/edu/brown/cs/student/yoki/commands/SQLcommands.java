@@ -86,7 +86,7 @@ public final class SQLcommands {
         Map.Entry mapElement = (Map.Entry) hmIterator.next();
         Interest interest = (Interest) mapElement.getValue();
 
-        PreparedStatement prep = conn.prepareStatement("UPDATE user_interests SET " + interest.getTag() + "=? WHERE id=?;");
+        PreparedStatement prep = conn.prepareStatement("UPDATE user_data SET " + interest.getTag() + "=? WHERE id=?;");
         prep.setInt(1, interest.getScore());
         prep.setInt(2, userId);
         prep.execute();
@@ -256,4 +256,20 @@ public final class SQLcommands {
       return -1;
     }
   }
+
+  public static void encryptPasswords() {
+    try {
+      Connection conn = DataReader.getConnection();
+
+      PreparedStatement prep = conn.prepareStatement("UPDATE user_data SET password=?;");
+      prep.setInt(1, interest.getScore());
+      prep.setInt(2, userId);
+      prep.execute();
+      prep.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+    }
+  }
+
 }
