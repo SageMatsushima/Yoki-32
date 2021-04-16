@@ -1,5 +1,13 @@
+<<<<<<< HEAD
+edu/brown/cs/student/yoki/Main$GetInterestHandler.class
+edu/brown/cs/student/yoki/Main$UpdateInterests.class
+edu/brown/cs/student/yoki/commands/UpdateInterests.class
+edu/brown/cs/student/yoki/Main$GetMatchesHandler.class
+edu/brown/cs/student/yoki/Main$ListInterestsHandler.class
+=======
 edu\brown\cs\student\yoki\Main$UpdateInterests.class
 edu\brown\cs\student\yoki\Main$GetInterestHandler.class
 edu\brown\cs\student\yoki\commands\UpdateInterests.class
 edu\brown\cs\student\yoki\Main$GetMatchesHandler.class
 edu\brown\cs\student\yoki\Main$ListInterestsHandler.class
+>>>>>>> 32c0e5b1fcbd86784f0fa54433c67ac75eb7f711
