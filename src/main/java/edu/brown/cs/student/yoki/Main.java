@@ -47,6 +47,7 @@ public final class Main {
   private static DataReader dataReader = new DataReader();
   private static InterestsReader interestsReader = new InterestsReader();
   private static UserReader userReader = new UserReader();
+  private static Encrypt encrypt = new Encrypt();
 
 
   private List<User> users = new ArrayList<>();
@@ -95,6 +96,7 @@ public final class Main {
     repl.addAction("interests", interestsReader);
     repl.addAction("match", matches);
     repl.addAction("user", userReader);
+    repl.addAction("encrypt", encrypt);
 
     repl.run();
   }
