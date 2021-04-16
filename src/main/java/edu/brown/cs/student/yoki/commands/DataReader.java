@@ -99,12 +99,12 @@ public class DataReader implements TriggerAction {
         }
 
         User user = new User(id, firstName, lastName, email, password, year, interests);
-        if (id == currentId) {
+        if (id == Main.getCurrentId()) {
           currentUser = user;
         }
 //        userList.add(user);
 
-        if (!SQLcommands.isAMatch(currentId, id)) {
+        if (!SQLcommands.isAMatch(Main.getCurrentId(), id)) {
           userList.add(user);
           System.out.println(user.toString());
         }

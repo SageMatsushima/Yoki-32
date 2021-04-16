@@ -51,7 +51,7 @@ public final class Main {
 
   private List<User> users = new ArrayList<>();
   private Set<User> matchSet = new HashSet();
-  private static int currentId = 1;
+  private static int currentId = -1;
 
   private static final Gson GSON = new Gson();
 
@@ -84,21 +84,11 @@ public final class Main {
     } else {
       runSparkServer(DEFAULT_PORT);
     }
-
-
     ArrayList<String> dataReaderArgs = new ArrayList<>();
     dataReaderArgs.add("data");
     dataReaderArgs.add("data/smallData.sqlite");
     dataReader = new DataReader();
     dataReader.action(dataReaderArgs);
-    ArrayList<String> finderArgs = new ArrayList<>();
-    finderArgs.add("match");
-    finderArgs.add("104");
-    finderArgs.add("1");
-    matches = new MatchFinder();
-    matches.action(finderArgs);
-
-    this.setUsers(matches.getUserList());
 
     REPL repl = new REPL();
     repl.addAction("data", dataReader);
@@ -115,6 +105,8 @@ public final class Main {
   public static void newKdTree() {
     tree = new TreeFunction<>();
   }
+
+  public static int getCurrentId() { return currentId; }
 
 
   private static FreeMarkerEngine createEngine() {
@@ -140,6 +132,7 @@ public final class Main {
 
     // Setup Spark Routes
     Spark.get("/yoki", new YokiHandler(), freeMarker);
+    Spark.get("/main", new MainHandler(), freeMarker);
     Spark.get("/learn", new LearnHandler(), freeMarker);
     Spark.get("/teach", new TeachHandler(), freeMarker);
     Spark.get("/settings", new SettingsHandler(), freeMarker);
@@ -154,6 +147,7 @@ public final class Main {
     Spark.post("/getinterests", new GetInterestHandler());
     Spark.get("/getmatch", new GetMatchesHandler());
     Spark.post("/updateInterests", new UpdateInterests());
+    Spark.post("/login", new LoginHandler());
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
@@ -161,6 +155,13 @@ public final class Main {
   //sends to Front-end next match -> pops from our list
   //when program loads, run the program and store a list of matches in Main
   private class YokiHandler implements TemplateViewRoute {
+    @Override
+    public ModelAndView handle(Request req, Response res) {
+      return new ModelAndView(null, "login.ftl");
+    }
+  }
+
+  private class MainHandler implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request req, Response res) {
 
@@ -172,7 +173,7 @@ public final class Main {
       ArrayList<String> finderArgs = new ArrayList<>();
       finderArgs.add("match");
       finderArgs.add("104");
-      finderArgs.add("1");
+      finderArgs.add(currentId + "");
       matches = new MatchFinder();
       matches.action(finderArgs);
 
@@ -180,6 +181,27 @@ public final class Main {
       return new ModelAndView(null, "main.ftl");
     }
   }
+
+  private class LoginHandler implements Route {
+    @Override
+    public String handle(Request req, Response res) throws JSONException {
+      //update interests
+      //update db
+      //update matches list
+      JSONObject loginCreds = new JSONObject(req.body());
+      String email = loginCreds.getString("email");
+      String password = loginCreds.getString("password");
+
+      currentId = SQLcommands.getUserId(email, password);
+      String status = "false";
+      if (currentId > 0) {
+        status = "true";
+      }
+      Map<String, Object> variables = ImmutableMap.of("authenticated", status);
+      return GSON.toJson(variables);
+    }
+  }
+
   private class UpdateInterests implements Route {
     @Override
     public String handle(Request req, Response res) throws JSONException {
@@ -210,7 +232,7 @@ public final class Main {
       ArrayList<String> finderArgs = new ArrayList<>();
       finderArgs.add("match");
       finderArgs.add(DataReader.getUserList().size() + "");
-      finderArgs.add("1");
+      finderArgs.add("" + currentId);
       System.out.println(finderArgs);
       MatchFinder m = new MatchFinder();
       m.action(finderArgs);

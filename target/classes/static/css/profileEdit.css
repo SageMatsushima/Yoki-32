@@ -13,6 +13,9 @@ body {
 #main {
     display: flex;
     grid-column: 2;
+    grid-row: 1;
+    margin-top: 7vw;
+    margin-left: 4vw;
 }
 
 #inputs {
@@ -86,6 +89,8 @@ h2 {
     margin-left: 25vw;
     width: 15vw;
     height: 4vw;
+    grid-row: 1;
+    grid-column: 2;
 }
 
 #profilePic {

@@ -12,6 +12,8 @@ body {
 
 #main {
     grid-column: 2;
+    grid-row: 1;
+    margin-top: 7vw;
     margin-left: 4vw;
 }
 
@@ -86,6 +88,8 @@ h2 {
     margin-left: 25vw;
     width: 15vw;
     height: 4vw;
+    grid-row: 1;
+    grid-column: 2;
 }
 
 #title {
@@ -97,6 +101,10 @@ h2 {
 
 h3, h4, h5 {
     margin: 0;
+}
+
+#searchTitle {
+    margin-left: 2vw;
 }
 
 div#subjects {
@@ -133,9 +141,22 @@ div#subjects {
     background-color: #FFE0A4;
     color: #C97800;
     width: 5vw;
-    height: 1vw;
+    height: 1.25vw;
+    border-radius: 1vw;
+    margin-left: 1vw;
+    margin-top: .5vw;
 }
 
 #nameButton {
     height: 3vw;
+}
+
+.edit {
+    background-color: #FFE0A4;
+    color: #C97800;
+    width: 10vw;
+    height: 1.5vw;
+    border-radius: 1vw;
+    margin-left: 1vw;
+    margin-top: .5vw;
 }

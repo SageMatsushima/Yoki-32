@@ -78,7 +78,6 @@ public final class SQLcommands {
   }
 
   public static void update(int userId, HashMap<Integer, Interest> newInterest) {
-    userId = 1;
     try {
       Connection conn = DataReader.getConnection();
 
@@ -150,7 +149,6 @@ public final class SQLcommands {
   }
 
   public static void addMatch(int userId, int matchId) {
-    userId = 1;
     try {
       Connection conn = DataReader.getConnection();
       PreparedStatement prep = conn.prepareStatement("INSERT INTO matches VALUES (?,?,true)");
@@ -173,7 +171,6 @@ public final class SQLcommands {
   }
 
   public static ArrayList<User> getAllMatches(int userId) {
-    userId = 1;
     try {
       Connection conn = DataReader.getConnection();
       PreparedStatement prep = conn.prepareStatement("SELECT * FROM matches WHERE id=? AND matched=true");
@@ -209,7 +206,6 @@ public final class SQLcommands {
   }
 
   public static void addPass(int userId, int matchId) {
-    userId = 1;
     try {
       Connection conn = DataReader.getConnection();
       PreparedStatement prep = conn.prepareStatement("INSERT INTO matches VALUES (?,?,false)");
@@ -225,7 +221,6 @@ public final class SQLcommands {
   }
 
   public static boolean isAMatch (int userId, int matchId) {
-    userId = 1;
     try {
       Connection conn = DataReader.getConnection();
       PreparedStatement prep = conn.prepareStatement("SELECT * FROM matches WHERE id=? AND match_id=? AND matched=true");
@@ -241,5 +236,24 @@ public final class SQLcommands {
       return false;
     }
     return false;
+  }
+
+  public static int getUserId(String email, String password) {
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement("SELECT * FROM user_data WHERE email=? AND password=?");
+      prep.setString(1, email);
+      prep.setString(2, password);
+      ResultSet rs = prep.executeQuery();
+      if (rs.next()) {
+        return rs.getInt("id");
+      } else {
+        return -1;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+      return -1;
+    }
   }
 }
