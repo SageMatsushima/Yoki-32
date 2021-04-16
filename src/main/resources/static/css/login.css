@@ -48,3 +48,14 @@ input {
     padding: 10px;
     width: 100%;
 }
+
+#login-password {
+    margin-bottom: 15px;
+}
+
+#login-status {
+    color: #b50f0f;
+    margin-bottom: 25px;
+    opacity: 0;
+    font-size: 15px;
+}

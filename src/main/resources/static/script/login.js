@@ -1,8 +1,6 @@
 function onLoginPressed() {
     let email = document.getElementById("login-email").value
     let password = document.getElementById("login-password").value
-    console.log(email)
-    console.log(password)
     requestLogin(email, password)
 }
 
@@ -24,6 +22,8 @@ function requestLogin(email, password) {
             console.log(data);
             if (data.authenticated == "true") {
                 window.location.href = "/main";
+            } else {
+                document.getElementById("login-status").style.opacity = 100;
             }
         })
         .catch(function (error) {

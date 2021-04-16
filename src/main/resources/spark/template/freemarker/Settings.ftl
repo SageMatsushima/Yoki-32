@@ -1,11 +1,11 @@
 <#assign nav>
-<nav>
-    <a href="/main"><img src="/images/whiteLogo.png" id="logo"></a>
-    <a href="/main"><div class="sidebar">Home</div></a>
-    <a href="/match"><div class="sidebar">Matches</div></a>
-    <a href="/profileOverview"><div class="sidebar">My Profile</div></a>
-    <a href="/settings"><div class="sidebar">Settings</div></a>
-</nav>
+    <nav>
+        <a href="/main"><img src="/images/whiteLogo.png" id="logo"></a>
+        <a href="/main"><div class="sidebar">Home</div></a>
+        <a href="/match"><div class="sidebar">Matches</div></a>
+        <a href="/profileOverview"><div class="sidebar">My Profile</div></a>
+        <a href="/settings"><div class="sidebar">Settings</div></a>
+    </nav>
 </#assign>
 
 <#assign logout>
@@ -34,18 +34,18 @@
 </head>
 <script src="script/settings.js"></script>
 <body>
-    <div id="profile">
-        ${nav}
-        <h2>Settings</h2><br>
-        <div id="main">
-            <div class="options">
-                ${logout}
-                ${LD}
-                ${TC}
-                ${report}
-            </div>
+<div id="profile">
+    ${nav}
+    <h2>Settings</h2><br>
+    <div id="main">
+        <div class="options">
+            ${logout}
+            ${LD}
+            ${TC}
+            ${report}
         </div>
     </div>
+</div>
 
 
 </body>

@@ -22,15 +22,14 @@ function login() {
     yes.className = "yes";
     yes.innerHTML = "Yes";
     yes.onclick = function() { logout(); };
+    const aLink = document.createElement("a");
+    aLink.href = "/yoki";
 
     document.getElementById("main").appendChild(login);
     login.appendChild(name);
-    login.appendChild(buttons);
+    login.appendChild(aLink);
+    aLink.append(buttons);
     buttons.appendChild(yes);
-}
-
-function logout() {
-
 }
 
 function lightDark() {
@@ -128,5 +127,8 @@ function report() {
     reasonDiv.appendChild(reasonInput);
 }
 
+// function logout() {
+//     <
+// }
 
 

@@ -159,6 +159,7 @@ public final class Main {
   private class YokiHandler implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request req, Response res) {
+      currentId = -1;
       return new ModelAndView(null, "login.ftl");
     }
   }
@@ -166,7 +167,9 @@ public final class Main {
   private class MainHandler implements TemplateViewRoute {
     @Override
     public ModelAndView handle(Request req, Response res) {
-
+      if (currentId == -1) {
+        return new ModelAndView(null, "login.ftl");
+      }
       ArrayList<String> dataReaderArgs = new ArrayList<>();
       dataReaderArgs.add("data");
       dataReaderArgs.add("data/smallData.sqlite");
@@ -283,6 +286,9 @@ public final class Main {
     @Override
     public ModelAndView handle(Request req, Response res) {
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      if (currentId == -1) {
+        return new ModelAndView(variables.build(), "login.ftl");
+      }
       return new ModelAndView(variables.build(), "Matches.ftl");
     }
   }
@@ -292,6 +298,9 @@ public final class Main {
     public ModelAndView handle(Request req, Response res) {
 
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      if (currentId == -1) {
+        return new ModelAndView(variables.build(), "login.ftl");
+      }
       return new ModelAndView(variables.build(), "LearnSubjects.ftl");
     }
   }
@@ -301,6 +310,9 @@ public final class Main {
     public ModelAndView handle(Request req, Response res) {
 
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      if (currentId == -1) {
+        return new ModelAndView(variables.build(), "yoki.ftl");
+      }
       return new ModelAndView(variables.build(), "TeachSubjects.ftl");
     }
   }
@@ -310,6 +322,9 @@ public final class Main {
     public ModelAndView handle(Request req, Response res) {
 
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      if (currentId == -1) {
+        return new ModelAndView(variables.build(), "login.ftl");
+      }
       return new ModelAndView(variables.build(), "Settings.ftl");
     }
   }
@@ -319,6 +334,9 @@ public final class Main {
     public ModelAndView handle(Request req, Response res) {
 
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      if (currentId == -1) {
+        return new ModelAndView(variables.build(), "login.ftl");
+      }
       return new ModelAndView(variables.build(), "ProfileEdit.ftl");
     }
   }
@@ -328,6 +346,9 @@ public final class Main {
     public ModelAndView handle(Request req, Response res) {
 
       ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      if (currentId == -1) {
+        return new ModelAndView(variables.build(), "login.ftl");
+      }
       return new ModelAndView(variables.build(), "ProfileOverview.ftl");
     }
   }
