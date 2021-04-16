@@ -3,8 +3,6 @@
     <a href="/yoki"><img src="/images/whiteLogo.png" id="logo"></a>
     <a href="/yoki"><div class="sidebar">Home</div></a>
     <a href="/match"><div class="sidebar">Matches</div></a>
-    <a href="/learn"><div class="sidebar">Learn</div></a>
-    <a href="/teach"><div class="sidebar">Teach</div></a>
     <a href="/profileOverview"><div class="sidebar">My Profile</div></a>
     <a href="/settings"><div class="sidebar">Settings</div></a>
 </nav>
