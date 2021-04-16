@@ -13,8 +13,8 @@ function addInterestDiv(value, key) {
 
         const nameButton = document.createElement("div");
         nameButton.id = "nameButton";
-        // nameButton.style.display = "flex";
-        const name = document.createElement("h3");
+        nameButton.style.display = "flex";
+        const name = document.createElement("h4");
         name.innerHTML = value.name;
         const remove = document.createElement("button");
         remove.className = "remove";
@@ -30,9 +30,9 @@ function addInterestDiv(value, key) {
 
         //ocument.getElementById("interest").appendChild(interest);
         interest.appendChild(nameButton);
-        document.getElementById("interest").appendChild(interest);
-        document.getElementById("nameButton").appendChild(name);
-        document.getElementById("nameButton").appendChild(remove);
+        document.getElementById("interestList").appendChild(interest);
+        nameButton.appendChild(name);
+        nameButton.appendChild(remove);
         interest.appendChild(input);
         addInterest.set(key,  input.value);
     }
@@ -126,8 +126,8 @@ function removes(key) {
 function removeInterest(key) {
     console.log(key);
     let interest = document.getElementById(key + "remove");
-    // interest.innerHTML = '';
-    // interest.textContent = '';
+    interest.innerHTML = '';
+    interest.textContent = '';
     // while (interest.firstChild) {
     //     interest.removeChild(interest.lastChild);
     // }
