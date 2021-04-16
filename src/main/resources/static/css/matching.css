@@ -11,6 +11,12 @@ body {
     margin: 0;
     font-family: Quicksand;
     font-size: 1.75vw;
+    height: 100vh;
+}
+
+html {
+    height: 100vh;
+    overflow: hidden;
 }
 
 #potential_card {
@@ -228,14 +234,18 @@ ul {
 #match-div{
     margin-left: 20vw;
     /*overflow: scroll;*/
-    width: 100vw;
+    width: 100%;
+    height: 100%;
 }
 
 #match-list{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 1000px;
+    width: 75vw;
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 80vh;
 }
 
 .match{
