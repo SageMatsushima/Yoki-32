@@ -11,19 +11,19 @@
 </#assign>
 
 <#assign logout>
-    <button class="settings" id="match-button">Logout</button><br>
+    <button class="settings" id="match-button" onclick="login()">Logout</button><br>
 </#assign>
 
 <#assign LD>
-    <button class="settings" id="match-button">Light/Dark Mode</button><br>
+    <button class="settings" id="match-button" onclick="lightDark()">Light/Dark Mode</button><br>
 </#assign>
 
 <#assign TC>
-    <button class="settings" id="match-button">Terms and Conditions</button><br>
+    <button class="settings" id="match-button" onclick="termsConditions()">Terms and Conditions</button><br>
 </#assign>
 
 <#assign report>
-    <button class="settings" id="match-button">Report</button>
+    <button class="settings" id="match-button" onclick="report()">Report</button>
 </#assign>
 
 <!DOCTYPE html>
@@ -34,12 +34,13 @@
     <link rel="stylesheet" href="css/settings.css">
     <link rel="stylesheet" href="css/matching.css">
 </head>
+<script src="script/settings.js"></script>
 <body>
     <div id="profile">
         ${nav}
         <h2>Settings</h2><br>
         <div id="main">
-            <div id="options">
+            <div class="options">
                 ${logout}
                 ${LD}
                 ${TC}

@@ -36,7 +36,7 @@ body {
     background-color: #8c8c8c;
 }
 
-#interest {
+#interestList {
     width: 70vw;
     height: 16vw;
     background-color: #bac5cf;
@@ -127,4 +127,15 @@ div#subjects {
 
 #side {
     display: flex;
+}
+
+.remove {
+    background-color: #FFE0A4;
+    color: #C97800;
+    width: 5vw;
+    height: 1vw;
+}
+
+#nameButton {
+    height: 3vw;
 }

@@ -5,22 +5,23 @@ const gradYear = document.getElementById("gradYear");
 const email = document.getElementById('email');
 const bio = document.getElementById('bioBox');
 
-const save = () => {
-    fetch('/yoki', {
+function save() {
+    const postParameters = {
+        //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
+        name: name.value,
+        pronouns: pronouns.value,
+        major: major.value,
+        gradYear: gradYear.value,
+        email: email.value,
+        bio: bio.value
+    };
+    fetch('http://localhost:4567/yoki', {
         method: 'post',
         body: JSON.stringify(postParameters),
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
         },
     })
-        .then(response => {
-            text: name.value
-            text: pronouns.value
-            text: major.value
-            text: gradYear.value
-            text: email.value
-            text: bio.value
-        })
         .catch(function (error) {
             console.log(error);
         });

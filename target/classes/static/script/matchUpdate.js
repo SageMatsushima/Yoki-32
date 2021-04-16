@@ -17,10 +17,13 @@ function addMatchDiv(matched) {
     const name = document.createElement("h3");
     name.innerHTML = matched.firstName;
 
+<<<<<<< HEAD
+=======
     name.onclick = function() {
         currMatch = matched;
         openMatchInfo();
     };
+>>>>>>> 890b11e34e8d62496df397e12301925bba43eb96
     // const card = document.createElement("div");
     // card.className = "card";
 
@@ -143,6 +146,8 @@ function addMatches() {
         .catch(function (error) {
             console.log(error);
         });
+<<<<<<< HEAD
+=======
 }
 
 function getInterests() {
@@ -165,4 +170,5 @@ function getInterests() {
         .catch(function (error) {
             console.log(error);
         });
+>>>>>>> 890b11e34e8d62496df397e12301925bba43eb96
 }
