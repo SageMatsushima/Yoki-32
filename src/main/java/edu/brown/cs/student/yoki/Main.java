@@ -150,6 +150,7 @@ public final class Main {
     Spark.get("/getmatch", new GetMatchesHandler());
     Spark.post("/updateInterests", new UpdateInterests());
     Spark.post("/login", new LoginHandler());
+    Spark.post("/profileInfo", new ProfileInfo());
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
@@ -203,6 +204,15 @@ public final class Main {
         status = "true";
       }
       Map<String, Object> variables = ImmutableMap.of("authenticated", status);
+      return GSON.toJson(variables);
+    }
+  }
+
+  private class ProfileInfo implements Route {
+    @Override
+    public String handle(Request req, Response res) throws JSONException {
+      User user = SQLcommands.getUserInfo(currentId);
+      Map<String, Object> variables = ImmutableMap.of("user", user);
       return GSON.toJson(variables);
     }
   }

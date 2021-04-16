@@ -257,6 +257,7 @@ public final class SQLcommands {
     }
   }
 
+<<<<<<< HEAD
   public static void encryptPasswords() {
     try {
       Connection conn = DataReader.getConnection();
@@ -272,4 +273,35 @@ public final class SQLcommands {
     }
   }
 
+=======
+  public static User getUserInfo(int userId) {
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement("SELECT * FROM user_data INNER JOIN user_interests WHERE user_data.id=?");
+      prep.setInt(1, userId);
+      ResultSet rs = prep.executeQuery();
+      if (rs.next()) {
+        int id = rs.getInt("id");
+        String firstName = rs.getString("first_name");
+        String lastName = rs.getString("last_name");
+        String email = rs.getString("email");
+        String password = rs.getString("password");
+        int year = rs.getInt("year");
+
+        int[] interests = new int[DataReader.getInterestCount()];
+        for (int j = 0; j < interests.length; j++) {
+          interests[j] = rs.getInt(j + 8);
+        }
+
+        User user = new User(id, firstName, lastName, email, password, year, interests);
+        return user;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+      return null;
+    }
+    return null;
+  }
+>>>>>>> 54736902be4e981f551a267918b07aa0dd4ff278
 }

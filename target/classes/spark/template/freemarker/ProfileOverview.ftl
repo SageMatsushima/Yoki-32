@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="css/matching.css">
 </head>
 <script src="script/interestButtons.js"></script>
+<script src="script/profileLoad.js"></script>
 <body onload="allInterests()">
 <div id="profile">
     ${nav}
@@ -33,10 +34,10 @@
         <div id="side">
             <div id="profileTag">
                 <div id="info">
-                    <h4>Sage</h4> <h4>pronouns</h4><br>
-                    <h5>grad Year</h5><br>
-                    <h5>concentration</h5>
-                    <h5>Email</h5>
+<#--                    <h4>Sage</h4>-->
+<#--                    <h5>grad Year</h5>-->
+<#--                    <h5>concentration</h5>-->
+<#--                    <h5>Email</h5>-->
                     <a href="/profileEdit"><button id="match-button" class="edit" onclick="">Edit Profile</button></a>
                 </div>
                 <div id="picture"><img src="">Picture</div>
