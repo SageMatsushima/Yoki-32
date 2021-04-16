@@ -18,7 +18,7 @@
           <h3 id="match-grade">Class of 2023</h3>
         </div>
         <div id = "top_interests">
-          <h3>Interests</h3>
+          <h3>Common Interests</h3>
           <ul id = "top_interests_list">
             <div class="interest">
               <ul>
