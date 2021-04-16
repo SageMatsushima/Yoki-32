@@ -135,7 +135,7 @@ html {
 
 nav {
     grid-column: 1;
-    height: 100%;
+    height: 100vw;
     width: 15vw;
     background-color: #DBDBDB;
     float: left;
@@ -232,7 +232,7 @@ ul {
 }
 
 #match-div{
-    margin-left: 20vw;
+    /*margin-left: 20vw;*/
     /*overflow: scroll;*/
     width: 100%;
     height: 100%;
