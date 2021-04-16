@@ -89,11 +89,13 @@ public final class Main {
     ArrayList<String> dataReaderArgs = new ArrayList<>();
     dataReaderArgs.add("data");
     dataReaderArgs.add("data/smallData.sqlite");
+    dataReader = new DataReader();
     dataReader.action(dataReaderArgs);
     ArrayList<String> finderArgs = new ArrayList<>();
     finderArgs.add("match");
     finderArgs.add("104");
     finderArgs.add("1");
+    matches = new MatchFinder();
     matches.action(finderArgs);
 
     this.setUsers(matches.getUserList());
@@ -162,26 +164,19 @@ public final class Main {
     @Override
     public ModelAndView handle(Request req, Response res) {
 
-      //User tod = new User(20, "test", "test", "test", "test", 3023, new int[]{0, 1});
-      //Map<String, User> variables = ImmutableMap.of("user", tod);
-      //ImmutableMap.Builder<String, User> variables = new ImmutableMap.Builder();
-      System.out.println(Main.this.getUsers().size());
-      if (Main.this.getUsers().size() > 0) {
-        User nextMatch = Main.this.getUsers().remove(0);
+      ArrayList<String> dataReaderArgs = new ArrayList<>();
+      dataReaderArgs.add("data");
+      dataReaderArgs.add("data/smallData.sqlite");
+      dataReader = new DataReader();
+      dataReader.action(dataReaderArgs);
+      ArrayList<String> finderArgs = new ArrayList<>();
+      finderArgs.add("match");
+      finderArgs.add("104");
+      finderArgs.add("1");
+      matches = new MatchFinder();
+      matches.action(finderArgs);
 
-        ArrayList<String> interestsArgs = new ArrayList<>();
-        interestsArgs.add("interests");
-        interestsArgs.add(nextMatch.getId() + "");
-        System.out.println("match id: " + nextMatch.getId());
-        interestsReader.action(interestsArgs);
-        ArrayList<Interest> topCommonInterests = interestsReader.getTopInterests().get(0);
-        ArrayList<Interest> topOtherInterests = interestsReader.getTopInterests().get(1);
-        System.out.println("size: " + interestsReader.getTopInterests().get(0).size());
-
-        Map<String, Object> variables = ImmutableMap.of("user", nextMatch,
-            "topCommonInterests", topCommonInterests, "topOtherInterests", topOtherInterests);
-        return new ModelAndView(variables, "main.ftl");
-      }
+      Main.this.setUsers(matches.getUserList());
       return new ModelAndView(null, "main.ftl");
     }
   }
