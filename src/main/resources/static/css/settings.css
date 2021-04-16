@@ -69,3 +69,40 @@ h2 {
     grid-row: 1;
     grid-column: 2;
 }
+
+h3 {
+    margin-bottom: 1vw;
+}
+#nameDiv, #gradDiv, #reasonDiv {
+    margin-left: 2vw;
+}
+
+#reasonInput {
+    height: 10vw;
+    width: 25vw;
+}
+
+#match-button.LD {
+    height: 4vw;
+    width: 7vw;
+    border-radius: 1vw;
+    margin-top: 5vw;
+    margin-left: 5vw;
+}
+
+#logout {
+    margin-left: 2vw;
+}
+
+#match-button.yes {
+    height: 4vw;
+    width: 7vw;
+    border-radius: 1vw;
+    margin-left: 11vw;
+}
+
+.inputs {
+    border-radius: 1vw;
+    border: none;
+}
+

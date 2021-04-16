@@ -37,12 +37,12 @@
                     <h5>grad Year</h5><br>
                     <h5>concentration</h5>
                     <h5>Email</h5>
-                    <a href="/profileEdit"><button id="match-button" onclick="">Edit Profile</button></a>
+                    <a href="/profileEdit"><button id="match-button" class="edit" onclick="">Edit Profile</button></a>
                 </div>
                 <div id="picture"><img src="">Picture</div>
             </div>
             <div id="subjects">
-                <h3>Interest Search</h3>
+                <h3 id = "searchTitle">Interest Search</h3>
             </div>
         </div>
 

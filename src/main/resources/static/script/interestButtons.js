@@ -18,6 +18,7 @@ function addInterestDiv(value, key) {
         name.innerHTML = value.name;
         const remove = document.createElement("button");
         remove.className = "remove";
+        remove.innerHTML = "Remove";
         remove.onclick = function() { removes(key); };
 
         const input = document.createElement("input");
