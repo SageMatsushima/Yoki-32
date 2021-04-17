@@ -1,18 +1,13 @@
 package edu.brown.cs.student.yoki.commands;
 
-import edu.brown.cs.student.yoki.Main;
-import edu.brown.cs.student.yoki.driver.Interest;
-import edu.brown.cs.student.yoki.driver.TreeFunction;
 import edu.brown.cs.student.yoki.driver.TriggerAction;
 import edu.brown.cs.student.yoki.driver.User;
-import org.checkerframework.checker.units.qual.A;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import static java.lang.System.err;
-import static java.lang.System.out;
 
 /**
  * Subclasses searches through a list or kdTree of stars. Parses input.
@@ -47,13 +42,17 @@ public class UserReader implements TriggerAction {
           String email = rs1.getString("email");
           String password = rs1.getString("password");
           int year = rs1.getInt("year");
+          String images = rs1.getString("images");
+          String major = rs1.getString("major");
+          String bio = rs1.getString("bio");
 
           int[] interests = new int[DataReader.getInterestCount()];
           for (int j = 0; j < interests.length; j++) {
-            interests[j] = rs1.getInt(j + 8);
+            interests[j] = rs1.getInt(j + DataReader.getUserDataColumnLen() + 2);
           }
 
-          user = new User(id, firstName, lastName, email, password, year, interests);
+          user = new User(id, firstName, lastName, email, password, year,
+            interests, images, major, bio);
           getUser();
           prep.close();
           rs1.close();

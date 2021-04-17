@@ -6,16 +6,19 @@ import java.util.HashMap;
  * Class for a single star.
  */
 public class User extends KdNode {
+  private int id;
   private String firstName;
   private String lastName;
-  private int id;
   private String email;
   private String password;
   private int year;
+  private String images;
+  private String major;
+  private String bio;
 
   private int[] interests;
 
-  public User(int id, String firstName, String lastName, String email, String password, int year, int[] interests) {
+  public User(int id, String firstName, String lastName, String email, String password, int year, int[] interests, String images, String major, String bio) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -23,6 +26,9 @@ public class User extends KdNode {
     this.email = email;
     this.password = password;
     this.year = year;
+    this.images = images;
+    this.major = major;
+    this.bio = bio;
     setCoords(this.interests);
   }
 
