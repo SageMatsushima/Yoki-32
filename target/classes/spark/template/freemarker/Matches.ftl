@@ -5,7 +5,7 @@
     <a href="/match"><div class="sidebar">Matches</div></a>
     <a href="/profileOverview"><div class="sidebar">My Profile</div></a>
     <a href="/settings"><div class="sidebar">Settings</div></a>
-  </nav>2
+  </nav>
 </#assign>
 
 <!DOCTYPE html>

@@ -76,8 +76,11 @@ function termsConditions() {
 
     const popup = document.createElement("div");
     popup.id = "popup";
-
+    const pdf = document.createElement("a");
+    pdf.innerHTML = "Terms and Conditions";
+    pdf.href = "PDF/TermsAndConditions.pdf";
     document.getElementById("main").appendChild(popup);
+    popup.appendChild(pdf);
 
 }
 
