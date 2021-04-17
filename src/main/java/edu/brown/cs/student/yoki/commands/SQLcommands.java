@@ -189,13 +189,16 @@ public final class SQLcommands {
         String email = rs2.getString("email");
         String password = rs2.getString("password");
         int year = rs2.getInt("year");
+        String images = rs.getString("images");
+        String major = rs.getString("major");
+        String bio = rs.getString("bio");
 
         int[] interests = new int[DataReader.getInterestCount()];
         for (int j = 0; j < interests.length; j++) {
           interests[j] = rs2.getInt(j + 8);
         }
 
-        User user = new User(id, firstName, lastName, email, password, year, interests);
+        User user = new User(id, firstName, lastName, email, password, year, interests, images, major, bio);
         matches.add(user);
       }
       return matches;
@@ -301,13 +304,16 @@ public final class SQLcommands {
         String email = rs.getString("email");
         String password = rs.getString("password");
         int year = rs.getInt("year");
+        String images = rs.getString("images");
+        String major = rs.getString("major");
+        String bio = rs.getString("bio");
 
         int[] interests = new int[DataReader.getInterestCount()];
         for (int j = 0; j < interests.length; j++) {
           interests[j] = rs.getInt(j + DataReader.getUserDataColumnLen() + 2);
         }
 
-        User user = new User(id, firstName, lastName, email, password, year, interests);
+        User user = new User(id, firstName, lastName, email, password, year, interests, images, major, bio);
         return user;
       }
     } catch (Exception e) {

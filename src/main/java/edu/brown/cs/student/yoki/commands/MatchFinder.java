@@ -65,7 +65,6 @@ public class MatchFinder implements TriggerAction {
         return true;
       }
     }
-
     return false;
   }
 }
