@@ -41,6 +41,7 @@
             </div>
             <div id="subjects">
                 <h3 id = "searchTitle">Interest Search</h3>
+                <input type="text" id="myInput" onkeyup="serach()" placeholder="Search for ineterests.." title="Type in an ineterest">
             </div>
         </div>
 
