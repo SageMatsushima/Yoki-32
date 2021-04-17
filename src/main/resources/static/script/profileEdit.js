@@ -1,21 +1,46 @@
-const name = document.getElementById('name');
-const pronouns = document.getElementById('pronouns');
-const major = document.getElementById('major');
-const gradYear = document.getElementById("gradYear");
-const email = document.getElementById('email');
-const bio = document.getElementById('bioBox');
+window.onload(getUserInfo());
 
-function save() {
+function getUserInfo() {
+    console.log("load profile")
+    fetch('/profileInfo', {
+        method: 'post',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        .then((response) =>
+            response.json())
+        .then((data) => {
+            setUser(data.user);
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+function setUser(user) {
+    document.getElementById("firstInput").value = user.firstName;
+    document.getElementById("lastInput").value = user.lastName;
+    document.getElementById("pronounInput").value = user.pronouns;
+    document.getElementById("majorInput").value = user.major;
+    document.getElementById("gradYearInput").value = user.year;
+    document.getElementById("emailInput").value = user.email;
+    document.getElementById("bioBox").innerText = user.bio;
+}
+
+function updateProfile() {
+    console.log(document.getElementById("firstInput").value);
     const postParameters = {
-        //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
-        name: name.value,
-        pronouns: pronouns.value,
-        major: major.value,
-        gradYear: gradYear.value,
-        email: email.value,
-        bio: bio.value
+        first: document.getElementById("firstInput").value,
+        last: document.getElementById("lastInput").value,
+        pronouns: document.getElementById("pronounInput").value,
+        major: document.getElementById("majorInput").value,
+        gradYear: document.getElementById("gradYearInput").value,
+        email: document.getElementById("emailInput").value,
+        bio: document.getElementById("bioBox").innerText
     };
-    fetch('http://localhost:4567/yoki', {
+    fetch('http://localhost:4567/updateProfile', {
         method: 'post',
         body: JSON.stringify(postParameters),
         headers: {

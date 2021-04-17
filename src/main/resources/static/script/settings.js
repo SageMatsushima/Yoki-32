@@ -93,42 +93,51 @@ function report() {
     const popup = document.createElement("div");
     popup.id = "popup";
 
-    const nameDiv = document.createElement("div");
-    nameDiv.id = "nameDiv"
-    const name = document.createElement("h3");
-    name.innerHTML = "Username: ";
-    const nameInput = document.createElement("input");
-    nameInput.className = "inputs";
-
-    const gradDiv = document.createElement("div");
-    gradDiv.id = "gradDiv";
-    const gradYear = document.createElement("h3");
-    gradYear.innerHTML = "Graduation Year: ";
-    const year = document.createElement("input");
-    year.className = "inputs";
+    const emailDiv = document.createElement("div");
+    emailDiv.id = "nameDiv"
+    const email = document.createElement("h3");
+    email.innerHTML = "User's Email: ";
+    const emailInput = document.createElement("input");
+    emailInput.className = "inputs";
 
     const reasonDiv = document.createElement("div");
     reasonDiv.id = "reasonDiv";
     const reason = document.createElement("h3");
     reason.innerHTML = "Reason: ";
-    const reasonInput = document.createElement("input");
+    const reasonInput = document.createElement("textarea");
     reasonInput.id = "reasonInput";
     reasonInput.className = "inputs";
 
+    const reportButton = document.createElement("button");
+    reportButton.innerHTML = "Report";
+    reportButton.id = "match-button";
+    reportButton.className = "reportButton"
+    reportButton.onclick = function() { sendReport(); };
+
     document.getElementById("main").appendChild(popup);
-    popup.appendChild(nameDiv);
-    nameDiv.appendChild(name);
-    nameDiv.appendChild(nameInput);
-    popup.appendChild(gradDiv);
-    gradDiv.appendChild(gradYear);
-    gradDiv.appendChild(year);
+    popup.appendChild(emailDiv);
+    emailDiv.appendChild(email);
+    emailDiv.appendChild(emailInput);
     popup.appendChild(reasonDiv);
     reasonDiv.appendChild(reason);
     reasonDiv.appendChild(reasonInput);
+    popup.appendChild(reportButton);
 }
 
-// function logout() {
-//     <
-// }
-
-
+function sendReport() {
+    console.log(document.getElementById("firstInput").value);
+    const postParameters = {
+        email: document.getElementById("reasonInput").value,
+        message: document.getElementById("reasonInput").innerText
+    };
+    fetch('http://localhost:4567/report', {
+        method: 'post',
+        body: JSON.stringify(postParameters),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        .catch(function (error) {
+            console.log(error);
+        });
+}

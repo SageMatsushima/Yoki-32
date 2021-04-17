@@ -15,7 +15,8 @@ function getUserInfo() {
             response.json())
         .then((data) => {
             console.log(data);
-            loadInfoDiv(data.user)
+            console.log(data.user);
+            loadInfoDiv(data.user);
         })
         .catch(function (error) {
             console.log(error);
