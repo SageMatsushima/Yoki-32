@@ -71,9 +71,9 @@ public class InterestsReader implements TriggerAction {
     for (int i = 0; i < DataReader.getInterestCount(); i++) {
       if (userInterests.get(i) > 0) {
         if (currentUser.getInterests()[i] > 0) {
-          topCommonInterests.add(new Interest(i+1, converter.get(i+8).getTag(), userInterests.get(i)));
+          topCommonInterests.add(new Interest(i + 1, converter.get(i + DataReader.getUserDataColumnLen() + 2).getTag(), userInterests.get(i)));
         } else {
-          topOtherInterests.add(new Interest(i+1, converter.get(i+8).getTag(), userInterests.get(i)));
+          topOtherInterests.add(new Interest(i + 1, converter.get(i + DataReader.getUserDataColumnLen() + 2).getTag(), userInterests.get(i)));
         }
       }
     }
