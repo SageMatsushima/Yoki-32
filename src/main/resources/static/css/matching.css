@@ -97,6 +97,7 @@ html {
     background-color: #FFE0A4;
     color: #C97800;
     margin-left: 2.5%;
+    border: none;
 }
 
 #pass-button {

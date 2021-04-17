@@ -112,6 +112,9 @@ public class DataReader implements TriggerAction {
         String email = rs1.getString("email");
         String password = rs1.getString("password");
         int year = rs1.getInt("year");
+        String images = rs1.getString("images");
+        String major = rs1.getString("major");
+        String bio = rs1.getString("bio");
 
         int[] interests = new int[interestCount];
         for (int j = 0; j < interests.length; j++) {
@@ -120,7 +123,7 @@ public class DataReader implements TriggerAction {
           convert.put(j + userDataColumnLen + 2, new Interest(j + userDataColumnLen + 2, tag));
         }
 
-        User user = new User(id, firstName, lastName, email, password, year, interests);
+        User user = new User(id, firstName, lastName, email, password, year, interests, images, major, bio);
         if (id == Main.getCurrentId()) {
           currentUser = user;
         }
