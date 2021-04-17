@@ -33,15 +33,17 @@ function encrypt(text) {
 
 // function printout(t) {
 //     var arr = t.split("\n")
+//     // console.log(arr)
 //     var str = "";
 //     for (i = 0; i < arr.length; i++) {
-//         // console.log(i)
-//         str += encrypt(t[i]) + "\n"
+//         // console.log(arr[i])
+//         console.log(encrypt(arr[i]))
+//         str += encrypt(arr[i]) + "\n"
 //         //console.log(CryptoJS.AES.encrypt(arr[i], "gudetama").toString())
 //     }
 //     console.log(str)
 // }
-
+//
 // function convert(t) {
 //     var arr = "";
 //     t.then(t => printout(t))
