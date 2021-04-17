@@ -28,14 +28,7 @@ public class UserReader implements TriggerAction {
           // North to south, less than lat 1 and greater than lat2
           prep.setInt(1, searchId);
           ResultSet rs1 = prep.executeQuery();
-//          for (int i = 2; i < 8; i++) {
-//            try {
-//              userData.add(rs.getString(i));
-//              out.print(rs.getInt(i) + ", ");
-//            } catch (Exception e) {
-//              err.println("Something went wrong with reading in data");
-//            }
-//          }
+
           int id = rs1.getInt("id");
           String firstName = rs1.getString("first_name");
           String lastName = rs1.getString("last_name");

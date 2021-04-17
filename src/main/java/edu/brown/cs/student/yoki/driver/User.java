@@ -32,18 +32,10 @@ public class User extends KdNode {
     setCoords(this.interests);
   }
 
-  /**
-   * Get the id of the star.
-   * @return Star id as an integer
-   */
   public int getId() {
     return id;
   }
 
-  /**
-   * Get the name of the star.
-   * @return Star name as a String
-   */
   public String getName() {
     return this.firstName + " " + this.lastName;
   }
@@ -52,18 +44,25 @@ public class User extends KdNode {
     return this.interests;
   }
 
-  public double distance(Object o) {
-    return 0; }
-
-  @Override
-  public String toString() {
-    String str = "id: " + this.id + ", first_name: " + this.firstName + ", last_name: " + this.lastName
-        + ", email: " + this.email + ", password: " + this.password + ", year: " + this.year
-        + "\nInterest Levels: " + interestsToString() + "\n";
-    return str;
+  public String getEmail() {
+    return this.email;
   }
 
+  public String getPassword() {
+    return this.password;
+  }
 
+  public String getImages() {
+    return this.images;
+  }
+
+  public String getMajor() {
+    return this.major;
+  }
+
+  public String getBio() {
+    return this.bio;
+  }
 
   public String interestsToString() {
     String str = "";
@@ -71,5 +70,18 @@ public class User extends KdNode {
       str += this.interests[i] + ", ";
     }
     return str.substring(0, str.length() - 2);
+  }
+
+  @Override
+  public double distance(Object o) {
+    return 0;
+  }
+
+  @Override
+  public String toString() {
+    String str = "id: " + this.id + ", first_name: " + this.firstName + ", last_name: " + this.lastName
+        + ", email: " + this.email + ", password: " + this.password + ", year: " + this.year
+        + "\nInterest Levels: " + interestsToString() + "\n";
+    return str;
   }
 }
