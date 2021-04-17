@@ -161,7 +161,7 @@ public final class Main {
     @Override
     public ModelAndView handle(Request req, Response res) {
       currentId = -1;
-      return new ModelAndView(null, "login.ftl");
+      return new ModelAndView(null, "signup.ftl");
     }
   }
 
