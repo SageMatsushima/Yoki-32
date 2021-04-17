@@ -1,8 +1,59 @@
 function onLoginPressed() {
     let email = document.getElementById("login-email").value
     let password = document.getElementById("login-password").value
-    requestLogin(email, password)
+    requestLogin(email, encrypt(password))
+
+    console.log('encStr', encrypt(password));
 }
+
+function encrypt(text) {
+    const key = 'gudetama';
+    const keyutf = CryptoJS.enc.Utf8.parse(key);
+    const iv = CryptoJS.enc.Base64.parse(key);
+
+    const enc = CryptoJS.AES.encrypt(text, keyutf, { iv: iv });
+    const encStr = enc.toString();
+    return encStr;
+}
+//
+// function decrypt(text) {
+//     const key = 'gudetama';
+//     const keyutf = CryptoJS.enc.Utf8.parse(key);
+//     const iv = CryptoJS.enc.Base64.parse(key);
+//
+//     const dec = CryptoJS.AES.decrypt(
+//         { ciphertext: CryptoJS.enc.Base64.parse(text) },
+//         keyutf,
+//         {
+//             iv: iv
+//         });
+//     const decStr = CryptoJS.enc.Utf8.stringify(dec)
+//     return decStr;
+// }
+
+// function printout(t) {
+//     var arr = t.split("\n")
+//     // console.log(arr)
+//     var str = "";
+//     for (i = 0; i < arr.length; i++) {
+//         // console.log(arr[i])
+//         console.log(encrypt(arr[i]))
+//         str += encrypt(arr[i]) + "\n"
+//         //console.log(CryptoJS.AES.encrypt(arr[i], "gudetama").toString())
+//     }
+//     console.log(str)
+// }
+//
+// function convert(t) {
+//     var arr = "";
+//     t.then(t => printout(t))
+//     // console.log(arr)
+//     // for (i = 0; i < arr.length; i++) {
+//     //     console.log(i)
+//     //     console.log(CryptoJS.AES.encrypt(arr[i], "gudetama").toString())
+//     // }
+//     // console.log(CryptoJS.AES.encrypt(t, "gudetama").toString())
+// }
 
 function requestLogin(email, password) {
     const postPara = {

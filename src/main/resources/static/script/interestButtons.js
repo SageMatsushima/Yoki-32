@@ -70,6 +70,23 @@ function allInterests() {
         });
 }
 
+function search() {
+    var input, filter, subjects, btns, a, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    subjects = document.getElementById("subjects");
+    btns = subjects.getElementsByTagName("button");
+    for (i = 0; i < btns.length; i++) {
+        a = btns[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            btns[i].style.display = "";
+        } else {
+            btns[i].style.display = "none";
+        }
+    }
+}
+
 /**
  * Updates the interests based on the users input.
  */

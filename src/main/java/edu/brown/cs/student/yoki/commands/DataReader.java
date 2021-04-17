@@ -24,6 +24,7 @@ public class DataReader implements TriggerAction {
   private static HashMap<Integer, Interest> convert = new HashMap<>();
   private static int currentId = 1;
   private static User currentUser;
+  private static int userDataColumnLen = 0;
 
   /**
    * Action command that executes the MapReader code.
@@ -38,7 +39,21 @@ public class DataReader implements TriggerAction {
       if (new File(path).exists()) {
         try {
           dataPath = path;
+
+          if (conn != null) {
+            conn.close();
+          }
+
+          // connect to database
+          Class.forName("org.sqlite.JDBC");
+          String urlToDB = "jdbc:sqlite:" + dataPath;
+          conn = DriverManager.getConnection(urlToDB);
+          Statement stat = conn.createStatement();
+          stat.executeUpdate("PRAGMA foreign_keys=ON");
+
+          setUserDataColLen();
           allUserData();
+          System.out.println("col len " + getUserDataColumnLen());
 //          printHash();
           System.out.println("Reading data from " + path);
         } catch (SQLException | ClassNotFoundException sqlEx) {
@@ -54,31 +69,38 @@ public class DataReader implements TriggerAction {
 
   public static void printHash() {
     for (int i = 0; i < interestCount; i++) {
-      Interest interest = convert.get(i + 8);
+      Interest interest = convert.get(i + userDataColumnLen + 2);
       System.out.println(interest.getId() + " " + interest.getTag() + " " + interest.getName());
+    }
+  }
+
+  private void setUserDataColLen() throws SQLException, ClassNotFoundException {
+    Statement stat = conn.createStatement();
+    stat.executeUpdate("PRAGMA foreign_keys=ON");
+    try {
+      PreparedStatement prep = conn.prepareStatement("SELECT * FROM user_data;");
+      ResultSet rs = prep.executeQuery();
+      ResultSetMetaData rsmd = rs.getMetaData();
+      userDataColumnLen = rsmd.getColumnCount();
+
+      prep.close();
+      rs.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: There was an error reading in node data");
     }
   }
 
   private void allUserData() throws SQLException, ClassNotFoundException {
     userList = new ArrayList<>();
-    if (conn != null) {
-      conn.close();
-    }
-
-    // connect to database
-    Class.forName("org.sqlite.JDBC");
-    String urlToDB = "jdbc:sqlite:" + dataPath;
-    conn = DriverManager.getConnection(urlToDB);
-    Statement stat = conn.createStatement();
-    stat.executeUpdate("PRAGMA foreign_keys=ON");
     try {
       PreparedStatement prep1 = SQLcommands.getAll();
       ResultSet rs1 = prep1.executeQuery();
       ResultSetMetaData rsmd = rs1.getMetaData();
-      interestCount = rsmd.getColumnCount() - 7;
+      interestCount = rsmd.getColumnCount() - (userDataColumnLen + 1);
 
       HashMap<String, Integer> converter = new HashMap<>();
-      for (int i = 7; i < interestCount; i++) {
+      for (int i = userDataColumnLen + 1; i < interestCount; i++) {
         String interestName = rsmd.getColumnName(i);
         converter.put(interestName, i);
       }
@@ -93,16 +115,15 @@ public class DataReader implements TriggerAction {
 
         int[] interests = new int[interestCount];
         for (int j = 0; j < interests.length; j++) {
-          interests[j] = rs1.getInt(j + 8);
-          String tag = rsmd.getColumnName(j + 8);
-          convert.put(j + 8, new Interest(j + 8, tag));
+          interests[j] = rs1.getInt(j + userDataColumnLen + 2);
+          String tag = rsmd.getColumnName(j + userDataColumnLen + 2);
+          convert.put(j + userDataColumnLen + 2, new Interest(j + userDataColumnLen + 2, tag));
         }
 
         User user = new User(id, firstName, lastName, email, password, year, interests);
         if (id == Main.getCurrentId()) {
           currentUser = user;
         }
-//        userList.add(user);
 
         if (!SQLcommands.isAMatch(Main.getCurrentId(), id)) {
           userList.add(user);
@@ -146,4 +167,7 @@ public class DataReader implements TriggerAction {
     return currentUser;
   }
 
+  public static int getUserDataColumnLen() {
+    return userDataColumnLen;
+  }
 }

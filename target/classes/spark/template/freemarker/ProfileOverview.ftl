@@ -34,19 +34,14 @@
         <div id="side">
             <div id="profileTag">
                 <div id="info">
-                    <div id="user-info">
-
-                    </div>
-<#--                    <h4>Sage</h4>-->
-<#--                    <h5>grad Year</h5>-->
-<#--                    <h5>concentration</h5>-->
-<#--                    <h5>Email</h5>-->
+                    <div id="user-info"></div>
                     <a href="/profileEdit"><button id="match-button" class="edit" onclick="">Edit Profile</button></a>
                 </div>
                 <div id="picture"><img src="">Picture</div>
             </div>
             <div id="subjects">
                 <h3 id = "searchTitle">Interest Search</h3>
+                <input type="text" id="myInput" onkeyup="serach()" placeholder="Search for ineterests.." title="Type in an ineterest">
             </div>
         </div>
 

@@ -304,12 +304,27 @@ public final class SQLcommands {
 
         int[] interests = new int[DataReader.getInterestCount()];
         for (int j = 0; j < interests.length; j++) {
-          interests[j] = rs.getInt(j + 8);
+          interests[j] = rs.getInt(j + DataReader.getUserDataColumnLen() + 2);
         }
 
         User user = new User(id, firstName, lastName, email, password, year, interests);
         return user;
       }
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+      return null;
+    }
+    return null;
+  }
+
+  public static User getPic(int userId) {
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement("SELECT image FROM user_data WHERE user_data.id=?");
+      prep.setInt(1, userId);
+      ResultSet rs = prep.executeQuery();
+
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println("ERROR: Issue reading in SQL");

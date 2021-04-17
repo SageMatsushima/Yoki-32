@@ -37,6 +37,7 @@
             </div>
             <div id="picture">
                 <img id = "profilePic" src="./images/kendall.jpg">
+<#--                <img id = "profilePic" src="https://i.pinimg.com/originals/59/af/39/59af39192d3f0cbf7a89bcaf534ccd82.png">-->
                 <button id="changePic">Picture icon</button><br>
                 ${save}
             </div>
