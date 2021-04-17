@@ -98,11 +98,24 @@ h3 {
     height: 4vw;
     width: 7vw;
     border-radius: 1vw;
-    margin-left: 11vw;
 }
 
 .inputs {
+    padding-left: .5vw;
+    height: 2vw;
+    width: 15vw;
     border-radius: 1vw;
     border: none;
+}
+
+#match-button.reportButton {
+    width: 10vw;
+    height: 3vw;
+    border-radius: 1vw;
+    float: right;
+}
+
+textarea {
+    padding-left: .5vw;
 }
 

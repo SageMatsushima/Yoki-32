@@ -14,6 +14,10 @@ function addMatchDiv(matched) {
     image.src = "./images/kendall.jpg";
     // image.src = "https://i.pinimg.com/originals/59/af/39/59af39192d3f0cbf7a89bcaf534ccd82.png"
     image.id = "match_image";
+    image.onclick = function() {
+        currMatch = matched;
+        openMatchInfo();
+    };
 
     const name = document.createElement("h3");
     name.innerHTML = matched.firstName;
