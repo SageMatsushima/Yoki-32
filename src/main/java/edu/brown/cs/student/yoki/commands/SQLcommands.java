@@ -318,18 +318,17 @@ public final class SQLcommands {
     return null;
   }
 
-  public static User getPic(int userId) {
+  public static String getImage(int userId) {
     try {
       Connection conn = DataReader.getConnection();
-      PreparedStatement prep = conn.prepareStatement("SELECT image FROM user_data WHERE user_data.id=?");
+      PreparedStatement prep = conn.prepareStatement("SELECT images FROM user_data WHERE user_data.id=?");
       prep.setInt(1, userId);
       ResultSet rs = prep.executeQuery();
-
+      return rs.getString("images");
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println("ERROR: Issue reading in SQL");
-      return null;
+      return "";
     }
-    return null;
   }
 }
