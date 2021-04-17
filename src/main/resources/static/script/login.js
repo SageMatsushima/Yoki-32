@@ -1,7 +1,12 @@
 function onLoginPressed() {
     let email = document.getElementById("login-email").value
     let password = document.getElementById("login-password").value
-    requestLogin(email, CryptoJS.AES.encrypt(password).toString())
+    let encrypt = CryptoJS.AES
+    encrypt.salt = 1
+    encrypt.salt.iv = 5
+    let output = encrypt.encrypt(password, "gudetama")
+    console.log(output.toString(), output.salt, output.iv)
+    requestLogin(email, CryptoJS.AES.encrypt(password, "gudetama").toString())
 }
 
 // function printout(t) {
