@@ -11,7 +11,8 @@ function addMatchDiv(matched) {
     match.className = "match";
     match.id = "matchCard";
     const image = document.createElement("img");
-    image.src = "./images/kendall.jpg";
+    // image.src = "./images/kendall.jpg";
+    image.src = "https://eyeondesign.aiga.org/wp-content/uploads/2016/12/Gudetama-2016-sigh-1.jpg"
     image.id = "match_image";
 
     const name = document.createElement("h3");
