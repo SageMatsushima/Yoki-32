@@ -200,6 +200,7 @@ public final class Main {
       System.out.println(password);
       String key = "gudetama";
       password = Encrypt.encrypt(password, key);
+      System.out.println(password);
       currentId = SQLcommands.getUserId(email, password);
       String status = "false";
       if (currentId > 0) {
