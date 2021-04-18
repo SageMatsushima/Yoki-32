@@ -53,15 +53,12 @@ html {
     display: flex;
     flex-direction: row;
     padding: 5%;
+    justify-content: space-between;
 }
 
-#right-content {
-    margin-right: 5%;
-}
 
 #match_image{
     height: 30vw;
-    margin-left: 10%;
     top: 118px;
     border-radius: 30px;
 }

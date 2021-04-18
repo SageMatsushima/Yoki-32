@@ -55,17 +55,14 @@ function getNextMatch(){
             for (var i in data.topCommonInterests) {
                 let interest = data.topCommonInterests[i]
                 let intDiv = '<div className="interest"><ul>' + interest.name + '</ul>'
-                    + '<progress className="interestBar" value="' + interest.score + '" max="10"></progress></div>';
+                    + '<progress className="interestBar" value="0" max="10"></progress></div>';
                 topInterests.innerHTML += intDiv;
-                let progressBar = document.getElementsByTagName('progress')[i];
-                // console.log(progressBar)
-                // move(progressBar, interest.score)
             }
 
             let progressBars = document.getElementsByTagName('progress');
             for (i = 0; i < progressBars.length; i++) {
                 console.log(progressBars[i])
-                move(progressBars[i], progressBars[i].value)
+                move(progressBars[i],  data.topCommonInterests[i].score)
             }
 
             let matchList = document.getElementById('match-list');
@@ -83,6 +80,7 @@ function getNextMatch(){
 }
 
 const move = (progressBar, interestScore) => {
+    progressBar.value = 0
     let i = 0;
     if (i == 0) {
         i = 1;
