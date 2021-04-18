@@ -15,7 +15,8 @@
       <div id = "left-content">
         <div id = "name_info">
           <h1 id="match-name">Kendall</h1>
-          <h3 id="match-grade">Class of 2023</h3>
+          <i><h5 id="match-major">Undecided</h5></i>
+          <h5 id="match-grade">Class of 2023</h5>
         </div>
         <div id = "top_interests">
           <h3>Common Interests</h3>

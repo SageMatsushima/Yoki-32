@@ -54,6 +54,10 @@ function openMatchInfo(){
     nameText.id = "match-name";
     nameText.innerHTML = currMatch.firstName;
 
+    const major = document.createElement("h3");
+    major.id = "match-major";
+    major.innerHTML = currMatch.major;
+
     const nameYear = document.createElement("h3");
     nameYear.id = "match-grade";
     nameYear.innerHTML = "Class of " + currMatch.year;
@@ -107,6 +111,7 @@ function openMatchInfo(){
     leftContent.appendChild(nameDiv);
     leftContent.appendChild(topInterests);
     nameDiv.appendChild(nameText);
+    nameDiv.appendChild(major);
     nameDiv.appendChild(nameYear);
     cardContent.appendChild(rightContent);
     rightContent.appendChild(image);
