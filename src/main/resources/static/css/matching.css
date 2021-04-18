@@ -186,15 +186,6 @@ progress.interestBar {
     margin-left: 2vw;
 }
 
-progress{
-    color: #bc9e26;
-}
-
-/*progress[value^="4"] {*/
-/*    color: white;*/
-/*}*/
-
-
 ul {
     font-size: 1.25vw;
     padding-left: .5vw;
