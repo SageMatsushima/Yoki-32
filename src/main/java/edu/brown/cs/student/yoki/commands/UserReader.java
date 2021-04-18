@@ -29,23 +29,27 @@ public class UserReader implements TriggerAction {
           prep.setInt(1, searchId);
           ResultSet rs1 = prep.executeQuery();
 
-          int id = rs1.getInt("id");
-          String firstName = rs1.getString("first_name");
-          String lastName = rs1.getString("last_name");
-          String email = rs1.getString("email");
-          String password = rs1.getString("password");
-          int year = rs1.getInt("year");
-          String images = rs1.getString("images");
-          String major = rs1.getString("major");
-          String bio = rs1.getString("bio");
+          ArrayList<String> userInfo = new ArrayList<String>();
+          ArrayList<Integer> idYear = new ArrayList<Integer>();
+
+          idYear.add(rs1.getInt("id"));
+          idYear.add(rs1.getInt("year"));
+
+          userInfo.add(rs1.getString("first_name"));
+          userInfo.add(rs1.getString("last_name"));
+          userInfo.add(rs1.getString("email"));
+          userInfo.add(rs1.getString("password"));
+          userInfo.add(rs1.getString("images"));
+          userInfo.add(rs1.getString("major"));
+          userInfo.add(rs1.getString("bio"));
 
           int[] interests = new int[DataReader.getInterestCount()];
           for (int j = 0; j < interests.length; j++) {
             interests[j] = rs1.getInt(j + DataReader.getUserDataColumnLen() + 2);
           }
 
-          user = new User(id, firstName, lastName, email, password, year,
-            interests, images, major, bio);
+          user = new User(idYear, userInfo, interests);
+
           getUser();
           prep.close();
           rs1.close();
