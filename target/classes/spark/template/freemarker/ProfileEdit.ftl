@@ -9,8 +9,10 @@
 </#assign>
 
 <#assign save>
-    <button id="save">Save</button>
+    <button id="save" onclick="updateProfile()">Save</button>
 </#assign>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,20 +22,22 @@
     <link rel="stylesheet" href="css/profileEdit.css">
     <link rel="stylesheet" href="css/matching.css">
 </head>
+<script src="script/profileEdit.js"></script>
 <body>
     <div id="profile">
         ${nav}
         <h2>Edit Profile</h2><br>
         <div id="main">
             <div id="inputs">
-                <div id="name">Name<br><input name= "name" type="text"></div>
+                <div id="first">First Name<br><input id= "firstInput" type="text"></div>
+                <div id="last">Last Name<br><input id= "lastInput" type="text"></div>
                 <div id="pronouns">Pronouns<br><label>
-                    <input name= "pronouns" type="text">
+                    <input id= "pronounInput" type="text">
                 </label></div><br>
-                <div id="major">Major<br><input name= "major" type="text"></div>
-                <div id="gradYear">Grad Year<br><input name= "gradYear" type="text"></div><br>
-                <div id="email">Email<br><input name= "email" type="text"></div> <br>
-                <div id="bio">Bio<br><input id= "bioBox" type="text"></div>
+                <div id="major">Major<br><input id= "majorInput" type="text"></div>
+                <div id="gradYear">Grad Year<br><input id= "gradYearInput" type="text"></div><br>
+                <div id="email">Email<br><input id= "emailInput" type="text"></div> <br>
+                <div id="bio">Bio<br><textarea id= "bioBox" type="text"></textarea></div>
             </div>
             <div id="picture">
                 <img id = "profilePic" src="./images/kendall.jpg">
