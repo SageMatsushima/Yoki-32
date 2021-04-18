@@ -183,22 +183,26 @@ public final class SQLcommands {
         prep2.setInt(1, rs.getInt("match_id"));
         ResultSet rs2 = prep2.executeQuery();
 
-        int id = rs2.getInt("id");
-        String firstName = rs2.getString("first_name");
-        String lastName = rs2.getString("last_name");
-        String email = rs2.getString("email");
-        String password = rs2.getString("password");
-        int year = rs2.getInt("year");
-        String images = rs.getString("images");
-        String major = rs.getString("major");
-        String bio = rs.getString("bio");
+        ArrayList<String> userInfo = new ArrayList<String>();
+        ArrayList<Integer> idYear = new ArrayList<Integer>();
+
+        idYear.add(rs2.getInt("id"));
+        idYear.add(rs2.getInt("year"));
+
+        userInfo.add(rs2.getString("first_name"));
+        userInfo.add(rs2.getString("last_name"));
+        userInfo.add(rs2.getString("email"));
+        userInfo.add(rs2.getString("password"));
+        userInfo.add(rs2.getString("images"));
+        userInfo.add(rs2.getString("major"));
+        userInfo.add(rs2.getString("bio"));
 
         int[] interests = new int[DataReader.getInterestCount()];
         for (int j = 0; j < interests.length; j++) {
           interests[j] = rs2.getInt(j + 8);
         }
 
-        User user = new User(id, firstName, lastName, email, password, year, interests, images, major, bio);
+        User user = new User(idYear, userInfo, interests);
         matches.add(user);
       }
       return matches;
@@ -298,22 +302,26 @@ public final class SQLcommands {
       prep.setInt(1, userId);
       ResultSet rs = prep.executeQuery();
       if (rs.next()) {
-        int id = rs.getInt("id");
-        String firstName = rs.getString("first_name");
-        String lastName = rs.getString("last_name");
-        String email = rs.getString("email");
-        String password = rs.getString("password");
-        int year = rs.getInt("year");
-        String images = rs.getString("images");
-        String major = rs.getString("major");
-        String bio = rs.getString("bio");
+        ArrayList<String> userInfo = new ArrayList<String>();
+        ArrayList<Integer> idYear = new ArrayList<Integer>();
+
+        idYear.add(rs.getInt("id"));
+        idYear.add(rs.getInt("year"));
+
+        userInfo.add(rs.getString("first_name"));
+        userInfo.add(rs.getString("last_name"));
+        userInfo.add(rs.getString("email"));
+        userInfo.add(rs.getString("password"));
+        userInfo.add(rs.getString("images"));
+        userInfo.add(rs.getString("major"));
+        userInfo.add(rs.getString("bio"));
 
         int[] interests = new int[DataReader.getInterestCount()];
         for (int j = 0; j < interests.length; j++) {
           interests[j] = rs.getInt(j + DataReader.getUserDataColumnLen() + 2);
         }
 
-        User user = new User(id, firstName, lastName, email, password, year, interests, images, major, bio);
+        User user = new User(idYear, userInfo, interests);
         return user;
       }
     } catch (Exception e) {
