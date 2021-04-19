@@ -417,7 +417,7 @@ public final class Main {
       int matchId = newMatch.getInt("id");
       User matched = null;
       System.out.println(matchId + "matchID");
-      for (User user: SQLcommands.getAllMatches(currentId)) {
+      for (User user: SQLcommands.getAllMatches(currentId, false)) {
         System.out.println(user.getId());
         if ((int) (user.getId()) == (int) (matchId)) {
           matched = user;
