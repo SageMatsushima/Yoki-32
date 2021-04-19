@@ -56,7 +56,8 @@ function getNextMatch(){
                 topInterests.innerHTML += intDiv;
             }
 
-
+            let matchImage = document.getElementById("match_image");
+            matchImage.src = data.user.images;
             let matchList = document.getElementById('match-list');
             Object.keys(matchMap).map(function(key) {
                 matchList.innerHTML = "<li> " + matchMap[key].firstName + " </li>";

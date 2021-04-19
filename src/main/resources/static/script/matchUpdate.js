@@ -6,21 +6,23 @@ let currMatch;
 
 function addMatchDiv(matched) {
     const match = document.createElement("div");
-    //currMatch = matched;
     //match.addEventListener('click', openMatchInfo);
     match.className = "match";
     match.id = "matchCard";
     const image = document.createElement("img");
-    image.src = "./images/kendall.jpg";
+    image.src = matched.images;
     // image.src = "https://i.pinimg.com/originals/59/af/39/59af39192d3f0cbf7a89bcaf534ccd82.png"
     image.id = "match_image";
 
     const name = document.createElement("h3");
     name.innerHTML = matched.firstName;
 
-    name.onclick = function() {
+    match.onclick = function() {
         currMatch = matched;
-        openMatchInfo();
+        openMI().then(() => {
+            console.log(matchInterests);
+            openMatchInfo();
+        });
     };
     // const card = document.createElement("div");
     // card.className = "card";
@@ -31,8 +33,33 @@ function addMatchDiv(matched) {
     document.getElementById("match-list").appendChild(match);
 }
 
+async function openMI() {
+    await getInterests();
+};
+
+
+function getInterests() {
+    const postPara = {
+        id: currMatch.id
+    };
+    fetch('http://localhost:4567/getinterests', {
+        method: 'post',
+        body: JSON.stringify(postPara),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        .then((response) =>
+            response.json())
+        .then((data) => {
+            console.log(data);
+            matchInterests = data.topCommonInterests;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
 function openMatchInfo(){
-    getInterests();
     const grayDiv = document.createElement("div");
     grayDiv.id = "grayDiv";
     grayDiv.className = "matchCardOverlay";
@@ -62,6 +89,8 @@ function openMatchInfo(){
     const topInterests = document.createElement("ul");
     topInterests.id = 'top_interests_list';
 
+    console.log("match interests" + matchInterests);
+
     for (var i in matchInterests) {
         let interest = matchInterests[i]
         let intDiv = '<div className="interest"><ul>' + interest.name + '</ul>'
@@ -73,7 +102,7 @@ function openMatchInfo(){
     rightContent.id = "right-content";
 
     const image = document.createElement("img");
-    image.src = "./images/kendall.jpg";
+    image.src = currMatch.images;
     image.id = "match_image";
 
     const emailDiv = document.createElement('div');
@@ -140,28 +169,6 @@ function addMatches() {
             }
             //matchMajor.innerHTML = response.data.major;
             return data;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
-
-function getInterests() {
-    const postPara = {
-        id: currMatch.id
-    };
-    fetch('http://localhost:4567/getinterests', {
-        method: 'post',
-        body: JSON.stringify(postPara),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-    })
-        .then((response) =>
-            response.json())
-        .then((data) => {
-            console.log(data);
-            matchInterests = data.topCommonInterests;
         })
         .catch(function (error) {
             console.log(error);

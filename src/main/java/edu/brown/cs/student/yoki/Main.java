@@ -403,10 +403,12 @@ public final class Main {
       JSONObject newMatch = new JSONObject(req.body());
       int matchId = newMatch.getInt("id");
       User matched = null;
-      for (User user: matches.getUserList()) {
-        if ((user.getId()) == (matchId)) {
+      System.out.println(matchId + "matchID");
+      for (User user: SQLcommands.getAllMatches(currentId)) {
+        System.out.println(user.getId());
+        if ((int) (user.getId()) == (int) (matchId)) {
           matched = user;
-          System.out.println(user.getName() + " matched");
+          System.out.println(user.getName() + " matched in matchset");
         }
       }
       if (matched != null) {
@@ -417,13 +419,14 @@ public final class Main {
         interestsArgs.add(matched.getId() + "");
         ir.action(interestsArgs);
         ArrayList<Interest> topCommonInterests = ir.getTopInterests().get(0);
-        ArrayList<Interest> topOtherInterests = ir.getTopInterests().get(1);
 
         Map<String, Object> variables = ImmutableMap.of(
-                "topCommonInterests", topCommonInterests, "topOtherInterests", topOtherInterests);
+                "topCommonInterests", topCommonInterests);
         return GSON.toJson(variables);
       }
-      return "null";
+      Map<String, Object> variables = ImmutableMap.of(
+              "topCommonInterests", "hi", "topOtherInterests", "hi");
+      return GSON.toJson(variables);
     }
   }
 
