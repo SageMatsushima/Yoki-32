@@ -154,6 +154,7 @@ public final class Main {
     Spark.post("/profileInfo", new ProfileInfo());
     Spark.post("/addUser", new AddUser());
     Spark.post("/deleteMatch", new DeleteMatch());
+    Spark.post("/report", new Report());
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
@@ -477,6 +478,24 @@ public final class Main {
       SQLcommands.deleteMatch(currentId, matchID);
 
       Map<String, Object> variables = ImmutableMap.of("matchSet", SQLcommands.getAllMatches(currentId, false));
+      return GSON.toJson(variables);
+    }
+  }
+
+  private class Report implements Route {
+    @Override
+    public String handle(Request req, Response res) throws Exception {
+      JSONObject matchToDelete = new JSONObject(req.body());
+      String email = matchToDelete.getString("email");
+      String report = matchToDelete.getString("report");
+      int reportedId = SQLcommands.getIdByEmail(email);
+      if (reportedId == -1) {
+        Map<String, Object> variables = ImmutableMap.of("reported", "false");
+        return GSON.toJson(variables);
+      }
+      SQLcommands.addReport(currentId, reportedId, report);
+
+      Map<String, Object> variables = ImmutableMap.of("reported", "true");
       return GSON.toJson(variables);
     }
   }

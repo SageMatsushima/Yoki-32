@@ -119,3 +119,10 @@ textarea {
     padding-left: .5vw;
 }
 
+#report-status {
+    color: #b50f0f;
+    opacity: 0;
+    font-size: 15px;
+    margin-left: 2vw;
+    margin-top: 1vh;
+}

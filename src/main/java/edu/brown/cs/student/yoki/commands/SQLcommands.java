@@ -396,4 +396,39 @@ public final class SQLcommands {
       return false;
     }
   }
+
+  public static int getIdByEmail(String email) {
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement("SELECT id FROM user_data WHERE email=?");
+      prep.setString(1, email);
+      ResultSet rs = prep.executeQuery();
+      if (rs.next()) {
+        return rs.getInt("id");
+      } else {
+        return -1;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+      return -1;
+    }
+  }
+
+  public static void addReport(int userId, int reportedId, String report) {
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement(
+        "INSERT INTO reports VALUES (?,?,?);");
+      prep.setInt(1, userId);
+      prep.setInt(2, reportedId);
+      prep.setString(3, report);
+      prep.execute();
+
+      prep.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+    }
+  }
 }

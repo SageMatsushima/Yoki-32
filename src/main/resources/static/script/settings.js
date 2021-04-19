@@ -99,6 +99,7 @@ function report() {
     email.innerHTML = "User's Email: ";
     const emailInput = document.createElement("input");
     emailInput.className = "inputs";
+    emailInput.id = "report-email";
 
     const reasonDiv = document.createElement("div");
     reasonDiv.id = "reasonDiv";
@@ -107,6 +108,10 @@ function report() {
     const reasonInput = document.createElement("textarea");
     reasonInput.id = "reasonInput";
     reasonInput.className = "inputs";
+
+    const errMsg = document.createElement("div")
+    errMsg.innerText = "No user with that email!"
+    errMsg.id = "report-status"
 
     const reportButton = document.createElement("button");
     reportButton.innerHTML = "Report";
@@ -121,14 +126,14 @@ function report() {
     popup.appendChild(reasonDiv);
     reasonDiv.appendChild(reason);
     reasonDiv.appendChild(reasonInput);
+    popup.append(errMsg)
     popup.appendChild(reportButton);
 }
 
 function sendReport() {
-    console.log(document.getElementById("firstInput").value);
     const postParameters = {
-        email: document.getElementById("reasonInput").value,
-        message: document.getElementById("reasonInput").innerText
+        email: document.getElementById("report-email").value,
+        report: document.getElementById("reasonInput").value
     };
     fetch('http://localhost:4567/report', {
         method: 'post',
@@ -137,6 +142,19 @@ function sendReport() {
             'Content-type': 'application/json; charset=UTF-8',
         },
     })
+        .then((response) =>
+            response.json())
+        .then((data) => {
+            let reportStatus = document.getElementById("report-status");
+            reportStatus.style.opacity = 100;
+            if (data.reported == "true") {
+                reportStatus.style.color = "#C97800";
+                reportStatus.innerText = "Report sent!";
+            } else {
+                reportStatus.style.color = "#b50f0f";
+                reportStatus.innerText = "No user with that email!";
+            }
+        })
         .catch(function (error) {
             console.log(error);
         });
