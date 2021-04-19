@@ -28,6 +28,9 @@
         <img id = "match_image" src="">
       </div>
     </div>
+    <div id="no-matches-msg">
+      No Matches Left!
+    </div>
   </div>
 </#assign>
 

@@ -81,8 +81,10 @@ html {
     color: #646464;
 }
 
+
 #top_interests {
     margin-top: 3vh;
+    height: 50%;
 }
 
 .button {
@@ -297,3 +299,15 @@ h2 {
     padding-bottom: 2%;
 }
 
+#name_info{
+    height: 50%;
+}
+
+#left-content{
+    height: 80%
+}
+
+#no-matches-msg{
+    display: none;
+    margin: 30px;
+}
