@@ -368,7 +368,7 @@ public final class SQLcommands {
   public static boolean editProfile(int id, String firstName, String lastName, String major, Double year, String bio, String email, String image) {
     try {
       Connection conn = DataReader.getConnection();
-      PreparedStatement prep = conn.prepareStatement("UPDATE user_data SET first_name=?, last_name=?, email=?, year=?, major=?, bio=?, image = ? WHERE id=?;");
+      PreparedStatement prep = conn.prepareStatement("UPDATE user_data SET first_name=?, last_name=?, email=?, year=?, major=?, bio=?, images = ? WHERE id=?;");
       prep.setString(1, firstName);
       prep.setString(2, lastName);
       prep.setString(3, email);
@@ -380,7 +380,7 @@ public final class SQLcommands {
       prep.execute();
       prep.close();
       return true;
-      
+
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println("ERROR: Issue reading in SQL");
