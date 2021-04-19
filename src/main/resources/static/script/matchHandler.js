@@ -45,6 +45,8 @@ function getNextMatch(){
         .then((data) => {
             let matchImage = document.getElementById("match_image");
             matchImage.onload = function() {
+                matchImage.style.opacity = 100;
+                
                 let matchName = document.getElementById('match-name');
                 let matchGrade = document.getElementById('match-grade');
                 let topInterests = document.getElementById('top_interests_list')

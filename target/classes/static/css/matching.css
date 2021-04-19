@@ -61,6 +61,7 @@ html {
     height: 30vw;
     top: 118px;
     border-radius: 30px;
+    opacity: 0;
 }
 
 #top_interests_list li{
