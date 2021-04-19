@@ -24,7 +24,11 @@ html {
 }
 
 #potential_card {
+<<<<<<< HEAD
     max-width: 65%;
+=======
+    max-width: 70%;
+>>>>>>> 3a0e705aec1b98f5ba3f9cf1ec9883fb8f157492
 
     background: #FFFFFF;
     box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
@@ -81,8 +85,10 @@ html {
     color: #646464;
 }
 
+
 #top_interests {
     margin-top: 3vh;
+    height: 50%;
 }
 
 .button {
@@ -295,5 +301,13 @@ h2 {
     align-items: center;
     padding-top: 3%;
     padding-bottom: 2%;
+}
+
+#name_info{
+    height: 50%;
+}
+
+#left-content{
+    height: 80%
 }
 

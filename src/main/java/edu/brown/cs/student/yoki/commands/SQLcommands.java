@@ -250,6 +250,8 @@ public final class SQLcommands {
   }
 
   public static int getUserId(String email, String password) {
+    System.out.println("email: " + email);
+    System.out.println("pass: " + password);
     try {
       Connection conn = DataReader.getConnection();
       PreparedStatement prep = conn.prepareStatement("SELECT * FROM user_data WHERE email=? AND password=?");
