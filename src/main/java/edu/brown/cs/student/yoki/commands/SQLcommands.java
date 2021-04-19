@@ -375,4 +375,23 @@ public final class SQLcommands {
       return false;
     }
   }
+
+  public static boolean deleteMatch(int userId, int matchId) {
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement(
+              "DELETE FROM matches "
+                      +  "WHERE id = ? AND match_id = ?;");
+      prep.setInt(1, userId);
+      prep.setInt(2, matchId);
+      prep.execute();
+
+      prep.close();
+      return true;
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+      return false;
+    }
+  }
 }
