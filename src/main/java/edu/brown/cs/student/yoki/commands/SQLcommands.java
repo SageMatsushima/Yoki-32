@@ -87,7 +87,7 @@ public final class SQLcommands {
         Map.Entry mapElement = (Map.Entry) hmIterator.next();
         Interest interest = (Interest) mapElement.getValue();
 
-        PreparedStatement prep = conn.prepareStatement("UPDATE user_data SET " + interest.getTag() + "=? WHERE id=?;");
+        PreparedStatement prep = conn.prepareStatement("UPDATE user_interests SET " + interest.getTag() + "=? WHERE id=?;");
         prep.setInt(1, interest.getScore());
         prep.setInt(2, userId);
         prep.execute();
@@ -149,16 +149,18 @@ public final class SQLcommands {
     }
   }
 
-  public static void addMatch(int userId, int matchId) {
+  public static void addMatch(int userId, int matchId, boolean isMatch) {
     try {
       Connection conn = DataReader.getConnection();
-      PreparedStatement prep = conn.prepareStatement("INSERT INTO matches VALUES (?,?,true)");
+      PreparedStatement prep = conn.prepareStatement("INSERT INTO matches VALUES (?,?,?)");
       prep.setInt(1, userId);
       prep.setInt(2, matchId);
+      prep.setBoolean(3, isMatch);
 
-      PreparedStatement prep2 = conn.prepareStatement("SELECT * FROM matches WHERE id=? AND match_id=? AND matched=true");
+      PreparedStatement prep2 = conn.prepareStatement("SELECT * FROM matches WHERE id=? AND match_id=? AND matched=?");
       prep2.setInt(1, userId);
       prep2.setInt(2, matchId);
+      prep2.setBoolean(3, isMatch);
       ResultSet rs2 = prep2.executeQuery();
       if (!rs2.next()) {
         prep.execute();
@@ -171,10 +173,13 @@ public final class SQLcommands {
     }
   }
 
-  public static ArrayList<User> getAllMatches(int userId) {
+  public static ArrayList<User> getAllMatches(int userId, boolean includePasses) {
     try {
       Connection conn = DataReader.getConnection();
       PreparedStatement prep = conn.prepareStatement("SELECT * FROM matches WHERE id=? AND matched=true");
+      if (includePasses) {
+        prep = conn.prepareStatement("SELECT * FROM matches WHERE id=?");
+      }
       prep.setInt(1, userId);
       ResultSet rs = prep.executeQuery();
       ArrayList<User> matches = new ArrayList<>();
@@ -183,6 +188,7 @@ public final class SQLcommands {
         prep2.setInt(1, rs.getInt("match_id"));
         ResultSet rs2 = prep2.executeQuery();
 
+<<<<<<< HEAD
         int id = rs2.getInt("id");
         String firstName = rs2.getString("first_name");
         String lastName = rs2.getString("last_name");
@@ -192,13 +198,28 @@ public final class SQLcommands {
         String images = rs2.getString("images");
         String major = rs2.getString("major");
         String bio = rs2.getString("bio");
+=======
+        ArrayList<String> userInfo = new ArrayList<String>();
+        ArrayList<Integer> idYear = new ArrayList<Integer>();
+
+        idYear.add(rs2.getInt("id"));
+        idYear.add(rs2.getInt("year"));
+
+        userInfo.add(rs2.getString("first_name"));
+        userInfo.add(rs2.getString("last_name"));
+        userInfo.add(rs2.getString("email"));
+        userInfo.add(rs2.getString("password"));
+        userInfo.add(rs2.getString("images"));
+        userInfo.add(rs2.getString("major"));
+        userInfo.add(rs2.getString("bio"));
+>>>>>>> 85422cf049b43f8da2556c5ec67c955b49e799ad
 
         int[] interests = new int[DataReader.getInterestCount()];
         for (int j = 0; j < interests.length; j++) {
           interests[j] = rs2.getInt(j + 8);
         }
 
-        User user = new User(id, firstName, lastName, email, password, year, interests, images, major, bio);
+        User user = new User(idYear, userInfo, interests);
         matches.add(user);
       }
       return matches;
@@ -209,25 +230,10 @@ public final class SQLcommands {
     }
   }
 
-  public static void addPass(int userId, int matchId) {
+  public static boolean isAMatchPass (int userId, int matchId) {
     try {
       Connection conn = DataReader.getConnection();
-      PreparedStatement prep = conn.prepareStatement("INSERT INTO matches VALUES (?,?,false)");
-      prep.setInt(1, userId);
-      prep.setInt(2, matchId);
-      prep.execute();
-      prep.close();
-      conn.close();
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.err.println("ERROR: Issue reading in SQL");
-    }
-  }
-
-  public static boolean isAMatch (int userId, int matchId) {
-    try {
-      Connection conn = DataReader.getConnection();
-      PreparedStatement prep = conn.prepareStatement("SELECT * FROM matches WHERE id=? AND match_id=? AND matched=true");
+      PreparedStatement prep = conn.prepareStatement("SELECT * FROM matches WHERE id=? AND match_id=?");
       prep.setInt(1, userId);
       prep.setInt(2, matchId);
       ResultSet rs = prep.executeQuery();
@@ -240,6 +246,19 @@ public final class SQLcommands {
       return false;
     }
     return false;
+  }
+
+  public static void removeAllPasses(int userId) {
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement("DELETE FROM matches WHERE id=? AND matched=false;");
+      prep.setInt(1, userId);
+      prep.execute();
+      prep.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+    }
   }
 
   public static int getUserId(String email, String password) {
@@ -298,22 +317,26 @@ public final class SQLcommands {
       prep.setInt(1, userId);
       ResultSet rs = prep.executeQuery();
       if (rs.next()) {
-        int id = rs.getInt("id");
-        String firstName = rs.getString("first_name");
-        String lastName = rs.getString("last_name");
-        String email = rs.getString("email");
-        String password = rs.getString("password");
-        int year = rs.getInt("year");
-        String images = rs.getString("images");
-        String major = rs.getString("major");
-        String bio = rs.getString("bio");
+        ArrayList<String> userInfo = new ArrayList<String>();
+        ArrayList<Integer> idYear = new ArrayList<Integer>();
+
+        idYear.add(rs.getInt("id"));
+        idYear.add(rs.getInt("year"));
+
+        userInfo.add(rs.getString("first_name"));
+        userInfo.add(rs.getString("last_name"));
+        userInfo.add(rs.getString("email"));
+        userInfo.add(rs.getString("password"));
+        userInfo.add(rs.getString("images"));
+        userInfo.add(rs.getString("major"));
+        userInfo.add(rs.getString("bio"));
 
         int[] interests = new int[DataReader.getInterestCount()];
         for (int j = 0; j < interests.length; j++) {
           interests[j] = rs.getInt(j + DataReader.getUserDataColumnLen() + 2);
         }
 
-        User user = new User(id, firstName, lastName, email, password, year, interests, images, major, bio);
+        User user = new User(idYear, userInfo, interests);
         return user;
       }
     } catch (Exception e) {
@@ -335,6 +358,33 @@ public final class SQLcommands {
       e.printStackTrace();
       System.err.println("ERROR: Issue reading in SQL");
       return "";
+    }
+  }
+
+  public static boolean addUser(String firstName, String lastName, String email, String password, double year, String major, String bio) {
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement(
+        "INSERT INTO user_data (first_name, last_name, email, password, year, major, bio) "
+          +  "VALUES (?,?,?,?,?,?,?);");
+      prep.setString(1, firstName);
+      prep.setString(2, lastName);
+      prep.setString(3, email);
+      prep.setString(4, password);
+      prep.setDouble(5, year);
+      prep.setString(6, major);
+      prep.setString(7, bio);
+      prep.execute();
+
+      prep = conn.prepareStatement("INSERT INTO user_interests (id) VALUES (last_insert_rowid())");
+      prep.execute();
+
+      prep.close();
+      return true;
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+      return false;
     }
   }
 }

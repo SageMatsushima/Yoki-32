@@ -142,6 +142,7 @@ public final class Main {
     Spark.get("/match", new MatchPageHandler(), freeMarker);
     Spark.get("/profileOverview", new ProfileOverviewHandler(), freeMarker);
     Spark.get("/yokimatch", new MatchHandler());
+    Spark.get("/signup", new SignupHandler(), freeMarker);
 
     Spark.post("/sendmatches", new MatchMapHandler());
     Spark.post("/sendmatch", new MatchMapHandler());
@@ -151,6 +152,7 @@ public final class Main {
     Spark.post("/updateInterests", new UpdateInterests());
     Spark.post("/login", new LoginHandler());
     Spark.post("/profileInfo", new ProfileInfo());
+    Spark.post("/addUser", new AddUser());
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
@@ -240,6 +242,7 @@ public final class Main {
       }
       Main.newKdTree();
       SQLcommands.update(currentId, interestsMap);
+      SQLcommands.removeAllPasses(currentId);
       ArrayList<String> dataReaderArgs = new ArrayList<>();
       dataReaderArgs.add("data");
       dataReaderArgs.add("data/smallData.sqlite");
@@ -366,6 +369,15 @@ public final class Main {
     }
   }
 
+  private static class SignupHandler implements TemplateViewRoute {
+    @Override
+    public ModelAndView handle(Request req, Response res) {
+
+      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      return new ModelAndView(variables.build(), "Signup.ftl");
+    }
+  }
+
   /**
    * Handler method for post request for matching with a user. Adds the matched user to matchSet.
    */
@@ -374,13 +386,14 @@ public final class Main {
     public String handle(Request req, Response res) throws Exception {
       JSONObject newMatch = new JSONObject(req.body());
       int matchId = newMatch.getInt("id");
+      boolean isMatch = newMatch.getBoolean("isMatch");
       for (User user: matches.getUserList()) {
         if ((user.getId()) == (matchId)) {
           matchSet.add(user);
           System.out.println("added");
         }
       }
-      SQLcommands.addMatch(currentId, matchId);
+      SQLcommands.addMatch(currentId, matchId, isMatch);
       //add match to db function with matchId
       return "";
     }
@@ -392,7 +405,7 @@ public final class Main {
   private class GetMatchesHandler implements Route {
     @Override
     public String handle(Request req, Response res) throws Exception {
-      Map<String, Object> variables = ImmutableMap.of("matchSet", SQLcommands.getAllMatches(currentId));
+      Map<String, Object> variables = ImmutableMap.of("matchSet", SQLcommands.getAllMatches(currentId, false));
       return GSON.toJson(variables);
     }
   }
@@ -403,10 +416,12 @@ public final class Main {
       JSONObject newMatch = new JSONObject(req.body());
       int matchId = newMatch.getInt("id");
       User matched = null;
-      for (User user: matches.getUserList()) {
-        if ((user.getId()) == (matchId)) {
+      System.out.println(matchId + "matchID");
+      for (User user: SQLcommands.getAllMatches(currentId)) {
+        System.out.println(user.getId());
+        if ((int) (user.getId()) == (int) (matchId)) {
           matched = user;
-          System.out.println(user.getName() + " matched");
+          System.out.println(user.getName() + " matched in matchset");
         }
       }
       if (matched != null) {
@@ -417,13 +432,38 @@ public final class Main {
         interestsArgs.add(matched.getId() + "");
         ir.action(interestsArgs);
         ArrayList<Interest> topCommonInterests = ir.getTopInterests().get(0);
-        ArrayList<Interest> topOtherInterests = ir.getTopInterests().get(1);
 
         Map<String, Object> variables = ImmutableMap.of(
-                "topCommonInterests", topCommonInterests, "topOtherInterests", topOtherInterests);
+                "topCommonInterests", topCommonInterests);
         return GSON.toJson(variables);
       }
-      return "null";
+      Map<String, Object> variables = ImmutableMap.of(
+              "topCommonInterests", "hi", "topOtherInterests", "hi");
+      return GSON.toJson(variables);
+    }
+  }
+
+  private class AddUser implements Route {
+    @Override
+    public String handle(Request req, Response res) throws Exception {
+      JSONObject newMatch = new JSONObject(req.body());
+      String firstName = newMatch.getString("firstName");
+      String lastName = newMatch.getString("lastName");
+      String email = newMatch.getString("email");
+      String password = newMatch.getString("password");
+      String key = "gudetama";
+      password = Encrypt.encrypt(password, key);
+      double year = newMatch.getDouble("year");
+      String major = newMatch.getString("major");
+      String bio = newMatch.getString("bio");
+
+      if (SQLcommands.addUser(firstName, lastName, email, password, year, major, bio)) {
+        Map<String, Object> variables = ImmutableMap.of("success", "true");
+        currentId = SQLcommands.getUserId(email, password);
+        return GSON.toJson(variables);
+      }
+      Map<String, Object> variables = ImmutableMap.of("success", "false");
+      return GSON.toJson(variables);
     }
   }
 

@@ -10,8 +10,13 @@
         <div id="login-status">Incorrect login information!</div>
 
         <button type="submit" class="button" id="login-button" onclick="onLoginPressed()">Login</button>
+        <br>
+        <div id="signup-redir-wrapper">
+            <h6 class="no-account">Dont have an account?</h6>
+            <a class="no-account" href="/signup"><h6 id="signup-link">Sign up</h6></a>
+        </div>
     </div>
-    <input type="file" onchange="convert(this.files[0].text())">
+<#--    <input type="file" onchange="convert(this.files[0].text())">-->
 </#assign>
 
 <!DOCTYPE html>

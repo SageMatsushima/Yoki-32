@@ -53,15 +53,12 @@ html {
     display: flex;
     flex-direction: row;
     padding: 5%;
+    justify-content: space-between;
 }
 
-#right-content {
-    margin-right: 5%;
-}
 
 #match_image{
     height: 30vw;
-    margin-left: 10%;
     top: 118px;
     border-radius: 30px;
 }
@@ -186,10 +183,6 @@ progress.interestBar {
     margin-left: 2vw;
 }
 
-progress[value] {
-    color: #bc9e26;
-}
-
 ul {
     font-size: 1.25vw;
     padding-left: .5vw;
@@ -256,5 +249,24 @@ ul {
 
 h2 {
     margin-left: 10vw;
+}
+
+#match_image {
+    height: 50vh;
+    width: 25vw;
+    object-fit: cover;
+}
+
+#matchCard {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 3%;
+    padding-bottom: 2%;
 }
 

@@ -40,8 +40,12 @@
                 <div id="picture"><img src="">Picture</div>
             </div>
             <div id="subjects">
-                <h3 id = "searchTitle">Interest Search</h3>
-                <input type="text" id="myInput" onkeyup="serach()" placeholder="Search for ineterests.." title="Type in an ineterest">
+                <div id="subjects-header">
+                    <input type="text" id="search-bar" onkeyup="search()" placeholder="Search for ineterests to add..." title="Type in an ineterest">
+                </div>
+                    <div id="subjects-list">
+
+                    </div>
             </div>
         </div>
 

@@ -15,7 +15,8 @@
       <div id = "left-content">
         <div id = "name_info">
           <h1 id="match-name">Kendall</h1>
-          <h3 id="match-grade">Class of 2023</h3>
+          <i><h5 id="match-major">Undecided</h5></i>
+          <h5 id="match-grade">Class of 2023</h5>
         </div>
         <div id = "top_interests">
           <h3>Common Interests</h3>
@@ -49,13 +50,13 @@
 </#assign>
 
 <#assign matchButton>
- <button class = "button" id="match-button" onclick="onMatchPressed()">
+ <button class = "button" id="match-button" onclick="onMatchPressed(true)">
    match
  </button>
 </#assign>
 
 <#assign passButton>
-  <button class = "button" id="pass-button" onclick="getNextMatch()">
+  <button class = "button" id="pass-button" onclick="onMatchPressed(false)">
     pass
   </button>
 </#assign>

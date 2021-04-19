@@ -12,7 +12,10 @@ function getUserInfo() {
             response.json())
         .then((data) => {
             setUser(data.user);
+<<<<<<< HEAD
             console.log(data.user);
+=======
+>>>>>>> 85422cf049b43f8da2556c5ec67c955b49e799ad
 
         })
         .catch(function (error) {
@@ -23,6 +26,10 @@ function getUserInfo() {
 function setUser(user) {
     document.getElementById("firstInput").value = user.firstName;
     document.getElementById("lastInput").value = user.lastName;
+<<<<<<< HEAD
+=======
+    document.getElementById("pronounInput").value = user.pronouns;
+>>>>>>> 85422cf049b43f8da2556c5ec67c955b49e799ad
     document.getElementById("majorInput").value = user.major;
     document.getElementById("gradYearInput").value = user.year;
     document.getElementById("emailInput").value = user.email;
@@ -34,6 +41,10 @@ function updateProfile() {
     const postParameters = {
         first: document.getElementById("firstInput").value,
         last: document.getElementById("lastInput").value,
+<<<<<<< HEAD
+=======
+        pronouns: document.getElementById("pronounInput").value,
+>>>>>>> 85422cf049b43f8da2556c5ec67c955b49e799ad
         major: document.getElementById("majorInput").value,
         gradYear: document.getElementById("gradYearInput").value,
         email: document.getElementById("emailInput").value,

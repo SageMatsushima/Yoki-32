@@ -61,7 +61,7 @@ function allInterests() {
                 interest.className = "subject";
                 interest.id = key;
                 interest.innerHTML = value.name;
-                document.getElementById("subjects").appendChild(interest);
+                document.getElementById("subjects-list").appendChild(interest);
             }
             return data;
         })
@@ -72,13 +72,14 @@ function allInterests() {
 
 function search() {
     var input, filter, subjects, btns, a, i, txtValue;
-    input = document.getElementById("myInput");
+    input = document.getElementById("search-bar");
     filter = input.value.toUpperCase();
-    subjects = document.getElementById("subjects");
+    subjects = document.getElementById("subjects-list");
     btns = subjects.getElementsByTagName("button");
     for (i = 0; i < btns.length; i++) {
-        a = btns[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
+        // a = btns[i].getElementsByTagName("a")[0];
+        // txtValue = a.textContent || a.innerText;
+        txtValue = btns[i].innerText
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             btns[i].style.display = "";
         } else {

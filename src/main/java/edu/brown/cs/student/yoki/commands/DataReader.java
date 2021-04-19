@@ -106,15 +106,19 @@ public class DataReader implements TriggerAction {
       }
 
       while (rs1.next()) {
-        int id = rs1.getInt("id");
-        String firstName = rs1.getString("first_name");
-        String lastName = rs1.getString("last_name");
-        String email = rs1.getString("email");
-        String password = rs1.getString("password");
-        int year = rs1.getInt("year");
-        String images = rs1.getString("images");
-        String major = rs1.getString("major");
-        String bio = rs1.getString("bio");
+        ArrayList<String> userInfo = new ArrayList<String>();
+        ArrayList<Integer> idYear = new ArrayList<Integer>();
+
+        idYear.add(rs1.getInt("id"));
+        idYear.add(rs1.getInt("year"));
+
+        userInfo.add(rs1.getString("first_name"));
+        userInfo.add(rs1.getString("last_name"));
+        userInfo.add(rs1.getString("email"));
+        userInfo.add(rs1.getString("password"));
+        userInfo.add(rs1.getString("images"));
+        userInfo.add(rs1.getString("major"));
+        userInfo.add(rs1.getString("bio"));
 
         int[] interests = new int[interestCount];
         for (int j = 0; j < interests.length; j++) {
@@ -123,12 +127,12 @@ public class DataReader implements TriggerAction {
           convert.put(j + userDataColumnLen + 2, new Interest(j + userDataColumnLen + 2, tag));
         }
 
-        User user = new User(id, firstName, lastName, email, password, year, interests, images, major, bio);
-        if (id == Main.getCurrentId()) {
+        User user = new User(idYear, userInfo, interests);
+        if (idYear.get(0) == Main.getCurrentId()) {
           currentUser = user;
         }
 
-        if (!SQLcommands.isAMatch(Main.getCurrentId(), id)) {
+        if (!SQLcommands.isAMatchPass(Main.getCurrentId(), idYear.get(0))) {
           userList.add(user);
           System.out.println(user.toString());
         }

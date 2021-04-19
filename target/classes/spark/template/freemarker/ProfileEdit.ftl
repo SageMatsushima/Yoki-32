@@ -9,8 +9,14 @@
 </#assign>
 
 <#assign save>
+<<<<<<< HEAD
     <button id="match-button" class="save" onclick="updateProfile()">Save</button>
+=======
+    <button id="save" onclick="updateProfile()">Save</button>
+>>>>>>> 85422cf049b43f8da2556c5ec67c955b49e799ad
 </#assign>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +35,12 @@
             <div id="inputs">
                 <div id="first">First Name<br><input id= "firstInput" type="text"></div>
                 <div id="last">Last Name<br><input id= "lastInput" type="text"></div>
+<<<<<<< HEAD
+=======
+                <div id="pronouns">Pronouns<br><label>
+                    <input id= "pronounInput" type="text">
+                </label></div><br>
+>>>>>>> 85422cf049b43f8da2556c5ec67c955b49e799ad
                 <div id="major">Major<br><input id= "majorInput" type="text"></div>
                 <div id="gradYear">Grad Year<br><input id= "gradYearInput" type="text"></div><br>
                 <div id="email">Email<br><input id= "emailInput" type="text"></div> <br>
