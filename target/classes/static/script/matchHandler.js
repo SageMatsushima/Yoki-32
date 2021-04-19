@@ -43,8 +43,13 @@ function getNextMatch(){
         .then((response) =>
             response.json())
         .then((data) => {
-            let matchImage = document.getElementById("match_image");
-            // matchImage.onload = function() {
+            if (data != null) {
+                console.log("matches")
+                document.getElementById("no-matches-msg").style.display = "none";
+                document.getElementById("card_content").style.display = "flex";
+
+                let matchImage = document.getElementById("match_image");
+                // matchImage.onload = function() {
                 matchImage.style.opacity = 100;
 
                 let matchName = document.getElementById('match-name');
@@ -76,11 +81,16 @@ function getNextMatch(){
                     console.log(progressBars[i])
                     move(progressBars[i],  data.topCommonInterests[i].score)
                 }
-            // }
+                // }
 
-            //matchMajor.innerHTML = response.data.major;
-            matchImage.src = data.user.images;
-            return data;
+                //matchMajor.innerHTML = response.data.major;
+                matchImage.src = data.user.images;
+                return data;
+            } else {
+                console.log("no matches")
+                document.getElementById("no-matches-msg").style.display = "block";
+                document.getElementById("card_content").style.display = "none";
+            }
         })
         .catch(function (error) {
             console.log(error);

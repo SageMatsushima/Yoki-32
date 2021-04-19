@@ -154,6 +154,8 @@ public final class Main {
     Spark.post("/profileInfo", new ProfileInfo());
     Spark.post("/addUser", new AddUser());
     Spark.post("/deleteMatch", new DeleteMatch());
+    Spark.post("/updateUser", new UpdateUser());
+
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
@@ -477,6 +479,29 @@ public final class Main {
       SQLcommands.deleteMatch(currentId, matchID);
 
       Map<String, Object> variables = ImmutableMap.of("matchSet", SQLcommands.getAllMatches(currentId, false));
+      return GSON.toJson(variables);
+    }
+  }
+
+  private class UpdateUser implements Route {
+    @Override
+    public String handle(Request req, Response res) throws Exception {
+      JSONObject updateUser = new JSONObject(req.body());
+      String firstName = updateUser.getString("firstName");
+      String lastName = updateUser.getString("lastName");
+      String major = updateUser.getString("major");
+      Double year = updateUser.getDouble("year");
+      String bio = updateUser.getString("bio");
+      String email = updateUser.getString("email");
+      String image = updateUser.getString("image");
+
+      System.out.println("updating " + currentId);
+
+      if (SQLcommands.editProfile(currentId, firstName, lastName, major, year, bio, email, image)) {
+        Map<String, Object> variables = ImmutableMap.of("success", "true");
+        return GSON.toJson(variables);
+      }
+      Map<String, Object> variables = ImmutableMap.of("success", "false");
       return GSON.toJson(variables);
     }
   }
