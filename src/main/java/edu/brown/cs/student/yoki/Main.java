@@ -10,6 +10,7 @@ import edu.brown.cs.student.yoki.commands.*;
 import edu.brown.cs.student.yoki.driver.*;
 
 import com.google.gson.Gson;
+import edu.brown.cs.student.yoki.util.NaiveMatch;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,6 +49,7 @@ public final class Main {
   private static InterestsReader interestsReader = new InterestsReader();
   private static UserReader userReader = new UserReader();
   private static Encrypt encrypt = new Encrypt();
+  private static NaiveMatch naiveMatch = new NaiveMatch();
 
 
   private List<User> users = new ArrayList<>();
@@ -97,6 +99,7 @@ public final class Main {
     repl.addAction("match", matches);
     repl.addAction("user", userReader);
     repl.addAction("encrypt", encrypt);
+    repl.addAction("naive", naiveMatch);
 
     repl.run();
   }

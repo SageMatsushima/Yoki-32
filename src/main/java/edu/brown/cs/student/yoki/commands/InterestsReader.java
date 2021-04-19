@@ -61,6 +61,14 @@ public class InterestsReader implements TriggerAction {
     return userInterests;
   }
 
+  public int[] getInterestsList() {
+    int[] output = new int[userInterests.size()];
+    for (int i = 0; i < userInterests.size(); i++) {
+      output[i] = userInterests.get(i);
+    }
+    return output;
+  }
+
   public ArrayList<ArrayList<Interest>>  getTopInterests() {
     HashMap<Integer, Interest> converter = DataReader.getConvert();
     ArrayList<Interest> topCommonInterests = new ArrayList<>();
@@ -81,7 +89,6 @@ public class InterestsReader implements TriggerAction {
     topOtherInterests.sort(new DistComparator());
     topInterests.add(topCommonInterests);
     topInterests.add(topOtherInterests);
-
     return topInterests;
   }
 

@@ -263,16 +263,15 @@ ul {
     width: 100%;
     overflow: scroll;
     overflow-x: hidden;
-<<<<<<< HEAD
+
     height: 80vh;
     margin-left: 2vw;
-=======
+
     align-items: center;
     justify-content: center;
     padding-top: 2%;
     height: 91vh;
     padding-bottom: 2%;
->>>>>>> 4383e7e5e66a994406aa0a79279a5a0b4b2b8cda
 }
 
 .match{
@@ -288,7 +287,7 @@ h2 {
     height: 50vh;
     width: 25vw;
     object-fit: cover;
-    margin-left: 2.5vw;
+    /*margin-left: 2.5vw;*/
 }
 
 #matchCard {
