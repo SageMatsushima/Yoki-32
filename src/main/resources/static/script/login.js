@@ -2,8 +2,6 @@ function onLoginPressed() {
     let email = document.getElementById("login-email").value
     let password = document.getElementById("login-password").value
     requestLogin(email, encrypt(password))
-
-    console.log('encStr', encrypt(password));
 }
 
 function encrypt(text) {

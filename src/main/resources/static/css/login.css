@@ -20,8 +20,14 @@
 }
 
 #login-button {
-    background-color: #FFE0A4;
+    background-color: #ffe0a4;
     color: #C97800;
+    width: 480px;
+    height: 7vh;
+}
+
+#login-button:hover {
+    cursor: pointer;
 }
 
 #login-button:focus {outline:0;}
@@ -37,6 +43,17 @@ input,textarea, #signup-year{
     border: 10px solid white;
     /*background-color: ;*/
     vertical-align: center;
+}
+.no-account{
+    display: inline-block;
+}
+
+#signup-redir-wrapper{
+    text-align: center;
+}
+
+#signup-link{
+    color: #C97800;
 }
 
 #signup-year {

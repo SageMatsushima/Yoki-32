@@ -1,3 +1,4 @@
+
 function onSignupPressed() {
     let firstName = document.getElementById("signup-first-name").value
     let lastName = document.getElementById("signup-last-name").value
@@ -20,7 +21,6 @@ function onSignupPressed() {
         requestSignup(postPara)
     }
 }
-
 
 function validateFields() {
     let firstName = document.getElementById("signup-first-name").value
@@ -66,7 +66,7 @@ function encrypt(text) {
 }
 
 function requestSignup(postPara) {
-    fetch('http://localhost:4567/signup', {
+    fetch('http://localhost:4567/addUser', {
         method: 'post',
         body: JSON.stringify(postPara),
         headers: {
@@ -77,7 +77,7 @@ function requestSignup(postPara) {
             response.json())
         .then((data) => {
             console.log(data);
-            if (data.authenticated == "true") {
+            if (data.success == "true") {
                 window.location.href = "/main";
             } else {
                 document.getElementById("signup-status").innerText = "Email is already taken!";
