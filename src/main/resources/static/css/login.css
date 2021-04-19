@@ -26,6 +26,10 @@
     height: 7vh;
 }
 
+#login-button:hover {
+    cursor: pointer;
+}
+
 #login-button:focus {outline:0;}
 
 input,textarea, #signup-year{

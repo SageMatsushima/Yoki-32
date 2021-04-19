@@ -3,20 +3,21 @@ let currUser;
 window.onload = getNextMatch();
 
 
-function onMatchPressed() {
+function onMatchPressed(isMatch) {
     getNextMatch();
     console.log(currUser);
     matchMap.set(currUser.firstName, currUser);
     console.log(matchMap);
-    setBackMatch();
+    setBackMatch(isMatch);
 }
 
-function setBackMatch() {
+function setBackMatch(isMatch) {
     const postParameters = {
         //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
         id: currUser.id,
         first: currUser.firstName,
-        last: currUser.lastName
+        last: currUser.lastName,
+        isMatch: isMatch
     };
 
     fetch('http://localhost:4567/sendmatch', {

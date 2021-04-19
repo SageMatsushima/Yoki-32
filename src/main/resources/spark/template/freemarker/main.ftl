@@ -50,13 +50,13 @@
 </#assign>
 
 <#assign matchButton>
- <button class = "button" id="match-button" onclick="onMatchPressed()">
+ <button class = "button" id="match-button" onclick="onMatchPressed(true)">
    match
  </button>
 </#assign>
 
 <#assign passButton>
-  <button class = "button" id="pass-button" onclick="getNextMatch()">
+  <button class = "button" id="pass-button" onclick="onMatchPressed(false)">
     pass
   </button>
 </#assign>

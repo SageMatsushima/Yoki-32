@@ -132,7 +132,7 @@ public class DataReader implements TriggerAction {
           currentUser = user;
         }
 
-        if (!SQLcommands.isAMatch(Main.getCurrentId(), idYear.get(0))) {
+        if (!SQLcommands.isAMatchPass(Main.getCurrentId(), idYear.get(0))) {
           userList.add(user);
           System.out.println(user.toString());
         }

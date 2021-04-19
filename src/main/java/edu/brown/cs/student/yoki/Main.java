@@ -242,6 +242,7 @@ public final class Main {
       }
       Main.newKdTree();
       SQLcommands.update(currentId, interestsMap);
+      SQLcommands.removeAllPasses(currentId);
       ArrayList<String> dataReaderArgs = new ArrayList<>();
       dataReaderArgs.add("data");
       dataReaderArgs.add("data/smallData.sqlite");
@@ -385,13 +386,14 @@ public final class Main {
     public String handle(Request req, Response res) throws Exception {
       JSONObject newMatch = new JSONObject(req.body());
       int matchId = newMatch.getInt("id");
+      boolean isMatch = newMatch.getBoolean("isMatch");
       for (User user: matches.getUserList()) {
         if ((user.getId()) == (matchId)) {
           matchSet.add(user);
           System.out.println("added");
         }
       }
-      SQLcommands.addMatch(currentId, matchId);
+      SQLcommands.addMatch(currentId, matchId, isMatch);
       //add match to db function with matchId
       return "";
     }
@@ -403,7 +405,7 @@ public final class Main {
   private class GetMatchesHandler implements Route {
     @Override
     public String handle(Request req, Response res) throws Exception {
-      Map<String, Object> variables = ImmutableMap.of("matchSet", SQLcommands.getAllMatches(currentId));
+      Map<String, Object> variables = ImmutableMap.of("matchSet", SQLcommands.getAllMatches(currentId, false));
       return GSON.toJson(variables);
     }
   }

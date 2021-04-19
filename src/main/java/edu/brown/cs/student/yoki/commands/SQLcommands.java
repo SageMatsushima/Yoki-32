@@ -149,16 +149,18 @@ public final class SQLcommands {
     }
   }
 
-  public static void addMatch(int userId, int matchId) {
+  public static void addMatch(int userId, int matchId, boolean isMatch) {
     try {
       Connection conn = DataReader.getConnection();
-      PreparedStatement prep = conn.prepareStatement("INSERT INTO matches VALUES (?,?,true)");
+      PreparedStatement prep = conn.prepareStatement("INSERT INTO matches VALUES (?,?,?)");
       prep.setInt(1, userId);
       prep.setInt(2, matchId);
+      prep.setBoolean(3, isMatch);
 
-      PreparedStatement prep2 = conn.prepareStatement("SELECT * FROM matches WHERE id=? AND match_id=? AND matched=true");
+      PreparedStatement prep2 = conn.prepareStatement("SELECT * FROM matches WHERE id=? AND match_id=? AND matched=?");
       prep2.setInt(1, userId);
       prep2.setInt(2, matchId);
+      prep2.setBoolean(3, isMatch);
       ResultSet rs2 = prep2.executeQuery();
       if (!rs2.next()) {
         prep.execute();
@@ -171,10 +173,13 @@ public final class SQLcommands {
     }
   }
 
-  public static ArrayList<User> getAllMatches(int userId) {
+  public static ArrayList<User> getAllMatches(int userId, boolean includePasses) {
     try {
       Connection conn = DataReader.getConnection();
       PreparedStatement prep = conn.prepareStatement("SELECT * FROM matches WHERE id=? AND matched=true");
+      if (includePasses) {
+        prep = conn.prepareStatement("SELECT * FROM matches WHERE id=?");
+      }
       prep.setInt(1, userId);
       ResultSet rs = prep.executeQuery();
       ArrayList<User> matches = new ArrayList<>();
@@ -213,25 +218,10 @@ public final class SQLcommands {
     }
   }
 
-  public static void addPass(int userId, int matchId) {
+  public static boolean isAMatchPass (int userId, int matchId) {
     try {
       Connection conn = DataReader.getConnection();
-      PreparedStatement prep = conn.prepareStatement("INSERT INTO matches VALUES (?,?,false)");
-      prep.setInt(1, userId);
-      prep.setInt(2, matchId);
-      prep.execute();
-      prep.close();
-      conn.close();
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.err.println("ERROR: Issue reading in SQL");
-    }
-  }
-
-  public static boolean isAMatch (int userId, int matchId) {
-    try {
-      Connection conn = DataReader.getConnection();
-      PreparedStatement prep = conn.prepareStatement("SELECT * FROM matches WHERE id=? AND match_id=? AND matched=true");
+      PreparedStatement prep = conn.prepareStatement("SELECT * FROM matches WHERE id=? AND match_id=?");
       prep.setInt(1, userId);
       prep.setInt(2, matchId);
       ResultSet rs = prep.executeQuery();
@@ -244,6 +234,19 @@ public final class SQLcommands {
       return false;
     }
     return false;
+  }
+
+  public static void removeAllPasses(int userId) {
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement("DELETE FROM matches WHERE id=? AND matched=false;");
+      prep.setInt(1, userId);
+      prep.execute();
+      prep.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+    }
   }
 
   public static int getUserId(String email, String password) {
