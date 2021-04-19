@@ -240,6 +240,7 @@ ul {
     overflow: scroll;
     overflow-x: hidden;
     height: 80vh;
+    margin-left: 2vw;
 }
 
 .match{
@@ -255,6 +256,7 @@ h2 {
     height: 50vh;
     width: 25vw;
     object-fit: cover;
+    margin-left: 2.5vw;
 }
 
 #matchCard {
@@ -268,5 +270,15 @@ h2 {
     justify-content: center;
     padding-top: 3%;
     padding-bottom: 2%;
+    margin-left: 4vw;
+}
+
+#left-content {
+    overflow: auto;
+    height: 30vw;
+}
+
+h1 {
+    margin-left: 2vw;
 }
 

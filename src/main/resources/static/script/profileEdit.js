@@ -12,6 +12,7 @@ function getUserInfo() {
             response.json())
         .then((data) => {
             setUser(data.user);
+            getPicture(data.user);
             console.log(data.user);
 
         })
@@ -50,3 +51,33 @@ function updateProfile() {
             console.log(error);
         });
 }
+
+function getPicture(user) {
+    const div = document.getElementById("picDiv");
+    const picture = document.createElement("img");
+    picture.id = "picture"
+    picture.src = user.images;
+
+
+    const change = document.createElement("button");
+    change.id = "match-button";
+    change.className = "changePic";
+    const pic = document.createElement("img");
+    pic.src = "images/camera.png"
+    pic.id = "camera";
+    picture.append(change);
+
+    change.append(pic);
+
+    const saveButton = document.createElement("button");
+    saveButton.className = "save";
+    saveButton.innerText = "Save";
+    saveButton.id = "match-button";
+    saveButton.onclick = function() { updateProfile(); };
+
+    div.append(change);
+    div.append(picture);
+    div.append(saveButton);
+
+}
+
