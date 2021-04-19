@@ -60,6 +60,9 @@ function getNextMatch(){
                 topInterests.innerHTML += intDiv;
             }
 
+            let matchImage = document.getElementById("match_image");
+            matchImage.src = data.user.images;
+
             let progressBars = document.getElementsByTagName('progress');
             for (i = 0; i < progressBars.length; i++) {
                 console.log(progressBars[i])
