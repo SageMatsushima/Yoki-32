@@ -153,6 +153,7 @@ public final class Main {
     Spark.post("/login", new LoginHandler());
     Spark.post("/profileInfo", new ProfileInfo());
     Spark.post("/addUser", new AddUser());
+    Spark.post("/deleteMatch", new DeleteMatch());
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
@@ -463,6 +464,19 @@ public final class Main {
         return GSON.toJson(variables);
       }
       Map<String, Object> variables = ImmutableMap.of("success", "false");
+      return GSON.toJson(variables);
+    }
+  }
+
+  private class DeleteMatch implements Route {
+    @Override
+    public String handle(Request req, Response res) throws Exception {
+      JSONObject matchToDelete = new JSONObject(req.body());
+      int matchID = matchToDelete.getInt("id");
+      System.out.println("deleting " + matchID);
+      SQLcommands.deleteMatch(currentId, matchID);
+
+      Map<String, Object> variables = ImmutableMap.of("matchSet", SQLcommands.getAllMatches(currentId, false));
       return GSON.toJson(variables);
     }
   }
