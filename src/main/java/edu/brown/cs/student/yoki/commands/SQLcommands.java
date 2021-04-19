@@ -189,9 +189,9 @@ public final class SQLcommands {
         String email = rs2.getString("email");
         String password = rs2.getString("password");
         int year = rs2.getInt("year");
-        String images = rs.getString("images");
-        String major = rs.getString("major");
-        String bio = rs.getString("bio");
+        String images = rs2.getString("images");
+        String major = rs2.getString("major");
+        String bio = rs2.getString("bio");
 
         int[] interests = new int[DataReader.getInterestCount()];
         for (int j = 0; j < interests.length; j++) {

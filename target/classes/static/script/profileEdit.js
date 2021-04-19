@@ -12,6 +12,7 @@ function getUserInfo() {
             response.json())
         .then((data) => {
             setUser(data.user);
+            console.log(data.user);
 
         })
         .catch(function (error) {
@@ -22,7 +23,6 @@ function getUserInfo() {
 function setUser(user) {
     document.getElementById("firstInput").value = user.firstName;
     document.getElementById("lastInput").value = user.lastName;
-    document.getElementById("pronounInput").value = user.pronouns;
     document.getElementById("majorInput").value = user.major;
     document.getElementById("gradYearInput").value = user.year;
     document.getElementById("emailInput").value = user.email;
@@ -34,7 +34,6 @@ function updateProfile() {
     const postParameters = {
         first: document.getElementById("firstInput").value,
         last: document.getElementById("lastInput").value,
-        pronouns: document.getElementById("pronounInput").value,
         major: document.getElementById("majorInput").value,
         gradYear: document.getElementById("gradYearInput").value,
         email: document.getElementById("emailInput").value,
