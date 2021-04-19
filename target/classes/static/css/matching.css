@@ -24,7 +24,15 @@ html {
 }
 
 #potential_card {
+<<<<<<< HEAD
     max-width: 65%;
+=======
+<<<<<<< HEAD
+    max-width: 65%;
+=======
+    max-width: 70%;
+>>>>>>> 3a0e705aec1b98f5ba3f9cf1ec9883fb8f157492
+>>>>>>> 8af62069d80612097dd820f82314b976c6f94221
 
     background: #FFFFFF;
     box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
