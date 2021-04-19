@@ -12,10 +12,8 @@ function getUserInfo() {
             response.json())
         .then((data) => {
             setUser(data.user);
-<<<<<<< HEAD
+            getPicture(data.user);
             console.log(data.user);
-=======
->>>>>>> 85422cf049b43f8da2556c5ec67c955b49e799ad
 
         })
         .catch(function (error) {
@@ -26,10 +24,6 @@ function getUserInfo() {
 function setUser(user) {
     document.getElementById("firstInput").value = user.firstName;
     document.getElementById("lastInput").value = user.lastName;
-<<<<<<< HEAD
-=======
-    document.getElementById("pronounInput").value = user.pronouns;
->>>>>>> 85422cf049b43f8da2556c5ec67c955b49e799ad
     document.getElementById("majorInput").value = user.major;
     document.getElementById("gradYearInput").value = user.year;
     document.getElementById("emailInput").value = user.email;
@@ -41,10 +35,6 @@ function updateProfile() {
     const postParameters = {
         first: document.getElementById("firstInput").value,
         last: document.getElementById("lastInput").value,
-<<<<<<< HEAD
-=======
-        pronouns: document.getElementById("pronounInput").value,
->>>>>>> 85422cf049b43f8da2556c5ec67c955b49e799ad
         major: document.getElementById("majorInput").value,
         gradYear: document.getElementById("gradYearInput").value,
         email: document.getElementById("emailInput").value,
@@ -61,3 +51,33 @@ function updateProfile() {
             console.log(error);
         });
 }
+
+function getPicture(user) {
+    const div = document.getElementById("picDiv");
+    const picture = document.createElement("img");
+    picture.id = "picture"
+    picture.src = user.images;
+
+
+    const change = document.createElement("button");
+    change.id = "match-button";
+    change.className = "changePic";
+    const pic = document.createElement("img");
+    pic.src = "images/camera.png"
+    pic.id = "camera";
+    picture.append(change);
+
+    change.append(pic);
+
+    const saveButton = document.createElement("button");
+    saveButton.className = "save";
+    saveButton.innerText = "Save";
+    saveButton.id = "match-button";
+    saveButton.onclick = function() { updateProfile(); };
+
+    div.append(change);
+    div.append(picture);
+    div.append(saveButton);
+
+}
+

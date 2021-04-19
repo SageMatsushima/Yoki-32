@@ -1,6 +1,6 @@
 <#assign nav>
 <nav>
-    <a href="/main"><img src="/images/whiteLogo.png" id="logo"></a>
+    <a href="/main"><img src="/images/whiteLogo.png" id="logo" alt="Yoki Logo"></a>
     <a href="/main"><div class="sidebar">Home</div></a>
     <a href="/match"><div class="sidebar">Matches</div></a>
     <a href="/profileOverview"><div class="sidebar">My Profile</div></a>
@@ -8,21 +8,11 @@
 </nav>
 </#assign>
 
-<#assign save>
-<<<<<<< HEAD
-    <button id="match-button" class="save" onclick="updateProfile()">Save</button>
-=======
-    <button id="save" onclick="updateProfile()">Save</button>
->>>>>>> 85422cf049b43f8da2556c5ec67c955b49e799ad
-</#assign>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Your Profile</title>
     <link rel="stylesheet" href="css/profileEdit.css">
     <link rel="stylesheet" href="css/matching.css">
 </head>
@@ -35,22 +25,12 @@
             <div id="inputs">
                 <div id="first">First Name<br><input id= "firstInput" type="text"></div>
                 <div id="last">Last Name<br><input id= "lastInput" type="text"></div>
-<<<<<<< HEAD
-=======
-                <div id="pronouns">Pronouns<br><label>
-                    <input id= "pronounInput" type="text">
-                </label></div><br>
->>>>>>> 85422cf049b43f8da2556c5ec67c955b49e799ad
                 <div id="major">Major<br><input id= "majorInput" type="text"></div>
                 <div id="gradYear">Grad Year<br><input id= "gradYearInput" type="text"></div><br>
                 <div id="email">Email<br><input id= "emailInput" type="text"></div> <br>
                 <div id="bio">Bio<br><textarea id= "bioBox" type="text"></textarea></div>
             </div>
-            <div id="picture">
-                <img id = "profilePic" src="./images/kendall.jpg">
-<#--                <img id = "profilePic" src="https://i.pinimg.com/originals/59/af/39/59af39192d3f0cbf7a89bcaf534ccd82.png">-->
-                <button id="changePic">Picture icon</button><br>
-                ${save}
+            <div id="picDiv">
             </div>
         </div>
     </div>
