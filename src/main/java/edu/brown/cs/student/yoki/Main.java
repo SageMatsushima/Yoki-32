@@ -154,12 +154,8 @@ public final class Main {
     Spark.post("/profileInfo", new ProfileInfo());
     Spark.post("/addUser", new AddUser());
     Spark.post("/deleteMatch", new DeleteMatch());
-<<<<<<< HEAD
     Spark.post("/report", new Report());
-=======
     Spark.post("/updateUser", new UpdateUser());
-
->>>>>>> d90591affe334db59397c64c20e720dccd5215bd
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
@@ -487,7 +483,6 @@ public final class Main {
     }
   }
 
-<<<<<<< HEAD
   private class Report implements Route {
     @Override
     public String handle(Request req, Response res) throws Exception {
@@ -502,7 +497,10 @@ public final class Main {
       SQLcommands.addReport(currentId, reportedId, report);
 
       Map<String, Object> variables = ImmutableMap.of("reported", "true");
-=======
+      return GSON.toJson(variables);
+    }
+  }
+
   private class UpdateUser implements Route {
     @Override
     public String handle(Request req, Response res) throws Exception {
@@ -522,7 +520,6 @@ public final class Main {
         return GSON.toJson(variables);
       }
       Map<String, Object> variables = ImmutableMap.of("success", "false");
->>>>>>> d90591affe334db59397c64c20e720dccd5215bd
       return GSON.toJson(variables);
     }
   }

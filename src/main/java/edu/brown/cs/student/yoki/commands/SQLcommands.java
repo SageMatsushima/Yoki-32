@@ -365,7 +365,6 @@ public final class SQLcommands {
     }
   }
 
-<<<<<<< HEAD
   public static int getIdByEmail(String email) {
     try {
       Connection conn = DataReader.getConnection();
@@ -398,7 +397,9 @@ public final class SQLcommands {
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println("ERROR: Issue reading in SQL");
-=======
+    }
+  }
+
   public static boolean editProfile(int id, String firstName, String lastName, String major, Double year, String bio, String email, String image) {
     try {
       Connection conn = DataReader.getConnection();
@@ -419,7 +420,6 @@ public final class SQLcommands {
       e.printStackTrace();
       System.err.println("ERROR: Issue reading in SQL");
       return false;
->>>>>>> d90591affe334db59397c64c20e720dccd5215bd
     }
   }
 }
