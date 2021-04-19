@@ -44,7 +44,7 @@ function getNextMatch(){
             response.json())
         .then((data) => {
             let matchImage = document.getElementById("match_image");
-            matchImage.onload = function() {
+            // matchImage.onload = function() {
                 matchImage.style.opacity = 100;
 
                 let matchName = document.getElementById('match-name');
@@ -76,7 +76,7 @@ function getNextMatch(){
                     console.log(progressBars[i])
                     move(progressBars[i],  data.topCommonInterests[i].score)
                 }
-            }
+            // }
 
             //matchMajor.innerHTML = response.data.major;
             matchImage.src = data.user.images;

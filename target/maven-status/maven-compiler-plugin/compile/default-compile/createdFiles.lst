@@ -1,6 +1,7 @@
 edu/brown/cs/student/yoki/Main$GetInterestHandler.class
 edu/brown/cs/student/yoki/Main$SignupHandler.class
 edu/brown/cs/student/yoki/Main$ProfileInfo.class
+edu/brown/cs/student/yoki/Main$DeleteMatch.class
 edu/brown/cs/student/yoki/Main$LoginHandler.class
 edu/brown/cs/student/yoki/Main$MainHandler.class
 edu/brown/cs/student/yoki/driver/Encrypt.class

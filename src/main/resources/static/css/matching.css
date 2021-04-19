@@ -303,3 +303,7 @@ h2 {
     height: 80%
 }
 
+#no-matches-msg{
+    display: none;
+    margin: 30px;
+}
