@@ -47,7 +47,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Sign Up</title>
     <link rel="stylesheet" href="css/matching.css">
     <link rel="stylesheet" href="css/login.css">
 </head>

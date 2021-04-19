@@ -78,6 +78,7 @@ function getNextMatch(){
 
             //matchMajor.innerHTML = response.data.major;
             matchImage.src = data.user.images;
+            matchImage.alt = "image of " + data.user.firstName;
             return data;
         })
         .catch(function (error) {
