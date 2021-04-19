@@ -14,7 +14,6 @@ function getUserInfo() {
             setUser(data.user);
             getPicture(data.user);
             console.log(data.user);
-
         })
         .catch(function (error) {
             console.log(error);
@@ -33,14 +32,15 @@ function setUser(user) {
 function updateProfile() {
     console.log(document.getElementById("firstInput").value);
     const postParameters = {
-        first: document.getElementById("firstInput").value,
-        last: document.getElementById("lastInput").value,
+        firstName: document.getElementById("firstInput").value,
+        lastName: document.getElementById("lastInput").value,
         major: document.getElementById("majorInput").value,
-        gradYear: document.getElementById("gradYearInput").value,
+        year: document.getElementById("gradYearInput").value,
         email: document.getElementById("emailInput").value,
-        bio: document.getElementById("bioBox").innerText
+        bio: document.getElementById("bioBox").value,
+        image: document.getElementById("picture").src
     };
-    fetch('http://localhost:4567/updateProfile', {
+    fetch('http://localhost:4567/updateUser', {
         method: 'post',
         body: JSON.stringify(postParameters),
         headers: {

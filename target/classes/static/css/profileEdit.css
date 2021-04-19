@@ -107,13 +107,15 @@ h2 {
     width: 15vw;
     border-radius: 1vw;
     margin-left: 15vw;
+    margin-top: 0;
 }
 
-.changePic{
+#match-button.changePic{
     height: 6vw;
     width: 6vw;
     border-radius: 10vw;
-    transform: translate(110%, -25%);
+    transform: translate(120%, -25%);
+    padding: 0;
 }
 
 #camera {
