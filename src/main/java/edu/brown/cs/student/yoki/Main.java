@@ -142,6 +142,7 @@ public final class Main {
     Spark.get("/match", new MatchPageHandler(), freeMarker);
     Spark.get("/profileOverview", new ProfileOverviewHandler(), freeMarker);
     Spark.get("/yokimatch", new MatchHandler());
+    Spark.get("/signup", new SignupHandler(), freeMarker);
 
     Spark.post("/sendmatches", new MatchMapHandler());
     Spark.post("/sendmatch", new MatchMapHandler());
@@ -151,6 +152,7 @@ public final class Main {
     Spark.post("/updateInterests", new UpdateInterests());
     Spark.post("/login", new LoginHandler());
     Spark.post("/profileInfo", new ProfileInfo());
+    Spark.post("/addUser", new AddUser());
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
@@ -366,6 +368,15 @@ public final class Main {
     }
   }
 
+  private static class SignupHandler implements TemplateViewRoute {
+    @Override
+    public ModelAndView handle(Request req, Response res) {
+
+      ImmutableMap.Builder<String, String> variables = new ImmutableMap.Builder();
+      return new ModelAndView(variables.build(), "Signup.ftl");
+    }
+  }
+
   /**
    * Handler method for post request for matching with a user. Adds the matched user to matchSet.
    */
@@ -424,6 +435,30 @@ public final class Main {
         return GSON.toJson(variables);
       }
       return "null";
+    }
+  }
+
+  private class AddUser implements Route {
+    @Override
+    public String handle(Request req, Response res) throws Exception {
+      JSONObject newMatch = new JSONObject(req.body());
+      String firstName = newMatch.getString("firstName");
+      String lastName = newMatch.getString("lastName");
+      String email = newMatch.getString("email");
+      String password = newMatch.getString("password");
+      String key = "gudetama";
+      password = Encrypt.encrypt(password, key);
+      double year = newMatch.getDouble("year");
+      String major = newMatch.getString("major");
+      String bio = newMatch.getString("bio");
+
+      if (SQLcommands.addUser(firstName, lastName, email, password, year, major, bio)) {
+        Map<String, Object> variables = ImmutableMap.of("success", "true");
+        currentId = SQLcommands.getUserId(email, password);
+        return GSON.toJson(variables);
+      }
+      Map<String, Object> variables = ImmutableMap.of("success", "false");
+      return GSON.toJson(variables);
     }
   }
 

@@ -1,7 +1,6 @@
 <#assign signup>
     <img src="/images/whiteLogo.png" id="logo-login"><br>
     <div class="container">
-<#--        <form>-->
             <label for="first-name"><b>First Name</b></label><br>
             <input type="text" placeholder="Enter First Name" name="first-name" required id="signup-first-name" value=""><br>
             <label for="last-name"><b>Last Name</b></label><br>
@@ -36,8 +35,11 @@
 
             <div id="signup-status">Incorrect login information!</div>
 
-            <button type="submit" class="button" id="login-button" onclick="onSignupPressed()">Signup</button>
-<#--        </form>-->
+            <button type="submit" class="button" id="login-button" onclick="onSignupPressed()">Sign up</button>
+            <div id="signup-redir-wrapper">
+                <h6 class="no-account">Already have an account?</h6>
+                <a class="no-account" href="/main"><h6 id="signup-link">Sign in</h6></a>
+            </div>
     </div>
 </#assign>
 

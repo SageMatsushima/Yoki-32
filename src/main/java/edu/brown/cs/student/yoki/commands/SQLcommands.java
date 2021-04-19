@@ -345,4 +345,31 @@ public final class SQLcommands {
       return "";
     }
   }
+
+  public static boolean addUser(String firstName, String lastName, String email, String password, double year, String major, String bio) {
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement(
+        "INSERT INTO user_data (first_name, last_name, email, password, year, major, bio) "
+          +  "VALUES (?,?,?,?,?,?,?);");
+      prep.setString(1, firstName);
+      prep.setString(2, lastName);
+      prep.setString(3, email);
+      prep.setString(4, password);
+      prep.setDouble(5, year);
+      prep.setString(6, major);
+      prep.setString(7, bio);
+      prep.execute();
+
+      prep = conn.prepareStatement("INSERT INTO user_interests (id) VALUES (last_insert_rowid())");
+      prep.execute();
+
+      prep.close();
+      return true;
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+      return false;
+    }
+  }
 }
