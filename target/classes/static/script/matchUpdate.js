@@ -10,7 +10,7 @@ function addMatchDiv(matched) {
     match.className = "match";
     match.id = "matchCard";
     const image = document.createElement("img");
-    image.src = "./images/kendall.jpg";
+    image.src = matched.images;
     // image.src = "https://i.pinimg.com/originals/59/af/39/59af39192d3f0cbf7a89bcaf534ccd82.png"
     image.id = "match_image";
     image.onclick = function() {
@@ -21,11 +21,12 @@ function addMatchDiv(matched) {
     const name = document.createElement("h3");
     name.innerHTML = matched.firstName;
 
-    match.onclick = async function() {
+    match.onclick = function() {
         currMatch = matched;
-        await getInterests();
-        console.log(currMatch);
-        openMatchInfo();
+        openMI().then(() => {
+            console.log(matchInterests);
+            openMatchInfo();
+        });
     };
     // const card = document.createElement("div");
     // card.className = "card";
@@ -35,6 +36,11 @@ function addMatchDiv(matched) {
 
     document.getElementById("match-list").appendChild(match);
 }
+
+async function openMI() {
+    await getInterests();
+};
+
 
 function getInterests() {
     const postPara = {
@@ -104,7 +110,7 @@ function openMatchInfo(){
     rightContent.id = "right-content";
 
     const image = document.createElement("img");
-    image.src = "./images/kendall.jpg";
+    image.src = currMatch.images;
     image.id = "match_image";
 
     const emailDiv = document.createElement('div');

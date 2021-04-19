@@ -188,17 +188,6 @@ public final class SQLcommands {
         prep2.setInt(1, rs.getInt("match_id"));
         ResultSet rs2 = prep2.executeQuery();
 
-<<<<<<< HEAD
-        int id = rs2.getInt("id");
-        String firstName = rs2.getString("first_name");
-        String lastName = rs2.getString("last_name");
-        String email = rs2.getString("email");
-        String password = rs2.getString("password");
-        int year = rs2.getInt("year");
-        String images = rs2.getString("images");
-        String major = rs2.getString("major");
-        String bio = rs2.getString("bio");
-=======
         ArrayList<String> userInfo = new ArrayList<String>();
         ArrayList<Integer> idYear = new ArrayList<Integer>();
 
@@ -212,7 +201,6 @@ public final class SQLcommands {
         userInfo.add(rs2.getString("images"));
         userInfo.add(rs2.getString("major"));
         userInfo.add(rs2.getString("bio"));
->>>>>>> 85422cf049b43f8da2556c5ec67c955b49e799ad
 
         int[] interests = new int[DataReader.getInterestCount()];
         for (int j = 0; j < interests.length; j++) {
