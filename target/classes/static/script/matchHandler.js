@@ -61,9 +61,15 @@ function getNextMatch(){
             }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             let matchImage = document.getElementById("match_image");
             matchImage.src = data.user.images;
 =======
+=======
+            let matchImage = document.getElementById("match_image");
+            matchImage.src = data.user.images;
+
+>>>>>>> c6a63e7c995f1edbab6fe418658a685e2c739f1b
             let progressBars = document.getElementsByTagName('progress');
             for (i = 0; i < progressBars.length; i++) {
                 console.log(progressBars[i])
