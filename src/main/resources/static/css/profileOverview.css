@@ -29,11 +29,6 @@ body {
     /*flex-wrap: wrap;*/
 }
 
-#picture {
-    background-color: #4D7A97;
-    float: right;
-}
-
 .sidebar:hover {
     background-color: #8c8c8c;
 }
@@ -143,10 +138,9 @@ div#subjects {
     margin-top: 10px;
     margin-bottom: 10px;
     height: 2vh;
-    width: 200px;
+    width: 15vw;
     border-radius: 1vw;
     border: 10px solid white;
-    /*background-color: ;*/
     vertical-align: center;
 }
 
@@ -180,4 +174,19 @@ div#subjects {
     border-radius: 1vw;
     margin-left: 1vw;
     margin-top: .5vw;
+}
+
+#picture {
+    width: 12vw;
+    height: 13vw;
+    margin-left: 4vw;
+    padding-top: 1vw;
+    float: right;
+    border-radius: 1vw;
+}
+
+#picDiv {
+    width: 15vw;
+    height: 15vw;
+    border-radius: 1vw;
 }

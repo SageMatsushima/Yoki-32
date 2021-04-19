@@ -372,11 +372,11 @@ public final class SQLcommands {
       prep.setString(1, firstName);
       prep.setString(2, lastName);
       prep.setString(3, email);
-      prep.setDouble(5, year);
-      prep.setString(6, major);
-      prep.setString(7, bio);
-      prep.setString(8, image);
-      prep.setInt(9, id);
+      prep.setDouble(4, year);
+      prep.setString(5, major);
+      prep.setString(6, bio);
+      prep.setString(7, image);
+      prep.setInt(8, id);
       prep.execute();
       prep.close();
       return true;
