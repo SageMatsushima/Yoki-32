@@ -46,7 +46,7 @@ function getNextMatch(){
             let matchImage = document.getElementById("match_image");
             matchImage.onload = function() {
                 matchImage.style.opacity = 100;
-                
+
                 let matchName = document.getElementById('match-name');
                 let matchGrade = document.getElementById('match-grade');
                 let topInterests = document.getElementById('top_interests_list')
@@ -58,13 +58,14 @@ function getNextMatch(){
                 matchMajor.innerHTML = data.user.major;
                 currUser = data.user;
                 for (var i in data.topCommonInterests) {
-                    let interest = data.topCommonInterests[i]
-                    let intDiv = '<div className="interest"><ul>' + interest.name + '</ul>'
-                        + '<progress className="interestBar" value="0" max="10"></progress></div>';
-                    topInterests.innerHTML += intDiv;
+                    if (i < 3) {
+                        let interest = data.topCommonInterests[i]
+                        let intDiv = '<div className="interest"><ul>' + interest.name + '</ul>'
+                            + '<progress className="interestBar" value="0" max="10"></progress></div>';
+                        topInterests.innerHTML += intDiv;
+                    }
                 }
 
-<<<<<<< HEAD
                 let matchList = document.getElementById('match-list');
                 Object.keys(matchMap).map(function(key) {
                     matchList.innerHTML = "<li> " + matchMap[key].firstName + " </li>";
@@ -77,30 +78,6 @@ function getNextMatch(){
                 }
             }
 
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-            let matchImage = document.getElementById("match_image");
-            matchImage.src = data.user.images;
-=======
-=======
-            let matchImage = document.getElementById("match_image");
-            matchImage.src = data.user.images;
-
->>>>>>> c6a63e7c995f1edbab6fe418658a685e2c739f1b
-            let progressBars = document.getElementsByTagName('progress');
-            for (i = 0; i < progressBars.length; i++) {
-                console.log(progressBars[i])
-                move(progressBars[i],  data.topCommonInterests[i].score)
-            }
-
->>>>>>> e0e617a2e5de20cc7f7f8d155a299d6dabd97a36
-            let matchList = document.getElementById('match-list');
-            Object.keys(matchMap).map(function(key) {
-                matchList.innerHTML = "<li> " + matchMap[key].firstName + " </li>";
-            });
-
->>>>>>> fe0024bc2ceb3b66adb5f8381b9c7eeb5b14024e
             //matchMajor.innerHTML = response.data.major;
             matchImage.src = data.user.images;
             return data;

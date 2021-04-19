@@ -61,7 +61,7 @@ html {
     height: 30vw;
     top: 118px;
     border-radius: 30px;
-    opacity: 0;
+    /*opacity: 0;*/
 }
 
 #top_interests_list li{
@@ -74,8 +74,10 @@ html {
     color: #646464;
 }
 
+
 #top_interests {
     margin-top: 3vh;
+    height: 50%;
 }
 
 .button {
@@ -269,5 +271,13 @@ h2 {
     justify-content: center;
     padding-top: 3%;
     padding-bottom: 2%;
+}
+
+#name_info{
+    height: 50%;
+}
+
+#left-content{
+    height: 80%
 }
 
