@@ -60,12 +60,17 @@ function getNextMatch(){
                 topInterests.innerHTML += intDiv;
             }
 
+<<<<<<< HEAD
+            let matchImage = document.getElementById("match_image");
+            matchImage.src = data.user.images;
+=======
             let progressBars = document.getElementsByTagName('progress');
             for (i = 0; i < progressBars.length; i++) {
                 console.log(progressBars[i])
                 move(progressBars[i],  data.topCommonInterests[i].score)
             }
 
+>>>>>>> e0e617a2e5de20cc7f7f8d155a299d6dabd97a36
             let matchList = document.getElementById('match-list');
             Object.keys(matchMap).map(function(key) {
                 matchList.innerHTML = "<li> " + matchMap[key].firstName + " </li>";
