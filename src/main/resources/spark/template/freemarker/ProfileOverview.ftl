@@ -41,12 +41,11 @@
             </div>
             <div id="subjects">
                 <div id="subjects-header">
-                    <h3 id = "searchTitle">Interest Search</h3>
-                    <input type="text" id="myInput" onkeyup="search()" placeholder="Search for ineterests.." title="Type in an ineterest">
+                    <input type="text" id="search-bar" onkeyup="search()" placeholder="Search for ineterests to add..." title="Type in an ineterest">
                 </div>
-                <div id="subjects-list">
+                    <div id="subjects-list">
 
-                </div>
+                    </div>
             </div>
         </div>
 

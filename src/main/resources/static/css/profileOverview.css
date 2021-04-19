@@ -116,24 +116,42 @@ div#subjects {
     margin-left: 3vw;
 }
 
+
+#subjects-list {
+    overflow: scroll;
+    height: 65%;
+    text-align: center;
+}
+
 .subject {
     border: none;
     border-radius: 1vw;
     width: 18vw;
     height: 2vw;
-    margin-left: 4.5vw;
-    margin-top: 1vw;
-}
-
-#subjects-list {
-    height: 60%;
-    overflow: scroll;
+    margin-top: 10px;
 }
 
 #search {
     width: 20vw;
     height: 2vw;
     margin-left: 4.5vw;
+}
+
+#search-bar{
+    font-family: Quicksand;
+    font-style: normal;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 2vh;
+    width: 200px;
+    border-radius: 1vw;
+    border: 10px solid white;
+    /*background-color: ;*/
+    vertical-align: center;
+}
+
+#subjects-header {
+    text-align: center;
 }
 
 #side {

@@ -72,7 +72,7 @@ function allInterests() {
 
 function search() {
     var input, filter, subjects, btns, a, i, txtValue;
-    input = document.getElementById("myInput");
+    input = document.getElementById("search-bar");
     filter = input.value.toUpperCase();
     subjects = document.getElementById("subjects-list");
     btns = subjects.getElementsByTagName("button");
