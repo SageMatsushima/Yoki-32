@@ -20,10 +20,7 @@ function addMatchDiv(matched) {
 
     match.onclick = function() {
         currMatch = matched;
-        openMI().then(() => {
-            console.log(matchInterests);
-            openMatchInfo();
-        });
+        getInterests()
     };
     // const card = document.createElement("div");
     // card.className = "card";
@@ -33,10 +30,6 @@ function addMatchDiv(matched) {
 
     document.getElementById("match-list").appendChild(match);
 }
-
-async function openMI() {
-    await getInterests();
-};
 
 
 function getInterests() {
@@ -55,11 +48,13 @@ function getInterests() {
         .then((data) => {
             console.log(data);
             matchInterests = data.topCommonInterests;
+            openMatchInfo();
         })
         .catch(function (error) {
             console.log(error);
         });
 }
+
 function openMatchInfo(){
     const grayDiv = document.createElement("div");
     grayDiv.id = "grayDiv";
