@@ -43,39 +43,39 @@ function getNextMatch(){
         .then((response) =>
             response.json())
         .then((data) => {
-            let matchName = document.getElementById('match-name');
-            let matchGrade = document.getElementById('match-grade');
-            let topInterests = document.getElementById('top_interests_list')
-            let matchMajor = document.getElementById('match-major')
-
-            matchName.innerHTML = data.user.firstName;
-            matchGrade.innerHTML = "Class of " + data.user.year;
-            topInterests.innerHTML = ""
-            matchMajor.innerHTML = data.user.major;
-            currUser = data.user;
-            for (var i in data.topCommonInterests) {
-                let interest = data.topCommonInterests[i]
-                let intDiv = '<div className="interest"><ul>' + interest.name + '</ul>'
-                    + '<progress className="interestBar" value="0" max="10"></progress></div>';
-                topInterests.innerHTML += intDiv;
-            }
-
             let matchImage = document.getElementById("match_image");
-            matchImage.src = data.user.images;
+            matchImage.onload = function() {
+                let matchName = document.getElementById('match-name');
+                let matchGrade = document.getElementById('match-grade');
+                let topInterests = document.getElementById('top_interests_list')
+                let matchMajor = document.getElementById('match-major')
 
-            let matchList = document.getElementById('match-list');
-            Object.keys(matchMap).map(function(key) {
-                matchList.innerHTML = "<li> " + matchMap[key].firstName + " </li>";
-            });
+                matchName.innerHTML = data.user.firstName;
+                matchGrade.innerHTML = "Class of " + data.user.year;
+                topInterests.innerHTML = ""
+                matchMajor.innerHTML = data.user.major;
+                currUser = data.user;
+                for (var i in data.topCommonInterests) {
+                    let interest = data.topCommonInterests[i]
+                    let intDiv = '<div className="interest"><ul>' + interest.name + '</ul>'
+                        + '<progress className="interestBar" value="0" max="10"></progress></div>';
+                    topInterests.innerHTML += intDiv;
+                }
 
-            let progressBars = document.getElementsByTagName('progress');
-            for (i = 0; i < progressBars.length; i++) {
-                console.log(progressBars[i])
-                move(progressBars[i],  data.topCommonInterests[i].score)
+                let matchList = document.getElementById('match-list');
+                Object.keys(matchMap).map(function(key) {
+                    matchList.innerHTML = "<li> " + matchMap[key].firstName + " </li>";
+                });
+
+                let progressBars = document.getElementsByTagName('progress');
+                for (i = 0; i < progressBars.length; i++) {
+                    console.log(progressBars[i])
+                    move(progressBars[i],  data.topCommonInterests[i].score)
+                }
             }
 
             //matchMajor.innerHTML = response.data.major;
-
+            matchImage.src = data.user.images;
             return data;
         })
         .catch(function (error) {
