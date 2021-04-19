@@ -22,6 +22,12 @@ body {
 
 }
 
+.popup {
+    overflow: auto;
+    font-size: 14px;
+    padding: .5vw;
+}
+
 #login {
     height: 15vw;
     width: 30vw;

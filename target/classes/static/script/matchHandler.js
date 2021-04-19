@@ -83,6 +83,10 @@ function getNextMatch(){
                 }
                 // }
 
+<<<<<<< HEAD
+=======
+            matchImage.alt = "image of " + data.user.firstName;
+>>>>>>> d90591affe334db59397c64c20e720dccd5215bd
                 //matchMajor.innerHTML = response.data.major;
                 matchImage.src = data.user.images;
                 return data;

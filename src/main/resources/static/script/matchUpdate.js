@@ -11,6 +11,7 @@ function addMatchDiv(matched) {
     match.id = "matchCard";
     const image = document.createElement("img");
     image.src = matched.images;
+    image.alt = "image of " + matched.firstName;
     // image.src = "https://i.pinimg.com/originals/59/af/39/59af39192d3f0cbf7a89bcaf534ccd82.png"
     image.id = "match_image";
 
@@ -19,10 +20,7 @@ function addMatchDiv(matched) {
 
     match.onclick = function() {
         currMatch = matched;
-        openMI().then(() => {
-            console.log(matchInterests);
-            openMatchInfo();
-        });
+        getInterests()
     };
     // const card = document.createElement("div");
     // card.className = "card";
@@ -32,10 +30,6 @@ function addMatchDiv(matched) {
 
     document.getElementById("match-list").appendChild(match);
 }
-
-async function openMI() {
-    await getInterests();
-};
 
 
 function getInterests() {
@@ -54,11 +48,13 @@ function getInterests() {
         .then((data) => {
             console.log(data);
             matchInterests = data.topCommonInterests;
+            openMatchInfo();
         })
         .catch(function (error) {
             console.log(error);
         });
 }
+
 function openMatchInfo(){
     const grayDiv = document.createElement("div");
     grayDiv.id = "grayDiv";
@@ -108,6 +104,7 @@ function openMatchInfo(){
     const image = document.createElement("img");
     image.src = currMatch.images;
     image.id = "match_image";
+    image.alt = "image of " + currMatch.firstName;
 
     const emailDiv = document.createElement('div');
     emailDiv.id = "emaildiv";

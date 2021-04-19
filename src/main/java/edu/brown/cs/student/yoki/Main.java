@@ -154,7 +154,12 @@ public final class Main {
     Spark.post("/profileInfo", new ProfileInfo());
     Spark.post("/addUser", new AddUser());
     Spark.post("/deleteMatch", new DeleteMatch());
+<<<<<<< HEAD
     Spark.post("/report", new Report());
+=======
+    Spark.post("/updateUser", new UpdateUser());
+
+>>>>>>> d90591affe334db59397c64c20e720dccd5215bd
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
@@ -482,6 +487,7 @@ public final class Main {
     }
   }
 
+<<<<<<< HEAD
   private class Report implements Route {
     @Override
     public String handle(Request req, Response res) throws Exception {
@@ -496,6 +502,27 @@ public final class Main {
       SQLcommands.addReport(currentId, reportedId, report);
 
       Map<String, Object> variables = ImmutableMap.of("reported", "true");
+=======
+  private class UpdateUser implements Route {
+    @Override
+    public String handle(Request req, Response res) throws Exception {
+      JSONObject updateUser = new JSONObject(req.body());
+      String firstName = updateUser.getString("firstName");
+      String lastName = updateUser.getString("lastName");
+      String major = updateUser.getString("major");
+      Double year = updateUser.getDouble("year");
+      String bio = updateUser.getString("bio");
+      String email = updateUser.getString("email");
+      String image = updateUser.getString("image");
+
+      System.out.println("updating " + currentId);
+
+      if (SQLcommands.editProfile(currentId, firstName, lastName, major, year, bio, email, image)) {
+        Map<String, Object> variables = ImmutableMap.of("success", "true");
+        return GSON.toJson(variables);
+      }
+      Map<String, Object> variables = ImmutableMap.of("success", "false");
+>>>>>>> d90591affe334db59397c64c20e720dccd5215bd
       return GSON.toJson(variables);
     }
   }

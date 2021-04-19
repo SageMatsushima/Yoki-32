@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 edu/brown/cs/student/yoki/Main$GetInterestHandler.class
 edu/brown/cs/student/yoki/Main$SignupHandler.class
 edu/brown/cs/student/yoki/Main$ProfileInfo.class
@@ -11,3 +12,18 @@ edu/brown/cs/student/yoki/Main$AddUser.class
 edu/brown/cs/student/yoki/commands/UpdateInterests.class
 edu/brown/cs/student/yoki/Main$GetMatchesHandler.class
 edu/brown/cs/student/yoki/Main$ListInterestsHandler.class
+=======
+edu\brown\cs\student\yoki\Main$UpdateInterests.class
+edu\brown\cs\student\yoki\Main$DeleteMatch.class
+edu\brown\cs\student\yoki\Main$MainHandler.class
+edu\brown\cs\student\yoki\Main$GetInterestHandler.class
+edu\brown\cs\student\yoki\commands\UpdateInterests.class
+edu\brown\cs\student\yoki\Main$GetMatchesHandler.class
+edu\brown\cs\student\yoki\Main$UpdateUser.class
+edu\brown\cs\student\yoki\Main$LoginHandler.class
+edu\brown\cs\student\yoki\Main$ListInterestsHandler.class
+edu\brown\cs\student\yoki\Main$ProfileInfo.class
+edu\brown\cs\student\yoki\driver\Encrypt.class
+edu\brown\cs\student\yoki\Main$AddUser.class
+edu\brown\cs\student\yoki\Main$SignupHandler.class
+>>>>>>> d90591affe334db59397c64c20e720dccd5215bd

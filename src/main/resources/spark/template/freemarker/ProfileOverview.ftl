@@ -1,6 +1,6 @@
 <#assign nav>
 <nav>
-    <a href="/main"><img src="/images/whiteLogo.png" id="logo"></a>
+    <a href="/main"><img src="/images/whiteLogo.png" id="logo" alt="Yoki Logo"></a>
     <a href="/main"><div class="sidebar">Home</div></a>
     <a href="/match"><div class="sidebar">Matches</div></a>
     <a href="/profileOverview"><div class="sidebar">My Profile</div></a>
@@ -20,7 +20,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Your Profile</title>
     <link rel="stylesheet" href="css/profileOverview.css">
     <link rel="stylesheet" href="css/matching.css">
 </head>
@@ -37,7 +37,7 @@
                     <div id="user-info"></div>
                     <a href="/profileEdit"><button id="match-button" class="edit" onclick="">Edit Profile</button></a>
                 </div>
-                <div id="picture"><img src="">Picture</div>
+                <div id = "picDiv"></div>
             </div>
             <div id="subjects">
                 <div id="subjects-header">

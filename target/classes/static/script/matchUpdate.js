@@ -11,6 +11,7 @@ function addMatchDiv(matched) {
     match.id = "matchCard";
     const image = document.createElement("img");
     image.src = matched.images;
+    image.alt = "image of " + matched.firstName;
     // image.src = "https://i.pinimg.com/originals/59/af/39/59af39192d3f0cbf7a89bcaf534ccd82.png"
     image.id = "match_image";
 
@@ -108,6 +109,7 @@ function openMatchInfo(){
     const image = document.createElement("img");
     image.src = currMatch.images;
     image.id = "match_image";
+    image.alt = "image of " + currMatch.firstName;
 
     const emailDiv = document.createElement('div');
     emailDiv.id = "emaildiv";
