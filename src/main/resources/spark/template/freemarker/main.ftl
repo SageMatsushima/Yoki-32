@@ -1,6 +1,6 @@
 <#assign nav>
   <nav>
-    <a href="/main"><img src="/images/whiteLogo.png" id="logo"></a>
+    <a href="/main"><img src="/images/whiteLogo.png" id="logo" alt="Yoki Logo"></a>
     <a href="/main"><div class="sidebar">Home</div></a>
     <a href="/match"><div class="sidebar">Matches</div></a>
     <a href="/profileOverview"><div class="sidebar">My Profile</div></a>
@@ -14,37 +14,22 @@
     <div id = "card_content">
       <div id = "left-content">
         <div id = "name_info">
-          <h1 id="match-name">Kendall</h1>
-          <i><h5 id="match-major">Undecided</h5></i>
-          <h5 id="match-grade">Class of 2023</h5>
+          <h1 id="match-name"></h1>
+          <i><h5 id="match-major"></h5></i>
+          <h5 id="match-grade"></h5>
         </div>
         <div id = "top_interests">
           <h3>Common Interests</h3>
           <ul id = "top_interests_list">
-            <div class="interest">
-              <ul>
-                modeling
-              </ul>
-              <progress class="interestBar" value="22" max="100"></progress>
-            </div>
-            <div class="interest">
-              <ul>
-                being rich
-              </ul>
-              <progress class="interestBar" value="22" max="100"></progress>
-            </div>
-            <div class="interest">
-              <ul>
-                ASAP Rocky
-              </ul>
-              <progress class="interestBar" value="22" max="100"></progress>
-            </div>
           </ul>
         </div>
       </div>
       <div id = "right-content">
-        <img id = "match_image" src="./images/kendall.jpg">
+        <img id = "match_image" src="">
       </div>
+    </div>
+    <div id="no-matches-msg">
+      No Matches Left!
     </div>
   </div>
 </#assign>
@@ -66,7 +51,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-   <#-- <title>${title}</title>-->
+   <title>Yoki</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- In real-world webapps, css is usually minified and
          concatenated. Here, separate normalize from our code, and

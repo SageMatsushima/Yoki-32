@@ -11,6 +11,7 @@ function addMatchDiv(matched) {
     match.id = "matchCard";
     const image = document.createElement("img");
     image.src = matched.images;
+    image.alt = "image of " + matched.firstName;
     // image.src = "https://i.pinimg.com/originals/59/af/39/59af39192d3f0cbf7a89bcaf534ccd82.png"
     image.id = "match_image";
 
@@ -108,6 +109,7 @@ function openMatchInfo(){
     const image = document.createElement("img");
     image.src = currMatch.images;
     image.id = "match_image";
+    image.alt = "image of " + currMatch.firstName;
 
     const emailDiv = document.createElement('div');
     emailDiv.id = "emaildiv";
@@ -118,6 +120,7 @@ function openMatchInfo(){
 
     const copyEmail = document.createElement('button');
     copyEmail.innerHTML = "Copy Email";
+    copyEmail.id = 'match-button';
     copyEmail.onclick = function() {
         const copyText = document.createElement('textarea');
         copyText.value = currMatch.email;
@@ -133,6 +136,12 @@ function openMatchInfo(){
         document.body.removeChild(copyText);
     }
 
+    const deleteButton = document.createElement('button');
+    deleteButton.innerHTML = "Unmatch";
+    deleteButton.id = 'match-button';
+    deleteButton.onclick = removeMatch;
+
+
 
     grayDiv.appendChild(card);
     card.appendChild(cardContent);
@@ -145,10 +154,32 @@ function openMatchInfo(){
     cardContent.appendChild(rightContent);
     rightContent.appendChild(image);
     leftContent.appendChild(emailDiv);
+    leftContent.appendChild(deleteButton);
     emailDiv.appendChild(emailtext);
     emailDiv.appendChild(copyEmail);
 
     document.getElementById("main").appendChild(grayDiv);
+}
+
+function removeMatch() {
+    const postPara = {
+        id: currMatch.id
+    };
+    fetch('http://localhost:4567/deleteMatch', {
+        method: 'post',
+        body: JSON.stringify(postPara),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        .then((response) =>
+            response.json())
+        .then((data) => {
+            window.location.reload('true');
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
 
 

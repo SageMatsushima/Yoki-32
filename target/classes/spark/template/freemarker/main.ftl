@@ -14,37 +14,22 @@
     <div id = "card_content">
       <div id = "left-content">
         <div id = "name_info">
-          <h1 id="match-name">Kendall</h1>
-          <i><h5 id="match-major">Undecided</h5></i>
-          <h5 id="match-grade">Class of 2023</h5>
+          <h1 id="match-name"></h1>
+          <i><h5 id="match-major"></h5></i>
+          <h5 id="match-grade"></h5>
         </div>
         <div id = "top_interests">
           <h3>Common Interests</h3>
           <ul id = "top_interests_list">
-            <div class="interest">
-              <ul>
-                modeling
-              </ul>
-              <progress class="interestBar" value="22" max="100"></progress>
-            </div>
-            <div class="interest">
-              <ul>
-                being rich
-              </ul>
-              <progress class="interestBar" value="22" max="100"></progress>
-            </div>
-            <div class="interest">
-              <ul>
-                ASAP Rocky
-              </ul>
-              <progress class="interestBar" value="22" max="100"></progress>
-            </div>
           </ul>
         </div>
       </div>
       <div id = "right-content">
-        <img id = "match_image" src="./images/kendall.jpg">
+        <img id = "match_image" src="">
       </div>
+    </div>
+    <div id="no-matches-msg">
+      No Matches Left!
     </div>
   </div>
 </#assign>

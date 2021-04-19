@@ -48,36 +48,6 @@ public final class SQLcommands {
     }
   }
 
-  public static void insert(ArrayList<String> values) {
-    String newDataInsert = "";
-    String newInterestInsert = "";
-
-    for (int i = 0; i < 7; i++) {
-      newDataInsert += values.get(i) + ", ";
-    }
-
-    for (int i = 7; i < values.size(); i++) {
-      newInterestInsert += values.get(i) + ", ";
-    }
-
-    newDataInsert.substring(0, newDataInsert.length() - 1);
-    newInterestInsert.substring(0, newInterestInsert.length() - 1);
-
-    try {
-      Connection conn = DataReader.getConnection();
-      PreparedStatement prep1 = conn.prepareStatement("INSERT INTO user_interests VALUES (" + newInterestInsert + ");");
-      PreparedStatement prep2 = conn.prepareStatement("INSERT INTO user_data VALUES (" + newDataInsert + ");");
-      prep1.execute();
-      prep2.execute();
-      prep1.close();
-      prep2.close();
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.err.println("ERROR: Issue reading in SQL");
-    }
-  }
-
   public static void update(int userId, HashMap<Integer, Interest> newInterest) {
     try {
       Connection conn = DataReader.getConnection();
@@ -250,6 +220,8 @@ public final class SQLcommands {
   }
 
   public static int getUserId(String email, String password) {
+    System.out.println("email: " + email);
+    System.out.println("pass: " + password);
     try {
       Connection conn = DataReader.getConnection();
       PreparedStatement prep = conn.prepareStatement("SELECT * FROM user_data WHERE email=? AND password=?");
@@ -352,9 +324,7 @@ public final class SQLcommands {
   public static boolean addUser(String firstName, String lastName, String email, String password, double year, String major, String bio) {
     try {
       Connection conn = DataReader.getConnection();
-      PreparedStatement prep = conn.prepareStatement(
-        "INSERT INTO user_data (first_name, last_name, email, password, year, major, bio) "
-          +  "VALUES (?,?,?,?,?,?,?);");
+      PreparedStatement prep = conn.prepareStatement("INSERT INTO user_data (first_name, last_name, email, password, year, major, bio) VALUES (?,?,?,?,?,?,?);");
       prep.setString(1, firstName);
       prep.setString(2, lastName);
       prep.setString(3, email);
@@ -369,6 +339,48 @@ public final class SQLcommands {
 
       prep.close();
       return true;
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+      return false;
+    }
+  }
+
+  public static boolean deleteMatch(int userId, int matchId) {
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement(
+              "DELETE FROM matches "
+                      +  "WHERE id = ? AND match_id = ?;");
+      prep.setInt(1, userId);
+      prep.setInt(2, matchId);
+      prep.execute();
+
+      prep.close();
+      return true;
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: Issue reading in SQL");
+      return false;
+    }
+  }
+
+  public static boolean editProfile(int id, String firstName, String lastName, String major, Double year, String bio, String email, String image) {
+    try {
+      Connection conn = DataReader.getConnection();
+      PreparedStatement prep = conn.prepareStatement("UPDATE user_data SET first_name=?, last_name=?, email=?, year=?, major=?, bio=?, image = ? WHERE id=?;");
+      prep.setString(1, firstName);
+      prep.setString(2, lastName);
+      prep.setString(3, email);
+      prep.setDouble(5, year);
+      prep.setString(6, major);
+      prep.setString(7, bio);
+      prep.setString(8, image);
+      prep.setInt(9, id);
+      prep.execute();
+      prep.close();
+      return true;
+      
     } catch (Exception e) {
       e.printStackTrace();
       System.err.println("ERROR: Issue reading in SQL");
