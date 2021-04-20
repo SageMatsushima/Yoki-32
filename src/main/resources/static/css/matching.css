@@ -131,6 +131,7 @@ textarea {
     background-color: var(--fourth);
     color: var(--sixth);
     margin: 2.5%;
+    margin-top: 0%;
     border: none;
     border-radius: 30px;
     outline: none;
@@ -149,7 +150,6 @@ textarea {
 }
 
 #button-div {
-    margin-top: 1%;
     text-align: center;
 }
 
