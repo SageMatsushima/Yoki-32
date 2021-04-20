@@ -1,6 +1,6 @@
-package edu.brown.cs.student.yoki.driver;
-
-import edu.brown.cs.student.yoki.commands.SQLcommands;
+package edu.brown.cs.student.yoki.commands;
+import edu.brown.cs.student.yoki.Main;
+import edu.brown.cs.student.yoki.driver.TriggerAction;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+
 
 public class Encrypt implements TriggerAction {
 
@@ -58,7 +59,18 @@ public class Encrypt implements TriggerAction {
 
   @Override
   public void action(ArrayList<String> args) throws SQLException, ClassNotFoundException {
-    System.out.println(SQLcommands.getImage(Integer.parseInt(args.get(1))));
-//    SQLcommands.encryptPasswords();
+    if (args.size() == 3) {
+      String encryptionKey = args.get(1);
+      String argument = args.get(2);
+      setKey(encryptionKey);
+      System.out.println("Encryption key: " + encryptionKey);
+      System.out.println("Original message: " + argument);
+      String encyrptedMessage = encrypt(argument, encryptionKey);
+      System.out.println("Encrypted message: " + encyrptedMessage);
+      System.out.println("Decrypted message: " + decrypt(encyrptedMessage, encryptionKey));
+      Main.keyreader();
+    } else {
+      System.err.println("ERROR: the encrypt command must follow the form <[encrypt] [key] [string]>");
+    }
   }
 }

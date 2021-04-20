@@ -1,29 +1,22 @@
 package edu.brown.cs.student.yoki;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.*;
-
-import edu.brown.cs.student.yoki.commands.*;
-import edu.brown.cs.student.yoki.driver.*;
-
+import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
-import edu.brown.cs.student.yoki.util.AddData;
-import edu.brown.cs.student.yoki.util.NaiveMatch;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import edu.brown.cs.student.yoki.commands.*;
+import edu.brown.cs.student.yoki.driver.Interest;
+import edu.brown.cs.student.yoki.driver.REPL;
+import edu.brown.cs.student.yoki.driver.TreeFunction;
+import edu.brown.cs.student.yoki.driver.User;
+import freemarker.template.Configuration;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
-
+import org.json.JSONException;
+import org.json.JSONObject;
 import spark.*;
 import spark.template.freemarker.FreeMarkerEngine;
 
-import com.google.common.collect.ImmutableMap;
-
-import freemarker.template.Configuration;
+import java.io.*;
+import java.util.*;
 
 /**
  * The Main class of our project. This is where execution begins.
@@ -51,16 +44,6 @@ public final class Main {
   private static UserReader userReader = new UserReader();
   private static Encrypt encrypt = new Encrypt();
   private static NaiveMatch naiveMatch = new NaiveMatch();
-
-//  private static AddData addData;
-//
-//  static {
-//    try {
-//      addData = new AddData("data/bigData.sqlite");
-//    } catch (Exception e) {
-//      e.printStackTrace();
-//    }
-//  }
 
 
   private List<User> users = new ArrayList<>();
@@ -111,8 +94,6 @@ public final class Main {
     repl.addAction("user", userReader);
     repl.addAction("encrypt", encrypt);
     repl.addAction("naive", naiveMatch);
-//    repl.addAction("addData", addData);
-
     repl.run();
   }
 
@@ -212,26 +193,46 @@ public final class Main {
     }
   }
 
+  public static String keyreader() {
+    try {
+      BufferedReader br = new BufferedReader(new FileReader("key.txt"));
+
+      String output = "";
+      String st;
+      while ((st = br.readLine()) != null) {
+        System.out.println(st);
+        output += st;
+      }
+      return output;
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.err.println("ERROR: there was an issue reading in the key");
+      return null;
+    }
+  }
+
   private class LoginHandler implements Route {
     @Override
     public String handle(Request req, Response res) throws JSONException {
-      //update interests
-      //update db
-      //update matches list
       JSONObject loginCreds = new JSONObject(req.body());
       String email = loginCreds.getString("email");
       String password = loginCreds.getString("password");
       System.out.println(password);
-      String key = "gudetama";
-      password = Encrypt.encrypt(password, key);
-      System.out.println(password);
-      currentId = SQLcommands.getUserId(email, password);
-      String status = "false";
-      if (currentId > 0) {
-        status = "true";
+      String key = keyreader();
+      if (key != null) {
+        password = Encrypt.encrypt(password, key);
+        System.out.println(password);
+        currentId = SQLcommands.getUserId(email, password);
+        String status = "false";
+        if (currentId > 0) {
+          status = "true";
+        }
+        Map<String, Object> variables = ImmutableMap.of("authenticated", status);
+        return GSON.toJson(variables);
+      } else {
+        System.err.println("ERROR: you do not have the right key");
+        return null;
       }
-      Map<String, Object> variables = ImmutableMap.of("authenticated", status);
-      return GSON.toJson(variables);
     }
   }
 
@@ -289,9 +290,6 @@ public final class Main {
     @Override
     public String handle(Request req, Response res) {
 
-      //User tod = new User(20, "test", "test", "test", "test", 3023, new int[]{0, 1});
-      //Map<String, User> variables = ImmutableMap.of("user", tod);
-      //ImmutableMap.Builder<String, User> variables = new ImmutableMap.Builder();
       System.out.println(Main.this.getUsers().size());
       if (Main.this.getUsers().size() > 0) {
         User nextMatch = Main.this.getUsers().remove(0);

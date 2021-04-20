@@ -12,18 +12,17 @@ public class User extends KdNode {
   private String lastName;
   private String email;
   private String password;
-  private int year;
+  private double year;
   private String images;
   private String major;
   private String bio;
+  private double distance;
 
   private int[] interests;
-  private ArrayList<String> userInfo = new ArrayList<String>();
-  private ArrayList<Integer> idYear = new ArrayList<Integer>();
 
-  public User(ArrayList<Integer> idYear, ArrayList<String> userInfo, int[] interests) {
-    this.id = idYear.get(0);
-    this.year = idYear.get(1);
+  public User(int id, double year, ArrayList<String> userInfo, int[] interests) {
+    this.id = id;
+    this.year = year;
 
     this.firstName = userInfo.get(0);
     this.lastName = userInfo.get(1);
@@ -69,6 +68,10 @@ public class User extends KdNode {
     return this.bio;
   }
 
+  public double getDistance() {
+    return this.distance;
+  }
+
   public String interestsToString() {
     String str = "";
     for (int i = 0; i < this.interests.length; i++) {
@@ -78,8 +81,16 @@ public class User extends KdNode {
   }
 
   @Override
-  public double distance(Object o) {
-    return 0;
+  public double distance(Object user) {
+    User compareUser = (User) user;
+    double matchScore = 0;
+    for (int i = 0; i < interests.length; i++) {
+      double relevance = interests[i] / 10.0 * compareUser.interests[i] / 10.0;
+      int dist = Math.abs(interests[i] - compareUser.interests[i]);
+      matchScore += relevance * (10 - dist);
+    }
+    distance = 1 / matchScore;
+    return distance;
   }
 
   @Override

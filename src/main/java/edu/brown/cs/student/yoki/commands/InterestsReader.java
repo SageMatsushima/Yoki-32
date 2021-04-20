@@ -1,6 +1,5 @@
 package edu.brown.cs.student.yoki.commands;
 
-import edu.brown.cs.student.yoki.Main;
 import edu.brown.cs.student.yoki.driver.Interest;
 import edu.brown.cs.student.yoki.driver.TriggerAction;
 import edu.brown.cs.student.yoki.driver.User;
@@ -32,7 +31,6 @@ public class InterestsReader implements TriggerAction {
       } else {
         try {
           int id = Integer.parseInt(args.get(1));
-//          Main.setCurrentId(id);
           PreparedStatement prep = SQLcommands.getUserInterests();
           // North to south, less than lat 1 and greater than lat2
           prep.setInt(1, id);
@@ -40,21 +38,21 @@ public class InterestsReader implements TriggerAction {
           for (int i = 2; i < DataReader.getInterestCount()+2; i++) {
             try {
               userInterests.add(rs.getInt(i));
-              out.print(rs.getInt(i) + ", ");
+              System.out.print(rs.getInt(i) + ", ");
             } catch (Exception e) {
-              err.println("Something went wrong with reading in data");
+              err.println("Something went wrong with reading in data (the input id is invalid)");
+              break;
             }
           }
+          int size = userInterests.size();
           prep.close();
           rs.close();
-//          getTopInterests();
         } catch (Exception e) {
-          e.printStackTrace();
           err.println("ERROR: must enter valid numbers");
         }
       }
     } else {
-      err.println("ERROR: ways takes 4 additional arguments");
+      err.println("ERROR: interests command must follow the following format <[interest] [#id of user]");
     }
   }
 
