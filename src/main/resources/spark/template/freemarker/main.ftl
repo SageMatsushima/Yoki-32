@@ -10,6 +10,7 @@
 
 <#assign card>
   <script src="script/matchHandler.js"></script>
+  <script src="script/lightDark.js"></script>
   <div id = "potential_card">
     <div id = "card_content">
       <div id = "left-content">

@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="css/matching.css">
 </head>
 <script src="script/settings.js"></script>
+<script src="script/lightDark.js"></script>
 <body>
 <div id="profile">
     ${nav}

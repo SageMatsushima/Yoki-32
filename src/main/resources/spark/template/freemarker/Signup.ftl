@@ -52,6 +52,7 @@
     <link rel="stylesheet" href="css/login.css">
 </head>
 <script src="script/signup.js"></script>
+<script src="script/lightDark.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
 <body>
 <div id="signup-div">

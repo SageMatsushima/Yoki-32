@@ -26,6 +26,7 @@
 </head>
 <script src="script/interestButtons.js"></script>
 <script src="script/profileLoad.js"></script>
+<script src="script/lightDark.js"></script>
 <body>
 <div id="profile">
     ${nav}

@@ -25,6 +25,7 @@ body {
     height: 35vw;
     width: 40vw;
     margin-left: 5vw;
+    color: var(--sixth);
 }
 
 input {

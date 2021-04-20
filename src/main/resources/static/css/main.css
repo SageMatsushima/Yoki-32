@@ -9,11 +9,11 @@
     border-radius: 8px;
     width: 90%;
     padding: 1em;
-    color: white;
+    color: var(--sixth);
 }
 
 hr {
-    background-color: white;
+    background-color: var(--sixth);
     border: none;
 }
 
@@ -25,7 +25,7 @@ td, th {
     width: 80%;
     margin: auto;
     max-width: 400px;
-    color: white;
+    color: var(--sixth);
     font-family: "Bradley Hand ITC", cursive;
 }
 

@@ -25,6 +25,7 @@
   <div id="profile">
     ${nav}
     <script src="script/matchUpdate.js"></script>
+    <script src="script/lightDark.js"></script>
     <div id = "match-div">
       <h1>Your Matches</h1>
       <div id="match-list">
