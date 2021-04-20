@@ -42,22 +42,38 @@ body {
 .interests {
     width: 55vw;
     height: 5vw;
-    background-color: #bcc8e3;
+    background-color: #fffbf5;
     margin-left: 3vw;
     margin-top: 1vw;
+    border-radius: 1vw;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
+
 }
 
 .slider {
     -webkit-appearance: none;
-    width: 100%;
-    height: 10px;
+    width: 80%;
+    height: 1vw;
     border-radius: 5px;
     background: #d3d3d3;
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
+    margin-left: 5vw;
+    transform: translate(0%, -60%);
 }
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 1vw;
+    background: #FFB84F;
+    cursor: pointer;
+}
+
 
 .interestBtn {
     margin-left: 0;
@@ -68,6 +84,8 @@ body {
     border: none;
     margin-top: 1vw;
     margin-right: 1vw;
+    transform: translate(-120%, -724%);
+
 }
 
 .slider:hover {
@@ -170,6 +188,7 @@ div#subjects {
 
 #nameButton {
     height: 3vw;
+    margin-left: 2vw;
 }
 
 .edit {
