@@ -110,7 +110,7 @@ function updateInterest() {
  */
 function save() {
     updateInterest();
-
+    console.log(addInterest)
     const postParameters = {
         //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
         interests: Object.fromEntries(addInterest)
