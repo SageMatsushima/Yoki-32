@@ -32,6 +32,7 @@ function addCurrentInterests(value, key) {
         const interest = document.createElement("div");
         interest.className = "interests";
         interest.id = key + "remove";
+        console.log(interest.id)
 
         const nameButton = document.createElement("div");
         nameButton.id = "nameButton";
@@ -42,9 +43,6 @@ function addCurrentInterests(value, key) {
         const remove = document.createElement("button");
         remove.className = "remove";
         remove.innerHTML = "Remove";
-        remove.onclick = function () {
-            removes(key);
-        };
 
         const input = document.createElement("input");
         input.className = "slider interestValue";
@@ -53,6 +51,10 @@ function addCurrentInterests(value, key) {
         input.min = "0";
         input.max = "10";
         input.value = value;
+
+        remove.onclick = function () {
+            removeInterest(key);
+        };
 
         interest.appendChild(nameButton);
         document.getElementById("interestList").appendChild(interest);
@@ -84,7 +86,6 @@ function addInterestDiv(value, key) {
         const remove = document.createElement("button");
         remove.className = "remove";
         remove.innerHTML = "Remove";
-        remove.onclick = function() { removes(key); };
 
         const input = document.createElement("input");
         input.className = "slider interestValue";
@@ -93,6 +94,7 @@ function addInterestDiv(value, key) {
         input.min = "0";
         input.max = "10";
         input.value = "5";
+        remove.onclick = function() { removeInterest(key); };
 
         interest.appendChild(nameButton);
         document.getElementById("interestList").appendChild(interest);
@@ -181,34 +183,13 @@ function save() {
         });
 }
 
-/**
- * Removes the interest from the users data.
- */
-function removes(key) {
-    removeInterest(key);
-    // console.log(addInterest);
-    const postParameters = {
-        //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
-        interests: addInterest
-    };
-    fetch('http://localhost:4567/listInterests', {
-        method: 'post',
-        body: JSON.stringify(postParameters),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-    })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
-
 function removeInterest(key) {
-    let interest = document.getElementById(key + "remove");
-    interest.innerHTML = '';
-    interest.textContent = '';
-
-    interest.remove();
+    // console.log(key);
+    // key -= 11;
+    console.log(key);
+    const interest = document.getElementById(key);
+    interest.value = 0;
+    interest.style.display = "hidden"
 
     addInterest.delete(key);
 }

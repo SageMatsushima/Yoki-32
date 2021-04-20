@@ -43,9 +43,6 @@ function addCurrentInterests(value, key) {
         const remove = document.createElement("button");
         remove.className = "remove";
         remove.innerHTML = "Remove";
-        remove.onclick = function () {
-            removes(key);
-        };
 
         const input = document.createElement("input");
         input.className = "slider interestValue";
@@ -55,12 +52,17 @@ function addCurrentInterests(value, key) {
         input.max = "10";
         input.value = value;
 
+
+        remove.onclick = function () {
+            removeInterest(key);
+        };
+
         interest.appendChild(nameButton);
         document.getElementById("interestList").appendChild(interest);
         nameButton.appendChild(name);
         nameButton.appendChild(remove);
         interest.appendChild(input);
-        addInterest.set(key, input.value);
+        addInterest.set(key+"", input.value);
     }
 }
 
@@ -85,7 +87,6 @@ function addInterestDiv(value, key) {
         const remove = document.createElement("button");
         remove.className = "remove";
         remove.innerHTML = "Remove";
-        remove.onclick = function() { removes(key); };
 
         const input = document.createElement("input");
         input.className = "slider interestValue";
@@ -94,6 +95,7 @@ function addInterestDiv(value, key) {
         input.min = "0";
         input.max = "10";
         input.value = "5";
+        remove.onclick = function() { removeInterest(key); };
 
         interest.appendChild(nameButton);
         document.getElementById("interestList").appendChild(interest);
@@ -157,7 +159,9 @@ function search() {
  */
 function updateInterest() {
     for (let i of document.getElementsByClassName("interestValue")) {
-        addInterest.set(i.id, i.value);
+        if (addInterest.get(i.id) != 0) {
+            addInterest.set(i.id, i.value);
+        }
     }
 }
 
@@ -166,6 +170,7 @@ function updateInterest() {
  */
 function save() {
     updateInterest();
+    console.log(addInterest)
     const postParameters = {
         interests: Object.fromEntries(addInterest)
     };
@@ -182,35 +187,9 @@ function save() {
         });
 }
 
-/**
- * Removes the interest from the users data.
- */
-function removes(key) {
-    removeInterest(key);
-    // console.log(addInterest);
-    const postParameters = {
-        //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
-        interests: addInterest
-    };
-    fetch('http://localhost:4567/listInterests', {
-        method: 'post',
-        body: JSON.stringify(postParameters),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-    })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
-
 function removeInterest(key) {
-    console.log(key + "remove")
-    let interest = document.getElementById(key + "remove");
-    // interest.innerHTML = '';
-    // interest.textContent = '';
-
+    addInterest.set(key+"",0);
+    key = key-11;
+    const interest = document.getElementById(key+"remove");
     interest.remove();
-
-    addInterest.delete(key);
 }
