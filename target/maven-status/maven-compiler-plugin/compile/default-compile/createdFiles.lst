@@ -1,0 +1,5 @@
+edu\brown\cs\student\yoki\commands\NaiveMatch$CompareUsers.class
+edu\brown\cs\student\yoki\commands\MatchFinder$CompareDist.class
+edu\brown\cs\student\yoki\commands\NaiveMatch$CompareDist.class
+edu\brown\cs\student\yoki\commands\Encrypt.class
+edu\brown\cs\student\yoki\commands\NaiveMatch.class
