@@ -30,7 +30,7 @@ function setUser(user) {
 }
 
 function updateProfile() {
-    console.log(document.getElementById("firstInput").value);
+    updatePic();
     const postParameters = {
         firstName: document.getElementById("firstInput").value,
         lastName: document.getElementById("lastInput").value,
@@ -54,10 +54,10 @@ function updateProfile() {
 
 function getPicture(user) {
     const div = document.getElementById("picDiv");
+    div.id = "div";
     const picture = document.createElement("img");
     picture.id = "picture"
     picture.src = user.images;
-
 
     const change = document.createElement("button");
     change.id = "match-button";
@@ -65,9 +65,9 @@ function getPicture(user) {
     const pic = document.createElement("img");
     pic.src = "images/camera.png"
     pic.id = "camera";
-    picture.append(change);
-
     change.append(pic);
+    picture.append(change);
+    change.onclick = function() { inputText(user); };
 
     const saveButton = document.createElement("button");
     saveButton.className = "save";
@@ -78,6 +78,26 @@ function getPicture(user) {
     div.append(change);
     div.append(picture);
     div.append(saveButton);
+}
 
+function updatePic() {
+    const text = document.getElementById("text");
+    document.getElementById("picture").src = text.value;
+
+}
+
+function inputText(user) {
+    const inputElement = document.getElementById("text");
+    if (inputElement !== null) {
+        inputElement.remove();
+    }
+
+    const picture = document.getElementById("div");
+    const text = document.createElement("input");
+    text.id = "text";
+    console.log(user.images);
+    text.value = user.images;
+    picture.src = text.value;
+    picture.append(text);
 }
 

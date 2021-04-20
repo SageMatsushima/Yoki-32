@@ -25,7 +25,6 @@ html {
 
 #potential_card {
     max-width: 65%;
-
     background: #FFFFFF;
     box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
@@ -117,6 +116,11 @@ textarea {
     padding-right: 5%;
 }
 
+#match-button:hover {
+    background-color: #ffd263;
+
+}
+
 #pass-button {
     margin-right: 2.5%;
 }
@@ -137,12 +141,22 @@ textarea {
 
 .sidebar {
     border: none;
-    background-color: #DBDBDB;
+    background-color: #FFE0B0;
     color: black;
     padding: 14px 28px;
     font-size: 1.5vw;
     cursor: pointer;
     margin-top: 1vw;
+}
+
+.sidebar:hover {
+    background-color: #FFB84F;
+    color: white;
+}
+
+.sidebar:focus {
+    background-color: #FFB84F;
+    color: white;
 }
 
 #profile {
@@ -155,7 +169,7 @@ nav {
     grid-column: 1;
     height: 100vw;
     width: 15vw;
-    background-color: #DBDBDB;
+    background-color: #FFE0B0;
     float: left;
 }
 
@@ -179,10 +193,6 @@ a {
     text-decoration: none;
     text-align: center;
     font-weight: bold;
-}
-
-div.sidebar:hover {
-    background-color: #646464;
 }
 
 #logo {
@@ -263,16 +273,13 @@ ul {
     width: 100%;
     overflow: scroll;
     overflow-x: hidden;
-<<<<<<< HEAD
     height: 80vh;
     margin-left: 2vw;
-=======
     align-items: center;
     justify-content: center;
     padding-top: 2%;
     height: 91vh;
     padding-bottom: 2%;
->>>>>>> 4383e7e5e66a994406aa0a79279a5a0b4b2b8cda
 }
 
 .match{
@@ -327,3 +334,4 @@ h1 {
     display: none;
     margin: 30px;
 }
+

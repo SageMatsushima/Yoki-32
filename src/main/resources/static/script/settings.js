@@ -32,6 +32,16 @@ function login() {
     buttons.appendChild(yes);
 }
 
+function darkMode() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+}
+
+function lightMode () {
+    var element = document.body;
+    element.classList.toggle("light-mode");
+}
+
 function lightDark() {
     const pop = document.getElementById("login");
     const popp = document.getElementById("popup");
@@ -51,13 +61,13 @@ function lightDark() {
     light.id = "match-button";
     light.className = "LD";
     light.innerHTML = "Light";
-    light.onclick = function() { logout(); };
+    light.onclick = function() { lightMode(); };
 
     const dark = document.createElement("button");
     dark.id = "match-button";
     dark.innerHTML = "Dark";
     dark.className = "LD";
-    dark.onclick = function() { logout(); };
+    dark.onclick = function() { darkMode(); };
 
     document.getElementById("main").appendChild(login);
     login.appendChild(buttons);
