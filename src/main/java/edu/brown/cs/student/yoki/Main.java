@@ -52,15 +52,15 @@ public final class Main {
   private static Encrypt encrypt = new Encrypt();
   private static NaiveMatch naiveMatch = new NaiveMatch();
 
-  private static AddData addData;
-
-  static {
-    try {
-      addData = new AddData("data/bigData.sqlite");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
+//  private static AddData addData;
+//
+//  static {
+//    try {
+//      addData = new AddData("data/bigData.sqlite");
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//    }
+//  }
 
 
   private List<User> users = new ArrayList<>();
@@ -111,7 +111,7 @@ public final class Main {
     repl.addAction("user", userReader);
     repl.addAction("encrypt", encrypt);
     repl.addAction("naive", naiveMatch);
-    repl.addAction("addData", addData);
+//    repl.addAction("addData", addData);
 
     repl.run();
   }
