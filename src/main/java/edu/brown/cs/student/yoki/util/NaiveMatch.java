@@ -58,6 +58,7 @@ public class NaiveMatch implements TriggerAction {
       ArrayList<String> userInterests = new ArrayList<>();
       userInterests.add("interests");
       userInterests.add(userId);
+
       ir.action(userInterests);
       Compare compare = new Compare(ir.getInterestsList());
       userList.sort(compare);

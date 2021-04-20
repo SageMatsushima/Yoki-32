@@ -103,6 +103,7 @@ public final class Main {
 
     repl.run();
   }
+
   public static TreeFunction<User> getKdTree() {
     return tree;
   }
@@ -111,8 +112,11 @@ public final class Main {
     tree = new TreeFunction<>();
   }
 
-  public static int getCurrentId() { return currentId; }
+  public static int getCurrentId() {return currentId; }
 
+  public static void setCurrentId(int id) {
+    currentId = id;
+  }
 
   private static FreeMarkerEngine createEngine() {
     Configuration config = new Configuration();
