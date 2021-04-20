@@ -86,8 +86,6 @@ function requestSignup(postPara) {
                         window.location.href = "/main";
                     }, 1500);
                 }, 500);
-
-                // window.location.href = "/main";
             } else {
                 document.getElementById("signup-status").innerText = "Email is already taken!";
                 document.getElementById("signup-status").style.opacity = 100;
