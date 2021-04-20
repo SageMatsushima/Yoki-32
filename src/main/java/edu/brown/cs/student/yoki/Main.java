@@ -81,11 +81,6 @@ public final class Main {
     } else {
       runSparkServer(DEFAULT_PORT);
     }
-    ArrayList<String> dataReaderArgs = new ArrayList<>();
-    dataReaderArgs.add("data");
-    dataReaderArgs.add("data/bigData.sqlite");
-    dataReader = new DataReader();
-    dataReader.action(dataReaderArgs);
 
     REPL repl = new REPL();
     repl.addAction("data", dataReader);
@@ -157,6 +152,11 @@ public final class Main {
     Spark.post("/report", new Report());
     Spark.post("/updateUser", new UpdateUser());
 
+    ArrayList<String> dataReaderArgs = new ArrayList<>();
+    dataReaderArgs.add("data");
+    dataReaderArgs.add("data/bigData.sqlite");
+    dataReader = new DataReader();
+    dataReader.action(dataReaderArgs);
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
 
@@ -471,7 +471,7 @@ public final class Main {
       String lastName = newMatch.getString("lastName");
       String email = newMatch.getString("email");
       String password = newMatch.getString("password");
-      String key = "gudetama";
+      String key = keyreader();
       password = Encrypt.encrypt(password, key);
       double year = newMatch.getDouble("year");
       String major = newMatch.getString("major");
