@@ -1,12 +1,10 @@
 package edu.brown.cs.student.yoki.commands;
 
 
-import edu.brown.cs.student.yoki.driver.Encrypt;
 import edu.brown.cs.student.yoki.driver.Interest;
 import edu.brown.cs.student.yoki.driver.User;
 
 import java.sql.Connection;
-import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;

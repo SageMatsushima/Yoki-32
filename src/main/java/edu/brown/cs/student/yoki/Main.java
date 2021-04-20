@@ -10,8 +10,7 @@ import edu.brown.cs.student.yoki.commands.*;
 import edu.brown.cs.student.yoki.driver.*;
 
 import com.google.gson.Gson;
-import edu.brown.cs.student.yoki.util.AddData;
-import edu.brown.cs.student.yoki.util.NaiveMatch;
+import edu.brown.cs.student.yoki.commands.NaiveMatch;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -51,16 +50,6 @@ public final class Main {
   private static UserReader userReader = new UserReader();
   private static Encrypt encrypt = new Encrypt();
   private static NaiveMatch naiveMatch = new NaiveMatch();
-
-//  private static AddData addData;
-//
-//  static {
-//    try {
-//      addData = new AddData("data/bigData.sqlite");
-//    } catch (Exception e) {
-//      e.printStackTrace();
-//    }
-//  }
 
 
   private List<User> users = new ArrayList<>();
@@ -111,8 +100,6 @@ public final class Main {
     repl.addAction("user", userReader);
     repl.addAction("encrypt", encrypt);
     repl.addAction("naive", naiveMatch);
-//    repl.addAction("addData", addData);
-
     repl.run();
   }
 
@@ -215,9 +202,6 @@ public final class Main {
   private class LoginHandler implements Route {
     @Override
     public String handle(Request req, Response res) throws JSONException {
-      //update interests
-      //update db
-      //update matches list
       JSONObject loginCreds = new JSONObject(req.body());
       String email = loginCreds.getString("email");
       String password = loginCreds.getString("password");
@@ -289,9 +273,6 @@ public final class Main {
     @Override
     public String handle(Request req, Response res) {
 
-      //User tod = new User(20, "test", "test", "test", "test", 3023, new int[]{0, 1});
-      //Map<String, User> variables = ImmutableMap.of("user", tod);
-      //ImmutableMap.Builder<String, User> variables = new ImmutableMap.Builder();
       System.out.println(Main.this.getUsers().size());
       if (Main.this.getUsers().size() > 0) {
         User nextMatch = Main.this.getUsers().remove(0);

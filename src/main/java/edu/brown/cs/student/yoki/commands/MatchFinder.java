@@ -21,15 +21,19 @@ public class MatchFinder implements TriggerAction {
 
   @Override
   public void action(ArrayList<String> args) {
-    if (Double.parseDouble(args.get(1)) >= 0) {
-      if (parse(args)) {
-        TreeFunction<User> tree = Main.getKdTree();
-        tree.setK(k);
-        tree.setR(r);
-        tree.setNodeIgnored(starIgnored);
-        tree.searchAndPrint();
-        userList = tree.getFound();
+    try {
+      if (Integer.parseInt(args.get(1)) >= 0) {
+        if (parse(args)) {
+          TreeFunction<User> tree = Main.getKdTree();
+          tree.setK(k);
+          tree.setR(r);
+          tree.setNodeIgnored(starIgnored);
+          tree.searchAndPrint();
+          userList = tree.getFound();
+        }
       }
+    } catch (Exception e) {
+      System.err.println("ERROR: the match command must follow the form <[match] [# of matches] [id#]> (make sure your inputs are integers)");
     }
   }
 
@@ -64,18 +68,29 @@ public class MatchFinder implements TriggerAction {
   public ArrayList<User> getUserList() {
     return userList;
   }
-
+  public ArrayList<Integer> getUserIds() {
+    ArrayList<Integer> idList = new ArrayList<>();
+    for (User i: userList) {
+      idList.add(i.getId());
+    }
+    return idList;
+  }
   private boolean parse(ArrayList<String> args) {
-    if (args.size() == 3) {
-      k = Integer.parseInt(args.get(1));
-      r = Double.POSITIVE_INFINITY;
-      if (!setCoordsByName(args.get(2))) {
-        System.err.println("ERROR: No user id found named " + args.get(2));
+    try {
+      if (args.size() == 3) {
+        k = Integer.parseInt(args.get(1));
+        r = Double.POSITIVE_INFINITY;
+        if (!setCoordsByName(args.get(2))) {
+          System.err.println("ERROR: No user id found named " + args.get(2));
+          return false;
+        }
+        return true;
+      } else {
+        System.err.println("ERROR: " + args + " <[match] [# of matches] [id#]>");
         return false;
       }
-      return true;
-    } else {
-      System.err.println("ERROR: " + args + " requires the form of <match #amount #id>");
+    } catch (Exception e) {
+      System.err.println("ERROR: the match command must follow the form <[match] [# of matches] [id#]> (make sure your inputs are integers)");
       return false;
     }
   }

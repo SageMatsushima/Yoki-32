@@ -1,4 +1,4 @@
-package edu.brown.cs.student.yoki.util;
+package edu.brown.cs.student.yoki.commands;
 
 import edu.brown.cs.student.yoki.Database;
 import edu.brown.cs.student.yoki.commands.DataReader;
@@ -22,27 +22,37 @@ public class NaiveMatch implements TriggerAction {
   public void action(ArrayList<String> args) throws SQLException, ClassNotFoundException {
 
     if (args.size() == 3) {
-      String userId = args.get(2);
-      PreparedStatement prep = SQLcommands.getAll();
-      ResultSet rs = prep.executeQuery();
-      ArrayList<User> allUserList = new ArrayList<>();
+      try {
+        String userId = args.get(2);
+        PreparedStatement prep = SQLcommands.getAll();
+        ResultSet rs = prep.executeQuery();
+        ArrayList<User> allUserList = new ArrayList<>();
 
-      while (rs.next()) {
-        ArrayList<String> userInfo = new ArrayList<>();
-        int id = rs.getInt("id");
-        double year = rs.getInt("year");
+        while (rs.next()) {
+          ArrayList<String> userInfo = new ArrayList<>();
+          int id = rs.getInt("id");
+          double year = rs.getInt("year");
 
-        userInfo.add(rs.getString("first_name"));
-        userInfo.add(rs.getString("last_name"));
-        userInfo.add(rs.getString("email"));
-        userInfo.add(rs.getString("password"));
-        userInfo.add(rs.getString("images"));
-        userInfo.add(rs.getString("major"));
-        userInfo.add(rs.getString("bio"));
+          userInfo.add(rs.getString("first_name"));
+          userInfo.add(rs.getString("last_name"));
+          userInfo.add(rs.getString("email"));
+          userInfo.add(rs.getString("password"));
+          userInfo.add(rs.getString("images"));
+          userInfo.add(rs.getString("major"));
+          userInfo.add(rs.getString("bio"));
 
-        int[] interests = new int[DataReader.getInterestCount()];
-        for (int j = 0; j < interests.length; j++) {
-          interests[j] = rs.getInt(j + DataReader.getUserDataColumnLen() + 2);
+          int[] interests = new int[DataReader.getInterestCount()];
+          for (int j = 0; j < interests.length; j++) {
+            interests[j] = rs.getInt(j + DataReader.getUserDataColumnLen() + 2);
+          }
+
+          InterestsReader ir = new InterestsReader();
+          ArrayList<String> userInterests = new ArrayList<>();
+          userInterests.add("interests");
+          userInterests.add(userId);
+
+          User user = new User(id, year, userInfo, interests);
+          allUserList.add(user);
         }
 
         InterestsReader ir = new InterestsReader();
@@ -50,37 +60,25 @@ public class NaiveMatch implements TriggerAction {
         userInterests.add("interests");
         userInterests.add(userId);
 
-        User user = new User(id, year, userInfo, interests);
-        allUserList.add(user);
-      }
+        ir.action(userInterests);
+        CompareUsers userCompare = new CompareUsers(ir.getInterestsList());
+        CompareDist distCompare = new CompareDist();
+        allUserList.sort(userCompare);
 
-      InterestsReader ir = new InterestsReader();
-      ArrayList<String> userInterests = new ArrayList<>();
-      userInterests.add("interests");
-      userInterests.add(userId);
-
-      ir.action(userInterests);
-      CompareUsers userCompare = new CompareUsers(ir.getInterestsList());
-      CompareDist distCompare = new CompareDist();
-      allUserList.sort(userCompare);
-
-      int numbMatches = Integer.parseInt(args.get(1));
-      allUserList.remove(0);
-      userList = new ArrayList<>();
-      for (int i = 0; i < numbMatches; i++) {
-        System.out.println(allUserList.get(i).toString());
-        userList.add(allUserList.get(i));
+        int numbMatches = Integer.parseInt(args.get(1));
+        allUserList.remove(0);
+        userList = new ArrayList<>();
+        for (int i = 0; i < numbMatches; i++) {
+          System.out.println(allUserList.get(i).toString());
+          userList.add(allUserList.get(i));
+        }
+      } catch (Exception e) {
+        System.err.println("ERROR: the command naive must follow the form <[naive] [# of matches] [id#]>");
       }
     }
   }
 
   public ArrayList<Double> propertyBasedTesting(ArrayList<User> userlist, User currentUser) {
-//    User current = null;
-//    for (int i = 0; i < userlist.size(); i++) {
-//      if (id == userlist.get(i).getId()) {
-//        current = userlist.get(i);
-//      }
-//    }
     if (currentUser != null) {
       ArrayList<Double> dist = new ArrayList<>();
       for (int i = 0; i < userlist.size(); i++) {
@@ -101,7 +99,13 @@ public class NaiveMatch implements TriggerAction {
   public ArrayList<User> getUserList() {
     return userList;
   }
-
+  public ArrayList<Integer> getUserIds() {
+    ArrayList<Integer> ids = new ArrayList<>();
+    for (User i: userList) {
+      ids.add(i.getId());
+    }
+    return ids;
+  }
 
   private final class CompareUsers implements Comparator<User> {
     private int[] interests;

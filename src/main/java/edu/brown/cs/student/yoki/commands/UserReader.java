@@ -23,7 +23,6 @@ public class UserReader implements TriggerAction {
       } else {
         try {
           int searchId = Integer.parseInt(args.get(1));
-
           PreparedStatement prep = SQLcommands.getUserData();
           // North to south, less than lat 1 and greater than lat2
           prep.setInt(1, searchId);
@@ -54,12 +53,11 @@ public class UserReader implements TriggerAction {
           prep.close();
           rs1.close();
         } catch (Exception e) {
-          e.printStackTrace();
-          err.println("ERROR: must enter valid numbers");
+          System.err.println("ERROR: must enter valid numbers");
         }
       }
     } else {
-      err.println("ERROR: ways takes 4 additional arguments");
+      System.err.println("ERROR: the user command must be in the form <[user] [id#]");
     }
   }
 

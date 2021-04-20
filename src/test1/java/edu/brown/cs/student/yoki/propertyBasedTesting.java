@@ -1,13 +1,9 @@
-package edu.brown.cs.student.cs.stars;
+package edu.brown.cs.student.yoki;
 
-import edu.brown.cs.student.yoki.Main;
-import edu.brown.cs.student.yoki.commands.DataReader;
 import edu.brown.cs.student.yoki.commands.MatchFinder;
-import edu.brown.cs.student.yoki.driver.AlexKDTree;
 import edu.brown.cs.student.yoki.driver.TreeFunction;
 import edu.brown.cs.student.yoki.driver.User;
-import edu.brown.cs.student.yoki.util.NaiveMatch;
-import org.checkerframework.checker.units.qual.A;
+import edu.brown.cs.student.yoki.commands.NaiveMatch;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,17 +11,9 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-/**
- * Class that tests methods in stars.
- */
-public class baseModelTest {
+public class propertyBasedTesting {
   //Instantiate instance variables
 
   private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -76,7 +64,7 @@ public class baseModelTest {
   }
 
   @Test
-  public void propertyBasedTesting(){
+  public void pbt(){
     this.setUp();
     Assert.assertEquals(userList.size(), 10);
     System.out.println(userList.size());

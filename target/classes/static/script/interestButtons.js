@@ -52,6 +52,7 @@ function addCurrentInterests(value, key) {
         input.max = "10";
         input.value = value;
 
+
         remove.onclick = function () {
             removeInterest(key);
         };
@@ -61,7 +62,7 @@ function addCurrentInterests(value, key) {
         nameButton.appendChild(name);
         nameButton.appendChild(remove);
         interest.appendChild(input);
-        addInterest.set(key, input.value);
+        addInterest.set(key+"", input.value);
     }
 }
 
@@ -158,7 +159,9 @@ function search() {
  */
 function updateInterest() {
     for (let i of document.getElementsByClassName("interestValue")) {
-        addInterest.set(i.id, i.value);
+        if (addInterest.get(i.id) != 0) {
+            addInterest.set(i.id, i.value);
+        }
     }
 }
 
@@ -167,6 +170,7 @@ function updateInterest() {
  */
 function save() {
     updateInterest();
+    console.log(addInterest)
     const postParameters = {
         interests: Object.fromEntries(addInterest)
     };
@@ -184,12 +188,8 @@ function save() {
 }
 
 function removeInterest(key) {
-    // console.log(key);
-    // key -= 11;
-    console.log(key);
-    const interest = document.getElementById(key);
-    interest.value = 0;
-    interest.style.display = "hidden"
-
-    addInterest.delete(key);
+    addInterest.set(key+"",0);
+    key = key-11;
+    const interest = document.getElementById(key+"remove");
+    interest.remove();
 }
