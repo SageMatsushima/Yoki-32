@@ -1,5 +1,15 @@
 const addInterest = new Map();
 
+window.onload(userInterests());
+
+function userInterests() {
+    console.log("dddd");
+    for (const [key, value] of  Object.entries(addInterest)) {
+        addInterestDiv(value, key);
+        console.log(key);
+    }
+}
+
 /**
  * Adds an interest to the user.
  * @param value for dictionary
@@ -29,7 +39,6 @@ function addInterestDiv(value, key) {
         input.max = "10";
         input.value = "5";
 
-        //ocument.getElementById("interest").appendChild(interest);
         interest.appendChild(nameButton);
         document.getElementById("interestList").appendChild(interest);
         nameButton.appendChild(name);
@@ -53,7 +62,6 @@ function allInterests() {
         .then((response) =>
             response.json())
         .then((data) => {
-            console.log(data)
             for (const [key, value] of Object.entries(data.interestsList)) {
                 console.log(`${key}: ${value.name}`);
                 const interest = document.createElement("button");
