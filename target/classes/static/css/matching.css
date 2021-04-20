@@ -1,3 +1,12 @@
+:root {
+    --first: white;
+    --second: #dbdbdb;
+    --third: #fff9ef;
+    --fourth: #ffe0a4;
+    --fifth: #FFB84F;
+    --sixth: #804C00;
+}
+
 @font-face {
     font-family: Quicksand;
     src: url(/fonts/Quicksand-VariableFont_wght.ttf) format("truetype");
@@ -25,7 +34,7 @@ html {
 
 #potential_card {
     max-width: 65%;
-    background: #FFFFFF;
+    background: var(--first);
     box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
     /*display: flex;*/
@@ -119,8 +128,8 @@ textarea {
 }
 
 #match-button {
-    background-color: #FFE0A4;
-    color: #804C00;
+    background-color: var(--fourth);
+    color: var(--sixth);
     margin: 2.5%;
     border: none;
     border-radius: 30px;
@@ -130,7 +139,7 @@ textarea {
 }
 
 #match-button:hover {
-    background-color: #ffd263;
+    background-color: var(--fifth);
 
 }
 
@@ -156,8 +165,8 @@ textarea {
 
 .sidebar {
     border: none;
-    background-color: #FFE0B0;
-    color: black;
+    background-color: var(--fourth);
+    color: var(--sixth);
     padding: 14px 28px;
     font-size: 1.5vw;
     cursor: pointer;
@@ -165,13 +174,13 @@ textarea {
 }
 
 .sidebar:hover {
-    background-color: #FFB84F;
-    color: white;
+    background-color: var(--fifth);
+    color: var(--first);
 }
 
 .sidebar:focus {
     background-color: #FFB84F;
-    color: white;
+    color: var(--first);
 }
 
 #profile {
@@ -184,7 +193,7 @@ nav {
     grid-column: 1;
     height: 100vw;
     width: 15vw;
-    background-color: #FFE0B0;
+    background-color: var(--fourth);
     float: left;
 }
 
@@ -204,7 +213,7 @@ nav {
 }
 
 a {
-    color: black;
+    color: var(--sixth);
     text-decoration: none;
     text-align: center;
     font-weight: bold;
@@ -307,6 +316,7 @@ ul {
 }
 
 h2 {
+    color: var(--sixth);
     margin-left: 10vw;
 }
 
@@ -318,7 +328,7 @@ h2 {
 }
 
 #matchCard {
-    background: #FFFFFF;
+    background: var(--first);
     box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
 

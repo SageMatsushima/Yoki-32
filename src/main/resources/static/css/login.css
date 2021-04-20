@@ -1,14 +1,11 @@
-.options {
-    height: 35vw;
-    width: 30vw;
-    margin-left: 5vw;
-    background-color: #bac5cf;
-    border-radius: 1vw;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+:root {
+    --primary: #ffe0a4;
+    --secondary: #804C00;
+    --foundation: #DBDBDB;
 }
 
-#login-div{
-    background-color: #DBDBDB;
+#login-div, .lightDark{
+    background-color: var(--foundation);
     width: 500px;
     border-radius: 40px;
     position: fixed;
@@ -16,12 +13,12 @@
     left: 50%;
     /* bring your own prefixes */
     transform: translate(-50%, -50%);
-    border: 20px solid #DBDBDB;
+    border: 20px solid var(--foundation);
 }
 
-#login-button {
-    background-color: #ffe0a4;
-    color: #804C00;
+#login-button, .lightDark{
+    background-color: var(--primary);
+    color: var(--secondary);
     width: 470px;
     height: 7vh;
     display: table;
@@ -45,7 +42,7 @@
 
 #login-button:focus {outline:0;}
 
-input,textarea, #signup-year{
+input,textarea, #signup-year, .lightDark{
     font-family: Quicksand;
     font-style: normal;
     margin-top: 10px;
@@ -65,8 +62,8 @@ input,textarea, #signup-year{
     text-align: center;
 }
 
-#signup-link{
-    color: #804C00;
+#signup-link, .lightDark{
+    color: var(--secondary);
 }
 
 #signup-year {
@@ -106,8 +103,8 @@ input,textarea, #signup-year{
     font-size: 15px;
 }
 
-#signup-div{
-    background-color: #DBDBDB;
+#signup-div, .lightDark{
+    background-color: var(--foundation);
     width: 500px;
     /*border-radius: 40px;*/
     position: fixed;
@@ -115,7 +112,7 @@ input,textarea, #signup-year{
     left: 50%;
     /* bring your own prefixes */
     transform: translate(-50%, -50%);
-    border: 20px solid #DBDBDB;
+    border: 20px solid var(--foundation);
     height: 100vh;
     overflow: scroll;
     overflow-x: hidden;
