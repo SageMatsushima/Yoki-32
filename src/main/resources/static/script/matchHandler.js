@@ -63,12 +63,12 @@ function getNextMatch(){
                 matchMajor.innerHTML = data.user.major;
                 currUser = data.user;
                 for (var i in data.topCommonInterests) {
-                    if (i < 3) {
+                    // if (i < 3) {
                         let interest = data.topCommonInterests[i]
                         let intDiv = '<div className="interest"><ul>' + interest.name + '</ul>'
                             + '<progress className="interestBar" value="0" max="10"></progress></div>';
                         topInterests.innerHTML += intDiv;
-                    }
+                    // }
                 }
 
                 let matchList = document.getElementById('match-list');

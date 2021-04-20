@@ -26,11 +26,11 @@
 </head>
 <script src="script/interestButtons.js"></script>
 <script src="script/profileLoad.js"></script>
-<body onload="allInterests()">
+<body>
 <div id="profile">
     ${nav}
-    <h2>My Profile</h2> <br>
     <div id="main">
+        <h2 class="page-title">My Profile</h2>
         <div id="side">
             <div id="profileTag">
                 <div id="info">
@@ -51,8 +51,8 @@
 
         <h2 id="title">Interests</h2>
         <div id="interestList">
-            ${save}
         </div>
+        ${save}
     </div>
 </div>
 </body>

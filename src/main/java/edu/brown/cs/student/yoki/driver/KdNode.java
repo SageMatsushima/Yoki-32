@@ -80,4 +80,5 @@ public abstract class KdNode {
   public int getDepth() {
     return depth;
   }
+
 }

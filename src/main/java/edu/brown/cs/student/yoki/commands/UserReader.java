@@ -23,7 +23,6 @@ public class UserReader implements TriggerAction {
       } else {
         try {
           int searchId = Integer.parseInt(args.get(1));
-
           PreparedStatement prep = SQLcommands.getUserData();
           // North to south, less than lat 1 and greater than lat2
           prep.setInt(1, searchId);
@@ -32,8 +31,8 @@ public class UserReader implements TriggerAction {
           ArrayList<String> userInfo = new ArrayList<String>();
           ArrayList<Integer> idYear = new ArrayList<Integer>();
 
-          idYear.add(rs1.getInt("id"));
-          idYear.add(rs1.getInt("year"));
+          int id = rs1.getInt("id");
+          double year = rs1.getDouble("year");
 
           userInfo.add(rs1.getString("first_name"));
           userInfo.add(rs1.getString("last_name"));
@@ -48,18 +47,17 @@ public class UserReader implements TriggerAction {
             interests[j] = rs1.getInt(j + DataReader.getUserDataColumnLen() + 2);
           }
 
-          user = new User(idYear, userInfo, interests);
+          user = new User(id, year, userInfo, interests);
 
           getUser();
           prep.close();
           rs1.close();
         } catch (Exception e) {
-          e.printStackTrace();
-          err.println("ERROR: must enter valid numbers");
+          System.err.println("ERROR: must enter valid numbers");
         }
       }
     } else {
-      err.println("ERROR: ways takes 4 additional arguments");
+      System.err.println("ERROR: the user command must be in the form <[user] [id#]");
     }
   }
 

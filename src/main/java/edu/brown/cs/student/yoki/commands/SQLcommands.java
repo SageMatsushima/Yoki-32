@@ -1,12 +1,10 @@
 package edu.brown.cs.student.yoki.commands;
 
 
-import edu.brown.cs.student.yoki.driver.Encrypt;
 import edu.brown.cs.student.yoki.driver.Interest;
 import edu.brown.cs.student.yoki.driver.User;
 
 import java.sql.Connection;
-import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -161,8 +159,8 @@ public final class SQLcommands {
         ArrayList<String> userInfo = new ArrayList<String>();
         ArrayList<Integer> idYear = new ArrayList<Integer>();
 
-        idYear.add(rs2.getInt("id"));
-        idYear.add(rs2.getInt("year"));
+        int id = rs2.getInt("id");
+        double year = rs2.getDouble("year");
 
         userInfo.add(rs2.getString("first_name"));
         userInfo.add(rs2.getString("last_name"));
@@ -177,7 +175,7 @@ public final class SQLcommands {
           interests[j] = rs2.getInt(j + 8);
         }
 
-        User user = new User(idYear, userInfo, interests);
+        User user = new User(id, year, userInfo, interests);
         matches.add(user);
       }
       return matches;
@@ -278,10 +276,8 @@ public final class SQLcommands {
       ResultSet rs = prep.executeQuery();
       if (rs.next()) {
         ArrayList<String> userInfo = new ArrayList<String>();
-        ArrayList<Integer> idYear = new ArrayList<Integer>();
-
-        idYear.add(rs.getInt("id"));
-        idYear.add(rs.getInt("year"));
+        int id = rs.getInt("id");
+        double year = rs.getDouble("year");
 
         userInfo.add(rs.getString("first_name"));
         userInfo.add(rs.getString("last_name"));
@@ -296,7 +292,7 @@ public final class SQLcommands {
           interests[j] = rs.getInt(j + DataReader.getUserDataColumnLen() + 2);
         }
 
-        User user = new User(idYear, userInfo, interests);
+        User user = new User(id, year, userInfo, interests);
         return user;
       }
     } catch (Exception e) {

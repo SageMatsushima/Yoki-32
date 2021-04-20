@@ -2,19 +2,14 @@ package edu.brown.cs.student.yoki.commands;
 
 import edu.brown.cs.student.yoki.Main;
 import edu.brown.cs.student.yoki.driver.Interest;
-import edu.brown.cs.student.yoki.driver.TreeFunction;
 import edu.brown.cs.student.yoki.driver.TriggerAction;
 import edu.brown.cs.student.yoki.driver.User;
-import jdk.nashorn.api.tree.Tree;
 
 import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Reads a database containing tables of nodes and ways.
- */
 public class DataReader implements TriggerAction {
   //setting up instance variables
   private static Connection conn;
@@ -26,16 +21,10 @@ public class DataReader implements TriggerAction {
   private static User currentUser;
   private static int userDataColumnLen = 0;
 
-  /**
-   * Action command that executes the MapReader code.
-   *
-   * @param args List of strings
-   */
   @Override
   public void action(ArrayList<String> args) {
     if (args.size() == 2) {
       String path = args.get(1);
-      // Check if file exists, otherwise an empty temporary database will be created
       if (new File(path).exists()) {
         try {
           dataPath = path;
@@ -44,7 +33,6 @@ public class DataReader implements TriggerAction {
             conn.close();
           }
 
-          // connect to database
           Class.forName("org.sqlite.JDBC");
           String urlToDB = "jdbc:sqlite:" + dataPath;
           conn = DriverManager.getConnection(urlToDB);
@@ -53,8 +41,6 @@ public class DataReader implements TriggerAction {
 
           setUserDataColLen();
           allUserData();
-          System.out.println("col len " + getUserDataColumnLen());
-//          printHash();
           System.out.println("Reading data from " + path);
         } catch (SQLException | ClassNotFoundException sqlEx) {
           System.out.println("ERROR: Error reading from " + path);
@@ -64,13 +50,6 @@ public class DataReader implements TriggerAction {
       }
     } else {
       System.err.println("ERROR: Maps takes one additional argument");
-    }
-  }
-
-  public static void printHash() {
-    for (int i = 0; i < interestCount; i++) {
-      Interest interest = convert.get(i + userDataColumnLen + 2);
-      System.out.println(interest.getId() + " " + interest.getTag() + " " + interest.getName());
     }
   }
 
@@ -107,10 +86,8 @@ public class DataReader implements TriggerAction {
 
       while (rs1.next()) {
         ArrayList<String> userInfo = new ArrayList<String>();
-        ArrayList<Integer> idYear = new ArrayList<Integer>();
-
-        idYear.add(rs1.getInt("id"));
-        idYear.add(rs1.getInt("year"));
+        int id = rs1.getInt("id");
+        double year = rs1.getDouble("year");
 
         userInfo.add(rs1.getString("first_name"));
         userInfo.add(rs1.getString("last_name"));
@@ -127,18 +104,15 @@ public class DataReader implements TriggerAction {
           convert.put(j + userDataColumnLen + 2, new Interest(j + userDataColumnLen + 2, tag));
         }
 
-        User user = new User(idYear, userInfo, interests);
-        if (idYear.get(0) == Main.getCurrentId()) {
+        User user = new User(id, year, userInfo, interests);
+        if (id == Main.getCurrentId()) {
           currentUser = user;
         }
 
-        if (!SQLcommands.isAMatchPass(Main.getCurrentId(), idYear.get(0))) {
+        if (!SQLcommands.isAMatchPass(Main.getCurrentId(), id)) {
           userList.add(user);
-          System.out.println(user.toString());
         }
       }
-
-      System.out.println("userlist" + userList.size());
       Main.getKdTree().listToTree(userList);
 
       prep1.close();
