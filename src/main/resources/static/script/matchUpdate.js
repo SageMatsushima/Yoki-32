@@ -94,9 +94,12 @@ function openMatchInfo(){
     for (var i in matchInterests) {
         let interest = matchInterests[i]
         let intDiv = '<div className="interest"><ul>' + interest.name + '</ul>'
-            + '<progress className="interestBar" value="' + interest.score + '" max="10"></progress></div>';
+            + '<progress className="interestBar" value="0" max="10"></progress></div>';
         topInterests.innerHTML += intDiv;
     }
+
+    // let progressBars = document.getElementsByTagName("progress")
+        // document.getElementsByTagName('progress');
 
     const rightContent = document.createElement("div");
     rightContent.id = "right-content";
@@ -153,7 +156,19 @@ function openMatchInfo(){
     emailDiv.appendChild(emailtext);
     emailDiv.appendChild(copyEmail);
 
+    if (document.getElementById("grayDiv") != null) {
+        document.getElementById("grayDiv").remove();
+    }
     document.getElementById("main").appendChild(grayDiv);
+
+    // start progress bar animations
+    let progressBars = document.getElementsByTagName("progress")
+    for (var i in matchInterests) {
+        let interest = matchInterests[i]
+        console.log(progressBars[i])
+        console.log(interest.score)
+        move(progressBars[i], interest.score)
+    }
 }
 
 function removeMatch() {
@@ -204,4 +219,23 @@ function addMatches() {
         .catch(function (error) {
             console.log(error);
         });
+}
+
+const move = (progressBar, interestScore) => {
+    progressBar.value = 0
+    let i = 0;
+    if (i == 0) {
+        i = 1;
+        var width = 0;
+        var id = setInterval(frame, 10);
+        function frame() {
+            if (width >= interestScore) {
+                clearInterval(id);
+                i = 0;
+            } else {
+                width += 0.1;
+                progressBar.value = width
+            }
+        }
+    }
 }
