@@ -78,7 +78,16 @@ function requestSignup(postPara) {
         .then((data) => {
             console.log(data);
             if (data.success == "true") {
-                window.location.href = "/main";
+                let loginBtn = document.getElementById("login-button")
+                loginBtn.getElementsByTagName("p")[0].style.opacity = 0;
+                setTimeout(function(){
+                    loginBtn.style.width = "60px";
+                    setTimeout(function() {
+                        window.location.href = "/main";
+                    }, 1500);
+                }, 500);
+
+                // window.location.href = "/main";
             } else {
                 document.getElementById("signup-status").innerText = "Email is already taken!";
                 document.getElementById("signup-status").style.opacity = 100;

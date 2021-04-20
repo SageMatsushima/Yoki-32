@@ -46,7 +46,11 @@ function updateProfile() {
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
         },
-    })
+    })  .then((response) =>
+            response.json())
+        .then((data) => {
+            window.location.href = "/profileEdit";
+        })
         .catch(function (error) {
             console.log(error);
         });

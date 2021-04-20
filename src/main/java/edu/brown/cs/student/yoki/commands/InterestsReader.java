@@ -1,5 +1,6 @@
 package edu.brown.cs.student.yoki.commands;
 
+import edu.brown.cs.student.yoki.Main;
 import edu.brown.cs.student.yoki.driver.Interest;
 import edu.brown.cs.student.yoki.driver.TriggerAction;
 import edu.brown.cs.student.yoki.driver.User;
@@ -31,7 +32,7 @@ public class InterestsReader implements TriggerAction {
       } else {
         try {
           int id = Integer.parseInt(args.get(1));
-
+//          Main.setCurrentId(id);
           PreparedStatement prep = SQLcommands.getUserInterests();
           // North to south, less than lat 1 and greater than lat2
           prep.setInt(1, id);
@@ -46,7 +47,7 @@ public class InterestsReader implements TriggerAction {
           }
           prep.close();
           rs.close();
-          getTopInterests();
+//          getTopInterests();
         } catch (Exception e) {
           e.printStackTrace();
           err.println("ERROR: must enter valid numbers");
@@ -61,7 +62,15 @@ public class InterestsReader implements TriggerAction {
     return userInterests;
   }
 
-  public ArrayList<ArrayList<Interest>>  getTopInterests() {
+  public int[] getInterestsList() {
+    int[] output = new int[userInterests.size()];
+    for (int i = 0; i < userInterests.size(); i++) {
+      output[i] = userInterests.get(i);
+    }
+    return output;
+  }
+
+  public ArrayList<ArrayList<Interest>> getTopInterests() {
     HashMap<Integer, Interest> converter = DataReader.getConvert();
     ArrayList<Interest> topCommonInterests = new ArrayList<>();
     ArrayList<Interest> topOtherInterests = new ArrayList<>();
@@ -81,7 +90,6 @@ public class InterestsReader implements TriggerAction {
     topOtherInterests.sort(new DistComparator());
     topInterests.add(topCommonInterests);
     topInterests.add(topOtherInterests);
-
     return topInterests;
   }
 

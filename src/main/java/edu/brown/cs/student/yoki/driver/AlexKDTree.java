@@ -214,9 +214,9 @@ public class AlexKDTree<N extends KdNode> {
     double matchScore = 0;
     double sum = 0;
     for (int i = 0; i < dimensions; i++) {
-      double relevance = node[i]/10.0 * targetPoint[i]/10.0;
+      double relevance = node[i] / 10.0 * targetPoint[i] / 10.0;
       int dist = Math.abs(node[i] - targetPoint[i]);
-      matchScore += relevance*(10 - dist);
+      matchScore += relevance * (10 - dist);
 //      sum += Math.pow(node[i] - targetPoint[i], 2);
     }
     return 1 / matchScore;
