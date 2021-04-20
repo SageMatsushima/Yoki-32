@@ -29,8 +29,8 @@
 <body>
 <div id="profile">
     ${nav}
-    <h2>My Profile</h2> <br>
     <div id="main">
+        <h2 class="page-title">My Profile</h2>
         <div id="side">
             <div id="profileTag">
                 <div id="info">

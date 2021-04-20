@@ -65,11 +65,7 @@ function addCurrentInterests(value, key) {
         document.getElementById("interestList").appendChild(interest);
         nameButton.appendChild(name);
         nameButton.appendChild(remove);
-<<<<<<< HEAD
-        interest.appendChild(input);
-=======
         interest.appendChild(inputWrapper);
->>>>>>> b4f6abac75dcb3a8af3b1d77ecdfa9b1feba038b
         addInterest.set(key+"", input.value);
     }
 }

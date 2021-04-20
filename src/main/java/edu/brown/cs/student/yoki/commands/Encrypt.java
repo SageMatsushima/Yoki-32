@@ -1,4 +1,5 @@
 package edu.brown.cs.student.yoki.commands;
+import edu.brown.cs.student.yoki.Main;
 import edu.brown.cs.student.yoki.driver.TriggerAction;
 
 import javax.crypto.Cipher;
@@ -67,6 +68,7 @@ public class Encrypt implements TriggerAction {
       String encyrptedMessage = encrypt(argument, encryptionKey);
       System.out.println("Encrypted message: " + encyrptedMessage);
       System.out.println("Decrypted message: " + decrypt(encyrptedMessage, encryptionKey));
+      Main.keyreader();
     } else {
       System.err.println("ERROR: the encrypt command must follow the form <[encrypt] [key] [string]>");
     }
