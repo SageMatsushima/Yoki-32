@@ -28,8 +28,8 @@ public class AddData implements TriggerAction {
     Connection conn = null;
     PreparedStatement prep;
     String filename = "data/bigData.sqlite";
-    int numCols = 622;
-    int numRows = 1000;
+    int numCols = 621;
+    int numRows = 104;
     System.out.println("1");
     try {
       Class.forName("org.sqlite.JDBC");
@@ -41,8 +41,8 @@ public class AddData implements TriggerAction {
       for (int i = 0; i < numRows; i++) {
         String toQuest = "INSERT INTO user_interests VALUES (" + (i + 1) + ",";
         for (int j = 0; j < numCols-1; j++) {
-          int zeroOrNot = new Random().nextInt(5);
-          if (zeroOrNot < 3) {
+          int zeroOrNot = new Random().nextInt(100);
+          if (zeroOrNot < 5) {
             toQuest += new Random().nextInt(11) + ",";
           } else {
             toQuest += "0,";

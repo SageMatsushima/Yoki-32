@@ -35,7 +35,7 @@
 
             <div id="signup-status">Incorrect login information!</div>
 
-            <button type="submit" class="button" id="login-button" onclick="onSignupPressed()">Sign up</button>
+            <button type="submit" class="button" id="login-button" onclick="onSignupPressed()"><p>Sign up</p></button>
             <div id="signup-redir-wrapper">
                 <h6 class="no-account">Already have an account?</h6>
                 <a class="no-account" href="/main"><h6 id="signup-link">Sign in</h6></a>

@@ -1,4 +1,71 @@
 const addInterest = new Map();
+let all = new Map();
+
+window.onload(allInterests());
+
+function userInterests() {
+    fetch('/profileInfo', {
+        method: 'post',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+        .then((response) =>
+            response.json())
+        .then((data) => {
+            for (const [key, value] of Object.entries(data.user.interests)) {
+                if (value !== 0) {
+                    addCurrentInterests(value, key);
+                }
+
+            }
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+function addCurrentInterests(value, key) {
+    key = parseInt(key);
+    if (!addInterest.has(key)) {
+        const interest = document.createElement("div");
+        interest.className = "interests";
+        interest.id = key + "remove";
+        console.log(interest.id)
+
+        const nameButton = document.createElement("div");
+        nameButton.id = "nameButton";
+        nameButton.style.display = "flex";
+        const name = document.createElement("h4");
+        key+= 11
+        name.innerHTML = all.get(key+"").name;
+        const remove = document.createElement("button");
+        remove.className = "remove";
+        remove.innerHTML = "Remove";
+
+        const input = document.createElement("input");
+        input.className = "slider interestValue";
+        input.id = key;
+        input.type = "range";
+        input.min = "0";
+        input.max = "10";
+        input.value = value;
+
+
+        remove.onclick = function () {
+            removeInterest(key);
+        };
+
+        interest.appendChild(nameButton);
+        document.getElementById("interestList").appendChild(interest);
+        nameButton.appendChild(name);
+        nameButton.appendChild(remove);
+        interest.appendChild(input);
+        addInterest.set(key+"", input.value);
+    }
+}
+
 
 /**
  * Adds an interest to the user.
@@ -6,6 +73,7 @@ const addInterest = new Map();
  * @param key for dictionary
  */
 function addInterestDiv(value, key) {
+    key = parseInt(key);
     if (!addInterest.has(key)) {
         const interest = document.createElement("div");
         interest.className = "interests";
@@ -19,7 +87,6 @@ function addInterestDiv(value, key) {
         const remove = document.createElement("button");
         remove.className = "remove";
         remove.innerHTML = "Remove";
-        remove.onclick = function() { removes(key); };
 
         const input = document.createElement("input");
         input.className = "slider interestValue";
@@ -28,8 +95,8 @@ function addInterestDiv(value, key) {
         input.min = "0";
         input.max = "10";
         input.value = "5";
+        remove.onclick = function() { removeInterest(key); };
 
-        //ocument.getElementById("interest").appendChild(interest);
         interest.appendChild(nameButton);
         document.getElementById("interestList").appendChild(interest);
         nameButton.appendChild(name);
@@ -53,16 +120,17 @@ function allInterests() {
         .then((response) =>
             response.json())
         .then((data) => {
-            console.log(data)
             for (const [key, value] of Object.entries(data.interestsList)) {
-                console.log(`${key}: ${value.name}`);
+                // console.log(`${key}: ${value.name}`);
                 const interest = document.createElement("button");
                 interest.addEventListener("click", () => addInterestDiv(value, key));
                 interest.className = "subject";
                 interest.id = key;
                 interest.innerHTML = value.name;
                 document.getElementById("subjects-list").appendChild(interest);
+                all.set(key, value);
             }
+            userInterests();
             return data;
         })
         .catch(function (error) {
@@ -77,8 +145,6 @@ function search() {
     subjects = document.getElementById("subjects-list");
     btns = subjects.getElementsByTagName("button");
     for (i = 0; i < btns.length; i++) {
-        // a = btns[i].getElementsByTagName("a")[0];
-        // txtValue = a.textContent || a.innerText;
         txtValue = btns[i].innerText
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             btns[i].style.display = "";
@@ -93,7 +159,9 @@ function search() {
  */
 function updateInterest() {
     for (let i of document.getElementsByClassName("interestValue")) {
-        addInterest.set(i.id, i.value);
+        if (addInterest.get(i.id) != 0) {
+            addInterest.set(i.id, i.value);
+        }
     }
 }
 
@@ -102,12 +170,11 @@ function updateInterest() {
  */
 function save() {
     updateInterest();
-
+    console.log(addInterest)
     const postParameters = {
-        //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
         interests: Object.fromEntries(addInterest)
     };
-    console.log(JSON.stringify(Array.from(addInterest)));
+    // console.log(JSON.stringify(Array.from(addInterest)));
     fetch('http://localhost:4567/updateInterests', {
         method: 'post',
         body: JSON.stringify(postParameters),
@@ -120,37 +187,9 @@ function save() {
         });
 }
 
-/**
- * Removes the interest from the users data.
- */
-function removes(key) {
-    removeInterest(key);
-    console.log(addInterest);
-    const postParameters = {
-        //TODO: get the text inside the input box (hint: use input.value to get the value of the input field)
-        interests: addInterest
-    };
-    fetch('http://localhost:4567/listInterests', {
-        method: 'post',
-        body: JSON.stringify(postParameters),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-    })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
-
 function removeInterest(key) {
-    console.log(key);
-    let interest = document.getElementById(key + "remove");
-    interest.innerHTML = '';
-    interest.textContent = '';
-    // while (interest.firstChild) {
-    //     interest.removeChild(interest.lastChild);
-    // }
+    addInterest.set(key+"",0);
+    key = key-11;
+    const interest = document.getElementById(key+"remove");
     interest.remove();
-
-    addInterest.delete(key);
 }

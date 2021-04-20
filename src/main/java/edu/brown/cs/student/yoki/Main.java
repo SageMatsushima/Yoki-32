@@ -10,6 +10,7 @@ import edu.brown.cs.student.yoki.commands.*;
 import edu.brown.cs.student.yoki.driver.*;
 
 import com.google.gson.Gson;
+import edu.brown.cs.student.yoki.util.AddData;
 import edu.brown.cs.student.yoki.util.NaiveMatch;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,6 +52,16 @@ public final class Main {
   private static Encrypt encrypt = new Encrypt();
   private static NaiveMatch naiveMatch = new NaiveMatch();
 
+//  private static AddData addData;
+//
+//  static {
+//    try {
+//      addData = new AddData("data/bigData.sqlite");
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//    }
+//  }
+
 
   private List<User> users = new ArrayList<>();
   private Set<User> matchSet = new HashSet();
@@ -89,7 +100,7 @@ public final class Main {
     }
     ArrayList<String> dataReaderArgs = new ArrayList<>();
     dataReaderArgs.add("data");
-    dataReaderArgs.add("data/smallData.sqlite");
+    dataReaderArgs.add("data/bigData.sqlite");
     dataReader = new DataReader();
     dataReader.action(dataReaderArgs);
 
@@ -100,6 +111,7 @@ public final class Main {
     repl.addAction("user", userReader);
     repl.addAction("encrypt", encrypt);
     repl.addAction("naive", naiveMatch);
+//    repl.addAction("addData", addData);
 
     repl.run();
   }
@@ -185,7 +197,7 @@ public final class Main {
       }
       ArrayList<String> dataReaderArgs = new ArrayList<>();
       dataReaderArgs.add("data");
-      dataReaderArgs.add("data/smallData.sqlite");
+      dataReaderArgs.add("data/bigData.sqlite");
       dataReader = new DataReader();
       dataReader.action(dataReaderArgs);
       ArrayList<String> finderArgs = new ArrayList<>();
@@ -255,7 +267,7 @@ public final class Main {
       SQLcommands.removeAllPasses(currentId);
       ArrayList<String> dataReaderArgs = new ArrayList<>();
       dataReaderArgs.add("data");
-      dataReaderArgs.add("data/smallData.sqlite");
+      dataReaderArgs.add("data/bigData.sqlite");
       DataReader dr = new DataReader();
       dr.action(dataReaderArgs);
 

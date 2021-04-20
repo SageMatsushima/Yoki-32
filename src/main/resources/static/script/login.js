@@ -70,7 +70,14 @@ function requestLogin(email, password) {
         .then((data) => {
             console.log(data);
             if (data.authenticated == "true") {
-                window.location.href = "/main";
+                let loginBtn = document.getElementById("login-button")
+                loginBtn.getElementsByTagName("p")[0].style.opacity = 0;
+                setTimeout(function(){
+                    loginBtn.style.width = "60px";
+                    setTimeout(function() {
+                        window.location.href = "/main";
+                    }, 1500);
+                }, 500);
             } else {
                 document.getElementById("login-status").style.opacity = 100;
             }
