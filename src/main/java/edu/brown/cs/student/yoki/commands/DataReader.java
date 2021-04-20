@@ -107,10 +107,8 @@ public class DataReader implements TriggerAction {
 
       while (rs1.next()) {
         ArrayList<String> userInfo = new ArrayList<String>();
-        ArrayList<Integer> idYear = new ArrayList<Integer>();
-
-        idYear.add(rs1.getInt("id"));
-        idYear.add(rs1.getInt("year"));
+        int id = rs1.getInt("id");
+        double year = rs1.getDouble("year");
 
         userInfo.add(rs1.getString("first_name"));
         userInfo.add(rs1.getString("last_name"));
@@ -127,12 +125,12 @@ public class DataReader implements TriggerAction {
           convert.put(j + userDataColumnLen + 2, new Interest(j + userDataColumnLen + 2, tag));
         }
 
-        User user = new User(idYear, userInfo, interests);
-        if (idYear.get(0) == Main.getCurrentId()) {
+        User user = new User(id, year, userInfo, interests);
+        if (id == Main.getCurrentId()) {
           currentUser = user;
         }
 
-        if (!SQLcommands.isAMatchPass(Main.getCurrentId(), idYear.get(0))) {
+        if (!SQLcommands.isAMatchPass(Main.getCurrentId(), id)) {
           userList.add(user);
           System.out.println(user.toString());
         }

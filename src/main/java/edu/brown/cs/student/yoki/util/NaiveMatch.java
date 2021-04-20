@@ -15,22 +15,22 @@ import java.util.Comparator;
 
 public class NaiveMatch implements TriggerAction {
 
+  private ArrayList<User> userList;
+
+
   @Override
   public void action(ArrayList<String> args) throws SQLException, ClassNotFoundException {
-//need to read into data reader first
 
-    if (args.size() == 2) {
-      String userId = args.get(1);
-
+    if (args.size() == 3) {
+      String userId = args.get(2);
       PreparedStatement prep = SQLcommands.getAll();
       ResultSet rs = prep.executeQuery();
-      ArrayList<User> userList = new ArrayList<>();
+      ArrayList<User> allUserList = new ArrayList<>();
+
       while (rs.next()) {
         ArrayList<String> userInfo = new ArrayList<>();
-        ArrayList<Integer> idYear = new ArrayList<>();
-
-        idYear.add(rs.getInt("id"));
-        idYear.add(rs.getInt("year"));
+        int id = rs.getInt("id");
+        double year = rs.getInt("year");
 
         userInfo.add(rs.getString("first_name"));
         userInfo.add(rs.getString("last_name"));
@@ -50,8 +50,8 @@ public class NaiveMatch implements TriggerAction {
         userInterests.add("interests");
         userInterests.add(userId);
 
-        User user = new User(idYear, userInfo, interests);
-        userList.add(user);
+        User user = new User(id, year, userInfo, interests);
+        allUserList.add(user);
       }
 
       InterestsReader ir = new InterestsReader();
@@ -60,15 +60,53 @@ public class NaiveMatch implements TriggerAction {
       userInterests.add(userId);
 
       ir.action(userInterests);
-      Compare compare = new Compare(ir.getInterestsList());
-      userList.sort(compare);
-      System.out.println(userList);
+      CompareUsers userCompare = new CompareUsers(ir.getInterestsList());
+      CompareDist distCompare = new CompareDist();
+      allUserList.sort(userCompare);
+
+      int numbMatches = Integer.parseInt(args.get(1));
+      allUserList.remove(0);
+      userList = new ArrayList<>();
+      for (int i = 0; i < numbMatches; i++) {
+        System.out.println(allUserList.get(i).toString());
+        userList.add(allUserList.get(i));
+      }
     }
   }
-  private final class Compare implements Comparator<User> {
+
+  public ArrayList<Double> propertyBasedTesting(ArrayList<User> userlist, User currentUser) {
+//    User current = null;
+//    for (int i = 0; i < userlist.size(); i++) {
+//      if (id == userlist.get(i).getId()) {
+//        current = userlist.get(i);
+//      }
+//    }
+    if (currentUser != null) {
+      ArrayList<Double> dist = new ArrayList<>();
+      for (int i = 0; i < userlist.size(); i++) {
+        userlist.get(i).distance(currentUser);
+      }
+      userlist.sort(new CompareDist());
+      userlist.remove(0);
+      for (int i = 0; i < userlist.size(); i++) {
+        dist.add(userlist.get(i).getDistance());
+      }
+      return dist;
+    } else {
+      return null;
+    }
+  }
+
+
+  public ArrayList<User> getUserList() {
+    return userList;
+  }
+
+
+  private final class CompareUsers implements Comparator<User> {
     private int[] interests;
 
-    private Compare(int[] interests) {
+    private CompareUsers(int[] interests) {
       this.interests = interests;
     }
 
@@ -85,6 +123,13 @@ public class NaiveMatch implements TriggerAction {
     @Override
     public int compare(User a, User b) {
       return Double.compare(targetDis(a.getInterests(), interests), targetDis(b.getInterests(), interests));
+    }
+  }
+
+  private final class CompareDist implements Comparator<User> {
+    @Override
+    public int compare(User a, User b) {
+      return Double.compare(a.getDistance(), b.getDistance());
     }
   }
 }

@@ -32,8 +32,8 @@ public class UserReader implements TriggerAction {
           ArrayList<String> userInfo = new ArrayList<String>();
           ArrayList<Integer> idYear = new ArrayList<Integer>();
 
-          idYear.add(rs1.getInt("id"));
-          idYear.add(rs1.getInt("year"));
+          int id = rs1.getInt("id");
+          double year = rs1.getDouble("year");
 
           userInfo.add(rs1.getString("first_name"));
           userInfo.add(rs1.getString("last_name"));
@@ -48,7 +48,7 @@ public class UserReader implements TriggerAction {
             interests[j] = rs1.getInt(j + DataReader.getUserDataColumnLen() + 2);
           }
 
-          user = new User(idYear, userInfo, interests);
+          user = new User(id, year, userInfo, interests);
 
           getUser();
           prep.close();

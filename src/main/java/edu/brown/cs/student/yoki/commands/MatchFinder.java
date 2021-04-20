@@ -4,10 +4,9 @@ import edu.brown.cs.student.yoki.Main;
 import edu.brown.cs.student.yoki.driver.TreeFunction;
 import edu.brown.cs.student.yoki.driver.TriggerAction;
 import edu.brown.cs.student.yoki.driver.User;
-import edu.brown.cs.student.yoki.driver.Interest;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Comparator;
 
 /**
  * Subclasses searches through a list or kdTree of stars. Parses input.
@@ -34,6 +33,34 @@ public class MatchFinder implements TriggerAction {
     }
   }
 
+  public ArrayList<Double> propertyBasedTesting(TreeFunction<User> kdTree, ArrayList<User> listOfUsers, int search, User currentUser) {
+    ArrayList<Double> dist = new ArrayList<>();
+    if (currentUser != null) {
+      kdTree.setK(search);
+      kdTree.setR(Double.POSITIVE_INFINITY);
+      kdTree.setNodeIgnored(currentUser);
+      kdTree.kdNeighbors();
+      ArrayList<User> kdUsers = kdTree.getFound();
+      for (int i = 0; i < kdUsers.size(); i++) {
+        kdUsers.get(i).distance(currentUser);
+      }
+
+      kdUsers.sort(new CompareDist());
+      for (int i = 0; i < kdUsers.size(); i++) {
+        dist.add(kdUsers.get(i).distance(currentUser));
+      }
+      return dist;
+    } else {
+      return null;
+    }
+  }
+
+  private final class CompareDist implements Comparator<User> {
+    @Override
+    public int compare(User a, User b) {
+      return Double.compare(a.getDistance(), b.getDistance());
+    }
+  }
   public ArrayList<User> getUserList() {
     return userList;
   }

@@ -63,12 +63,10 @@ public class AlexKDTree<N extends KdNode> {
    * @return the middle node/current node you are working on
    */
   public N createTree(List<N> nodeList, int depth) {
-    //Finding the index of x, y, z
     int index = depth % this.dimensions;
     nodeList.sort(new NodeCompare(index));
     //Finding the middle node and setting its depth
     int mid = (nodeList.size()) / 2;
-//    System.out.println(nodeList.get(mid);
     N midNode = nodeList.get(mid);
     midNode.setDepth(depth);
 
@@ -212,15 +210,14 @@ public class AlexKDTree<N extends KdNode> {
    */
   public double targetDis(int[] node, int[] targetPoint) {
     double matchScore = 0;
-    double sum = 0;
     for (int i = 0; i < dimensions; i++) {
       double relevance = node[i] / 10.0 * targetPoint[i] / 10.0;
       int dist = Math.abs(node[i] - targetPoint[i]);
       matchScore += relevance * (10 - dist);
-//      sum += Math.pow(node[i] - targetPoint[i], 2);
+    }
+    if (matchScore == 0) {
+      return Double.POSITIVE_INFINITY;
     }
     return 1 / matchScore;
-//    System.out.println(Math.sqrt(sum));
-//    return Math.sqrt(sum);
   }
 }
