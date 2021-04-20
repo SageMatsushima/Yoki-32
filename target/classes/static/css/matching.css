@@ -12,6 +12,10 @@
     src: url(/fonts/Quicksand-VariableFont_wght.ttf) format("truetype");
 }
 
+h1,h2,h3,h4,h5,h6,ul{
+    color: var(--sixth);
+}
+
 html {
     height: 100%;
 }

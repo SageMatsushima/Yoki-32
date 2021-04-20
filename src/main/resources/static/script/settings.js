@@ -33,6 +33,7 @@ function login() {
 }
 
 function darkMode() {
+    localStorage['lighDark'] = 'dark';
     document.documentElement.style.setProperty('--first', "#1d2d50");
     document.documentElement.style.setProperty('--second', "#1d2d50");
     document.documentElement.style.setProperty('--third', "#133b5c");
@@ -42,6 +43,7 @@ function darkMode() {
 }
 
 function lightMode () {
+    localStorage['lighDark'] = 'light';
     document.documentElement.style.setProperty('--first', "white");
     document.documentElement.style.setProperty('--second', "#dbdbdb");
     document.documentElement.style.setProperty('--third', "#fff9ef");

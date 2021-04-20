@@ -2,6 +2,7 @@ let matchMap = new Map();
 let currUser;
 window.onload = getNextMatch();
 
+console.log(localStorage['lightDark'])
 
 function onMatchPressed(isMatch) {
     getNextMatch();
