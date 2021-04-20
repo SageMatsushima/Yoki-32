@@ -43,7 +43,10 @@ function addCurrentInterests(value, key) {
         const remove = document.createElement("button");
         remove.className = "remove";
         remove.innerHTML = "Remove";
-
+        
+        const inputWrapper = document.createElement("div")
+        inputWrapper.className = "input-wrapper"
+        
         const input = document.createElement("input");
         input.className = "slider interestValue";
         input.id = key;
@@ -57,11 +60,16 @@ function addCurrentInterests(value, key) {
             removeInterest(key);
         };
 
+        inputWrapper.appendChild(input)
         interest.appendChild(nameButton);
         document.getElementById("interestList").appendChild(interest);
         nameButton.appendChild(name);
         nameButton.appendChild(remove);
+<<<<<<< HEAD
         interest.appendChild(input);
+=======
+        interest.appendChild(inputWrapper);
+>>>>>>> b4f6abac75dcb3a8af3b1d77ecdfa9b1feba038b
         addInterest.set(key+"", input.value);
     }
 }
