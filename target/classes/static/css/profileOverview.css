@@ -18,15 +18,15 @@ body {
 }
 
 #profileTag {
-    height: 15vw;
+    height: 16vw;
     width: 30vw;
-    padding-left: 3vw;
     background-color: #fff9ef;
     border-radius: 1vw;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
     display: flex;
     margin-left: 2vw;
-    /*flex-wrap: wrap;*/
+    justify-content: space-between;
+    padding: 2vh;
 }
 
 #interestList {
@@ -37,31 +37,43 @@ body {
     overflow: auto;
     margin-left: 2vw;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .interests {
     width: 55vw;
     height: 5vw;
     background-color: #fffbf5;
-    margin-left: 3vw;
     margin-top: 1vw;
     border-radius: 1vw;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
 
+    display: flex;
+    flex-direction: column;
+    padding: 10px 30px;
+}
+
+.input-wrapper{
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
 }
 
 .slider {
     -webkit-appearance: none;
-    width: 80%;
+    width: 100%;
     height: 1vw;
     border-radius: 5px;
     background: #d3d3d3;
     outline: none;
     opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-    margin-left: 5vw;
-    transform: translate(0%, -60%);
+    /*-webkit-transition: .2s;*/
+    /*transition: opacity .2s;*/
+    /*transform: translate(0%, -60%);*/
+    text-align: center;
 }
 
 .slider::-webkit-slider-thumb {
@@ -182,13 +194,22 @@ div#subjects {
     width: 5vw;
     height: 1.25vw;
     border-radius: 1vw;
-    margin-left: 1vw;
+    /*margin-left: 1vw;*/
     margin-top: .5vw;
+    border: none;
+}
+
+.remove:hover {
+    background-color: #ffd263;
 }
 
 #nameButton {
     height: 3vw;
-    margin-left: 2vw;
+    /*margin-left: 2vw;*/
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+
 }
 
 .edit {
@@ -207,11 +228,13 @@ div#subjects {
     margin-left: 4vw;
     padding-top: 1vw;
     float: right;
-    border-radius: 1vw;
+    border-radius: 2vw;
+    object-fit: cover;
 }
 
 #picDiv {
     width: 15vw;
     height: 15vw;
-    border-radius: 1vw;
+    border-radius: 2vw;
+    object-fit: cover;
 }
