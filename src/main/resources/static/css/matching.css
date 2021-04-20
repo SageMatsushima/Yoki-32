@@ -135,10 +135,6 @@ textarea {
 .button:focus {outline:0;}
 
 #card-div {
-    /*margin-top: 5%;*/
-    /*margin-bottom: 1%;*/
-    /*grid-column: 2;*/
-    /*margin-left: 10vw;*/
     grid-column: 2;
     width: 100%; /* Can be in percentage also. */
     height: auto;

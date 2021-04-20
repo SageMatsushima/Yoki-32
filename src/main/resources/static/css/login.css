@@ -22,12 +22,25 @@
 #login-button {
     background-color: #ffe0a4;
     color: #804C00;
-    width: 480px;
+    width: 470px;
     height: 7vh;
+    display: table;
+    margin: 0 auto;
+
+    transition-property: width;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
 }
 
 #login-button:hover {
     cursor: pointer;
+}
+
+#login-button p {
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in;
+    opacity: 100;
 }
 
 #login-button:focus {outline:0;}
@@ -72,7 +85,6 @@ input,textarea, #signup-year{
 }
 
 .container {
-    padding: 10px;
     width: 100%;
 }
 
@@ -107,4 +119,9 @@ input,textarea, #signup-year{
     height: 100vh;
     overflow: scroll;
     overflow-x: hidden;
+}
+
+#login-fields {
+    display: table;
+    margin: 0 auto;
 }
