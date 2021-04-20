@@ -13,20 +13,19 @@ body {
 #main {
     grid-column: 2;
     grid-row: 1;
-    margin-top: 7vw;
     margin-left: 4vw;
+    margin-top: 2vh;
 }
 
 #profileTag {
-    height: 16vw;
-    width: 30vw;
+    width: 28vw;
     background-color: #fff9ef;
     border-radius: 1vw;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
     display: flex;
     margin-left: 2vw;
     justify-content: space-between;
-    padding: 2vh;
+    padding: 2vw;
 }
 
 #interestList {
@@ -105,12 +104,15 @@ body {
 }
 
 
-h2 {
-    margin-left: 25vw;
+/*h2 {*/
+/*    grid-row: 1;*/
+/*    grid-column: 2;*/
+/*}*/
+
+.page-title {
+    margin-left: 30vw;
     width: 15vw;
     height: 4vw;
-    grid-row: 1;
-    grid-column: 2;
 }
 
 
@@ -186,6 +188,7 @@ div#subjects {
 
 #side {
     display: flex;
+    align-items: stretch;
 }
 
 .remove {
@@ -223,18 +226,18 @@ div#subjects {
 }
 
 #picture {
-    width: 12vw;
-    height: 13vw;
-    margin-left: 4vw;
-    padding-top: 1vw;
-    float: right;
+    width: 10vw;
+    height: 10vw;
+    /*margin-left: 4vw;*/
+    /*padding-top: 1vw;*/
+    /*float: right;*/
     border-radius: 2vw;
     object-fit: cover;
 }
 
-#picDiv {
-    width: 15vw;
-    height: 15vw;
-    border-radius: 2vw;
-    object-fit: cover;
-}
+/*#picDiv {*/
+/*    width: 15vw;*/
+/*    height: 15vw;*/
+/*    border-radius: 2vw;*/
+/*    object-fit: cover;*/
+/*}*/
