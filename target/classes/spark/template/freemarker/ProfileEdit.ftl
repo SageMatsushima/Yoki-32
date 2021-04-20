@@ -8,12 +8,6 @@
 </nav>
 </#assign>
 
-<#assign save>
-    <button id="save" onclick="updateProfile()">Save</button>
-</#assign>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,19 +25,12 @@
             <div id="inputs">
                 <div id="first">First Name<br><input id= "firstInput" type="text"></div>
                 <div id="last">Last Name<br><input id= "lastInput" type="text"></div>
-                <div id="pronouns">Pronouns<br><label>
-                    <input id= "pronounInput" type="text">
-                </label></div><br>
                 <div id="major">Major<br><input id= "majorInput" type="text"></div>
                 <div id="gradYear">Grad Year<br><input id= "gradYearInput" type="text"></div><br>
                 <div id="email">Email<br><input id= "emailInput" type="text"></div> <br>
                 <div id="bio">Bio<br><textarea id= "bioBox" type="text"></textarea></div>
             </div>
-            <div id="picture">
-                <img id = "profilePic" src="./images/kendall.jpg">
-<#--                <img id = "profilePic" src="https://i.pinimg.com/originals/59/af/39/59af39192d3f0cbf7a89bcaf534ccd82.png">-->
-                <button id="changePic">Picture icon</button><br>
-                ${save}
+            <div id="picDiv">
             </div>
         </div>
     </div>

@@ -10,6 +10,7 @@ import edu.brown.cs.student.yoki.commands.*;
 import edu.brown.cs.student.yoki.driver.*;
 
 import com.google.gson.Gson;
+import edu.brown.cs.student.yoki.util.NaiveMatch;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,6 +49,7 @@ public final class Main {
   private static InterestsReader interestsReader = new InterestsReader();
   private static UserReader userReader = new UserReader();
   private static Encrypt encrypt = new Encrypt();
+  private static NaiveMatch naiveMatch = new NaiveMatch();
 
 
   private List<User> users = new ArrayList<>();
@@ -97,9 +99,11 @@ public final class Main {
     repl.addAction("match", matches);
     repl.addAction("user", userReader);
     repl.addAction("encrypt", encrypt);
+    repl.addAction("naive", naiveMatch);
 
     repl.run();
   }
+
   public static TreeFunction<User> getKdTree() {
     return tree;
   }
@@ -108,8 +112,11 @@ public final class Main {
     tree = new TreeFunction<>();
   }
 
-  public static int getCurrentId() { return currentId; }
+  public static int getCurrentId() {return currentId; }
 
+  public static void setCurrentId(int id) {
+    currentId = id;
+  }
 
   private static FreeMarkerEngine createEngine() {
     Configuration config = new Configuration();
@@ -154,8 +161,8 @@ public final class Main {
     Spark.post("/profileInfo", new ProfileInfo());
     Spark.post("/addUser", new AddUser());
     Spark.post("/deleteMatch", new DeleteMatch());
+    Spark.post("/report", new Report());
     Spark.post("/updateUser", new UpdateUser());
-
 
 //    Spark.get("/userData", new UserData(), freeMarker);
   }
@@ -479,6 +486,24 @@ public final class Main {
       SQLcommands.deleteMatch(currentId, matchID);
 
       Map<String, Object> variables = ImmutableMap.of("matchSet", SQLcommands.getAllMatches(currentId, false));
+      return GSON.toJson(variables);
+    }
+  }
+
+  private class Report implements Route {
+    @Override
+    public String handle(Request req, Response res) throws Exception {
+      JSONObject matchToDelete = new JSONObject(req.body());
+      String email = matchToDelete.getString("email");
+      String report = matchToDelete.getString("report");
+      int reportedId = SQLcommands.getIdByEmail(email);
+      if (reportedId == -1) {
+        Map<String, Object> variables = ImmutableMap.of("reported", "false");
+        return GSON.toJson(variables);
+      }
+      SQLcommands.addReport(currentId, reportedId, report);
+
+      Map<String, Object> variables = ImmutableMap.of("reported", "true");
       return GSON.toJson(variables);
     }
   }

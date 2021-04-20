@@ -37,7 +37,7 @@
                     <div id="user-info"></div>
                     <a href="/profileEdit"><button id="match-button" class="edit" onclick="">Edit Profile</button></a>
                 </div>
-                <div id="picture"><img src="">Picture</div>
+                <div id = "picDiv"></div>
             </div>
             <div id="subjects">
                 <div id="subjects-header">

@@ -1,15 +1,17 @@
 <#assign login>
     <img src="/images/whiteLogo.png" id="logo-login"><br>
     <div class="container">
-        <label for="uname"><b>Username</b></label><br>
-        <input type="text" placeholder="Enter Username" name="uname" required id="login-email" value="ian_henry_acosta@brown.edu"><br>
+        <div id="login-fields">
+            <label for="uname"><b>Username</b></label><br>
+            <input type="text" placeholder="Enter Username" name="uname" required id="login-email" value="ian_henry_acosta@brown.edu"><br>
 
-        <label for="psw"><b>Password</b></label><br>
-        <input type="password" placeholder="Enter Password" name="psw" required id="login-password" value="123"><br>
+            <label for="psw"><b>Password</b></label><br>
+            <input type="password" placeholder="Enter Password" name="psw" required id="login-password" value="123"><br>
+        </div>
 
         <div id="login-status">Incorrect login information!</div>
 
-        <button type="submit" class="button" id="login-button" onclick="onLoginPressed()">Login</button>
+        <button type="submit" class="button" id="login-button" onclick="onLoginPressed()"><p>Login</p></button>
         <br>
         <div id="signup-redir-wrapper">
             <h6 class="no-account">Dont have an account?</h6>

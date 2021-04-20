@@ -25,14 +25,18 @@ html {
 
 #potential_card {
     max-width: 65%;
-
     background: #FFFFFF;
     box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+
+    width: 100%; /* Can be in percentage also. */
+    height: auto;
+    margin: 5% auto;
+    position: relative;
 }
 
 #potential_card h1{
@@ -41,8 +45,8 @@ html {
     font-weight: bold;
     font-size: 40px;
     line-height: 50px;
-
     color: #6B6B6B;
+    margin-left: 0px;
 }
 
 #potential_card h3{
@@ -61,6 +65,7 @@ html {
     flex-direction: row;
     padding: 5%;
     justify-content: space-between;
+    width: 100%;
 }
 
 
@@ -117,32 +122,49 @@ textarea {
     padding-right: 5%;
 }
 
+#match-button:hover {
+    background-color: #ffd263;
+
+}
+
 #pass-button {
     margin-right: 2.5%;
 }
 
 #button-div {
     margin-top: 1%;
-    margin-left: 4vw;
+    text-align: center;
 }
 
 .button:focus {outline:0;}
 
 #card-div {
-    margin-top: 5%;
-    margin-bottom: 1%;
     grid-column: 2;
-    margin-left: 10vw;
+    width: 100%; /* Can be in percentage also. */
+    height: auto;
+    margin: 0 auto;
+    /*padding: 10px;*/
+    position: relative;
 }
 
 .sidebar {
     border: none;
-    background-color: #DBDBDB;
+    background-color: #FFE0B0;
     color: black;
     padding: 14px 28px;
     font-size: 1.5vw;
     cursor: pointer;
     margin-top: 1vw;
+}
+
+.sidebar:hover {
+    background-color: #FFB84F;
+    color: white;
+}
+
+.sidebar:focus {
+    background-color: #FFB84F;
+    color: white;
 }
 
 #profile {
@@ -155,7 +177,7 @@ nav {
     grid-column: 1;
     height: 100vw;
     width: 15vw;
-    background-color: #DBDBDB;
+    background-color: #FFE0B0;
     float: left;
 }
 
@@ -179,10 +201,6 @@ a {
     text-decoration: none;
     text-align: center;
     font-weight: bold;
-}
-
-div.sidebar:hover {
-    background-color: #646464;
 }
 
 #logo {
@@ -263,6 +281,15 @@ ul {
     width: 100%;
     overflow: scroll;
     overflow-x: hidden;
+<<<<<<< HEAD
+    height: 80vh;
+    margin-left: 2vw;
+=======
+
+    height: 80vh;
+    margin-left: 2vw;
+
+>>>>>>> e53f3420882ede2f14f17d855a06ec08b15f0e27
     align-items: center;
     justify-content: center;
     padding-top: 2%;
@@ -283,6 +310,7 @@ h2 {
     height: 50vh;
     width: 25vw;
     object-fit: cover;
+    /*margin-left: 2.5vw;*/
 }
 
 #matchCard {
@@ -297,6 +325,16 @@ h2 {
     align-items: center;
     padding-top: 3%;
     padding-bottom: 2%;
+    margin-left: 4vw;
+}
+
+#left-content {
+    overflow: auto;
+    height: 30vw;
+}
+
+h1 {
+    margin-left: 2vw;
 }
 
 #name_info{
@@ -311,3 +349,4 @@ h2 {
     display: none;
     margin: 30px;
 }
+

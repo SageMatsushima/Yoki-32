@@ -21,36 +21,29 @@ body {
     height: 15vw;
     width: 30vw;
     padding-left: 3vw;
-    background-color: #bac5cf;
+    background-color: #fff9ef;
     border-radius: 1vw;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
     display: flex;
-    margin-left: 5vw;
+    margin-left: 2vw;
     /*flex-wrap: wrap;*/
 }
 
-#picture {
-    background-color: #4D7A97;
-    float: right;
-}
-
-.sidebar:hover {
-    background-color: #8c8c8c;
-}
-
 #interestList {
-    width: 70vw;
+    width: 65vw;
     height: 16vw;
-    background-color: #bac5cf;
+    background-color: #fff9ef;
     border-radius: 1vw;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    overflow: auto;
+    margin-left: 2vw;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
 }
 
 .interests {
     width: 55vw;
     height: 5vw;
     background-color: #bcc8e3;
-    margin-left: 6vw;
+    margin-left: 3vw;
     margin-top: 1vw;
 }
 
@@ -68,7 +61,6 @@ body {
 
 .interestBtn {
     margin-left: 0;
-    /*position: fixed;*/
     float: right;
     height: 3vw;
     width: 10vw;
@@ -91,8 +83,10 @@ h2 {
     grid-column: 2;
 }
 
+
+
 #title {
-    margin-left: 28vw;
+    margin-left: 30vw;
     width: 15vw;
     height: 4vw;
     margin-bottom: 1vw;
@@ -107,9 +101,9 @@ h3, h4, h5 {
 }
 
 div#subjects {
-    background-color: #bac5cf;
+    background-color: #fff9ef;
     border-radius: 1vw;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
     width: 30vw;
     height: 15vw;
     align-content: center;
@@ -129,6 +123,13 @@ div#subjects {
     width: 18vw;
     height: 2vw;
     margin-top: 10px;
+    background-color: #FFE0A4;
+    color: #804C00;
+}
+
+.subject:hover {
+    background-color: #ffd263;
+
 }
 
 #search {
@@ -143,10 +144,9 @@ div#subjects {
     margin-top: 10px;
     margin-bottom: 10px;
     height: 2vh;
-    width: 200px;
+    width: 15vw;
     border-radius: 1vw;
     border: 10px solid white;
-    /*background-color: ;*/
     vertical-align: center;
 }
 
@@ -180,4 +180,19 @@ div#subjects {
     border-radius: 1vw;
     margin-left: 1vw;
     margin-top: .5vw;
+}
+
+#picture {
+    width: 12vw;
+    height: 13vw;
+    margin-left: 4vw;
+    padding-top: 1vw;
+    float: right;
+    border-radius: 1vw;
+}
+
+#picDiv {
+    width: 15vw;
+    height: 15vw;
+    border-radius: 1vw;
 }
