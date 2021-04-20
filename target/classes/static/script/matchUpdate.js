@@ -56,6 +56,7 @@ function getInterests() {
 }
 
 function openMatchInfo(){
+    console.log(currMatch);
     const grayDiv = document.createElement("div");
     grayDiv.id = "grayDiv";
     grayDiv.className = "matchCardOverlay";
@@ -100,6 +101,9 @@ function openMatchInfo(){
 
     // let progressBars = document.getElementsByTagName("progress")
         // document.getElementsByTagName('progress');
+    const bio = document.createElement('p');
+    bio.innerHTML = currMatch.bio;
+    bio.id = "user-bio";
 
     const rightContent = document.createElement("div");
     rightContent.id = "right-content";
@@ -151,6 +155,7 @@ function openMatchInfo(){
     nameDiv.appendChild(nameYear);
     cardContent.appendChild(rightContent);
     rightContent.appendChild(image);
+    rightContent.appendChild(bio);
     leftContent.appendChild(emailDiv);
     leftContent.appendChild(deleteButton);
     emailDiv.appendChild(emailtext);

@@ -15,7 +15,7 @@ function userInterests() {
         .then((data) => {
             for (const [key, value] of Object.entries(data.user.interests)) {
                 if (value !== 0) {
-                    //addCurrentInterests(value, key);
+                    addCurrentInterests(value, key);
                 }
 
             }
@@ -48,7 +48,7 @@ function addCurrentInterests(value, key) {
 
         const input = document.createElement("input");
         input.className = "slider interestValue";
-        input.id = value.id;
+        input.id = key;
         input.type = "range";
         input.min = "0";
         input.max = "10";
@@ -166,7 +166,7 @@ function updateInterest() {
 function save() {
     updateInterest();
     const postParameters = {
-        interests: Object.entries(addInterest)
+        interests: Object.fromEntries(addInterest)
     };
     // console.log(JSON.stringify(Array.from(addInterest)));
     fetch('http://localhost:4567/updateInterests', {

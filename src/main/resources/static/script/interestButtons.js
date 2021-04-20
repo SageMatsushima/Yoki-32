@@ -32,6 +32,7 @@ function addCurrentInterests(value, key) {
         const interest = document.createElement("div");
         interest.className = "interests";
         interest.id = key + "remove";
+        console.log(interest.id)
 
         const nameButton = document.createElement("div");
         nameButton.id = "nameButton";
@@ -204,9 +205,10 @@ function removes(key) {
 }
 
 function removeInterest(key) {
+    console.log(key + "remove")
     let interest = document.getElementById(key + "remove");
-    interest.innerHTML = '';
-    interest.textContent = '';
+    // interest.innerHTML = '';
+    // interest.textContent = '';
 
     interest.remove();
 
